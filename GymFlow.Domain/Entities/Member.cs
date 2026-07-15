@@ -1,5 +1,4 @@
 ﻿using GymFlow.Domain.Enums;
-using Schoolify.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
