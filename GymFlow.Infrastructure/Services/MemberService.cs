@@ -58,7 +58,7 @@ namespace GymFlow.Infrastructure.Services
             {
                 _appDbContext.Members.Add(entity);
                 await _appDbContext.SaveChangesAsync();
-                return Result<int>.Success(entity.Id);
+                return Result<int>.Success(entity.Id, ResultCodes.CreatedSuccessfully);
 
             }
             catch (Exception ex)
@@ -179,7 +179,7 @@ namespace GymFlow.Infrastructure.Services
                 member.UpdatedAt = DateTime.UtcNow;
 
                 await _appDbContext.SaveChangesAsync();
-                return Result<bool>.Success(true);
+                return Result<bool>.Success(true, ResultCodes.UpdatedSuccessfully);
             }
             catch (Exception ex)
             {
@@ -215,7 +215,7 @@ namespace GymFlow.Infrastructure.Services
                 member.DeletedAt = DateTime.UtcNow;
 
                 await _appDbContext.SaveChangesAsync();
-                return Result<bool>.Success(true);
+                return Result<bool>.Success(true, ResultCodes.DeletedSuccessfully);
             }
             catch (Exception ex)
             {
