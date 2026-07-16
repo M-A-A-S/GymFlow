@@ -1,4 +1,6 @@
-﻿using GymFlow.Infrastructure.Data;
+﻿using GymFlow.Application.Services;
+using GymFlow.Infrastructure.Data;
+using GymFlow.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,8 @@ namespace GymFlow.Infrastructure
             this IServiceCollection services,
             IConfiguration configuration)
         {
+
+            services.AddScoped<IMemberService, MemberService>();
 
             services.AddDbContext<AppDbContext>(options =>
             {

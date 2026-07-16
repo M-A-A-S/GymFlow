@@ -123,6 +123,9 @@
   <data name="Address" xml:space="preserve">
     <value>Address</value>
   </data>
+  <data name="AlreadyExists" xml:space="preserve">
+    <value>Already exists</value>
+  </data>
   <data name="AttendanceDate" xml:space="preserve">
     <value>Attendance Date</value>
   </data>
@@ -138,14 +141,23 @@
   <data name="CheckOut" xml:space="preserve">
     <value>Check Out</value>
   </data>
+  <data name="CreatedSuccessfully" xml:space="preserve">
+    <value>Created successfully</value>
+  </data>
   <data name="DaysPerWeek" xml:space="preserve">
     <value>Days Per Week</value>
+  </data>
+  <data name="DeletedSuccessfully" xml:space="preserve">
+    <value>Deleted Successfully</value>
   </data>
   <data name="DurationDays" xml:space="preserve">
     <value>Duration (Days)</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="EmailExists" xml:space="preserve">
+    <value>Email already exists</value>
   </data>
   <data name="EndDate" xml:space="preserve">
     <value>End Date</value>
@@ -162,8 +174,14 @@
   <data name="Gender" xml:space="preserve">
     <value>Gender</value>
   </data>
+  <data name="GeneralError" xml:space="preserve">
+    <value>Something went wrong</value>
+  </data>
   <data name="Inactive" xml:space="preserve">
     <value>Inactive</value>
+  </data>
+  <data name="InvalidData" xml:space="preserve">
+    <value>Invalid data</value>
   </data>
   <data name="IsActive" xml:space="preserve">
     <value>Active</value>
@@ -195,6 +213,12 @@
   <data name="NameEn" xml:space="preserve">
     <value>English Name</value>
   </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Record not found</value>
+  </data>
+  <data name="PhoneExists" xml:space="preserve">
+    <value>Phone number already exists</value>
+  </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>Phone Number</value>
   </data>
@@ -203,6 +227,12 @@
   </data>
   <data name="RegisterDate" xml:space="preserve">
     <value>Registration Date</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>This field is required</value>
+  </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>Server error occurred</value>
   </data>
   <data name="StartDate" xml:space="preserve">
     <value>Start Date</value>
@@ -216,10 +246,19 @@
   <data name="Suspended" xml:space="preserve">
     <value>Suspended</value>
   </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>An unexpected error occurred</value>
+  </data>
   <data name="Unknown" xml:space="preserve">
     <value>Unknown</value>
   </data>
   <data name="Unsuspended" xml:space="preserve">
     <value>Unsuspended</value>
+  </data>
+  <data name="UpdatedSuccessfully" xml:space="preserve">
+    <value>Updated successfully</value>
+  </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>Validation error</value>
   </data>
 </root>

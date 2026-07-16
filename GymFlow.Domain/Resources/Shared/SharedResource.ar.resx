@@ -123,6 +123,9 @@
   <data name="Address" xml:space="preserve">
     <value>العنوان</value>
   </data>
+  <data name="AlreadyExists" xml:space="preserve">
+    <value>موجود مسبقاً</value>
+  </data>
   <data name="AttendanceDate" xml:space="preserve">
     <value>تاريخ الحضور</value>
   </data>
@@ -138,14 +141,23 @@
   <data name="CheckOut" xml:space="preserve">
     <value>وقت الخروج</value>
   </data>
+  <data name="CreatedSuccessfully" xml:space="preserve">
+    <value>تم الإنشاء بنجاح</value>
+  </data>
   <data name="DaysPerWeek" xml:space="preserve">
     <value>عدد الأيام في الأسبوع</value>
+  </data>
+  <data name="DeletedSuccessfully" xml:space="preserve">
+    <value>تم الحذف بنجاح</value>
   </data>
   <data name="DurationDays" xml:space="preserve">
     <value>مدة الاشتراك (بالأيام)</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>البريد الإلكتروني</value>
+  </data>
+  <data name="EmailExists" xml:space="preserve">
+    <value>البريد الإلكتروني موجود مسبقاً</value>
   </data>
   <data name="EndDate" xml:space="preserve">
     <value>تاريخ النهاية</value>
@@ -162,8 +174,14 @@
   <data name="Gender" xml:space="preserve">
     <value>الجنس</value>
   </data>
+  <data name="GeneralError" xml:space="preserve">
+    <value>حدث خطأ غير متوقع</value>
+  </data>
   <data name="Inactive" xml:space="preserve">
     <value>غير نشط</value>
+  </data>
+  <data name="InvalidData" xml:space="preserve">
+    <value>بيانات غير صالحة</value>
   </data>
   <data name="IsActive" xml:space="preserve">
     <value>نشط</value>
@@ -195,6 +213,12 @@
   <data name="NameEn" xml:space="preserve">
     <value>الاسم بالإنجليزية</value>
   </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>السجل غير موجود</value>
+  </data>
+  <data name="PhoneExists" xml:space="preserve">
+    <value>رقم الهاتف موجود مسبقاً</value>
+  </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>رقم الهاتف</value>
   </data>
@@ -203,6 +227,12 @@
   </data>
   <data name="RegisterDate" xml:space="preserve">
     <value>تاريخ التسجيل</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>هذا الحقل مطلوب</value>
+  </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>حدث خطأ في الخادم</value>
   </data>
   <data name="StartDate" xml:space="preserve">
     <value>تاريخ البداية</value>
@@ -216,10 +246,19 @@
   <data name="Suspended" xml:space="preserve">
     <value>موقوف</value>
   </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>حدث خطأ غير متوقع</value>
+  </data>
   <data name="Unknown" xml:space="preserve">
     <value>غير محدد</value>
   </data>
   <data name="Unsuspended" xml:space="preserve">
     <value>تم رفع الإيقاف</value>
+  </data>
+  <data name="UpdatedSuccessfully" xml:space="preserve">
+    <value>تم التحديث بنجاح</value>
+  </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>خطأ في التحقق من البيانات</value>
   </data>
 </root>
