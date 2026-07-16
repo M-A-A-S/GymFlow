@@ -33,6 +33,14 @@ namespace GymFlow.Infrastructure.Configurations
                 .HasMaxLength(15)
                 .HasColumnType("varchar(15)");
 
+            builder.Property(x => x.Address)
+                .IsRequired(false)
+                .HasMaxLength(200)
+                .HasColumnType("nvarchar(200)");
+
+            builder.Property(x => x.BirthDate)
+                .IsRequired(false);
+
             builder.Property(m => m.Status)
                 .IsRequired()
                 .HasConversion<string>()

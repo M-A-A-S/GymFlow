@@ -11,11 +11,11 @@ namespace GymFlow.Domain.Entities
     {
         public string FullName { get; set; }
         public Gender Gender { get; set; }
-        public DateOnly BirthDate { get; set; }
+        public DateOnly? BirthDate { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
-        public DateOnly RegisterDate { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
+        public DateOnly? RegisterDate { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
         public MemberStatus Status { get; set; } = MemberStatus.Active;
 
         public ICollection<MemberSubscription> MemberSubscriptions { get; set; }

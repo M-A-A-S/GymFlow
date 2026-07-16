@@ -36,7 +36,7 @@ namespace GymFlow.Domain.DTOs.Member
             Name = nameof(Resources.Shared.SharedResource.BirthDate),
             ResourceType = typeof(Resources.Shared.SharedResource)
         )]
-        public DateOnly BirthDate { get; set; }
+        public DateOnly? BirthDate { get; set; }
 
         [Display(
             Name = nameof(Resources.Shared.SharedResource.PhoneNumber),
@@ -64,7 +64,7 @@ namespace GymFlow.Domain.DTOs.Member
             Name = nameof(Resources.Shared.SharedResource.RegisterDate),
             ResourceType = typeof(Resources.Shared.SharedResource)
         )]
-        public DateOnly RegisterDate { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
+        public DateOnly? RegisterDate { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
 
         [Display(
             Name = nameof(Resources.Shared.SharedResource.MemberStatus),

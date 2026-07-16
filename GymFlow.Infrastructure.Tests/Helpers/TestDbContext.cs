@@ -1,4 +1,5 @@
 ﻿using GymFlow.Domain.Entities;
+using GymFlow.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,14 +8,13 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymFlow.Infrastructure.Data
+namespace GymFlow.Infrastructure.Tests.Helpers
 {
-    public partial class AppDbContext : DbContext, IAppDbContext
+    public class TestDbContext : DbContext, IAppDbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-: base(options)
+        public TestDbContext(DbContextOptions<TestDbContext> options) : base(options)
         {
-
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,5 +42,15 @@ namespace GymFlow.Infrastructure.Data
             }
         }
 
+        public DbSet<Member> Members { get; set; }
+        public DbSet<SubscriptionType> SubscriptionTypes { get; set; }
+        public DbSet<MemberSubscription> MemberSubscriptions { get; set; }
+        public DbSet<MemberAttendance> MemberAttendances { get; set; }
+
+        public Task<int> SaveChangesAsync(
+        CancellationToken cancellationToken)
+        {
+            return base.SaveChangesAsync(cancellationToken);
+        }
     }
 }

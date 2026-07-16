@@ -4,6 +4,7 @@ using GymFlow.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,13 @@ namespace GymFlow.Infrastructure
             IConfiguration configuration)
         {
 
+            services.AddScoped<IAppDbContext>(provider => provider.GetService<AppDbContext>());
             services.AddScoped<IMemberService, MemberService>();
 
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(
-                    configuration.GetConnectionString("DefaultConnection"));
+                    configuration.GetConnectionString("DefaultConnection")).LogTo(Console.WriteLine, LogLevel.Debug);
             });
 
             return services;
