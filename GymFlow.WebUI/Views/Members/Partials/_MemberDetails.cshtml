@@ -1,0 +1,90 @@
+﻿@using GymFlow.Domain.Enums;
+
+@using GymFlow.Domain.DTOs.Member
+@model MemberDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="row">
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["FullName"]</label>
+        <div>@Model.FullName</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["BirthDate"]</label>
+        <div>@Model.BirthDate</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["PhoneNumber"]</label>
+        <div>@Model.PhoneNumber</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["Email"]</label>
+        <div>@Model.Email</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["Address"]</label>
+        <div>@Model.Address</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["RegisterDate"]</label>
+        <div>@Model.RegisterDate</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["Gender"]</label>
+        <div>
+            @switch (Model.Gender)
+            {
+                case Gender.Male:
+                    <span class="badge bg-primary">@Localizer["Male"]</span>
+                    break;
+
+                case Gender.Female:
+                    <span class="badge bg-primary">@Localizer["Female"]</span>
+                    break;
+
+                default:
+                    <span class="badge bg-secondary">@Localizer["Unknown"]</span>
+                    break;
+            }
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["Status"]</label>
+        <div>
+            @switch (Model.Status)
+            {
+                case MemberStatus.Active:
+                    <span class="badge bg-success">@Localizer["Active"]</span>
+                    break;
+
+                case MemberStatus.Inactive:
+                    <span class="badge bg-secondary">@Localizer["Inactive"]</span>
+                    break;
+
+                case MemberStatus.Suspended:
+                    <span class="badge bg-danger">@Localizer["Suspended"]</span>
+                    break;
+
+                case MemberStatus.Unsuspended:
+                    <span class="badge bg-secondary">@Localizer["Unsuspended"]</span>
+                    break;
+
+                default:
+                    <span class="badge bg-secondary">@Localizer["Unknown"]</span>
+                    break;
+            }
+        </div>
+    </div>
+
+</div>

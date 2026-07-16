@@ -1,7 +1,7 @@
 ﻿@using GymFlow.Domain.Resources.Shared
+@using GymFlow.Domain.Utilities
 @using Microsoft.Extensions.Localization
 @using System.Globalization;
-@using Schoolify.Common.Utilities
 @inject IStringLocalizer<SharedResource> Localizer
 
 <!DOCTYPE html>
@@ -19,7 +19,6 @@
 	<link rel="stylesheet"
 		  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-	@* <link rel="stylesheet" href="~/Schoolify.Web.styles.css" asp-append-version="true" /> *@
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body data-bs-theme="light">
@@ -41,7 +40,7 @@
 				</a>
 
 			</div>
-			<a class="navbar-brand" href="#">Schoolify</a>
+			<a class="navbar-brand" href="#">GymFlow</a>
 		</nav>
 	</header>
 
@@ -49,7 +48,7 @@
 	<aside class="sidebar close" id="sidebar">
 		@* Top *@
 		<div class="sidebar-top">
-			<div class="logo">Schoolify</div>
+			<div class="logo">GymFlow</div>
 			@* <button onClick={onClose}> *@
 			<button id="closeSidebarBtn">
 				<i class="fa-solid fa-xmark"></i>
@@ -205,7 +204,7 @@
 
 	<footer class="border-top footer text-muted">
 		<div class="container">
-			&copy; 2026 - Schoolify.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+			&copy; 2026 - GymFlow - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
 		</div>
 	</footer>
 

@@ -207,6 +207,9 @@
   <data name="GeneralError" xml:space="preserve">
     <value>حدث خطأ غير متوقع</value>
   </data>
+  <data name="GoBack" xml:space="preserve">
+    <value>رجوع</value>
+  </data>
   <data name="Inactive" xml:space="preserve">
     <value>غير نشط</value>
   </data>

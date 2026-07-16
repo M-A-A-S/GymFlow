@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Schoolify.Common.Utilities
+namespace GymFlow.Domain.Utilities
 {
     public class MenuItem
     {

@@ -207,6 +207,9 @@
   <data name="GeneralError" xml:space="preserve">
     <value>Something went wrong</value>
   </data>
+  <data name="GoBack" xml:space="preserve">
+    <value>Go Back</value>
+  </data>
   <data name="Inactive" xml:space="preserve">
     <value>Inactive</value>
   </data>
