@@ -171,6 +171,9 @@
   <data name="Delete" xml:space="preserve">
     <value>حذف</value>
   </data>
+  <data name="DeleteConfirmationMessage" xml:space="preserve">
+    <value>هل أنت متأكد من الحذف؟</value>
+  </data>
   <data name="DeletedSuccessfully" xml:space="preserve">
     <value>تم الحذف بنجاح</value>
   </data>
