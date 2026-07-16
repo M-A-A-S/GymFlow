@@ -50,7 +50,7 @@ namespace GymFlow.Domain.Extensions
                 BirthDate = DTO.BirthDate,
                 Address = DTO.Address,
                 RegisterDate = DTO.RegisterDate,
-                Status = DTO.Status
+                Status = DTO.Status ?? MemberStatus.Active
             };
         }
 

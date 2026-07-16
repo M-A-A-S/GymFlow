@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -52,13 +53,13 @@ namespace GymFlow.Domain.DTOs.Member
             Name = nameof(Resources.Shared.SharedResource.Email),
             ResourceType = typeof(Resources.Shared.SharedResource)
         )]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [Display(
             Name = nameof(Resources.Shared.SharedResource.Address),
             ResourceType = typeof(Resources.Shared.SharedResource)
         )]
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
         [Display(
             Name = nameof(Resources.Shared.SharedResource.RegisterDate),
@@ -70,7 +71,7 @@ namespace GymFlow.Domain.DTOs.Member
             Name = nameof(Resources.Shared.SharedResource.MemberStatus),
             ResourceType = typeof(Resources.Shared.SharedResource)
         )]
-        public MemberStatus Status { get; set; } = MemberStatus.Active;
+        public MemberStatus? Status { get; set; } = MemberStatus.Active;
 
     }
 }

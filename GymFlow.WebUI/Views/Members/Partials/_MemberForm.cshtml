@@ -1,0 +1,66 @@
+﻿@using GymFlow.Domain.Enums;
+
+@using GymFlow.Domain.DTOs.Member
+@model MemberDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="row g-3 mb-1 mb-2">
+
+    <div class="col-md-6">
+        <label asp-for="FullName"></label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="BirthDate"></label>
+        <input asp-for="BirthDate" type="date" class="form-control" />
+        <span asp-validation-for="BirthDate" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="RegisterDate"></label>
+        <input asp-for="RegisterDate" type="date" class="form-control" />
+        <span asp-validation-for="RegisterDate" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Gender" class="form-label"></label>
+        <select asp-for="Gender" class="form-select"
+                asp-items="Html.GetEnumSelectList<Gender>()">
+            <option value="" disabled selected>@Localizer["SelectGender"]</option>
+        </select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Status" class="form-label"></label>
+        <select asp-for="Status" class="form-select"
+                asp-items="Html.GetEnumSelectList<MemberStatus>()">
+            <option value="" disabled selected>@Localizer["SelectStatus"]</option>
+        </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+</div>

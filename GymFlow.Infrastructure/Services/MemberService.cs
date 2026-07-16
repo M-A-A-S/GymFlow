@@ -1,6 +1,7 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.Constants;
 using GymFlow.Domain.DTOs.Member;
+using GymFlow.Domain.Enums;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
@@ -173,7 +174,7 @@ namespace GymFlow.Infrastructure.Services
                 member.PhoneNumber = dto.PhoneNumber;
                 member.Gender = dto.Gender;
                 member.BirthDate = dto.BirthDate;
-                member.Status = dto.Status;
+                member.Status = dto.Status ?? MemberStatus.Active;
                 member.Address = dto.Address;
                 member.UpdatedAt = DateTime.UtcNow;
 

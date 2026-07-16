@@ -153,6 +153,9 @@
   <data name="CheckOut" xml:space="preserve">
     <value>Check Out</value>
   </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
   <data name="CreatedSuccessfully" xml:space="preserve">
     <value>Created successfully</value>
   </data>
@@ -275,6 +278,12 @@
   </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="SelectGender" xml:space="preserve">
+    <value>-- Select Gender --</value>
+  </data>
+  <data name="SelectStatus" xml:space="preserve">
+    <value>-- Select Status --</value>
   </data>
   <data name="ServerError" xml:space="preserve">
     <value>Server error occurred</value>
