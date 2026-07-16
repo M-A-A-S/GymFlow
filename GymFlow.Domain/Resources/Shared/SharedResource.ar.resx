@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Actions" xml:space="preserve">
+    <value>الإجراءات</value>
+  </data>
   <data name="Active" xml:space="preserve">
     <value>نشط</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>إضافة</value>
   </data>
   <data name="Address" xml:space="preserve">
     <value>العنوان</value>
@@ -126,11 +132,17 @@
   <data name="AlreadyExists" xml:space="preserve">
     <value>موجود مسبقاً</value>
   </data>
+  <data name="Attendance" xml:space="preserve">
+    <value>الحضور</value>
+  </data>
   <data name="AttendanceDate" xml:space="preserve">
     <value>تاريخ الحضور</value>
   </data>
   <data name="BirthDate" xml:space="preserve">
     <value>تاريخ الميلاد</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>إلغاء</value>
   </data>
   <data name="Cancelled" xml:space="preserve">
     <value>ملغي</value>
@@ -144,14 +156,26 @@
   <data name="CreatedSuccessfully" xml:space="preserve">
     <value>تم الإنشاء بنجاح</value>
   </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>لوحة التحكم</value>
+  </data>
   <data name="DaysPerWeek" xml:space="preserve">
     <value>عدد الأيام في الأسبوع</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
   </data>
   <data name="DeletedSuccessfully" xml:space="preserve">
     <value>تم الحذف بنجاح</value>
   </data>
+  <data name="Details" xml:space="preserve">
+    <value>تفاصيل</value>
+  </data>
   <data name="DurationDays" xml:space="preserve">
     <value>مدة الاشتراك (بالأيام)</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>البريد الإلكتروني</value>
@@ -198,6 +222,15 @@
   <data name="MemberAttendances" xml:space="preserve">
     <value>حضور العضو</value>
   </data>
+  <data name="Members" xml:space="preserve">
+    <value>الأعضاء</value>
+  </data>
+  <data name="MembersAttendances" xml:space="preserve">
+    <value>حضور الأعضاء</value>
+  </data>
+  <data name="MembersSubscriptions" xml:space="preserve">
+    <value>اشتراكات الأعضاء</value>
+  </data>
   <data name="MemberStatus" xml:space="preserve">
     <value>حالة العضو</value>
   </data>
@@ -231,17 +264,29 @@
   <data name="Required" xml:space="preserve">
     <value>هذا الحقل مطلوب</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>بحث</value>
+  </data>
   <data name="ServerError" xml:space="preserve">
     <value>حدث خطأ في الخادم</value>
   </data>
   <data name="StartDate" xml:space="preserve">
     <value>تاريخ البداية</value>
   </data>
+  <data name="Subscriptions" xml:space="preserve">
+    <value>الاشتراكات</value>
+  </data>
   <data name="SubscriptionStatus" xml:space="preserve">
     <value>حالة الاشتراك</value>
   </data>
   <data name="SubscriptionType" xml:space="preserve">
     <value>نوع الاشتراك</value>
+  </data>
+  <data name="SubscriptionTypes" xml:space="preserve">
+    <value>أنواع الاشتراكات</value>
   </data>
   <data name="Suspended" xml:space="preserve">
     <value>موقوف</value>

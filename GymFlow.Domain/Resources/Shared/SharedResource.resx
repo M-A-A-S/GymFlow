@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
   <data name="Active" xml:space="preserve">
     <value>Active</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
   </data>
   <data name="Address" xml:space="preserve">
     <value>Address</value>
@@ -126,11 +132,17 @@
   <data name="AlreadyExists" xml:space="preserve">
     <value>Already exists</value>
   </data>
+  <data name="Attendance" xml:space="preserve">
+    <value>Attendance</value>
+  </data>
   <data name="AttendanceDate" xml:space="preserve">
     <value>Attendance Date</value>
   </data>
   <data name="BirthDate" xml:space="preserve">
     <value>Birth Date</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
   <data name="Cancelled" xml:space="preserve">
     <value>Cancelled</value>
@@ -144,14 +156,26 @@
   <data name="CreatedSuccessfully" xml:space="preserve">
     <value>Created successfully</value>
   </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
   <data name="DaysPerWeek" xml:space="preserve">
     <value>Days Per Week</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
   <data name="DeletedSuccessfully" xml:space="preserve">
     <value>Deleted Successfully</value>
   </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
   <data name="DurationDays" xml:space="preserve">
     <value>Duration (Days)</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -198,6 +222,15 @@
   <data name="MemberAttendances" xml:space="preserve">
     <value>Member Attendances</value>
   </data>
+  <data name="Members" xml:space="preserve">
+    <value>Members</value>
+  </data>
+  <data name="MembersAttendances" xml:space="preserve">
+    <value>Members Attendances</value>
+  </data>
+  <data name="MembersSubscriptions" xml:space="preserve">
+    <value>Members Subscriptions</value>
+  </data>
   <data name="MemberStatus" xml:space="preserve">
     <value>Member Status</value>
   </data>
@@ -231,17 +264,29 @@
   <data name="Required" xml:space="preserve">
     <value>This field is required</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="ServerError" xml:space="preserve">
     <value>Server error occurred</value>
   </data>
   <data name="StartDate" xml:space="preserve">
     <value>Start Date</value>
   </data>
+  <data name="Subscriptions" xml:space="preserve">
+    <value>Subscriptions</value>
+  </data>
   <data name="SubscriptionStatus" xml:space="preserve">
     <value>Subscription Status</value>
   </data>
   <data name="SubscriptionType" xml:space="preserve">
     <value>Subscription Type</value>
+  </data>
+  <data name="SubscriptionTypes" xml:space="preserve">
+    <value>Subscription Types</value>
   </data>
   <data name="Suspended" xml:space="preserve">
     <value>Suspended</value>
