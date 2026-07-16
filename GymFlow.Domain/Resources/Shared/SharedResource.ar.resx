@@ -156,6 +156,9 @@
   <data name="CreatedSuccessfully" xml:space="preserve">
     <value>تم الإنشاء بنجاح</value>
   </data>
+  <data name="CreateNew" xml:space="preserve">
+    <value>إضافة جديد</value>
+  </data>
   <data name="Dashboard" xml:space="preserve">
     <value>لوحة التحكم</value>
   </data>
@@ -245,6 +248,9 @@
   </data>
   <data name="NameEn" xml:space="preserve">
     <value>الاسم بالإنجليزية</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>إضافة</value>
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>السجل غير موجود</value>

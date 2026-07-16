@@ -156,6 +156,9 @@
   <data name="CreatedSuccessfully" xml:space="preserve">
     <value>Created successfully</value>
   </data>
+  <data name="CreateNew" xml:space="preserve">
+    <value>Create New</value>
+  </data>
   <data name="Dashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
@@ -245,6 +248,9 @@
   </data>
   <data name="NameEn" xml:space="preserve">
     <value>English Name</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>New</value>
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>Record not found</value>

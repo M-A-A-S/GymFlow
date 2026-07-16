@@ -1,0 +1,112 @@
+﻿@using GymFlow.Domain.DTOs.Member
+@model IEnumerable<MemberDTO>
+
+@using GymFlow.Domain.Enums
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@using System.Globalization
+
+<div class="d-flex align-items-center justify-content-between my-4">
+    <h2>@Localizer["Members"]</h2>
+
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fa fa-plus me-1"></i>
+        @Localizer["CreateNew"]
+    </a>
+</div>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Localizer["FullName"]</th>
+                <th>@Localizer["Gender"]</th>
+                <th>@Localizer["BirthDate"]</th>
+                <th>@Localizer["PhoneNumber"]</th>
+                <th>@Localizer["Email"]</th>
+                <th>@Localizer["Address"]</th>
+                <th>@Localizer["RegisterDate"]</th>
+                <th>@Localizer["Status"]</th>
+                <th>@Localizer["Actions"]</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>@item.FullName</td>
+                    <td>
+                        @switch (item.Gender)
+                        {
+                            case Gender.Male:
+                                <span class="badge bg-primary">@Localizer["Male"]</span>
+                                break;
+
+                            case Gender.Female:
+                                <span class="badge bg-primary">@Localizer["Female"]</span>
+                                break;
+
+                            default:
+                                <span class="badge bg-secondary">@Localizer["Unknown"]</span>
+                                break;
+                        }
+                    </td>
+                    <td>@item.BirthDate</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.Email</td>
+                    <td>@item.Address</td>
+                    <td>@item.RegisterDate</td>
+                    <td>
+                        @switch (item.Status)
+                        {
+                            case MemberStatus.Active:
+                                <span class="badge bg-success">@Localizer["Active"]</span>
+                                break;
+
+                            case MemberStatus.Inactive:
+                                <span class="badge bg-secondary">@Localizer["Inactive"]</span>
+                                break;
+
+                            case MemberStatus.Suspended:
+                                <span class="badge bg-success">@Localizer["Suspended"]</span>
+                                break;
+
+                            case MemberStatus.Unsuspended:
+                                <span class="badge bg-danger">@Localizer["Unsuspended"]</span>
+                                break;
+
+                            default:
+                                <span class="badge bg-secondary">@Localizer["Unknown"]</span>
+                                break;
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit"
+                           asp-route-id="@item.Id"
+                           class="btn btn-icon btn-outline-primary tooltip-btn"
+                           data-tooltip="@Localizer["Edit"]">
+                            <i class="fa fa-pen"></i>
+                        </a>
+                        <a asp-action="Details"
+                           asp-route-id="@item.Id"
+                           class="btn btn-icon btn-outline-info tooltip-btn"
+                           data-tooltip="@Localizer["Details"]">
+                            <i class="fa fa-info"></i>
+                        </a>
+                        <a asp-action="Delete"
+                           asp-route-id="@item.Id"
+                           class="btn btn-icon btn-outline-danger tooltip-btn"
+                           data-tooltip="@Localizer["Delete"]">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>              
+            }
+        </tbody>
+    </table>
+</div>
