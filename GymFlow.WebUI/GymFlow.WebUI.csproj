@@ -7,8 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.25">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GymFlow.Application\GymFlow.Application.csproj" />
     <ProjectReference Include="..\GymFlow.Domain\GymFlow.Domain.csproj" />
+    <ProjectReference Include="..\GymFlow.Infrastructure\GymFlow.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

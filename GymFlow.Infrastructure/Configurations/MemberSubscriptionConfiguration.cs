@@ -1,4 +1,5 @@
 ﻿using GymFlow.Domain.Entities;
+using GymFlow.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -46,7 +47,51 @@ namespace GymFlow.Infrastructure.Configurations
                 .WithMany(st => st.MemberSubscriptions)
                 .HasForeignKey(ms => ms.SubscriptionTypeId)
                 .OnDelete(DeleteBehavior.Cascade);
-        }
-    }
 
+
+            builder.HasData(LoadMemberSubscriptions());
+        }
+
+
+        private static List<MemberSubscription> LoadMemberSubscriptions()
+        {
+            return new List<MemberSubscription>
+        {
+            new MemberSubscription
+            {
+                Id = 1,
+                MemberId = 1,
+                SubscriptionTypeId = 1,
+                StartDate = new DateOnly(2026, 1, 1),
+                EndDate = new DateOnly(2026, 1, 31),
+                Price = 50,
+                Status = SubscriptionStatus.Active
+            },
+
+            new MemberSubscription
+            {
+                Id = 2,
+                MemberId = 2,
+                SubscriptionTypeId = 2,
+                StartDate = new DateOnly(2026, 1, 5),
+                EndDate = new DateOnly(2026, 4, 5),
+                Price = 130,
+                Status = SubscriptionStatus.Active
+            },
+
+            new MemberSubscription
+            {
+                Id = 3,
+                MemberId = 3,
+                SubscriptionTypeId = 3,
+                StartDate = new DateOnly(2025, 1, 10),
+                EndDate = new DateOnly(2026, 1, 10),
+                Price = 450,
+                Status = SubscriptionStatus.Expired
+            }
+
+        };
+        }
+
+    }
 }

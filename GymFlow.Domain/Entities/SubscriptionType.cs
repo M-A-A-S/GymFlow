@@ -11,7 +11,7 @@ namespace GymFlow.Domain.Entities
         public string NameEn { get; set; }
         public string NameAr { get; set; }
         public byte DaysPerWeek { get; set; }
-        public byte DurationDays { get; set; }
+        public short DurationDays { get; set; }
         public decimal Price { get; set; }
         public bool IsActive { get; set; } = true;
 

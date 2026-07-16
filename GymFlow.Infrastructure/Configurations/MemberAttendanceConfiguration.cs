@@ -33,6 +33,40 @@ namespace GymFlow.Infrastructure.Configurations
                 .HasForeignKey(ma => ma.MemberId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
+
+        private static List<MemberAttendance> LoadMemberAttendances()
+        {
+            return new List<MemberAttendance>
+            {
+                new MemberAttendance
+                {
+                    Id = 1,
+                    MemberId = 1,
+                    AttendanceDate = new DateOnly(2026, 1, 15),
+                    CheckIn = new TimeOnly(8, 0),
+                    CheckOut = new TimeOnly(10, 0)
+                },
+
+                new MemberAttendance
+                {
+                    Id = 2,
+                    MemberId = 1,
+                    AttendanceDate = new DateOnly(2026, 1, 16),
+                    CheckIn = new TimeOnly(7, 30),
+                    CheckOut = new TimeOnly(9, 30)
+                },
+
+                new MemberAttendance
+                {
+                    Id = 3,
+                    MemberId = 2,
+                    AttendanceDate = new DateOnly(2026, 1, 15),
+                    CheckIn = new TimeOnly(17, 0),
+                    CheckOut = new TimeOnly(18, 30)
+                }
+            };
+        }
+
     }
 
 }
