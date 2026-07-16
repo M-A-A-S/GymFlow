@@ -91,6 +91,26 @@ namespace GymFlow.Infrastructure.Tests.Services
         }
 
         [Fact]
+        public async Task AddAsync_ShouldIgnoreExistingNullEmails_WhenDTOContainsNullEmail()
+        {
+            // Arrange
+            await CreateMemberAsync(email: null, phone: "111111111");
+
+            var dto = CreateMemberDTO(
+                email: null,
+                phone: "222222222");
+
+            // Act
+            var result = await _service.AddAsync(dto);
+
+            // Assert
+            Assert.True(result.IsSuccess);
+            Assert.True(result.Data > 0);
+            Assert.Equal(result.StatusCode, 200);
+
+        }
+
+        [Fact]
         public async Task AddAsync_ShouldReturnEmailExists_WhenEmailAlreadyExists()
         {
             // Arrange
@@ -240,6 +260,30 @@ namespace GymFlow.Infrastructure.Tests.Services
         }
 
         [Fact]
+        public async Task UpdateAsync_ShouldAllowNullEmail()
+        {
+            // Arrange
+            await CreateMemberAsync(
+                email: "existing@test.com",
+                phone: "111111111");
+
+            var member = await CreateMemberAsync(
+                email: null,
+                phone: "222222222");
+
+            var dto = CreateMemberDTO(
+                email: null,
+                phone: "222222222");
+
+            // Act
+            var result = await _service.UpdateAsync(member.Id, dto);
+
+            // Assert
+            Assert.True(result.IsSuccess);
+            Assert.True(result.Data);
+        }
+
+        [Fact]
         public async Task UpdateAsync_ShouldReturnPhoneExists_WhenUpdatedPhoneBelongsToAnotherMember()
         {
             // Arrange
@@ -257,7 +301,32 @@ namespace GymFlow.Infrastructure.Tests.Services
             Assert.Equal(result.Code, ResultCodes.PhoneExists);
 
         }
-        
+
+        [Fact]
+        public async Task UpdateAsync_ShouldAllowKeepingSameEmailAndPhone()
+        {
+            // Arrange
+            var member = await CreateMemberAsync(
+                email: "same@test.com",
+                phone: "111111111");
+
+            var dto = CreateMemberDTO(
+                email: "same@test.com",
+                phone: "111111111");
+
+            // Act
+            var result = await _service.UpdateAsync(member.Id, dto);
+
+            // Assert
+            Assert.True(result.IsSuccess);
+            Assert.True(result.Data);
+
+            var updated = await _context.Members.FindAsync(member.Id);
+            Assert.Equal(dto.FullName, updated.FullName);
+            Assert.Equal(dto.Email, updated.Email);
+            Assert.Equal(dto.PhoneNumber, updated.PhoneNumber);
+        }
+
         #endregion
 
         #region Delete

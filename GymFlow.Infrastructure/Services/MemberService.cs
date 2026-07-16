@@ -34,7 +34,7 @@ namespace GymFlow.Infrastructure.Services
         {
             bool emailExists = 
                 await _appDbContext.Members
-                .AnyAsync(m => m.Email == dto.Email);
+                .AnyAsync(m => m.Email == dto.Email && m.Email != null);
 
             if (emailExists)
             {
@@ -150,7 +150,7 @@ namespace GymFlow.Infrastructure.Services
                 }
 
                 bool emailExists = await _appDbContext.Members
-                    .AnyAsync(m => m.Email == dto.Email && m.Id != id);
+                    .AnyAsync(m => m.Email == dto.Email && m.Id != id && m.Email != null);
 
                 if (emailExists)
                 {
