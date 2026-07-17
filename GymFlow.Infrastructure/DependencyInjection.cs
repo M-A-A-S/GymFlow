@@ -20,6 +20,7 @@ namespace GymFlow.Infrastructure
             IConfiguration configuration)
         {
 
+            services.AddScoped<IMemberSubscriptionService, MemberSubscriptionService>();
             services.AddScoped<IMemberService, MemberService>();
             services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
 

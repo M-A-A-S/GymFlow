@@ -315,6 +315,9 @@
   <data name="StartDate" xml:space="preserve">
     <value>تاريخ البداية</value>
   </data>
+  <data name="Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
   <data name="Subscriptions" xml:space="preserve">
     <value>الاشتراكات</value>
   </data>
