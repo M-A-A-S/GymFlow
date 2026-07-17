@@ -306,8 +306,14 @@
   <data name="SelectGender" xml:space="preserve">
     <value>-- Select Gender --</value>
   </data>
+  <data name="SelectMember" xml:space="preserve">
+    <value>-- Select Member --</value>
+  </data>
   <data name="SelectStatus" xml:space="preserve">
     <value>-- Select Status --</value>
+  </data>
+  <data name="SelectSubscriptionType" xml:space="preserve">
+    <value>-- Select Subscription Type --</value>
   </data>
   <data name="ServerError" xml:space="preserve">
     <value>Server error occurred</value>
@@ -317,6 +323,9 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="SubscriptionOverlap" xml:space="preserve">
+    <value>The member already has a subscription during this period</value>
   </data>
   <data name="Subscriptions" xml:space="preserve">
     <value>Subscriptions</value>

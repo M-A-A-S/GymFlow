@@ -47,7 +47,8 @@ namespace GymFlow.WebUI.Controllers
         #region ========================= Create =========================
         public async Task<IActionResult> Create()
         {
-            return View(await _service.GetMemberSubscriptionAddUpdateDTO());
+            var result = await _service.GetMemberSubscriptionAddUpdateDTO();
+            return View(result.Data);
         }
 
         [HttpPost]

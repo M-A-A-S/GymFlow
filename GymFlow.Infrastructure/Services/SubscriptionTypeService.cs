@@ -1,5 +1,6 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.Constants;
+using GymFlow.Domain.DTOs.Member;
 using GymFlow.Domain.DTOs.SubscriptionType;
 using GymFlow.Domain.Enums;
 using GymFlow.Domain.Extensions;
@@ -120,6 +121,33 @@ namespace GymFlow.Infrastructure.Services
                     500,
                     "An unexpected error occurred.");
             }
+        }
+
+        public async Task<Result<IEnumerable<SubscriptionTypeSearchDTO>>> SearchAsync(string search)
+        {
+            var query = _appDbContext.SubscriptionTypes
+                .AsNoTracking();
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                query = query.Where(x =>
+                    x.NameEn.Contains(search) ||
+                    x.NameAr.Contains(search));
+            }
+
+            var subscriptionTypes = await query
+                .Take(20)
+                .Select(x => new SubscriptionTypeSearchDTO
+                {
+                    Id = x.Id,
+                    NameEn = x.NameEn,
+                    NameAr = x.NameAr,
+                    Price = x.Price,
+                    DurationDays = x.DurationDays,
+                })
+                .ToListAsync();
+
+            return Result<IEnumerable<SubscriptionTypeSearchDTO>>.Success(subscriptionTypes);
         }
 
         #endregion

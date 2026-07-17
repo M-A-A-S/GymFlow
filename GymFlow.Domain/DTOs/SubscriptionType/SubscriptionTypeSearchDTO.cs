@@ -23,5 +23,17 @@ namespace GymFlow.Domain.DTOs.SubscriptionType
         )]
         public string NameAr { get; set; }
 
+        [Display(
+            Name = nameof(Resources.Shared.SharedResource.DurationDays),
+            ResourceType = typeof(Resources.Shared.SharedResource)
+        )]
+        public short DurationDays { get; set; }
+
+        [Display(
+            Name = nameof(Resources.Shared.SharedResource.Price),
+            ResourceType = typeof(Resources.Shared.SharedResource)
+        )]
+        public decimal Price { get; set; }
+
     }
 }

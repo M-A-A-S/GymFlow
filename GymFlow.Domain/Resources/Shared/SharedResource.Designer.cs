@@ -628,11 +628,29 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -- Select Member --.
+        /// </summary>
+        public static string SelectMember {
+            get {
+                return ResourceManager.GetString("SelectMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -- Select Status --.
         /// </summary>
         public static string SelectStatus {
             get {
                 return ResourceManager.GetString("SelectStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -- Select Subscription Type --.
+        /// </summary>
+        public static string SelectSubscriptionType {
+            get {
+                return ResourceManager.GetString("SelectSubscriptionType", resourceCulture);
             }
         }
         
@@ -660,6 +678,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Status {
             get {
                 return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The member already has a subscription during this period.
+        /// </summary>
+        public static string SubscriptionOverlap {
+            get {
+                return ResourceManager.GetString("SubscriptionOverlap", resourceCulture);
             }
         }
         

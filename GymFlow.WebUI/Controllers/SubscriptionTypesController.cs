@@ -36,6 +36,13 @@ namespace GymFlow.WebUI.Controllers
 
             return View(member);
         }
+
+        public async Task<IActionResult> Search(string search)
+        {
+            var result = await _service.SearchAsync(search);
+            return Json(result.Data);
+        }
+
         #endregion
 
         #region ========================= Create =========================

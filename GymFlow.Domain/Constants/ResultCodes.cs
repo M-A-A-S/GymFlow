@@ -29,5 +29,8 @@ namespace GymFlow.Domain.Constants
         public const string InvalidValue = "InvalidValue";
         public const string ValueOutOfRange = "ValueOutOfRange";
         public const string ValueCannotBeNegative = "ValueCannotBeNegative";
+
+        public const string SubscriptionOverlap = "SubscriptionOverlap";
+
     }
 }

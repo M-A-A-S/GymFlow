@@ -33,7 +33,7 @@ namespace GymFlow.Infrastructure.Services
         #region ========================= Add =========================
         public async Task<Result<int>> AddAsync(MemberSubscriptionDTO dto)
         {
-            var validationResult = ValidateMemberSubscriptionDTO(dto);
+            var validationResult = await ValidateMemberSubscriptionDTO(dto);
 
             if (!validationResult.IsSuccess)
             {
@@ -160,7 +160,9 @@ namespace GymFlow.Infrastructure.Services
                 {
                     Id = x.Id,
                     NameEn = x.NameEn,
-                    NameAr = x.NameAr
+                    NameAr = x.NameAr,
+                    Price = x.Price,
+                    DurationDays = x.DurationDays,
                 })
                 .ToListAsync();
 
@@ -173,8 +175,9 @@ namespace GymFlow.Infrastructure.Services
         #region ========================= Update =========================
         public async Task<Result<bool>> UpdateAsync(int id, MemberSubscriptionDTO dto)
         {
+            dto.Id = id;
 
-            var validationResult = ValidateMemberSubscriptionDTO(dto);
+            var validationResult = await ValidateMemberSubscriptionDTO(dto);
 
             if (!validationResult.IsSuccess)
             {
@@ -261,7 +264,7 @@ namespace GymFlow.Infrastructure.Services
 
         #region ========================= Helpers =========================
 
-        private Result<bool> ValidateMemberSubscriptionDTO(MemberSubscriptionDTO DTO)
+        private async Task<Result<bool>> ValidateMemberSubscriptionDTO(MemberSubscriptionDTO DTO)
         {
             if (DTO == null)
             {
@@ -277,8 +280,35 @@ namespace GymFlow.Infrastructure.Services
                     400);
             }
 
+            var hasOverlappingSubscription = await HasOverlappingSubscription(
+                DTO.MemberId,
+                DTO.StartDate,
+                DTO.EndDate,
+                DTO.Id);
+
+            if (hasOverlappingSubscription)
+            {
+                return Result<bool>.Failure(
+                    ResultCodes.SubscriptionOverlap,
+                    400);
+            }
+
             return Result<bool>.Success(true);
 
+        }
+
+        private async Task<bool> HasOverlappingSubscription(
+            int memberId,
+            DateOnly startDate,
+            DateOnly endDate,
+            int? excludeId = null)
+        {
+            return await _appDbContext.MemberSubscriptions
+                .AnyAsync(x =>
+                x.MemberId == memberId &&
+                (excludeId == null || x.Id != excludeId) && 
+                x.StartDate <= endDate &&
+                x.EndDate >= startDate);
         }
 
         #endregion

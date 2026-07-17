@@ -306,8 +306,14 @@
   <data name="SelectGender" xml:space="preserve">
     <value>-- اختر الجنس --</value>
   </data>
+  <data name="SelectMember" xml:space="preserve">
+    <value>-- اختر العضو --</value>
+  </data>
   <data name="SelectStatus" xml:space="preserve">
     <value>-- اختر الحالة --</value>
+  </data>
+  <data name="SelectSubscriptionType" xml:space="preserve">
+    <value>-- اختر نوع الاشتراك --</value>
   </data>
   <data name="ServerError" xml:space="preserve">
     <value>حدث خطأ في الخادم</value>
@@ -317,6 +323,9 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>الحالة</value>
+  </data>
+  <data name="SubscriptionOverlap" xml:space="preserve">
+    <value>لدى العضو اشتراك آخر خلال هذه الفترة</value>
   </data>
   <data name="Subscriptions" xml:space="preserve">
     <value>الاشتراكات</value>

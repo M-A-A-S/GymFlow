@@ -1,0 +1,83 @@
+﻿@using GymFlow.Domain.DTOs.MemberSubscription
+@model MemberSubscriptionAddUpdateDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@using System.Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="card shadow-sm">
+
+    <div class="card-header">
+        <h5>@Localizer["Create"] @Localizer["MemberSubscription"]</h5>
+    </div>
+
+    <div class="card-body">
+
+        <form asp-action="Create" method="post">
+
+            <partial name="Partials/_MemberSubscriptionForm" model="Model" />
+
+            <button type="submit" class="btn btn-success">
+                @Localizer["Save"]
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                @Localizer["Cancel"]
+            </a>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(function () {
+
+            console.log("Calling initializeMemberSubscription");
+
+            initializeMemberSubscription({
+
+                        memberPlaceholder: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Localizer["SelectMember"].Value)),
+        subscriptionPlaceholder: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Localizer["SelectSubscriptionType"].Value)),
+        lang: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName))
+
+            });
+
+        });
+    </script>
+
+    @* <script>
+        $(function () {
+
+            console.log("Calling initializeMemberSubscription");
+
+            initializeMemberSubscription({
+
+                memberPlaceholder: '@Html.Raw(HttpUtility.JavaScriptStringEncode(Localizer["SelectMember"]))',
+
+                subscriptionPlaceholder: '@Html.Raw(HttpUtility.JavaScriptStringEncode(Localizer["SelectSubscriptionType"]))',
+
+                lang: '@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName'
+
+            });
+
+        });
+    </script> *@
+
+    @* <script>
+        $(function () {
+
+            initializeMemberSubscription({
+                memberPlaceholder: '@Localizer["SelectMember"]',
+                subscriptionPlaceholder: '@Localizer["SelectSubscriptionType"]',
+                lang: '@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName'
+            });
+
+        });
+    </script> *@
+}

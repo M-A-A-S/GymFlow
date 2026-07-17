@@ -134,6 +134,30 @@ namespace GymFlow.Infrastructure.Services
             }
         }
 
+        public async Task<Result<IEnumerable<MemberSearchDTO>>> SearchAsync(string search)
+        {
+            var query = _appDbContext.Members
+                .AsNoTracking();
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                query = query.Where(x =>
+                    x.FullName.Contains(search) ||
+                    x.PhoneNumber.Contains(search));
+            }
+
+            var members = await query
+                .Take(20)
+                .Select(x => new MemberSearchDTO
+                {
+                    Id = x.Id,
+                    FullName = x.FullName,
+                })
+                .ToListAsync();
+
+            return Result<IEnumerable<MemberSearchDTO>>.Success(members);
+        }
+
         #endregion
 
         #region Update

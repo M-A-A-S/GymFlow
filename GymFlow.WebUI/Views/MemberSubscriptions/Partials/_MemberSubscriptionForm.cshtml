@@ -1,0 +1,73 @@
+﻿@using GymFlow.Domain.DTOs.MemberSubscription
+@model MemberSubscriptionAddUpdateDTO
+
+@using GymFlow.Domain.Enums
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="row g-3 mb-1 mb-2">
+
+    @* ================= Member ================= *@
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="MemberSubscription.MemberId" ></label>
+        <select asp-for="MemberSubscription.MemberId" class="form-select"
+                id="memberSelect">
+            <option></option>
+            @* <option value="" disabled selected>@Localizer["SelectMember"]</option> *@
+        </select>
+        <span asp-validation-for="MemberSubscription.MemberId" class="text-danger"></span>
+    </div>
+
+    @* ================= SubscriptionType ================= *@
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="MemberSubscription.SubscriptionTypeId" ></label>
+        <select asp-for="MemberSubscription.SubscriptionTypeId" class="form-select"
+                
+                id="subscriptionTypeSelect">
+            <option></option>
+            @* <option value="" disabled selected>@Localizer["SelectSubscriptionType"]</option> *@
+        </select>
+        <span asp-validation-for="MemberSubscription.SubscriptionTypeId" class="text-danger"></span>
+    </div>
+
+    @* ================= StartDate ================= *@
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="MemberSubscription.StartDate"></label>
+        <input asp-for="MemberSubscription.StartDate" id="startDateInput" type="date" class="form-control"
+               value="@(Model.MemberSubscription.StartDate == DateOnly.MinValue
+                                          ? ""
+                                                         : Model.MemberSubscription.StartDate.ToString("yyyy-MM-dd"))" />
+        <span asp-validation-for="MemberSubscription.StartDate" class="text-danger"></span>
+    </div>
+
+    @* ================= EndDate ================= *@
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="MemberSubscription.EndDate"></label>
+        <input id="endDateInput" asp-for="MemberSubscription.EndDate" readonly type="date" class="form-control"
+               value="@(Model.MemberSubscription.EndDate == DateOnly.MinValue
+                                           ? ""
+                                                          : Model.MemberSubscription.EndDate.ToString("yyyy-MM-dd"))" />
+        <span asp-validation-for="MemberSubscription.EndDate" class="text-danger"></span>
+    </div>
+
+    @* ================= Price ================= *@
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="MemberSubscription.Price"></label>
+        <input asp-for="MemberSubscription.Price" id="priceInput" readonly type="number" class="form-control" />
+        <span asp-validation-for="MemberSubscription.Price" class="text-danger"></span>
+    </div>
+
+
+    @* ================= Status ================= *@
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="MemberSubscription.Status" class="form-label"></label>
+        <select asp-for="MemberSubscription.Status" class="form-select"
+                asp-items="Html.GetEnumSelectList<SubscriptionStatus>()">
+            <option value="" disabled selected>@Localizer["SelectStatus"]</option>
+        </select>
+        <span asp-validation-for="MemberSubscription.Status" class="text-danger"></span>
+    </div>
+
+</div>
+

@@ -100,6 +100,29 @@ namespace GymFlow.Infrastructure.Tests.Services
 
         }
 
+        [Fact]
+        public async Task AddAsync_ShouldReturnSubscriptionOverlap_WhenMemberHasExistingSubscription()
+        {
+            // Arrange
+            await CreateMemberSubscription();
+
+            var dto = CreateMemberSubscriptionDTO();
+
+            // Same member and overlapping dates
+            dto.MemberId = 1;
+            dto.StartDate = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(10));
+            dto.EndDate = DateOnly.FromDateTime(DateTime.UtcNow.AddMonths(2));
+
+            // Act
+            var result = await _service.AddAsync(dto);
+
+            // Assert
+            Assert.False(result.IsSuccess);
+
+            Assert.Equal(ResultCodes.SubscriptionOverlap, result.Code);
+            Assert.Equal(400, result.StatusCode);
+        }
+
         #endregion
 
         #region ========================= Get =========================
@@ -216,6 +239,50 @@ namespace GymFlow.Infrastructure.Tests.Services
             Assert.False(result.IsSuccess);
             Assert.Equal(ResultCodes.InvalidPrice, result.Code);
 
+        }
+
+        [Fact]
+        public async Task UpdateAsync_ShouldReturnSubscriptionOverlap_WhenUpdatingToExistingPeriod()
+        {
+            // Arrange
+
+            // Existing subscription for member 1
+            var first = await CreateMemberSubscription();
+
+            // Another subscription that will conflict
+            var second = new MemberSubscription
+            {
+                MemberId = 1,
+                SubscriptionTypeId = 2,
+
+                StartDate = DateOnly.FromDateTime(DateTime.UtcNow.AddMonths(2)),
+                EndDate = DateOnly.FromDateTime(DateTime.UtcNow.AddMonths(3)),
+
+                Price = 200,
+                Status = SubscriptionStatus.Active,
+                IsDeleted = false
+            };
+
+            _context.MemberSubscriptions.Add(second);
+
+            await _context.SaveChangesAsync();
+
+            var dto = CreateMemberSubscriptionDTO();
+
+            dto.MemberId = 1;
+
+            // Make first subscription overlap second subscription
+            dto.StartDate = DateOnly.FromDateTime(DateTime.UtcNow.AddMonths(2));
+            dto.EndDate = DateOnly.FromDateTime(DateTime.UtcNow.AddMonths(4));
+
+            // Act
+            var result = await _service.UpdateAsync(first.Id, dto);
+
+            // Assert
+            Assert.False(result.IsSuccess);
+
+            Assert.Equal(ResultCodes.SubscriptionOverlap, result.Code);
+            Assert.Equal(400, result.StatusCode);
         }
 
         #endregion
