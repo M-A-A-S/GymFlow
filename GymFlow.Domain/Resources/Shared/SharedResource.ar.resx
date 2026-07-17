@@ -273,6 +273,9 @@
   <data name="New" xml:space="preserve">
     <value>إضافة</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>لا</value>
+  </data>
   <data name="NotFound" xml:space="preserve">
     <value>السجل غير موجود</value>
   </data>
@@ -347,5 +350,8 @@
   </data>
   <data name="ValueOutOfRange" xml:space="preserve">
     <value>القيمة خارج النطاق المسموح</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>نعم</value>
   </data>
 </root>
