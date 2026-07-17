@@ -70,10 +70,5 @@ namespace GymFlow.Domain.DTOs.SubscriptionType
             ErrorMessageResourceType = typeof(Resources.Shared.SharedResource)
         )]
         public bool IsActive { get; set; } = true;
-
-        public Entities.SubscriptionType ToEntity()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -20,5 +20,14 @@ namespace GymFlow.Domain.Constants
         public const string AlreadyExists = "AlreadyExists";
         public const string ValidationError = "ValidationError";
         public const string UnexpectedError = "UnexpectedError";
+
+        public const string InvalidDaysPerWeek = "InvalidDaysPerWeek";
+        public const string InvalidDuration = "InvalidDuration";
+        public const string InvalidPrice = "InvalidPrice";
+
+        public const string RequiredField = "RequiredField";
+        public const string InvalidValue = "InvalidValue";
+        public const string ValueOutOfRange = "ValueOutOfRange";
+        public const string ValueCannotBeNegative = "ValueCannotBeNegative";
     }
 }

@@ -28,9 +28,18 @@ namespace GymFlow.Infrastructure.Services
             _logger = logger;
         }
 
-        #region Add
+        #region ========================= Add =========================
         public async Task<Result<int>> AddAsync(SubscriptionTypeDTO dto)
         {
+            var validationResult = ValidateSubscriptionTypeDTO(dto);
+
+            if (!validationResult.IsSuccess)
+            {
+                return Result<int>.Failure(
+                    validationResult.Code,
+                    validationResult.StatusCode);
+            }
+
             var entity = dto.ToEntity();
 
             try
@@ -57,7 +66,7 @@ namespace GymFlow.Infrastructure.Services
         }
         #endregion
 
-        #region Get
+        #region ========================= Get =========================
         public async Task<Result<IEnumerable<SubscriptionTypeDTO>>> GetAllAsync()
         {
             try
@@ -115,9 +124,19 @@ namespace GymFlow.Infrastructure.Services
 
         #endregion
 
-        #region Update
+        #region ========================= Update =========================
         public async Task<Result<bool>> UpdateAsync(int id, SubscriptionTypeDTO dto)
         {
+
+            var validationResult = ValidateSubscriptionTypeDTO(dto);
+
+            if (!validationResult.IsSuccess)
+            {
+                return Result<bool>.Failure(
+                    validationResult.Code,
+                    validationResult.StatusCode);
+            }
+
 
             try
             {
@@ -156,7 +175,7 @@ namespace GymFlow.Infrastructure.Services
         }
         #endregion
 
-        #region Delete
+        #region ========================= Delete =========================
         public async Task<Result<bool>> DeleteAsync(int id)
         {
             try
@@ -194,5 +213,43 @@ namespace GymFlow.Infrastructure.Services
         }
         #endregion
 
+        #region ========================= Helpers =========================
+
+        private Result<bool> ValidateSubscriptionTypeDTO(SubscriptionTypeDTO DTO)
+        {
+            if (DTO == null)
+            {
+                return Result<bool>.Failure(
+                    ResultCodes.InvalidData,
+                    400);
+            }
+
+            if (DTO.DaysPerWeek < 1 || DTO.DaysPerWeek > 7)
+            {
+                return Result<bool>.Failure(
+                    ResultCodes.InvalidDaysPerWeek,
+                    400);
+            }
+
+            if (DTO.DurationDays <= 0)
+            {
+                return Result<bool>.Failure(
+                    ResultCodes.InvalidDuration,
+                    400);
+            }
+
+            if (DTO.Price < 0)
+            {
+                return Result<bool>.Failure(
+                    ResultCodes.InvalidPrice,
+                    400);
+            }
+
+            return Result<bool>.Success(true);
+
+        }
+
+        #endregion
+    
     }
 }

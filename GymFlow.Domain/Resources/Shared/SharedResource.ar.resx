@@ -219,6 +219,18 @@
   <data name="InvalidData" xml:space="preserve">
     <value>بيانات غير صالحة</value>
   </data>
+  <data name="InvalidDaysPerWeek" xml:space="preserve">
+    <value>عدد الأيام في الأسبوع يجب أن يكون بين 1 و 7</value>
+  </data>
+  <data name="InvalidDuration" xml:space="preserve">
+    <value>المدة يجب أن تكون أكبر من صفر</value>
+  </data>
+  <data name="InvalidPrice" xml:space="preserve">
+    <value>السعر لا يمكن أن يكون قيمة سالبة</value>
+  </data>
+  <data name="InvalidValue" xml:space="preserve">
+    <value>القيمة غير صحيحة</value>
+  </data>
   <data name="IsActive" xml:space="preserve">
     <value>نشط</value>
   </data>
@@ -279,6 +291,9 @@
   <data name="Required" xml:space="preserve">
     <value>هذا الحقل مطلوب</value>
   </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>هذا الحقل مطلوب</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>حفظ</value>
   </data>
@@ -326,5 +341,11 @@
   </data>
   <data name="ValidationError" xml:space="preserve">
     <value>خطأ في التحقق من البيانات</value>
+  </data>
+  <data name="ValueCannotBeNegative" xml:space="preserve">
+    <value>لا يمكن أن تكون القيمة سالبة</value>
+  </data>
+  <data name="ValueOutOfRange" xml:space="preserve">
+    <value>القيمة خارج النطاق المسموح</value>
   </data>
 </root>

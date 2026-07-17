@@ -19,7 +19,7 @@ namespace GymFlow.WebUI.Controllers
             _service = memberService;
         }
 
-        #region Get
+        #region ========================= Get =========================
         public async Task<IActionResult> Index()
         {
             var getAllResult = await _service.GetAllAsync();
@@ -47,7 +47,7 @@ namespace GymFlow.WebUI.Controllers
         }
         #endregion
 
-        #region Create
+        #region ========================= Create =========================
         public async Task<IActionResult> Create()
         {
             return View(new MemberDTO());
@@ -75,7 +75,7 @@ namespace GymFlow.WebUI.Controllers
         }
         #endregion
 
-        #region Update
+        #region ========================= Update =========================
         public async Task<IActionResult> Edit(int id)
         {
             //var findResult = await _service.GetByIdAsync(id);
@@ -119,7 +119,7 @@ namespace GymFlow.WebUI.Controllers
 
         #endregion
 
-        #region Delete
+        #region ========================= Delete =========================
         public async Task<IActionResult> Delete(int id)
         {
             var member = await GetEntityOrNull(_service.GetByIdAsync(id));
