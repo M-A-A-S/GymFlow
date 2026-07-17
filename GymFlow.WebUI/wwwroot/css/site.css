@@ -218,6 +218,11 @@ select:-webkit-autofill:focus {
     color: var(--input-text-color);
     box-shadow: none
 }*/
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
 /* Start Navbar */
 .navbar {
     display: flex;
