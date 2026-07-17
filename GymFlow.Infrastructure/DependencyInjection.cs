@@ -20,8 +20,11 @@ namespace GymFlow.Infrastructure
             IConfiguration configuration)
         {
 
-            services.AddScoped<IAppDbContext>(provider => provider.GetService<AppDbContext>());
             services.AddScoped<IMemberService, MemberService>();
+            services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
+
+
+            services.AddScoped<IAppDbContext>(provider => provider.GetService<AppDbContext>());
 
             services.AddDbContext<AppDbContext>(options =>
             {
