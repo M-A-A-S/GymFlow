@@ -1,6 +1,9 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.Constants;
+using GymFlow.Domain.DTOs.Member;
 using GymFlow.Domain.DTOs.MemberSubscription;
+using GymFlow.Domain.DTOs.SubscriptionType;
+using GymFlow.Domain.Entities;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
@@ -119,6 +122,46 @@ namespace GymFlow.Infrastructure.Services
                     500,
                     "An unexpected error occurred.");
             }
+        }
+
+        public async Task<Result<MemberSubscriptionAddUpdateDTO>> GetMemberSubscriptionAddUpdateDTO(int? id = null)
+        {
+            var DTO = new MemberSubscriptionAddUpdateDTO();
+
+            if (id.HasValue)
+            {
+                var memberSubscription = await _appDbContext.MemberSubscriptions
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.Id == id.Value);
+
+                if (memberSubscription is null)
+                {
+                    return Result<MemberSubscriptionAddUpdateDTO>.Failure(
+                        ResultCodes.NotFound);
+                }
+
+                DTO.MemberSubscription = memberSubscription.ToDTO();
+            }
+
+            DTO.Members = await _appDbContext.Members
+                .Select(x => new MemberSearchDTO
+                {
+                    Id = x.Id,
+                    FullName = x.FullName,
+                })
+                .ToListAsync();
+
+            DTO.SubscriptionTypes = await _appDbContext.SubscriptionTypes
+                .Select(x => new SubscriptionTypeSearchDTO
+                {
+                    Id = x.Id,
+                    NameEn = x.NameEn,
+                    NameAr = x.NameAr
+                })
+                .ToListAsync();
+
+            return Result<MemberSubscriptionAddUpdateDTO>.Success(DTO);
+
         }
 
         #endregion
