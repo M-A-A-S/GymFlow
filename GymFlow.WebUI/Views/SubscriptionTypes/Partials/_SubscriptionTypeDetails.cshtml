@@ -1,0 +1,40 @@
+﻿@using GymFlow.Domain.DTOs.SubscriptionType
+@model SubscriptionTypeDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="row">
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["NameEn"]</label>
+        <div>@Model.NameEn</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["NameAr"]</label>
+        <div>@Model.NameAr</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["DaysPerWeek"]</label>
+        <div>@Model.DaysPerWeek</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["DurationDays"]</label>
+        <div>@Model.DurationDays</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["Price"]</label>
+        <div>@Model.Price</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["IsActive"]</label>
+        <div>@(Model.IsActive ? @Localizer["Yes"] : @Localizer["No"])</div>
+    </div>
+
+</div>
