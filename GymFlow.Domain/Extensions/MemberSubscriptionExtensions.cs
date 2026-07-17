@@ -26,7 +26,10 @@ namespace GymFlow.Domain.Extensions
                 StartDate = Entity.StartDate,
                 EndDate = Entity.EndDate,
                 Price = Entity.Price,
-                Status = Entity.Status
+                Status = Entity.Status,
+
+                Member = Entity.Member?.ToDTO(),
+                SubscriptionType = Entity.SubscriptionType?.ToDTO(),
             };
         }
 

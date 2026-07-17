@@ -74,8 +74,10 @@ namespace GymFlow.Infrastructure.Services
             try
             {
                 var memberSubscriptions = await _appDbContext.MemberSubscriptions
+                .Include(x => x.Member)
+                .Include(x => x.SubscriptionType)
                 .Select(m => m.ToDTO())
-                .AsNoTracking()
+                .AsNoTracking()          
                 .ToListAsync();
 
                 return Result<IEnumerable<MemberSubscriptionDTO>>.Success(memberSubscriptions);
@@ -100,6 +102,8 @@ namespace GymFlow.Infrastructure.Services
             try
             {
                 var memberSubscription = await _appDbContext.MemberSubscriptions
+                    .Include(x => x.Member)
+                    .Include(x => x.SubscriptionType)
                     .AsNoTracking()
                     .FirstOrDefaultAsync(x => x.Id == id);
 
