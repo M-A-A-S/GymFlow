@@ -129,6 +129,9 @@
   <data name="Address" xml:space="preserve">
     <value>Address</value>
   </data>
+  <data name="AlreadyCheckedOut" xml:space="preserve">
+    <value>Member already checked out</value>
+  </data>
   <data name="AlreadyExists" xml:space="preserve">
     <value>Already exists</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="AttendanceDate" xml:space="preserve">
     <value>Attendance Date</value>
+  </data>
+  <data name="AttendanceNotFound" xml:space="preserve">
+    <value>Attendance record not found</value>
   </data>
   <data name="BirthDate" xml:space="preserve">
     <value>Birth Date</value>
@@ -150,8 +156,14 @@
   <data name="CheckIn" xml:space="preserve">
     <value>Check In</value>
   </data>
+  <data name="CheckInSuccess" xml:space="preserve">
+    <value>Check-in completed successfully</value>
+  </data>
   <data name="CheckOut" xml:space="preserve">
     <value>Check Out</value>
+  </data>
+  <data name="CheckOutSuccess" xml:space="preserve">
+    <value>Check-out completed successfully</value>
   </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
@@ -239,6 +251,9 @@
   </data>
   <data name="Member" xml:space="preserve">
     <value>Member</value>
+  </data>
+  <data name="MemberAlreadyCheckedIn" xml:space="preserve">
+    <value>Member already checked in today</value>
   </data>
   <data name="MemberAttendance" xml:space="preserve">
     <value>Member Attendance</value>

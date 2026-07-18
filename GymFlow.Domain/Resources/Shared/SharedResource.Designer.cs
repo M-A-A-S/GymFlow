@@ -97,6 +97,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Member already checked out.
+        /// </summary>
+        public static string AlreadyCheckedOut {
+            get {
+                return ResourceManager.GetString("AlreadyCheckedOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Already exists.
         /// </summary>
         public static string AlreadyExists {
@@ -120,6 +129,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string AttendanceDate {
             get {
                 return ResourceManager.GetString("AttendanceDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attendance record not found.
+        /// </summary>
+        public static string AttendanceNotFound {
+            get {
+                return ResourceManager.GetString("AttendanceNotFound", resourceCulture);
             }
         }
         
@@ -160,11 +178,29 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check-in completed successfully.
+        /// </summary>
+        public static string CheckInSuccess {
+            get {
+                return ResourceManager.GetString("CheckInSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check Out.
         /// </summary>
         public static string CheckOut {
             get {
                 return ResourceManager.GetString("CheckOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check-out completed successfully.
+        /// </summary>
+        public static string CheckOutSuccess {
+            get {
+                return ResourceManager.GetString("CheckOutSuccess", resourceCulture);
             }
         }
         
@@ -426,6 +462,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Member {
             get {
                 return ResourceManager.GetString("Member", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Member already checked in today.
+        /// </summary>
+        public static string MemberAlreadyCheckedIn {
+            get {
+                return ResourceManager.GetString("MemberAlreadyCheckedIn", resourceCulture);
             }
         }
         

@@ -129,6 +129,9 @@
   <data name="Address" xml:space="preserve">
     <value>العنوان</value>
   </data>
+  <data name="AlreadyCheckedOut" xml:space="preserve">
+    <value>تم تسجيل الخروج مسبقاً</value>
+  </data>
   <data name="AlreadyExists" xml:space="preserve">
     <value>موجود مسبقاً</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="AttendanceDate" xml:space="preserve">
     <value>تاريخ الحضور</value>
+  </data>
+  <data name="AttendanceNotFound" xml:space="preserve">
+    <value>سجل الحضور غير موجود</value>
   </data>
   <data name="BirthDate" xml:space="preserve">
     <value>تاريخ الميلاد</value>
@@ -150,8 +156,14 @@
   <data name="CheckIn" xml:space="preserve">
     <value>وقت الدخول</value>
   </data>
+  <data name="CheckInSuccess" xml:space="preserve">
+    <value>تم تسجيل الدخول بنجاح</value>
+  </data>
   <data name="CheckOut" xml:space="preserve">
     <value>وقت الخروج</value>
+  </data>
+  <data name="CheckOutSuccess" xml:space="preserve">
+    <value>تم تسجيل الخروج بنجاح</value>
   </data>
   <data name="Create" xml:space="preserve">
     <value>إضافة</value>
@@ -239,6 +251,9 @@
   </data>
   <data name="Member" xml:space="preserve">
     <value>العضو</value>
+  </data>
+  <data name="MemberAlreadyCheckedIn" xml:space="preserve">
+    <value>تم تسجيل دخول العضو مسبقاً اليوم</value>
   </data>
   <data name="MemberAttendance" xml:space="preserve">
     <value>سجل الحضور</value>

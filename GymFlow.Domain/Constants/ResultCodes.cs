@@ -32,5 +32,11 @@ namespace GymFlow.Domain.Constants
 
         public const string SubscriptionOverlap = "SubscriptionOverlap";
 
+        public const string MemberAlreadyCheckedIn = "MemberAlreadyCheckedIn";
+        public const string CheckInSuccess = "CheckInSuccess";
+        public const string AttendanceNotFound = "AttendanceNotFound";
+        public const string AlreadyCheckedOut = "AlreadyCheckedOut";
+        public const string CheckOutSuccess = "CheckOutSuccess";
+
     }
 }
