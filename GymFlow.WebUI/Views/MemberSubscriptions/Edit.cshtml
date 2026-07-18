@@ -1,0 +1,68 @@
+﻿@using GymFlow.Domain.DTOs.MemberSubscription
+@model MemberSubscriptionAddUpdateDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@using System.Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="card shadow-sm">
+
+    <div class="card-header">
+        <h5>@Localizer["Edit"] @Localizer["MemberSubscription"]</h5>
+    </div>
+
+    <div class="card-body">
+
+        <form asp-action="Edit">
+
+            <input type="hidden" asp-for="MemberSubscription.Id" />
+
+            <partial name="Partials/_MemberSubscriptionForm" model="Model" />
+
+            <button type="submit" class="btn btn-primary">
+                @Localizer["Edit"]
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                @Localizer["Cancel"]
+            </a>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(function () {
+
+            console.log("Calling initializeMemberSubscription");
+
+            initializeMemberSubscription({
+
+                memberPlaceholder: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Localizer["SelectMember"].Value)),
+                subscriptionPlaceholder: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Localizer["SelectMemberSubscription"].Value)),
+                lang: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)),
+
+                // Edit values (empty in Create)
+                memberId: "@Model.MemberSubscription?.MemberId",
+                memberName: "@Model.MemberSubscription?.Member?.FullName",
+
+                subscriptionTypeId: "@Model.MemberSubscription?.SubscriptionTypeId",
+                    subscriptionTypeName: "@(
+                        System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "en"
+                        ? Model.MemberSubscription?.SubscriptionType?.NameEn
+                        : Model.MemberSubscription?.SubscriptionType?.NameAr)",
+
+                price: "@Model.MemberSubscription?.Price",
+            durationDays: "@Model.MemberSubscription?.SubscriptionType?.DurationDays"
+
+            });
+
+        });
+    </script>
+}

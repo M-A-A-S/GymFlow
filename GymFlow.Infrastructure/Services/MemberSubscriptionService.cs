@@ -135,6 +135,8 @@ namespace GymFlow.Infrastructure.Services
             if (id.HasValue)
             {
                 var memberSubscription = await _appDbContext.MemberSubscriptions
+                    .Include(x => x.Member)
+                    .Include(x => x.SubscriptionType)
                     .AsNoTracking()
                     .FirstOrDefaultAsync(x => x.Id == id.Value);
 

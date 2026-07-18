@@ -582,8 +582,6 @@ html[dir="rtl"] .submenu a {
 /* End Switch Slider */
 
 /* Start Select2 Library */
-
-
 .select2-container--default .select2-selection--single {
     background-color: var(--background-color);
     border-color: var(--border-color);
@@ -614,4 +612,11 @@ html[dir="rtl"] .submenu a {
     outline: none !important;
 }
 
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: var(--primary-color);
+}
+.select2-container--default .select2-results__option--selected {
+    background-color: var(--primary-color-hover-lighter);
+    color: white;
+}
 /* End Select2 Library */

@@ -1,15 +1,12 @@
-﻿console.log("member-subscription.js loaded - v2");
-let selectedDurationDays = 0;
+﻿let selectedDurationDays = 0;
 
 function initializeMemberSubscription(options) {
 
-    console.log("test");
 
-
+    // ================= Members =================
     $('#memberSelect').select2({
 
         placeholder: options.memberPlaceholder,
-
         allowClear: true,
 
         ajax: {
@@ -24,14 +21,7 @@ function initializeMemberSubscription(options) {
                 };
             },
 
-            //processResults: function (data) {
-            //    return {
-            //        results: data
-            //    };
-            //}
-
             processResults: function (data) {
-                console.log("subscriptionTypeSelect data -> ", data);
 
                 return {
                     results: data.map(function (item) {
@@ -45,10 +35,10 @@ function initializeMemberSubscription(options) {
         }
     });
 
+    // ================= Subscription Types =================
     $('#subscriptionTypeSelect').select2({
 
         placeholder: options.subscriptionPlaceholder,
-
         allowClear: true,
 
         ajax: {
@@ -62,21 +52,15 @@ function initializeMemberSubscription(options) {
                 };
             },
 
-            //processResults: function (data) {
-            //    return {
-            //        results: data
-            //    };
-            //}
-
             processResults: function (data) {
-
-                console.log("subscriptionTypeSelect data -> ", data)
 
                 return {
                     results: data.map(function (item) {
                         return {
                             id: item.id,
-                            text: options.lang == "en" ? item.nameEn : item.nameAr,
+                            text: options.lang == "en"
+                                ? item.nameEn
+                                : item.nameAr,
                             price: item.price,
                             durationDays: item.durationDays,
                         };
@@ -87,27 +71,63 @@ function initializeMemberSubscription(options) {
     });
 
 
+    // ================= Subscription Type Changed =================
     $('#subscriptionTypeSelect').on('select2:select', function (e) {
 
         var selected = e.params.data;
 
         selectedDurationDays = selected.durationDays;
 
-        console.log(selected);
-
         // Set price
         $('#priceInput').val(selected.price);
 
-        // Set start date to today
-        let today = new Date();
+        /// Set start date only if it's empty
+        let startDate = $('#startDateInput').val();
 
-        $('#startDateInput')
-            .val(formatDate(today));
+        if (!startDate) {
+            let today = new Date();
+            $('#startDateInput').val(formatDate(today));
+        }
 
         calculateEndDate();
     });
 
+    // ================= Edit Mode =================
+    if (options.memberId) {
 
+        console.log("member -> ", options.memberName)
+
+        let option = new Option(
+            options.memberName,
+            options.memberId,
+            true,
+            true
+        );
+
+        $('#memberSelect')
+            .append(option)
+            .trigger('change');
+    }
+
+    if (options.subscriptionTypeId) {
+
+        let option = new Option(
+            options.subscriptionTypeName,
+            options.subscriptionTypeId,
+            true,
+            true
+        );
+
+        $('#subscriptionTypeSelect')
+            .append(option)
+            .trigger('change');
+
+        selectedDurationDays = parseInt(options.durationDays || 0);
+
+        $('#priceInput').val(options.price);
+
+        calculateEndDate();
+    }
 }
 
 $('#startDateInput').on('change', function () {
