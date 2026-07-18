@@ -19,7 +19,7 @@ namespace GymFlow.Infrastructure.Configurations
                 .IsRequired();
 
             builder.Property(ma => ma.CheckOut)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.Property(ma => ma.CreatedAt)
                 .HasDefaultValueSql("GETUTCDATE()");

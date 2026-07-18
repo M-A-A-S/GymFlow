@@ -74,9 +74,35 @@ namespace GymFlow.Infrastructure.Services
             try
             {
                 var memberSubscriptions = await _appDbContext.MemberSubscriptions
-                .Include(x => x.Member)
-                .Include(x => x.SubscriptionType)
-                .Select(m => m.ToDTO())
+                .Select(m => new MemberSubscriptionDTO
+                {
+                    Id = m.Id,
+                    MemberId = m.MemberId,
+                    SubscriptionTypeId = m.SubscriptionTypeId,
+                    StartDate = m.StartDate,
+                    EndDate = m.EndDate,
+                    Status = m.Status,
+                    Price = m.Price,
+
+
+                    Member = new MemberDTO
+                    {
+                        Id = m.Member.Id,
+                        FullName = m.Member.FullName,
+                        PhoneNumber = m.Member.PhoneNumber,
+                        Gender = m.Member.Gender,
+                    },
+
+                    SubscriptionType = new SubscriptionTypeDTO
+                    {
+                        Id = m.SubscriptionType.Id,
+                        NameEn = m.SubscriptionType.NameEn,
+                        NameAr = m.SubscriptionType.NameAr,
+                        Price = m.SubscriptionType.Price,
+                        DurationDays = m.SubscriptionType.DurationDays,
+
+                    },
+                })
                 .AsNoTracking()          
                 .ToListAsync();
 
@@ -102,8 +128,35 @@ namespace GymFlow.Infrastructure.Services
             try
             {
                 var memberSubscription = await _appDbContext.MemberSubscriptions
-                    .Include(x => x.Member)
-                    .Include(x => x.SubscriptionType)
+                    .Select(m => new MemberSubscriptionDTO
+                    {
+                        Id = m.Id,
+                        MemberId = m.MemberId,
+                        SubscriptionTypeId = m.SubscriptionTypeId,
+                        StartDate = m.StartDate,
+                        EndDate = m.EndDate,
+                        Status = m.Status,
+                        Price = m.Price,
+
+
+                        Member = m.Member == null ? null : new MemberDTO
+                        {
+                            Id = m.Member.Id,
+                            FullName = m.Member.FullName,
+                            PhoneNumber = m.Member.PhoneNumber,
+                            Gender = m.Member.Gender,
+                        },
+
+                        SubscriptionType = m.SubscriptionType == null ? null : new SubscriptionTypeDTO
+                        {
+                            Id = m.SubscriptionType.Id,
+                            NameEn = m.SubscriptionType.NameEn,
+                            NameAr = m.SubscriptionType.NameAr,
+                            Price = m.SubscriptionType.Price,
+                            DurationDays = m.SubscriptionType.DurationDays,
+
+                        },
+                    })
                     .AsNoTracking()
                     .FirstOrDefaultAsync(x => x.Id == id);
 
@@ -111,7 +164,7 @@ namespace GymFlow.Infrastructure.Services
                 {
                     return Result<MemberSubscriptionDTO>.Failure(ResultCodes.NotFound, 404);
                 }
-                return Result<MemberSubscriptionDTO>.Success(memberSubscription.ToDTO());
+                return Result<MemberSubscriptionDTO>.Success(memberSubscription);
             }
             catch (Exception ex)
             {

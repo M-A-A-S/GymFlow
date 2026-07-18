@@ -336,13 +336,33 @@ namespace GymFlow.Infrastructure.Tests.Services
         {
             var entity = new MemberSubscription
             {
-                MemberId = 1,
-                SubscriptionTypeId = 1,
+                //MemberId = 1,
+                //SubscriptionTypeId = 1,
                 StartDate = DateOnly.FromDateTime(DateTime.UtcNow),
                 EndDate = DateOnly.FromDateTime(DateTime.UtcNow.AddMonths(1)),
                 Price = 100,
                 Status = SubscriptionStatus.Active,
-                IsDeleted = false
+                IsDeleted = false,
+
+                Member = new Member
+                {
+                    FullName = "Test Member 1",
+                    Email = "test1@test.com",
+                    PhoneNumber = "111111111",
+                    Address = "Sudan",
+                    BirthDate = new DateOnly(2001, 10, 4),
+                    Status = MemberStatus.Active,
+                    RegisterDate = DateOnly.FromDateTime(DateTime.UtcNow),
+                    Gender = Gender.Male
+                },
+                SubscriptionType = new SubscriptionType
+                {
+                    NameEn = "Monthly",
+                    NameAr = "شهري",
+                    DaysPerWeek = 5,
+                    DurationDays = 30,
+                    Price = 100
+                }
             };
 
             _context.MemberSubscriptions.Add(entity);
@@ -358,29 +378,64 @@ namespace GymFlow.Infrastructure.Tests.Services
 
                 new MemberSubscription
                 {
-                    MemberId = 1,
-                    SubscriptionTypeId = 1,
-
+                    //MemberId = 1,
+                    //SubscriptionTypeId = 1,
                     StartDate = DateOnly.FromDateTime(DateTime.UtcNow),
                     EndDate = DateOnly.FromDateTime(DateTime.UtcNow.AddMonths(1)),
-
                     Price = 100,
+                    Status = SubscriptionStatus.Active,
 
-                    Status = SubscriptionStatus.Active
+                    Member = new Member
+                    {
+                        FullName = "Test Member 1",
+                        Email = "test1@test.com",
+                        PhoneNumber = "111111111",
+                        Address = "Sudan",
+                        BirthDate = new DateOnly(2001, 10, 4),
+                        Status = MemberStatus.Active,
+                        RegisterDate = DateOnly.FromDateTime(DateTime.UtcNow),
+                        Gender = Gender.Male
+                    },
+                    SubscriptionType = new SubscriptionType
+                    {
+                        NameEn = "Monthly",
+                        NameAr = "شهري",
+                        DaysPerWeek = 5,
+                        DurationDays = 30,
+                        Price = 100
+                    }
                 },
 
 
                 new MemberSubscription
                 {
-                    MemberId = 2,
-                    SubscriptionTypeId = 2,
-
+                    //MemberId = 2,
+                    //SubscriptionTypeId = 2,
                     StartDate = DateOnly.FromDateTime(DateTime.UtcNow),
                     EndDate = DateOnly.FromDateTime(DateTime.UtcNow.AddMonths(3)),
-
                     Price = 300,
+                    Status = SubscriptionStatus.Active,
 
-                    Status = SubscriptionStatus.Active
+                    Member = new Member
+                    {
+                        FullName = "Test Member 2",
+                        Email = "test2@test.com",
+                        PhoneNumber = "222222222",
+                        Address = "Sudan",
+                        BirthDate = new DateOnly(2001, 10, 4),
+                        Status = MemberStatus.Active,
+                        RegisterDate = DateOnly.FromDateTime(DateTime.UtcNow),
+                        Gender = Gender.Male
+                    },
+
+                    SubscriptionType = new SubscriptionType
+                    {
+                        NameEn = "Yearly",
+                        NameAr = "سنوي",
+                        DaysPerWeek = 6,
+                        DurationDays = 365,
+                        Price = 1000
+                    }
                 }
 
             );

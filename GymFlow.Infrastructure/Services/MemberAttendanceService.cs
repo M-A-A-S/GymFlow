@@ -111,6 +111,9 @@ namespace GymFlow.Infrastructure.Services
                     CheckIn = TimeOnly.FromDateTime(DateTime.UtcNow)
                 };
 
+                _appDbContext.MemberAttendances .Add(attendance);
+                await _appDbContext.SaveChangesAsync();
+
                 return Result<bool>.Success(
                     true,
                     ResultCodes.CheckInSuccess);
@@ -150,6 +153,8 @@ namespace GymFlow.Infrastructure.Services
                 }
 
                 attendance.CheckOut = TimeOnly.FromDateTime(DateTime.UtcNow);
+
+                await _appDbContext.SaveChangesAsync();
 
                 return Result<bool>.Success(
                     true,
