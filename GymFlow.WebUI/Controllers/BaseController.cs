@@ -8,7 +8,7 @@ namespace GymFlow.WebUI.Controllers
 {
     public abstract class BaseController : Controller
     {
-        private readonly IStringLocalizer<SharedResource> _localizer;
+        protected readonly IStringLocalizer<SharedResource> _localizer;
 
         protected BaseController(IStringLocalizer<SharedResource> localizer)
         {
