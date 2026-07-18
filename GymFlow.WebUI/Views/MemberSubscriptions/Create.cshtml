@@ -5,6 +5,7 @@
 @using Microsoft.Extensions.Localization
 @using System.Globalization
 @using System.Web
+@using System.Text.Json
 @inject IStringLocalizer<SharedResource> Localizer
 
 <div class="card shadow-sm">
@@ -36,18 +37,36 @@
     <partial name="_ValidationScriptsPartial" />
 
     <script>
-        $(function () {
+                            initializeMemberSubscription({
 
-            console.log("Calling initializeMemberSubscription");
+                memberPlaceholder: @Html.Raw(JsonSerializer.Serialize(Localizer["SelectMember"].Value)),
 
-            initializeMemberSubscription({
+                subscriptionPlaceholder: @Html.Raw(JsonSerializer.Serialize(Localizer["SelectMemberSubscription"].Value)),
 
-                        memberPlaceholder: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Localizer["SelectMember"].Value)),
-        subscriptionPlaceholder: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Localizer["SelectSubscriptionType"].Value)),
-        lang: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName))
+                lang: @Html.Raw(JsonSerializer.Serialize(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)),
 
-            });
 
-        });
+                // Edit values
+                memberId: @Html.Raw(JsonSerializer.Serialize(Model.MemberSubscription?.MemberId)),
+
+                memberName: @Html.Raw(JsonSerializer.Serialize(Model.MemberSubscription?.Member?.FullName)),
+
+
+                subscriptionTypeId: @Html.Raw(JsonSerializer.Serialize(Model.MemberSubscription?.SubscriptionTypeId)),
+
+                subscriptionTypeName: @Html.Raw(JsonSerializer.Serialize(
+                                                            CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "en"
+                                                                            ? Model.MemberSubscription?.SubscriptionType?.NameEn
+                                                                            : Model.MemberSubscription?.SubscriptionType?.NameAr
+                                            )),
+
+
+        price: @Html.Raw(JsonSerializer.Serialize(Model.MemberSubscription?.Price)),
+
+                durationDays: @Html.Raw(JsonSerializer.Serialize(
+                                                Model.MemberSubscription?.SubscriptionType?.DurationDays
+                                ))
+
+    });
     </script>
 }
