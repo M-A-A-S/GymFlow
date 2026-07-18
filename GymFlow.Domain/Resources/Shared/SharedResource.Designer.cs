@@ -205,6 +205,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Completed .
+        /// </summary>
+        public static string Completed {
+            get {
+                return ResourceManager.GetString("Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create.
         /// </summary>
         public static string Create {
@@ -394,6 +403,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inside .
+        /// </summary>
+        public static string Inside {
+            get {
+                return ResourceManager.GetString("Inside", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid data.
         /// </summary>
         public static string InvalidData {
@@ -579,6 +597,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not Arrived.
+        /// </summary>
+        public static string NotArrived {
+            get {
+                return ResourceManager.GetString("NotArrived", resourceCulture);
             }
         }
         

@@ -40,27 +40,26 @@ namespace GymFlow.Infrastructure.Services
                 var result = await _appDbContext.Members
                 .Where(x => x.MemberSubscriptions.Any(x =>
                     x.StartDate <= date &&
-                    x.EndDate >= date))
+                    (x.EndDate == null || x.EndDate >= date)))
 
                 .Select(x => new MemberAttendanceRowDTO
                 {
                     MemberId = x.Id,
-
                     MemberName = x.FullName,
 
                     AttendanceId = x.MemberAttendances
                     .Where(x => x.AttendanceDate == date)
-                    .Select(x => x.Id)
+                    .Select(x => (int?)x.Id)
                     .FirstOrDefault(),
 
                     CheckIn = x.MemberAttendances
                     .Where(x => x.AttendanceDate == date)
-                    .Select(x => x.CheckIn)
+                    .Select(x => (TimeOnly?)x.CheckIn)
                     .FirstOrDefault(),
 
                     CheckOut = x.MemberAttendances
                     .Where(x => x.AttendanceDate == date)
-                    .Select(x => x.CheckOut)
+                    .Select(x => (TimeOnly?)x.CheckOut)
                     .FirstOrDefault()
                 })
                 .OrderBy(x => x.MemberName)
@@ -87,16 +86,18 @@ namespace GymFlow.Infrastructure.Services
         #endregion
 
         #region ========================= Check In =========================
-        public async Task<Result<bool>> CheckInAsync(int memberId)
+        public async Task<Result<bool>> CheckInAsync(
+            int memberId,
+            DateOnly date
+            )
         {         
             try
             {
-                var today = DateOnly.FromDateTime(DateTime.Today);
 
                 var exists = await _appDbContext.MemberAttendances
                     .AnyAsync(x =>
                         x.MemberId == memberId &&
-                        x.AttendanceDate == today);
+                        x.AttendanceDate == date);
 
                 if (exists)
                 {
@@ -107,7 +108,7 @@ namespace GymFlow.Infrastructure.Services
                 var attendance = new MemberAttendance
                 {
                     MemberId = memberId,
-                    AttendanceDate = today,
+                    AttendanceDate = date,
                     CheckIn = TimeOnly.FromDateTime(DateTime.UtcNow)
                 };
 

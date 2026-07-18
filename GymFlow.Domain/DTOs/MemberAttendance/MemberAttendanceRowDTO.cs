@@ -12,23 +12,26 @@ namespace GymFlow.Domain.DTOs.MemberAttendance
         public int MemberId { get; set; }
         public string MemberName { get; set; }
         public int? AttendanceId { get; set; }
-        public DateOnly AttendanceDate { get; set; }
+        //public DateOnly AttendanceDate { get; set; }
         public TimeOnly? CheckIn { get; set; }
         public TimeOnly? CheckOut { get; set; }
 
-        public string Status
-        {
-            get
-            {
-                if (CheckIn == null)
-                    return "Not Arrived";
+        public bool IsCheckedIn => CheckIn.HasValue;
+        public bool IsCheckedOut => CheckOut.HasValue;
 
-                if (CheckOut == null)
-                    return "Inside";
+        //public string Status
+        //{
+        //    get
+        //    {
+        //        if (CheckIn == null)
+        //            return "Not Arrived";
 
-                return "Completed";
-            }
-        }
-    
+        //        if (CheckOut == null)
+        //            return "Inside";
+
+        //        return "Completed";
+        //    }
+        //}
+
     }
 }

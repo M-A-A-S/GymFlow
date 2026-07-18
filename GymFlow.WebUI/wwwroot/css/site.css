@@ -620,3 +620,10 @@ html[dir="rtl"] .submenu a {
     color: white;
 }
 /* End Select2 Library */
+
+/* Start Global */
+.page-header {
+    background-color: var(--card-background);
+    padding: 1rem 2rem;
+}
+/* End Global */

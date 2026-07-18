@@ -11,7 +11,7 @@ namespace GymFlow.Application.Services
     public interface IMemberAttendanceService
     {
         Task<Result<IEnumerable<MemberAttendanceRowDTO>>> GetDailyAttendanceAsync(DateOnly date);
-        Task<Result<bool>> CheckInAsync(int memberId);
+        Task<Result<bool>> CheckInAsync(int memberId, DateOnly date);
         Task<Result<bool>> CheckOutAsync(int attendanceId);
     }
 }

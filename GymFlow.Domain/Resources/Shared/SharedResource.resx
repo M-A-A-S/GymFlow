@@ -165,6 +165,9 @@
   <data name="CheckOutSuccess" xml:space="preserve">
     <value>Check-out completed successfully</value>
   </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Completed </value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
   </data>
@@ -228,6 +231,9 @@
   <data name="Inactive" xml:space="preserve">
     <value>Inactive</value>
   </data>
+  <data name="Inside" xml:space="preserve">
+    <value>Inside </value>
+  </data>
   <data name="InvalidData" xml:space="preserve">
     <value>Invalid data</value>
   </data>
@@ -290,6 +296,9 @@
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="NotArrived" xml:space="preserve">
+    <value>Not Arrived</value>
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>Record not found</value>

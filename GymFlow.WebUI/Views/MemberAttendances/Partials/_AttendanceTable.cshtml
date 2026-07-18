@@ -1,0 +1,120 @@
+﻿@using GymFlow.Domain.DTOs.MemberAttendance
+@model IEnumerable<MemberAttendanceRowDTO> 
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Localizer["Member"]</th>
+                <th>@Localizer["CheckIn"]</th>
+                <th>@Localizer["CheckOut"]</th>
+                <th>@Localizer["Status"]</th>
+                <th>@Localizer["Actions"]</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>@item.MemberName</td>
+                    <td>
+                        @if (item.CheckIn.HasValue)
+                        {
+                            @item.CheckIn.Value.ToString("hh\\:mm")
+                        }
+                        else
+                        {
+                            <span class="text-muted">
+                                -
+                            </span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.CheckOut.HasValue)
+                        {
+                            @item.CheckOut.Value.ToString("hh\\:mm")
+                        }
+                        else
+                        {
+                            <span class="text-muted">
+                                -
+                            </span>
+                        }
+                    </td>
+                    <td>
+                        @if (!item.IsCheckedIn)
+                        {
+                            <span class="badge bg-secondary">
+                                <i class="fa fa-user-clock"></i>
+                                @Localizer["NotArrived"]
+                            </span>
+                        }
+                        else if (!item.IsCheckedOut)
+                        {
+                            <span class="badge bg-success">
+                                <i class="fa fa-user-check"></i>
+                                @Localizer["Inside"]
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-primary">
+                                <i class="fa fa-check-circle"></i>
+                                @Localizer["Completed"]
+                            </span>
+                        }
+                    </td>
+
+                    <td>
+                        @if (!item.IsCheckedIn)
+                        {
+                            <button type="button"
+                                    class="btn btn-icon btn-outline-success tooltip-btn"
+                                    data-tooltip="@Localizer["CheckIn"]"
+                                    onclick="checkIn(@item.MemberId)">
+                                <i class="fa fa-sign-in-alt"></i>
+                            </button>
+                        }
+                        else if (!item.IsCheckedOut)
+                        {
+                            <button type="button"
+                                    class="btn btn-icon btn-outline-danger tooltip-btn"
+                                    data-tooltip="@Localizer["CheckOut"]"
+                                    onclick="checkOut(@item.AttendanceId)">
+                                <i class="fa fa-sign-out-alt"></i>
+                            </button>
+                        }
+                    </td>
+
+                    @* <td>
+                        <a asp-action="Edit"
+                           asp-route-id="@item.Id"
+                           class="btn btn-icon btn-outline-primary tooltip-btn"
+                           data-tooltip="@Localizer["Edit"]">
+                            <i class="fa fa-pen"></i>
+                        </a>
+                        <a asp-action="Details"
+                           asp-route-id="@item.Id"
+                           class="btn btn-icon btn-outline-info tooltip-btn"
+                           data-tooltip="@Localizer["Details"]">
+                            <i class="fa fa-info"></i>
+                        </a>
+                        <a asp-action="Delete"
+                           asp-route-id="@item.Id"
+                           class="btn btn-icon btn-outline-danger tooltip-btn"
+                           data-tooltip="@Localizer["Delete"]">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

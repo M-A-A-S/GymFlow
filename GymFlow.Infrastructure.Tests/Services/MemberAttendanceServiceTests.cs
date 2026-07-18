@@ -127,9 +127,11 @@ namespace GymFlow.Infrastructure.Tests.Services
             // Arrange
             var member = await CreateMemberWithSubscription();
 
+            var date = DateOnly.FromDateTime(DateTime.UtcNow);
+
             // Act
             var result =
-                await _service.CheckInAsync(member.Id);
+                await _service.CheckInAsync(member.Id, date);
 
             // Assert
 
@@ -167,9 +169,10 @@ namespace GymFlow.Infrastructure.Tests.Services
             await _context.SaveChangesAsync();
 
             // Act
+            var date = DateOnly.FromDateTime(DateTime.Today);
 
             var result =
-                await _service.CheckInAsync(member.Id);
+                await _service.CheckInAsync(member.Id, date);
 
             // Assert
             Assert.False(result.IsSuccess);
@@ -177,6 +180,41 @@ namespace GymFlow.Infrastructure.Tests.Services
                 ResultCodes.MemberAlreadyCheckedIn,
                 result.Code);
 
+        }
+
+        [Fact]
+        public async Task CheckInAsync_ShouldCreateAttendance_ForSelectedDate()
+        {
+            // Arrange
+
+            var member =
+                await CreateMemberWithSubscription();
+
+            var selectedDate =
+                new DateOnly(2026, 7, 1);
+
+
+            // Act
+
+            var result =
+                await _service.CheckInAsync(
+                    member.Id,
+                    selectedDate);
+
+
+            // Assert
+
+            Assert.True(result.IsSuccess);
+
+
+            var attendance =
+                await _context.MemberAttendances
+                .FirstAsync();
+
+
+            Assert.Equal(
+                selectedDate,
+                attendance.AttendanceDate);
         }
 
         #endregion

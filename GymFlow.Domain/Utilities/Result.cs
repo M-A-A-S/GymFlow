@@ -23,9 +23,9 @@ namespace GymFlow.Domain.Utilities
             Message = message;
         }
 
-        public static Result<T> Success(T? data, string code = "success", int statusCode = 200)
+        public static Result<T> Success(T? data, string code = "success", int statusCode = 200, string? message = null)
         {
-            return new Result<T>(true, code, statusCode, data);
+            return new Result<T>(true, code, statusCode, data, message);
         }
 
         public static Result<T> Failure(string code = "failure", int statusCode = 400, string? message = null)

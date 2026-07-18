@@ -1,0 +1,106 @@
+﻿@using GymFlow.Domain.DTOs.MemberAttendance
+@model IEnumerable<MemberAttendanceRowDTO>
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@using System.Globalization
+
+<div class="page-header d-flex align-items-center justify-content-between my-4">
+    <h2>@Localizer["MemberAttendances"]</h2>
+
+    @* <a asp-action="Create" class="btn btn-primary">
+        <i class="fa fa-plus me-1"></i>
+        @Localizer["CreateNew"]
+    </a> *@
+
+    <input type="date"
+           id="attendanceDate"
+           class="form-control"
+           style="width:200px"
+           value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+
+</div>
+
+<div id="attendanceContainer">
+    @await Html.PartialAsync("Partials/_AttendanceTable", Model)
+</div>
+
+
+@section Scripts
+{
+    <script>
+
+                $("#attendanceDate").on("change", function () {
+
+            let date = $(this).val();
+
+            loadAttendance(date);
+        });
+
+                function loadAttendance(date)
+        {
+            $.get('/MemberAttendances/AttendanceTable',
+            {
+                date: date
+            },
+            function(data)
+            {
+                $("#attendanceContainer").html(data);
+            });
+        }
+
+
+                function checkIn(memberId) {
+                    let date = $("#attendanceDate").val();
+            $.post('/MemberAttendances/CheckIn',
+                {
+                    memberId: memberId,
+                    date: date
+                },
+                function(response) {
+
+                    if(response.isSuccess)
+                    {
+                        toastr.success(response.message);
+                        // location.reload();
+                        let date = $("#attendanceDate").val();
+            loadAttendance(date);
+                    }
+                    else
+                    {
+                        toastr.error(response.message);
+                    }
+
+                });
+        }
+
+
+
+        function checkOut(attendanceId) {
+
+            $.post('/MemberAttendances/CheckOut',
+                {
+                    attendanceId: attendanceId
+                },
+                function(response) {
+
+                    if(response.isSuccess)
+                    {
+                        toastr.success(response.message);
+                        // location.reload();
+                        let date = $("#attendanceDate").val();
+            loadAttendance(date);
+                    }
+                    else
+                    {
+                        toastr.error(response.message);
+                    }
+
+                });
+        }
+
+
+    </script>
+}

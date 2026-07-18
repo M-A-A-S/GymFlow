@@ -1,6 +1,7 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.DTOs.MemberAttendance;
 using GymFlow.Domain.Resources.Shared;
+using GymFlow.Domain.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
@@ -41,19 +42,42 @@ namespace GymFlow.WebUI.Controllers
             return View(result.Data);
         }
 
-        #endregion
-
-        #region ========================= Check In =========================
-        [HttpPost]
-        public async Task<IActionResult> CheckIn(int memberId)
+        public async Task<IActionResult> AttendanceTable(DateOnly date)
         {
+
             var result = await _memberAttendanceService
-                .CheckInAsync(memberId);
+                .GetDailyAttendanceAsync(date);
 
             if (!result.IsSuccess)
             {
                 Error(result.Code);
+                return View(new List<MemberAttendanceRowDTO>());
             }
+
+            return PartialView("Partials/_AttendanceTable", result.Data);
+        }
+
+        #endregion
+
+        #region ========================= Check In =========================
+        [HttpPost]
+        public async Task<IActionResult> CheckIn(int memberId,
+            DateOnly date)
+        {
+            var checkInResult = await _memberAttendanceService
+                .CheckInAsync(memberId, date);
+
+            var message = _localizer[checkInResult.Code].Value;
+            Result<bool> result = null;
+
+            if (!checkInResult.IsSuccess)
+            {
+                result = Result<bool>.Failure(checkInResult.Code, checkInResult.StatusCode, message);
+                //Error(checkInResult.Code);
+                return Json(result);
+            }
+
+            result = Result<bool>.Success(true, checkInResult.Code, checkInResult.StatusCode, message);
 
             return Json(result);
         }
@@ -65,15 +89,22 @@ namespace GymFlow.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckOut(int attendanceId)
         {
-            var result = await _memberAttendanceService
+            var checkOutResult = await _memberAttendanceService
                 .CheckOutAsync(attendanceId);
 
-            if (!result.IsSuccess)
+            var message = _localizer[checkOutResult.Code].Value;
+            Result<bool> result = null;
+
+            if (!checkOutResult.IsSuccess)
             {
-                Error(result.Code);
+                result = Result<bool>.Failure(checkOutResult.Code, checkOutResult.StatusCode, message);
+                //Error(checkInResult.Code);
+                return Json(result);
             }
 
-            return Json(result.Data);
+            result = Result<bool>.Success(true, checkOutResult.Code, checkOutResult.StatusCode, message);
+
+            return Json(result);
         }
 
         #endregion
