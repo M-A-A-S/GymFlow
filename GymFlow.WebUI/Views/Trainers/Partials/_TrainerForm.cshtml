@@ -1,0 +1,38 @@
+﻿@using GymFlow.Domain.DTOs.Trainer
+@model TrainerDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="row g-3 mb-1 mb-2">
+
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="FullName"></label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="HireDate"></label>
+        <input asp-for="HireDate" 
+        type="date" 
+        class="form-control"
+               value="@(Model.HireDate == DateOnly.MinValue ? "" : Model.HireDate.ToString("yyyy-MM-dd"))" />
+        <span asp-validation-for="HireDate" class="text-danger"></span>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="Salary"></label>
+        <input asp-for="Salary" type="number" class="form-control" />
+        <span asp-validation-for="Salary" class="text-danger"></span>
+    </div>
+
+</div>
