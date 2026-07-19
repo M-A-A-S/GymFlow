@@ -180,6 +180,9 @@
   <data name="Dashboard" xml:space="preserve">
     <value>لوحة التحكم</value>
   </data>
+  <data name="Day" xml:space="preserve">
+    <value>اليوم</value>
+  </data>
   <data name="DaysPerWeek" xml:space="preserve">
     <value>عدد الأيام في الأسبوع</value>
   </data>
@@ -210,11 +213,17 @@
   <data name="EndDate" xml:space="preserve">
     <value>تاريخ النهاية</value>
   </data>
+  <data name="EndTime" xml:space="preserve">
+    <value>وقت النهاية</value>
+  </data>
   <data name="Expired" xml:space="preserve">
     <value>منتهي</value>
   </data>
   <data name="Female" xml:space="preserve">
     <value>أنثى</value>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>الجمعة</value>
   </data>
   <data name="FullName" xml:space="preserve">
     <value>الاسم الكامل</value>
@@ -227,6 +236,12 @@
   </data>
   <data name="GoBack" xml:space="preserve">
     <value>رجوع</value>
+  </data>
+  <data name="GymSchedule" xml:space="preserve">
+    <value>جدول النادي</value>
+  </data>
+  <data name="HireDate" xml:space="preserve">
+    <value>تاريخ التعيين</value>
   </data>
   <data name="Inactive" xml:space="preserve">
     <value>غير نشط</value>
@@ -285,6 +300,9 @@
   <data name="MemberSubscriptions" xml:space="preserve">
     <value>اشتراكات العضو</value>
   </data>
+  <data name="Monday" xml:space="preserve">
+    <value>الثلاثاء</value>
+  </data>
   <data name="NameAr" xml:space="preserve">
     <value>الاسم بالعربية</value>
   </data>
@@ -321,6 +339,12 @@
   <data name="RequiredField" xml:space="preserve">
     <value>هذا الحقل مطلوب</value>
   </data>
+  <data name="Salary" xml:space="preserve">
+    <value>الراتب</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>السبت</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>حفظ</value>
   </data>
@@ -345,6 +369,9 @@
   <data name="StartDate" xml:space="preserve">
     <value>تاريخ البداية</value>
   </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>وقت البداية</value>
+  </data>
   <data name="Status" xml:space="preserve">
     <value>الحالة</value>
   </data>
@@ -363,8 +390,23 @@
   <data name="SubscriptionTypes" xml:space="preserve">
     <value>أنواع الاشتراكات</value>
   </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>الأحد</value>
+  </data>
   <data name="Suspended" xml:space="preserve">
     <value>موقوف</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>الخميس</value>
+  </data>
+  <data name="Trainer" xml:space="preserve">
+    <value>المدرب</value>
+  </data>
+  <data name="Trainers" xml:space="preserve">
+    <value>المدربون</value>
+  </data>
+  <data name="TrainerSchedule" xml:space="preserve">
+    <value>جدول المدرب</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>حدث خطأ غير متوقع</value>
@@ -386,6 +428,9 @@
   </data>
   <data name="ValueOutOfRange" xml:space="preserve">
     <value>القيمة خارج النطاق المسموح</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>الأربعاء</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>نعم</value>
