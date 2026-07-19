@@ -2,6 +2,7 @@
 @model IEnumerable<MemberDTO>
 
 @using GymFlow.Domain.Enums
+@using GymFlow.Domain.Extensions
 @using GymFlow.Domain.Resources.Shared
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResource> Localizer
@@ -41,20 +42,9 @@
                 <tr>
                     <td>@item.FullName</td>
                     <td>
-                        @switch (item.Gender)
-                        {
-                            case Gender.Male:
-                                <span class="badge bg-primary">@Localizer["Male"]</span>
-                                break;
-
-                            case Gender.Female:
-                                <span class="badge bg-primary">@Localizer["Female"]</span>
-                                break;
-
-                            default:
-                                <span class="badge bg-secondary">@Localizer["Unknown"]</span>
-                                break;
-                        }
+                        <span class="badge @item.Gender.ToBadgeClass()">
+                            @item.Gender.ToLocalizedString()
+                        </span>
                     </td>
                     <td>@item.BirthDate</td>
                     <td>@item.PhoneNumber</td>
@@ -62,28 +52,9 @@
                     <td>@item.Address</td>
                     <td>@item.RegisterDate</td>
                     <td>
-                        @switch (item.Status)
-                        {
-                            case MemberStatus.Active:
-                                <span class="badge bg-success">@Localizer["Active"]</span>
-                                break;
-
-                            case MemberStatus.Inactive:
-                                <span class="badge bg-secondary">@Localizer["Inactive"]</span>
-                                break;
-
-                            case MemberStatus.Suspended:
-                                <span class="badge bg-danger">@Localizer["Suspended"]</span>
-                                break;
-
-                            case MemberStatus.Unsuspended:
-                                <span class="badge bg-secondary">@Localizer["Unsuspended"]</span>
-                                break;
-
-                            default:
-                                <span class="badge bg-secondary">@Localizer["Unknown"]</span>
-                                break;
-                        }
+                        <span class="badge @item.Status?.ToBadgeClass()">
+                            @item.Status?.ToLocalizedString()
+                        </span>
                     </td>
                     <td>
                         <a asp-action="Edit"

@@ -2,6 +2,7 @@
 @model MemberSubscriptionDTO
 
 @using GymFlow.Domain.Enums
+@using GymFlow.Domain.Extensions
 @using GymFlow.Domain.Resources.Shared
 @using Microsoft.Extensions.Localization
 @using System.Globalization
@@ -41,36 +42,9 @@
     <div class="col-sm-6 col-md-3">
         <label class="fw-bold">@Localizer["Status"]</label>
         <div>
-            @switch (Model.Status)
-            {
-                case SubscriptionStatus.Active:
-                    <span class="badge bg-success">@Localizer["Active"]</span>
-                    break;
-
-                case SubscriptionStatus.Inactive:
-                    <span class="badge bg-danger">@Localizer["Inactive"]</span>
-                    break;
-
-                case SubscriptionStatus.Expired:
-                    <span class="badge bg-warning">@Localizer["Expired"]</span>
-                    break;
-
-                case SubscriptionStatus.Cancelled:
-                    <span class="badge bg-warning">@Localizer["Cancelled"]</span>
-                    break;
-
-                case SubscriptionStatus.Suspended:
-                    <span class="badge bg-success">@Localizer["Suspended"]</span>
-                    break;
-
-                case SubscriptionStatus.Unsuspended:
-                    <span class="badge bg-danger">@Localizer["Unsuspended"]</span>
-                    break;
-
-                default:
-                    <span class="badge bg-secondary">@Localizer["Unknown"]</span>
-                    break;
-            }
+            <span class="badge @Model.Status.ToBadgeClass()">
+                @Model.Status.ToLocalizedString()
+            </span>
         </div>
     </div>
 

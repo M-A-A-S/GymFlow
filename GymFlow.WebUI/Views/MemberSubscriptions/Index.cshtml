@@ -4,6 +4,7 @@
 @model IEnumerable<MemberSubscriptionDTO>
 
 @using GymFlow.Domain.Enums
+@using GymFlow.Domain.Extensions
 @using GymFlow.Domain.Resources.Shared
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResource> Localizer
@@ -49,36 +50,9 @@
                     <td>@item.EndDate</td>
                     <td>@item.Price</td>
                     <td>
-                    @switch (item.Status)
-                        {
-                            case SubscriptionStatus.Active:
-                                <span class="badge bg-success">@Localizer["Active"]</span>
-                                break;
-
-                            case SubscriptionStatus.Inactive:
-                                <span class="badge bg-danger">@Localizer["Inactive"]</span>
-                                break;
-
-                            case SubscriptionStatus.Expired:
-                                <span class="badge bg-warning">@Localizer["Expired"]</span>
-                                break;
-
-                            case SubscriptionStatus.Cancelled:
-                                <span class="badge bg-warning">@Localizer["Cancelled"]</span>
-                                break;
-
-                            case SubscriptionStatus.Suspended:
-                                <span class="badge bg-success">@Localizer["Suspended"]</span>
-                                break;
-
-                            case SubscriptionStatus.Unsuspended:
-                                <span class="badge bg-danger">@Localizer["Unsuspended"]</span>
-                                break;
-
-                            default:
-                                <span class="badge bg-secondary">@Localizer["Unknown"]</span>
-                                break;
-                        }
+                        <span class="badge @item.Status.ToBadgeClass()">
+                            @item.Status.ToLocalizedString()
+                        </span>
                     </td>
                     <td>
                         <a asp-action="Edit"
