@@ -240,6 +240,9 @@
   <data name="GymSchedule" xml:space="preserve">
     <value>Gym Schedule</value>
   </data>
+  <data name="GymSchedules" xml:space="preserve">
+    <value>Gym Schedules</value>
+  </data>
   <data name="HireDate" xml:space="preserve">
     <value>Hire Date</value>
   </data>
@@ -402,11 +405,17 @@
   <data name="Trainer" xml:space="preserve">
     <value>Trainer</value>
   </data>
+  <data name="TrainerManagement" xml:space="preserve">
+    <value>Trainer Management</value>
+  </data>
   <data name="Trainers" xml:space="preserve">
     <value>Trainers</value>
   </data>
   <data name="TrainerSchedule" xml:space="preserve">
     <value>Trainer Schedule</value>
+  </data>
+  <data name="TrainerSchedules" xml:space="preserve">
+    <value>Trainer Schedules</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>An unexpected error occurred</value>

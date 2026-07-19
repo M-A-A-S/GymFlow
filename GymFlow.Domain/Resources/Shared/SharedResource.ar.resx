@@ -240,6 +240,9 @@
   <data name="GymSchedule" xml:space="preserve">
     <value>جدول النادي</value>
   </data>
+  <data name="GymSchedules" xml:space="preserve">
+    <value>جدول النادي</value>
+  </data>
   <data name="HireDate" xml:space="preserve">
     <value>تاريخ التعيين</value>
   </data>
@@ -402,11 +405,17 @@
   <data name="Trainer" xml:space="preserve">
     <value>المدرب</value>
   </data>
+  <data name="TrainerManagement" xml:space="preserve">
+    <value>إدارة المدربين</value>
+  </data>
   <data name="Trainers" xml:space="preserve">
     <value>المدربون</value>
   </data>
   <data name="TrainerSchedule" xml:space="preserve">
     <value>جدول المدرب</value>
+  </data>
+  <data name="TrainerSchedules" xml:space="preserve">
+    <value>جداول المدربين</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>حدث خطأ غير متوقع</value>

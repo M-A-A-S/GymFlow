@@ -430,6 +430,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gym Schedules.
+        /// </summary>
+        public static string GymSchedules {
+            get {
+                return ResourceManager.GetString("GymSchedules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hire Date.
         /// </summary>
         public static string HireDate {
@@ -916,6 +925,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trainer Management.
+        /// </summary>
+        public static string TrainerManagement {
+            get {
+                return ResourceManager.GetString("TrainerManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trainers.
         /// </summary>
         public static string Trainers {
@@ -930,6 +948,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string TrainerSchedule {
             get {
                 return ResourceManager.GetString("TrainerSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trainer Schedules.
+        /// </summary>
+        public static string TrainerSchedules {
+            get {
+                return ResourceManager.GetString("TrainerSchedules", resourceCulture);
             }
         }
         

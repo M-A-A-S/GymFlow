@@ -119,6 +119,39 @@
 								}
 								}
 								},
+
+								new()
+								{
+								Key = "Trainers",
+								Icon = "fa-user-tie",
+								Children =
+								{
+								new()
+								{
+								Key = "TrainerManagement",
+								Icon = "fa-users-cog",
+								Controller = "Trainers",
+								Action = "Index"
+								},
+
+								new()
+								{
+								Key = "TrainerSchedules",
+								Icon = "fa-calendar-alt",
+								Controller = "TrainerSchedules",
+								Action = "Index"
+								}
+								}
+								},
+
+								new()
+								{
+								Key = "GymSchedules",
+								Icon = "fa-clock",
+								Controller = "GymSchedules",
+								Action = "Index"
+								},
+
 								};
 				}
 
