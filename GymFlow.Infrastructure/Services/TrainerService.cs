@@ -1,6 +1,7 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.Constants;
-using GymFlow.Domain.DTOs.Member;
+using GymFlow.Domain.DTOs.SubscriptionType;
+using GymFlow.Domain.DTOs.Trainer;
 using GymFlow.Domain.Enums;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
@@ -10,24 +11,23 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GymFlow.Infrastructure.Services
 {
-    public class MemberService : IMemberService
+    public class TrainerService : ITrainerService
     {
         #region ========================= Fields & Properties =========================
         private readonly IAppDbContext _appDbContext;
-        private readonly ILogger<MemberService> _logger;
+        private readonly ILogger<TrainerService> _logger;
 
         #endregion
 
         #region ========================= Constructors =========================
-        public MemberService(
+        public TrainerService(
             IAppDbContext appDbContext,
-            ILogger<MemberService> logger)
+            ILogger<TrainerService> logger)
         {
             _appDbContext = appDbContext;
             _logger = logger;
@@ -36,33 +36,23 @@ namespace GymFlow.Infrastructure.Services
         #endregion
 
         #region ========================= Add =========================
-        public async Task<Result<int>> AddAsync(MemberDTO dto)
-        {
-            bool emailExists = 
-                await _appDbContext.Members
-                .AnyAsync(m => m.Email == dto.Email && m.Email != null);
-
-            if (emailExists)
-            {
-                return Result<int>.Failure(
-                    ResultCodes.EmailExists, 409);
-            }
-
-            bool phoneNumberExists = 
-                await _appDbContext.Members
-                .AnyAsync(m => m.PhoneNumber == dto.PhoneNumber);
-
-            if (phoneNumberExists)
-            {
-                return Result<int>.Failure(
-                    ResultCodes.PhoneExists, 409);
-            }
-
-            var entity = dto.ToEntity();
+        public async Task<Result<int>> AddAsync(TrainerDTO dto)
+        {    
 
             try
             {
-                _appDbContext.Members.Add(entity);
+                var validationResult = await ValidateTrainerDTO(dto);
+
+                if (!validationResult.IsSuccess)
+                {
+                    return Result<int>.Failure(
+                        validationResult.Code,
+                        validationResult.StatusCode);
+                }
+
+                var entity = dto.ToEntity();
+
+                _appDbContext.Trainers.Add(entity);
                 await _appDbContext.SaveChangesAsync();
                 return Result<int>.Success(entity.Id, ResultCodes.CreatedSuccessfully);
 
@@ -72,7 +62,7 @@ namespace GymFlow.Infrastructure.Services
                 _logger.LogError(
                    ex,
                    "Error in Type : {Type}, Method: {Method},",
-                   nameof(MemberService),
+                   nameof(TrainerService),
                    nameof(AddAsync));
 
                 return Result<int>.Failure(
@@ -85,64 +75,64 @@ namespace GymFlow.Infrastructure.Services
         #endregion
 
         #region ========================= Get =========================
-        public async Task<Result<IEnumerable<MemberDTO>>> GetAllAsync()
+        public async Task<Result<IEnumerable<TrainerDTO>>> GetAllAsync()
         {
             try
             {
-                var members = await _appDbContext.Members
+                var trainers = await _appDbContext.Trainers
                 .Select(m => m.ToDTO())
                 .AsNoTracking()
                 .ToListAsync();
 
-                return Result<IEnumerable<MemberDTO>>.Success(members);
+                return Result<IEnumerable<TrainerDTO>>.Success(trainers);
             }
             catch (Exception ex)
             {
                 _logger.LogError(
                    ex,
                    "Error in Type : {Type}, Method: {Method},",
-                   nameof(MemberService),
+                   nameof(TrainerService),
                    nameof(GetAllAsync));
 
-                return Result<IEnumerable<MemberDTO>>.Failure(
+                return Result<IEnumerable<TrainerDTO>>.Failure(
                     ResultCodes.UnexpectedError,
                     500,
                     "An unexpected error occurred.");
             }
         }
 
-        public async Task<Result<MemberDTO>> GetByIdAsync(int id)
+        public async Task<Result<TrainerDTO>> GetByIdAsync(int id)
         {
             try
             {
-                var member = await _appDbContext.Members
+                var trainer = await _appDbContext.Trainers
                     .AsNoTracking()
                     .FirstOrDefaultAsync(x => x.Id == id);
 
-                if (member == null)
+                if (trainer == null)
                 {
-                    return Result<MemberDTO>.Failure(ResultCodes.NotFound, 404);
+                    return Result<TrainerDTO>.Failure(ResultCodes.NotFound, 404);
                 }
-                return Result<MemberDTO>.Success(member.ToDTO());
+                return Result<TrainerDTO>.Success(trainer.ToDTO());
             }
             catch (Exception ex)
             {
                 _logger.LogError(
                    ex,
                    "Error in Type : {Type}, Method: {Method},",
-                   nameof(MemberService),
+                   nameof(TrainerService),
                    nameof(GetByIdAsync));
 
-                return Result<MemberDTO>.Failure(
+                return Result<TrainerDTO>.Failure(
                     ResultCodes.UnexpectedError,
                     500,
                     "An unexpected error occurred.");
             }
         }
 
-        public async Task<Result<IEnumerable<MemberSearchDTO>>> SearchAsync(string search)
+        public async Task<Result<IEnumerable<TrainerSearchDTO>>> SearchAsync(string search)
         {
-            var query = _appDbContext.Members
+            var query = _appDbContext.Trainers
                 .AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(search))
@@ -152,61 +142,49 @@ namespace GymFlow.Infrastructure.Services
                     x.PhoneNumber.Contains(search));
             }
 
-            var members = await query
+            var trainers = await query
                 .Take(20)
-                .Select(x => new MemberSearchDTO
+                .Select(x => new TrainerSearchDTO
                 {
                     Id = x.Id,
                     FullName = x.FullName,
                 })
                 .ToListAsync();
 
-            return Result<IEnumerable<MemberSearchDTO>>.Success(members);
+            return Result<IEnumerable<TrainerSearchDTO>>.Success(trainers);
         }
 
         #endregion
 
         #region ========================= Update =========================
-        public async Task<Result<bool>> UpdateAsync(int id, MemberDTO dto)
+        public async Task<Result<bool>> UpdateAsync(int id, TrainerDTO dto)
         {
 
             try
             {
-                var member = _appDbContext.Members.FirstOrDefault(x => x.Id == id);
+                var validationResult = await ValidateTrainerDTO(dto, id);
 
-                if (member == null)
+                if (!validationResult.IsSuccess)
+                {
+                    return Result<bool>.Failure(
+                        validationResult.Code,
+                        validationResult.StatusCode);
+                }
+
+                var entity = dto.ToEntity();
+
+                var trainer = _appDbContext.Trainers.FirstOrDefault(x => x.Id == id);
+
+                if (trainer == null)
                 {
                     return Result<bool>.Failure(ResultCodes.NotFound, 404);
                 }
 
-                bool emailExists = await _appDbContext.Members
-                    .AnyAsync(m => m.Email == dto.Email && m.Id != id && m.Email != null);
-
-                if (emailExists)
-                {
-                    return Result<bool>.Failure(
-                        ResultCodes.EmailExists,
-                        409);
-                }
-
-                bool phoneExists = await _appDbContext.Members
-                    .AnyAsync(m => m.PhoneNumber == dto.PhoneNumber && m.Id != id);
-
-                if (phoneExists)
-                {
-                    return Result<bool>.Failure(
-                        ResultCodes.PhoneExists,
-                        409);
-                }
-
-                member.FullName = dto.FullName;
-                member.Email = dto.Email;
-                member.PhoneNumber = dto.PhoneNumber;
-                member.Gender = dto.Gender;
-                member.BirthDate = dto.BirthDate;
-                member.Status = dto.Status ?? MemberStatus.Active;
-                member.Address = dto.Address;
-                member.UpdatedAt = DateTime.UtcNow;
+                trainer.FullName = dto.FullName;
+                trainer.PhoneNumber = dto.PhoneNumber;
+                trainer.Salary = dto.Salary;
+                trainer.HireDate = dto.HireDate;
+                trainer.UpdatedAt = DateTime.UtcNow;
 
                 await _appDbContext.SaveChangesAsync();
                 return Result<bool>.Success(true, ResultCodes.UpdatedSuccessfully);
@@ -216,11 +194,11 @@ namespace GymFlow.Infrastructure.Services
                 _logger.LogError(
                     ex,
                     "Error in Type : {Type}, Method: {Method},",
-                    nameof(MemberService),
+                    nameof(TrainerService),
                     nameof(UpdateAsync));
 
                 return Result<bool>.Failure(
-                    ResultCodes.UnexpectedError, 
+                    ResultCodes.UnexpectedError,
                     500, "An unexpected error occurred.");
             }
         }
@@ -231,18 +209,18 @@ namespace GymFlow.Infrastructure.Services
         {
             try
             {
-                var member = await _appDbContext.Members.FirstOrDefaultAsync(x => x.Id == id);
+                var trainer = await _appDbContext.Trainers.FirstOrDefaultAsync(x => x.Id == id);
 
-                if (member == null)
+                if (trainer == null)
                 {
                     return Result<bool>.Failure(
                         ResultCodes.NotFound,
                         404);
                 }
 
-                member.IsDeleted = true;
-                member.UpdatedAt = DateTime.UtcNow;
-                member.DeletedAt = DateTime.UtcNow;
+                trainer.IsDeleted = true;
+                trainer.UpdatedAt = DateTime.UtcNow;
+                trainer.DeletedAt = DateTime.UtcNow;
 
                 await _appDbContext.SaveChangesAsync();
                 return Result<bool>.Success(true, ResultCodes.DeletedSuccessfully);
@@ -252,7 +230,7 @@ namespace GymFlow.Infrastructure.Services
                 _logger.LogError(
                     ex,
                     "Error in Type : {Type}, Method: {Method},",
-                    nameof(MemberService),
+                    nameof(TrainerService),
                     nameof(DeleteAsync));
 
                 return Result<bool>.Failure(
@@ -262,6 +240,39 @@ namespace GymFlow.Infrastructure.Services
             }
 
         }
+        #endregion
+
+        #region ========================= Helpers =========================
+        private async Task<Result<bool>> ValidateTrainerDTO(TrainerDTO DTO, int? excludedId = null)
+        {
+            if (DTO == null)
+            {
+                return Result<bool>.Failure(
+                    ResultCodes.InvalidData,
+                    400);
+            }
+
+            if (DTO.Salary < 0)
+            {
+                return Result<bool>.Failure(
+                    ResultCodes.ValueCannotBeNegative,
+                    400);
+            }
+
+            bool phoneNumberExists =
+                await _appDbContext.Trainers
+                .AnyAsync(m => m.PhoneNumber == DTO.PhoneNumber && (excludedId == null || m.Id != excludedId));
+
+            if (phoneNumberExists)
+            {
+                return Result<bool>.Failure(
+                    ResultCodes.PhoneExists, 409);
+            }
+
+            return Result<bool>.Success(true);
+
+        }
+
         #endregion
 
     }

@@ -15,6 +15,10 @@ namespace GymFlow.Infrastructure.Data
         public DbSet<MemberSubscription> MemberSubscriptions { get; set; }
         public DbSet<MemberAttendance> MemberAttendances { get; set; }
 
+        public DbSet<Trainer> Trainers { get; set; }
+        public DbSet<TrainerSchedule> TrainerSchedules { get; set; }
+        public DbSet<GymSchedule> GymSchedules { get; set; }
+
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
     }
