@@ -39,7 +39,6 @@ namespace GymFlow.Infrastructure.Tests.Services
         }
         #endregion
 
-
         #region ========================= Add =========================
         [Fact]
         public async Task AddAsync_ShouldReturnSuccessWithId_WhenDtoIsValid()
@@ -94,7 +93,6 @@ namespace GymFlow.Infrastructure.Tests.Services
         }
 
         #endregion
-
 
         #region ========================= Get =========================
         [Fact]
@@ -157,7 +155,6 @@ namespace GymFlow.Infrastructure.Tests.Services
 
         #endregion
 
-
         #region ========================= Update =========================
         [Fact]
         public async Task UpdateAsync_ShouldUpdateFields_WhenValid()
@@ -197,7 +194,6 @@ namespace GymFlow.Infrastructure.Tests.Services
 
         #endregion
 
-
         #region ========================= Delete =========================
         [Fact]
         public async Task DeleteAsync_ShouldSoftDelete_WhenTrainerExists()
@@ -231,7 +227,6 @@ namespace GymFlow.Infrastructure.Tests.Services
         }
 
         #endregion
-
 
         #region ========================= Helpers =========================
         private async Task<Trainer> CreateTrainerEntity(string name = "Mohammed Alfatih", string phone = "0999888777")
