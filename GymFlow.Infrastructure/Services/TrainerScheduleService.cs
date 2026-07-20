@@ -278,8 +278,8 @@ namespace GymFlow.Infrastructure.Services
                     x.TrainerId == DTO.TrainerId &&
                     x.Day == DTO.Day &&
                     (excludedId == null || x.Id != excludedId) &&
-                    DTO.StartTime < x.StartTime &&
-                    DTO.EndTime > DTO.EndTime);
+                    DTO.StartTime < x.EndTime && // new starts before existing ends
+                    DTO.EndTime > x.StartTime); // new ends after existing starts
 
             if (hasOverlap)
             {
