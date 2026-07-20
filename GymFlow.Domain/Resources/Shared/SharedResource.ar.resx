@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Accounting" xml:space="preserve">
+    <value>المحاسبة</value>
+  </data>
   <data name="Actions" xml:space="preserve">
     <value>الإجراءات</value>
   </data>
@@ -201,6 +204,9 @@
   <data name="DeletedSuccessfully" xml:space="preserve">
     <value>تم الحذف بنجاح</value>
   </data>
+  <data name="DeleteFailed" xml:space="preserve">
+    <value>تعذر حذف الملف</value>
+  </data>
   <data name="DescriptionAr" xml:space="preserve">
     <value>الوصف (عربي)</value>
   </data>
@@ -225,6 +231,9 @@
   <data name="EmailExists" xml:space="preserve">
     <value>البريد الإلكتروني موجود مسبقاً</value>
   </data>
+  <data name="Employees" xml:space="preserve">
+    <value>الموظفون</value>
+  </data>
   <data name="EndDate" xml:space="preserve">
     <value>تاريخ النهاية</value>
   </data>
@@ -236,6 +245,24 @@
   </data>
   <data name="Female" xml:space="preserve">
     <value>أنثى</value>
+  </data>
+  <data name="FileDeleted" xml:space="preserve">
+    <value>تم حذف الملف بنجاح</value>
+  </data>
+  <data name="FileInvalidExtension" xml:space="preserve">
+    <value>نوع الملف غير مدعوم</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>الملف غير موجود</value>
+  </data>
+  <data name="FileSaved" xml:space="preserve">
+    <value>تم رفع الملف بنجاح.</value>
+  </data>
+  <data name="FileSaveFailed" xml:space="preserve">
+    <value>تعذر حفظ الملف</value>
+  </data>
+  <data name="FileTooLarge" xml:space="preserve">
+    <value>حجم الملف يتجاوز الحد المسموح</value>
   </data>
   <data name="Friday" xml:space="preserve">
     <value>الجمعة</value>
@@ -315,6 +342,9 @@
   <data name="InvalidValue" xml:space="preserve">
     <value>القيمة غير صحيحة</value>
   </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>المخزون</value>
+  </data>
   <data name="IsActive" xml:space="preserve">
     <value>نشط</value>
   </data>
@@ -332,6 +362,9 @@
   </data>
   <data name="MemberAttendances" xml:space="preserve">
     <value>حضور العضو</value>
+  </data>
+  <data name="MemberManagement" xml:space="preserve">
+    <value>إدارة الأعضاء</value>
   </data>
   <data name="Members" xml:space="preserve">
     <value>الأعضاء</value>
@@ -387,6 +420,9 @@
   <data name="PurchasePrice" xml:space="preserve">
     <value>سعر الشراء</value>
   </data>
+  <data name="Purchases" xml:space="preserve">
+    <value>المشتريات</value>
+  </data>
   <data name="Quantity" xml:space="preserve">
     <value>الكمية</value>
   </data>
@@ -407,6 +443,9 @@
   </data>
   <data name="SalePrice" xml:space="preserve">
     <value>سعر البيع</value>
+  </data>
+  <data name="Sales" xml:space="preserve">
+    <value>المبيعات</value>
   </data>
   <data name="Saturday" xml:space="preserve">
     <value>السبت</value>

@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using GymFlow.Infrastructure;
+using GymFlow.Application.Services;
+using GymFlow.Domain.DTOs.File;
+using GymFlow.Infrastructure.Services;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +40,23 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
         new AcceptLanguageHeaderRequestCultureProvider()
     };
 
+});
+
+
+var uploadsPath = Path.Combine(builder.Environment.WebRootPath, "uploads");
+
+builder.Services.Configure<FileValidationOptions>(
+    builder.Configuration.GetSection("FileValidation"));
+
+
+builder.Services.AddScoped<IFileService>(x =>
+{
+    var logger = x.GetRequiredService<ILogger<FileService>>();
+
+    var options = x.GetRequiredService<IOptions<FileValidationOptions>>()
+    .Value;
+
+    return new FileService(uploadsPath, options, logger);
 });
 
 

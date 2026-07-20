@@ -1,4 +1,5 @@
 ﻿using GymFlow.Application.Services;
+using GymFlow.Domain.DTOs.File;
 using GymFlow.Infrastructure.Data;
 using GymFlow.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace GymFlow.Infrastructure
             IConfiguration configuration)
         {
 
+            services.AddScoped<IFileService, FileService>();
             services.AddScoped<IGymScheduleService, GymScheduleService>();
             services.AddScoped<ITrainerScheduleService, TrainerScheduleService>();
             services.AddScoped<ITrainerService, TrainerService>();

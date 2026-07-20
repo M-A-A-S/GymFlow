@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Accounting" xml:space="preserve">
+    <value>Accounting</value>
+  </data>
   <data name="Actions" xml:space="preserve">
     <value>Actions</value>
   </data>
@@ -201,6 +204,9 @@
   <data name="DeletedSuccessfully" xml:space="preserve">
     <value>Deleted Successfully</value>
   </data>
+  <data name="DeleteFailed" xml:space="preserve">
+    <value>Failed to delete the file</value>
+  </data>
   <data name="DescriptionAr" xml:space="preserve">
     <value>Arabic Description</value>
   </data>
@@ -225,6 +231,9 @@
   <data name="EmailExists" xml:space="preserve">
     <value>Email already exists</value>
   </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Employees</value>
+  </data>
   <data name="EndDate" xml:space="preserve">
     <value>End Date</value>
   </data>
@@ -236,6 +245,24 @@
   </data>
   <data name="Female" xml:space="preserve">
     <value>Female</value>
+  </data>
+  <data name="FileDeleted" xml:space="preserve">
+    <value>File deleted successfully</value>
+  </data>
+  <data name="FileInvalidExtension" xml:space="preserve">
+    <value>Invalid file type</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>File not found</value>
+  </data>
+  <data name="FileSaved" xml:space="preserve">
+    <value>File uploaded successfully.</value>
+  </data>
+  <data name="FileSaveFailed" xml:space="preserve">
+    <value>Failed to save the file</value>
+  </data>
+  <data name="FileTooLarge" xml:space="preserve">
+    <value>File size exceeds the allowed limit</value>
   </data>
   <data name="Friday" xml:space="preserve">
     <value>Friday</value>
@@ -315,6 +342,9 @@
   <data name="InvalidValue" xml:space="preserve">
     <value>The value is invalid</value>
   </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
   <data name="IsActive" xml:space="preserve">
     <value>Active</value>
   </data>
@@ -332,6 +362,9 @@
   </data>
   <data name="MemberAttendances" xml:space="preserve">
     <value>Member Attendances</value>
+  </data>
+  <data name="MemberManagement" xml:space="preserve">
+    <value>Member Management</value>
   </data>
   <data name="Members" xml:space="preserve">
     <value>Members</value>
@@ -387,6 +420,9 @@
   <data name="PurchasePrice" xml:space="preserve">
     <value>Purchase Price</value>
   </data>
+  <data name="Purchases" xml:space="preserve">
+    <value>Purchases</value>
+  </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
   </data>
@@ -407,6 +443,9 @@
   </data>
   <data name="SalePrice" xml:space="preserve">
     <value>Sale Price</value>
+  </data>
+  <data name="Sales" xml:space="preserve">
+    <value>Sales</value>
   </data>
   <data name="Saturday" xml:space="preserve">
     <value>Saturday</value>
