@@ -180,6 +180,7 @@ function initializeTrainerSchedule(options) {
     $('#trainerSelect').select2({
         placeholder: options.trainerPlaceholder,
         allowClear: true,
+        width: '100%'
     });
 
     // ================= Edit Mode =================
