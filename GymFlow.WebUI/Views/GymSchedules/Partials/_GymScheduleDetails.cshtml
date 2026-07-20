@@ -1,0 +1,36 @@
+﻿@using GymFlow.Domain.DTOs.GymSchedule
+@model GymScheduleDTO
+
+@using GymFlow.Domain.Extensions
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="row">
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["Day"]</label>
+        <div>@Model.Day.Value.ToLocalizedString()</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["StartTime"]</label>
+        <div>@Model.StartTime</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["EndTime"]</label>
+        <div>@Model.EndTime</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["Gender"]</label>
+        <div>
+            <span class="badge @Model.Gender.Value.ToBadgeClass()">
+                @Model.Gender.Value.ToLocalizedString()
+            </span>
+        </div>
+    </div>
+
+</div>
