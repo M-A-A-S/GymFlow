@@ -243,6 +243,9 @@
   <data name="GymSchedule" xml:space="preserve">
     <value>جدول النادي</value>
   </data>
+  <data name="GymScheduleOverlap" xml:space="preserve">
+    <value>يوجد تعارض مع جدول النادي الحالي</value>
+  </data>
   <data name="GymSchedules" xml:space="preserve">
     <value>جدول النادي</value>
   </data>

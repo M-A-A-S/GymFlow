@@ -38,5 +38,10 @@ namespace GymFlow.Domain.Constants
         public const string AlreadyCheckedOut = "AlreadyCheckedOut";
         public const string CheckOutSuccess = "CheckOutSuccess";
 
+
+        public const string GymScheduleOverlap = "GymScheduleOverlap";
+
+
+
     }
 }

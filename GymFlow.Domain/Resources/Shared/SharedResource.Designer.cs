@@ -439,6 +439,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The gym schedule overlaps with an existing schedule.
+        /// </summary>
+        public static string GymScheduleOverlap {
+            get {
+                return ResourceManager.GetString("GymScheduleOverlap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gym Schedules.
         /// </summary>
         public static string GymSchedules {

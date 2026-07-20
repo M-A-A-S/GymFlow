@@ -243,6 +243,9 @@
   <data name="GymSchedule" xml:space="preserve">
     <value>Gym Schedule</value>
   </data>
+  <data name="GymScheduleOverlap" xml:space="preserve">
+    <value>The gym schedule overlaps with an existing schedule</value>
+  </data>
   <data name="GymSchedules" xml:space="preserve">
     <value>Gym Schedules</value>
   </data>
