@@ -32,6 +32,8 @@ namespace GymFlow.Infrastructure.Configurations
                 .WithMany(m => m.MemberAttendances)
                 .HasForeignKey(ma => ma.MemberId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasData(LoadMemberAttendances());
         }
 
         private static List<MemberAttendance> LoadMemberAttendances()

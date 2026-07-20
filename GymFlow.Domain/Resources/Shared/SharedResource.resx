@@ -153,6 +153,9 @@
   <data name="Cancelled" xml:space="preserve">
     <value>Cancelled</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
   <data name="CheckIn" xml:space="preserve">
     <value>Check In</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="CheckOutSuccess" xml:space="preserve">
     <value>Check-out completed successfully</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
   </data>
   <data name="Completed" xml:space="preserve">
     <value>Completed </value>
@@ -194,6 +200,12 @@
   </data>
   <data name="DeletedSuccessfully" xml:space="preserve">
     <value>Deleted Successfully</value>
+  </data>
+  <data name="DescriptionAr" xml:space="preserve">
+    <value>Arabic Description</value>
+  </data>
+  <data name="DescriptionEn" xml:space="preserve">
+    <value>English Description</value>
   </data>
   <data name="Details" xml:space="preserve">
     <value>Details</value>
@@ -269,6 +281,12 @@
   </data>
   <data name="Hour_Two" xml:space="preserve">
     <value>Hour_Two</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="ImageUrl" xml:space="preserve">
+    <value>Image Url</value>
   </data>
   <data name="Inactive" xml:space="preserve">
     <value>Inactive</value>
@@ -363,8 +381,20 @@
   <data name="Price" xml:space="preserve">
     <value>Price</value>
   </data>
+  <data name="Product" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="PurchasePrice" xml:space="preserve">
+    <value>Purchase Price</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
   <data name="RegisterDate" xml:space="preserve">
     <value>Registration Date</value>
+  </data>
+  <data name="ReorderLevel" xml:space="preserve">
+    <value>Reorder Level</value>
   </data>
   <data name="Required" xml:space="preserve">
     <value>This field is required</value>
@@ -374,6 +404,9 @@
   </data>
   <data name="Salary" xml:space="preserve">
     <value>Salary</value>
+  </data>
+  <data name="SalePrice" xml:space="preserve">
+    <value>Sale Price</value>
   </data>
   <data name="Saturday" xml:space="preserve">
     <value>Saturday</value>
@@ -431,6 +464,9 @@
   </data>
   <data name="Sunday" xml:space="preserve">
     <value>Sunday</value>
+  </data>
+  <data name="Supplier" xml:space="preserve">
+    <value>Supplier</value>
   </data>
   <data name="Suspended" xml:space="preserve">
     <value>Suspended</value>

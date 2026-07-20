@@ -51,6 +51,10 @@ namespace GymFlow.Infrastructure.Tests.Helpers
         public DbSet<TrainerSchedule> TrainerSchedules { get; set; }
         public DbSet<GymSchedule> GymSchedules { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+
         public Task<int> SaveChangesAsync(
         CancellationToken cancellationToken)
         {

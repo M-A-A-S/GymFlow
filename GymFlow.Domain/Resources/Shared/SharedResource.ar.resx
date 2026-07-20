@@ -153,6 +153,9 @@
   <data name="Cancelled" xml:space="preserve">
     <value>ملغي</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>الفئة</value>
+  </data>
   <data name="CheckIn" xml:space="preserve">
     <value>وقت الدخول</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="CheckOutSuccess" xml:space="preserve">
     <value>تم تسجيل الخروج بنجاح</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>رمز المنتج</value>
   </data>
   <data name="Completed" xml:space="preserve">
     <value>مكتمل</value>
@@ -194,6 +200,12 @@
   </data>
   <data name="DeletedSuccessfully" xml:space="preserve">
     <value>تم الحذف بنجاح</value>
+  </data>
+  <data name="DescriptionAr" xml:space="preserve">
+    <value>الوصف (عربي)</value>
+  </data>
+  <data name="DescriptionEn" xml:space="preserve">
+    <value>الوصف (إنجليزي)</value>
   </data>
   <data name="Details" xml:space="preserve">
     <value>تفاصيل</value>
@@ -269,6 +281,12 @@
   </data>
   <data name="Hour_Two" xml:space="preserve">
     <value>ساعتان</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>الصورة</value>
+  </data>
+  <data name="ImageUrl" xml:space="preserve">
+    <value>رابط الصورة</value>
   </data>
   <data name="Inactive" xml:space="preserve">
     <value>غير نشط</value>
@@ -363,8 +381,20 @@
   <data name="Price" xml:space="preserve">
     <value>السعر</value>
   </data>
+  <data name="Product" xml:space="preserve">
+    <value>المنتج</value>
+  </data>
+  <data name="PurchasePrice" xml:space="preserve">
+    <value>سعر الشراء</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
   <data name="RegisterDate" xml:space="preserve">
     <value>تاريخ التسجيل</value>
+  </data>
+  <data name="ReorderLevel" xml:space="preserve">
+    <value>حد إعادة الطلب</value>
   </data>
   <data name="Required" xml:space="preserve">
     <value>هذا الحقل مطلوب</value>
@@ -374,6 +404,9 @@
   </data>
   <data name="Salary" xml:space="preserve">
     <value>الراتب</value>
+  </data>
+  <data name="SalePrice" xml:space="preserve">
+    <value>سعر البيع</value>
   </data>
   <data name="Saturday" xml:space="preserve">
     <value>السبت</value>
@@ -431,6 +464,9 @@
   </data>
   <data name="Sunday" xml:space="preserve">
     <value>الأحد</value>
+  </data>
+  <data name="Supplier" xml:space="preserve">
+    <value>المورد</value>
   </data>
   <data name="Suspended" xml:space="preserve">
     <value>موقوف</value>
