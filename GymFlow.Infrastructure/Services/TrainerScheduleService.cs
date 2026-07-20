@@ -1,5 +1,8 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.Constants;
+using GymFlow.Domain.DTOs.Member;
+using GymFlow.Domain.DTOs.MemberSubscription;
+using GymFlow.Domain.DTOs.SubscriptionType;
 using GymFlow.Domain.DTOs.Trainer;
 using GymFlow.Domain.DTOs.TrainerSchedule;
 using GymFlow.Domain.Extensions;
@@ -150,6 +153,38 @@ namespace GymFlow.Infrastructure.Services
                     500,
                     "An unexpected error occurred.");
             }
+        }
+
+        public async Task<Result<TrainerScheduleAddUpdateDTO>> GetTrainerScheduleAddUpdateDTO(int? id = null)
+        {
+            var DTO = new TrainerScheduleAddUpdateDTO();
+
+            if (id.HasValue)
+            {
+                var trainerSchedule = await _appDbContext.TrainerSchedules
+                    .Include(x => x.Trainer)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.Id == id.Value);
+
+                if (trainerSchedule is null)
+                {
+                    return Result<TrainerScheduleAddUpdateDTO>.Failure(
+                        ResultCodes.NotFound);
+                }
+
+                DTO.TrainerSchedule = trainerSchedule.ToDTO();
+            }
+
+            DTO.Trainers = await _appDbContext.Trainers
+                .Select(x => new TrainerSearchDTO
+                {
+                    Id = x.Id,
+                    FullName = x.FullName,
+                    PhoneNumber = x.PhoneNumber,
+                }).ToListAsync();
+
+            return Result<TrainerScheduleAddUpdateDTO>.Success(DTO);
+
         }
 
         #endregion
