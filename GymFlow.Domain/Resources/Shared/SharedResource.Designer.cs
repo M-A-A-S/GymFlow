@@ -313,6 +313,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duration Hours.
+        /// </summary>
+        public static string DurationHours {
+            get {
+                return ResourceManager.GetString("DurationHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {
@@ -444,6 +453,60 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string HireDate {
             get {
                 return ResourceManager.GetString("HireDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to hours.
+        /// </summary>
+        public static string Hour_Few {
+            get {
+                return ResourceManager.GetString("Hour_Few", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to hours.
+        /// </summary>
+        public static string Hour_Many {
+            get {
+                return ResourceManager.GetString("Hour_Many", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to hour.
+        /// </summary>
+        public static string Hour_One {
+            get {
+                return ResourceManager.GetString("Hour_One", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to hours.
+        /// </summary>
+        public static string Hour_Other {
+            get {
+                return ResourceManager.GetString("Hour_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hour_Two.
+        /// </summary>
+        public static string Hour_Two {
+            get {
+                return ResourceManager.GetString("Hour_Two", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hours.
+        /// </summary>
+        public static string Hours {
+            get {
+                return ResourceManager.GetString("Hours", resourceCulture);
             }
         }
         

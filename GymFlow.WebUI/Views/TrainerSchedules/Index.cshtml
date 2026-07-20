@@ -25,6 +25,7 @@
                 <th>@Localizer["Day"]</th>
                 <th>@Localizer["StartTime"]</th>
                 <th>@Localizer["EndTime"]</th>
+                <th>@Localizer["DurationHours"]</th>
                 <th>@Localizer["Actions"]</th>
                 <th></th>
             </tr>
@@ -39,6 +40,13 @@
                     <td>@item.Day.ToLocalizedString()</td>
                     <td>@item.StartTime</td>
                     <td>@item.EndTime</td>
+                    <td>
+                        @if (item.DurationHours.HasValue)
+                        {
+
+                            @item.DurationHours.Value.ToLocalizedHours();
+                        }
+                    </td>
                 <td>
                     <a asp-action="Edit"
                        asp-route-id="@item.Id"
