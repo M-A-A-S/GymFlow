@@ -429,6 +429,9 @@
   <data name="TrainerSchedules" xml:space="preserve">
     <value>Trainer Schedules</value>
   </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>An unexpected error occurred</value>
   </data>

@@ -310,7 +310,7 @@
     <value>اشتراكات العضو</value>
   </data>
   <data name="Monday" xml:space="preserve">
-    <value>الثلاثاء</value>
+    <value>الإثنين</value>
   </data>
   <data name="NameAr" xml:space="preserve">
     <value>الاسم بالعربية</value>
@@ -428,6 +428,9 @@
   </data>
   <data name="TrainerSchedules" xml:space="preserve">
     <value>جداول المدربين</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>الثلاثاء</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>حدث خطأ غير متوقع</value>
