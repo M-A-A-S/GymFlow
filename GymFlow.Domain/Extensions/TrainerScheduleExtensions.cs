@@ -39,9 +39,9 @@ namespace GymFlow.Domain.Extensions
             {
                 Id = DTO.Id,
                 TrainerId = DTO.TrainerId,
-                Day = DTO.Day,
-                StartTime = DTO.StartTime,
-                EndTime = DTO.EndTime,
+                Day = DTO.Day.Value,
+                StartTime = DTO.StartTime.Value,
+                EndTime = DTO.EndTime.Value,
             };
         }
 

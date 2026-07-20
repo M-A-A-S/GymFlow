@@ -30,7 +30,7 @@ namespace GymFlow.Domain.DTOs.TrainerSchedule
             ErrorMessageResourceName = nameof(Resources.Shared.SharedResource.Required),
             ErrorMessageResourceType = typeof(Resources.Shared.SharedResource)
         )]
-        public DayOfWeek Day { get; set; }
+        public DayOfWeek? Day { get; set; }
 
         [Display(
             Name = nameof(Resources.Shared.SharedResource.StartTime),
@@ -40,7 +40,7 @@ namespace GymFlow.Domain.DTOs.TrainerSchedule
             ErrorMessageResourceName = nameof(Resources.Shared.SharedResource.Required),
             ErrorMessageResourceType = typeof(Resources.Shared.SharedResource)
         )]
-        public TimeSpan StartTime { get; set; }
+        public TimeSpan? StartTime { get; set; }
 
         [Display(
             Name = nameof(Resources.Shared.SharedResource.EndTime),
@@ -50,7 +50,7 @@ namespace GymFlow.Domain.DTOs.TrainerSchedule
             ErrorMessageResourceName = nameof(Resources.Shared.SharedResource.Required),
             ErrorMessageResourceType = typeof(Resources.Shared.SharedResource)
         )]
-        public TimeSpan EndTime { get; set; }
+        public TimeSpan? EndTime { get; set; }
 
         public TrainerDTO? Trainer { get; set; }
 

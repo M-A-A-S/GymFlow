@@ -1,5 +1,6 @@
 ﻿let selectedDurationDays = 0;
 
+//  ================= member-subscription  =================
 function initializeMemberSubscription(options) {
 
 
@@ -170,4 +171,22 @@ function calculateEndDate() {
     $('#endDateInput')
         .val(formatDate(endDate));
 
+}
+
+//  ================= trainer-schedule  =================
+// TODO: Put it in seprate file
+function initializeTrainerSchedule(options) {
+    // ================= Trainer =================
+    $('#trainerSelect').select2({
+        placeholder: options.trainerPlaceholder,
+        allowClear: true,
+    });
+
+    // ================= Edit Mode =================
+    if (options.trainerId) {
+
+        $('#trainerSelect')
+            .val(options.trainerId)
+            .trigger('change');
+    }
 }

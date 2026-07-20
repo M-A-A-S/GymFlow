@@ -1,0 +1,54 @@
+﻿@using GymFlow.Domain.DTOs.TrainerSchedule
+@model TrainerScheduleAddUpdateDTO
+
+@using GymFlow.Domain.Enums
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="row g-3 mb-1 mb-2">
+
+    @* ================= Trainer ================= *@
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="TrainerSchedule.TrainerId"></label>
+        <select asp-for="TrainerSchedule.TrainerId" class="form-select"
+                id="trainerSelect">
+            <option></option>
+            <option value="" disabled selected>@Localizer["SelectTrainer"]</option>  
+            @foreach (var trainer in Model.Trainers)
+            {
+                <option value="@trainer.Id">
+                    @trainer.FullName
+                </option>
+            }
+        </select>
+        <span asp-validation-for="TrainerSchedule.TrainerId" class="text-danger"></span>
+    </div>
+
+    @* ================= Day ================= *@
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="TrainerSchedule.Day" class="form-label"></label>
+        <select asp-for="TrainerSchedule.Day" class="form-select"
+                asp-items="Html.GetEnumSelectList<DayOfWeek>()">
+            <option value="" disabled selected>@Localizer["SelectDay"]</option>
+        </select>
+        <span asp-validation-for="TrainerSchedule.Day" class="text-danger"></span>
+    </div>
+
+    @* ================= StartTime ================= *@
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="TrainerSchedule.StartTime"></label>
+        <input asp-for="TrainerSchedule.StartTime"  type="time" class="form-control"
+               />
+        <span asp-validation-for="TrainerSchedule.StartTime" class="text-danger"></span>
+    </div>
+
+    @* ================= EndTime ================= *@
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="TrainerSchedule.EndTime"></label>
+        <input  asp-for="TrainerSchedule.EndTime"type="time" class="form-control" />
+        <span asp-validation-for="TrainerSchedule.EndTime" class="text-danger"></span>
+    </div>
+
+</div>
+

@@ -214,9 +214,9 @@ namespace GymFlow.Infrastructure.Services
                 }
 
                 trainerSchedule.TrainerId = dto.TrainerId;
-                trainerSchedule.Day = dto.Day;
-                trainerSchedule.StartTime = dto.StartTime;
-                trainerSchedule.EndTime = dto.EndTime;
+                trainerSchedule.Day = dto.Day.Value;
+                trainerSchedule.StartTime = dto.StartTime.Value;
+                trainerSchedule.EndTime = dto.EndTime.Value;
                 trainerSchedule.UpdatedAt = DateTime.UtcNow;
 
                 await _appDbContext.SaveChangesAsync();

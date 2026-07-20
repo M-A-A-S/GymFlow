@@ -790,6 +790,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -- Select Day --.
+        /// </summary>
+        public static string SelectDay {
+            get {
+                return ResourceManager.GetString("SelectDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -- Select Gender --.
         /// </summary>
         public static string SelectGender {
@@ -822,6 +831,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string SelectSubscriptionType {
             get {
                 return ResourceManager.GetString("SelectSubscriptionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -- Select Trainer --.
+        /// </summary>
+        public static string SelectTrainer {
+            get {
+                return ResourceManager.GetString("SelectTrainer", resourceCulture);
             }
         }
         
