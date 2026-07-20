@@ -264,6 +264,12 @@
   <data name="InvalidPrice" xml:space="preserve">
     <value>السعر لا يمكن أن يكون قيمة سالبة</value>
   </data>
+  <data name="InvalidScheduleTime" xml:space="preserve">
+    <value>يجب أن يكون وقت البداية قبل وقت النهاية</value>
+  </data>
+  <data name="InvalidTrainer" xml:space="preserve">
+    <value>المدرب المحدد غير صالح</value>
+  </data>
   <data name="InvalidValue" xml:space="preserve">
     <value>القيمة غير صحيحة</value>
   </data>
@@ -408,11 +414,17 @@
   <data name="TrainerManagement" xml:space="preserve">
     <value>إدارة المدربين</value>
   </data>
+  <data name="TrainerNotFound" xml:space="preserve">
+    <value>المدرب غير موجود</value>
+  </data>
   <data name="Trainers" xml:space="preserve">
     <value>المدربون</value>
   </data>
   <data name="TrainerSchedule" xml:space="preserve">
     <value>جدول المدرب</value>
+  </data>
+  <data name="TrainerScheduleOverlap" xml:space="preserve">
+    <value>لدى المدرب جدول آخر يتداخل مع هذا الوقت</value>
   </data>
   <data name="TrainerSchedules" xml:space="preserve">
     <value>جداول المدربين</value>

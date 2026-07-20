@@ -502,6 +502,24 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start time must be earlier than end time.
+        /// </summary>
+        public static string InvalidScheduleTime {
+            get {
+                return ResourceManager.GetString("InvalidScheduleTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid trainer selected.
+        /// </summary>
+        public static string InvalidTrainer {
+            get {
+                return ResourceManager.GetString("InvalidTrainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value is invalid.
         /// </summary>
         public static string InvalidValue {
@@ -934,6 +952,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trainer not found.
+        /// </summary>
+        public static string TrainerNotFound {
+            get {
+                return ResourceManager.GetString("TrainerNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trainers.
         /// </summary>
         public static string Trainers {
@@ -948,6 +975,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string TrainerSchedule {
             get {
                 return ResourceManager.GetString("TrainerSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The trainer already has a schedule during this time.
+        /// </summary>
+        public static string TrainerScheduleOverlap {
+            get {
+                return ResourceManager.GetString("TrainerScheduleOverlap", resourceCulture);
             }
         }
         
