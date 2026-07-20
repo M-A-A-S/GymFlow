@@ -1,0 +1,39 @@
+﻿@using GymFlow.Domain.DTOs.GymSchedule
+@model GymScheduleDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="card shadow-sm">
+
+    <div class="card-header">
+        <h5>@Localizer["Edit"] @Localizer["GymSchedule"]</h5>
+    </div>
+
+    <div class="card-body">
+
+        <form asp-action="Edit">
+
+            <input type="hidden" asp-for="Id" />
+
+            <partial name="Partials/_GymScheduleForm" model="Model" />
+
+            <button type="submit" class="btn btn-primary">
+                @Localizer["Edit"]
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                @Localizer["Cancel"]
+            </a>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+}
