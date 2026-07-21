@@ -72,10 +72,10 @@
                     <td>@item.NameAr</td>
                     <td>@item.DescriptionEn</td>
                     <td>@item.DescriptionAr</td>
-                <td>@item.PurchasePrice.ToString("N2")</td>
-                <td>@item.SalePrice.ToString("N2")</td>
-                <td>@item.Quantity.ToString("N0")</td>
-                <td>@item.ReorderLevel.ToString("N0")</td>
+                <td>@item.PurchasePrice.Value.ToString("N2")</td>
+                <td>@item.SalePrice.Value.ToString("N2")</td>
+                <td>@item.Quantity.Value.ToString("N0")</td>
+                <td>@item.ReorderLevel.Value.ToString("N0")</td>
                     <td>
                         <a asp-action="Edit"
                            asp-route-id="@item.Id"

@@ -483,6 +483,9 @@
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>-- Select Category --</value>
+  </data>
   <data name="SelectDay" xml:space="preserve">
     <value>-- Select Day --</value>
   </data>

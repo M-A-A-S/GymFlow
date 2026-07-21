@@ -14,7 +14,7 @@ namespace GymFlow.WebUI.ViewModels.Product
             Name = nameof(SharedResource.Code),
             ResourceType = typeof(SharedResource)
         )]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         [Display(
             Name = nameof(SharedResource.NameEn),
@@ -62,7 +62,7 @@ namespace GymFlow.WebUI.ViewModels.Product
             ErrorMessageResourceName = nameof(SharedResource.Required),
             ErrorMessageResourceType = typeof(SharedResource)
         )]
-        public decimal PurchasePrice { get; set; }
+        public decimal? PurchasePrice { get; set; }
 
         [Display(
             Name = nameof(SharedResource.SalePrice),
@@ -72,7 +72,7 @@ namespace GymFlow.WebUI.ViewModels.Product
             ErrorMessageResourceName = nameof(SharedResource.Required),
             ErrorMessageResourceType = typeof(SharedResource)
         )]
-        public decimal SalePrice { get; set; }
+        public decimal? SalePrice { get; set; }
 
         [Display(
             Name = nameof(SharedResource.Quantity),
@@ -82,7 +82,7 @@ namespace GymFlow.WebUI.ViewModels.Product
             ErrorMessageResourceName = nameof(SharedResource.Required),
             ErrorMessageResourceType = typeof(SharedResource)
         )]
-        public int Quantity { get; set; } = 0;
+        public int? Quantity { get; set; } = 0;
 
         [Display(
             Name = nameof(SharedResource.ReorderLevel),
@@ -92,11 +92,11 @@ namespace GymFlow.WebUI.ViewModels.Product
             ErrorMessageResourceName = nameof(SharedResource.Required),
             ErrorMessageResourceType = typeof(SharedResource)
         )]
-        public int ReorderLevel { get; set; }
+        public int? ReorderLevel { get; set; }
 
         public CategoryDTO? Category { get; set; }
 
-        public ImageInputVM Image { get; set; } = new();
+        public ImageInputVM Image { get; set; } = new("Product.Image");
 
     }
 }

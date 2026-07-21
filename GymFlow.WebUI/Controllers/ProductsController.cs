@@ -3,6 +3,7 @@ using GymFlow.Domain.DTOs.Product;
 using GymFlow.Domain.Resources.Shared;
 using GymFlow.WebUI.Extensions;
 using GymFlow.WebUI.ViewModels;
+using GymFlow.WebUI.ViewModels.Product;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 

@@ -17,7 +17,7 @@ namespace GymFlow.Domain.DTOs.Product
             Name = nameof(Resources.Shared.SharedResource.Code),
             ResourceType = typeof(Resources.Shared.SharedResource)
         )]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         [Display(
             Name = nameof(Resources.Shared.SharedResource.NameEn),
@@ -71,7 +71,7 @@ namespace GymFlow.Domain.DTOs.Product
             ErrorMessageResourceName = nameof(Resources.Shared.SharedResource.Required),
             ErrorMessageResourceType = typeof(Resources.Shared.SharedResource)
         )]
-        public decimal PurchasePrice { get; set; }
+        public decimal? PurchasePrice { get; set; }
 
         [Display(
             Name = nameof(Resources.Shared.SharedResource.SalePrice),
@@ -81,7 +81,7 @@ namespace GymFlow.Domain.DTOs.Product
             ErrorMessageResourceName = nameof(Resources.Shared.SharedResource.Required),
             ErrorMessageResourceType = typeof(Resources.Shared.SharedResource)
         )]
-        public decimal SalePrice { get; set; }
+        public decimal? SalePrice { get; set; }
 
         [Display(
             Name = nameof(Resources.Shared.SharedResource.Quantity),
@@ -91,7 +91,7 @@ namespace GymFlow.Domain.DTOs.Product
             ErrorMessageResourceName = nameof(Resources.Shared.SharedResource.Required),
             ErrorMessageResourceType = typeof(Resources.Shared.SharedResource)
         )]
-        public int Quantity { get; set; } = 0;
+        public int? Quantity { get; set; }
 
         [Display(
             Name = nameof(Resources.Shared.SharedResource.ReorderLevel),
@@ -101,7 +101,7 @@ namespace GymFlow.Domain.DTOs.Product
             ErrorMessageResourceName = nameof(Resources.Shared.SharedResource.Required),
             ErrorMessageResourceType = typeof(Resources.Shared.SharedResource)
         )]
-        public int ReorderLevel { get; set; }
+        public int? ReorderLevel { get; set; }
 
         public CategoryDTO? Category { get; set; }
 

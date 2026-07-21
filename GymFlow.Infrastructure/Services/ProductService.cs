@@ -68,6 +68,7 @@ namespace GymFlow.Infrastructure.Services
                 }
 
                 var entity = dto.ToEntity();
+                entity.Code =  await GenerateProductCode();
 
                 entity.ImageUrl = imageResult.Data;
 
@@ -255,10 +256,10 @@ namespace GymFlow.Infrastructure.Services
                 product.DescriptionEn = dto.DescriptionEn;
                 product.DescriptionAr = dto.DescriptionAr;
                 product.CategoryId = dto.CategoryId;
-                product.PurchasePrice = dto.PurchasePrice;
-                product.SalePrice = dto.SalePrice;
-                product.Quantity = dto.Quantity;
-                product.ReorderLevel = dto.ReorderLevel;
+                product.PurchasePrice = dto.PurchasePrice.Value;
+                product.SalePrice = dto.SalePrice.Value;
+                product.Quantity = dto.Quantity.Value;
+                product.ReorderLevel = dto.ReorderLevel.Value;
                 product.UpdatedAt = DateTime.UtcNow;
 
                 await _appDbContext.SaveChangesAsync();

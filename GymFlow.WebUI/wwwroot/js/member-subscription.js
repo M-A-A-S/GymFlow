@@ -191,3 +191,22 @@ function initializeTrainerSchedule(options) {
             .trigger('change');
     }
 }
+
+//  ================= trainer-schedule  =================
+// TODO: Put it in seprate file
+function initializeCategory(options) {
+    // ================= Trainer =================
+    $('#categorySelect').select2({
+        placeholder: options.categoryPlaceholder,
+        allowClear: true,
+        width: '100%'
+    });
+
+    // ================= Edit Mode =================
+    if (options.trainerId) {
+
+        $('#categorySelect')
+            .val(options.categoryId)
+            .trigger('change');
+    }
+}

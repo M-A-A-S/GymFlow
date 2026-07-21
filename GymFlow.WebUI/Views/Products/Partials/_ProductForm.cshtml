@@ -1,0 +1,85 @@
+﻿@using GymFlow.WebUI.ViewModels;
+@using GymFlow.WebUI.ViewModels.Product
+@using Microsoft.AspNetCore.Mvc.ViewFeatures;
+@model ProductAddUpdateVM
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="row g-3 mb-1 mb-2">
+
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="Product.NameEn"></label>
+        <input asp-for="Product.NameEn" class="form-control" />
+        <span asp-validation-for="Product.NameEn" class="text-danger"></span>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="Product.NameAr"></label>
+        <input asp-for="Product.NameAr" class="form-control" />
+        <span asp-validation-for="Product.NameAr" class="text-danger"></span>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="Product.DescriptionEn"></label>
+        <input asp-for="Product.DescriptionEn" class="form-control" />
+        <span asp-validation-for="Product.DescriptionEn" class="text-danger"></span>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="Product.DescriptionAr"></label>
+        <input asp-for="Product.DescriptionAr" class="form-control" />
+        <span asp-validation-for="Product.DescriptionAr" class="text-danger"></span>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="Product.PurchasePrice"></label>
+        <input asp-for="Product.PurchasePrice" type="number" class="form-control" />
+        <span asp-validation-for="Product.PurchasePrice" class="text-danger"></span>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="Product.SalePrice"></label>
+        <input asp-for="Product.SalePrice" type="number" class="form-control" />
+        <span asp-validation-for="Product.SalePrice" class="text-danger"></span>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="Product.Quantity"></label>
+        <input asp-for="Product.Quantity" type="number" class="form-control" />
+        <span asp-validation-for="Product.Quantity" class="text-danger"></span>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="Product.ReorderLevel"></label>
+        <input asp-for="Product.ReorderLevel" type="number" class="form-control" />
+        <span asp-validation-for="Product.ReorderLevel" class="text-danger"></span>
+    </div>
+
+    @* ================= Category ================= *@
+    <div class="col-sm-6 col-md-3">
+        <label asp-for="Product.CategoryId"></label>
+        <select asp-for="Product.CategoryId" class="form-select"
+                id="categorySelect">
+            @* <option></option> *@
+            <option value="" disabled selected>@Localizer["SelectCategory"]</option>
+            @foreach (var category in Model.Categories)
+            {
+                <option value="@category.Id">
+                    @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                    ? category?.NameAr
+                                    : category?.NameEn)
+                </option>
+            }
+        </select>
+        <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+    </div>
+
+
+    @* ================= Product Image ================= *@
+    <partial name="_ImageUpload" model="Model.Product.Image" />
+
+
+</div>

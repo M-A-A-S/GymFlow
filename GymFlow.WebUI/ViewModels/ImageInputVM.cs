@@ -3,6 +3,16 @@
     public class ImageInputVM
     {
 
+        public ImageInputVM()
+        {
+            
+        }
+
+        public ImageInputVM(string prefix)
+        {
+            Prefix = prefix;
+        }
+
         /// <summary>
         /// Current image (Edit page)
         /// </summary>

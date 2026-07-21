@@ -53,10 +53,10 @@ namespace GymFlow.Domain.Extensions
                 DescriptionAr = DTO.DescriptionAr,
                 ImageUrl = DTO.ImageUrl,
                 CategoryId = DTO.CategoryId,
-                PurchasePrice = DTO.PurchasePrice,
-                SalePrice = DTO.SalePrice,
-                Quantity = DTO.Quantity,
-                ReorderLevel = DTO.ReorderLevel,
+                PurchasePrice = DTO.PurchasePrice.Value,
+                SalePrice = DTO.SalePrice.Value,
+                Quantity = DTO.Quantity.Value,
+                ReorderLevel = DTO.ReorderLevel.Value,
             };
         }
 

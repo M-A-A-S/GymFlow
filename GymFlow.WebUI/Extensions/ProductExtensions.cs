@@ -10,15 +10,16 @@ namespace GymFlow.WebUI.Extensions
         {
             return new ProductDTO
             {
+                Code = VM.Code,
                 NameEn = VM.NameEn,
                 NameAr = VM.NameAr,
                 DescriptionEn = VM.DescriptionEn,
                 DescriptionAr = VM.DescriptionAr,
                 CategoryId = VM.CategoryId,
-                PurchasePrice = VM.PurchasePrice,
-                SalePrice = VM.SalePrice,
-                Quantity = VM.Quantity,
-                ReorderLevel = VM.ReorderLevel,
+                PurchasePrice = VM.PurchasePrice.Value,
+                SalePrice = VM.SalePrice.Value,
+                Quantity = VM.Quantity.Value,
+                ReorderLevel = VM.ReorderLevel.Value,
                 ImageUrl = VM.Image.Url,
                 Image = VM.Image.File.ToFileUploadRequest(),
             };
@@ -28,6 +29,7 @@ namespace GymFlow.WebUI.Extensions
         {
             return new ProductVM
             {
+                Code = DTO.Code,
                 NameEn = DTO.NameEn,
                 NameAr = DTO.NameAr,
                 DescriptionEn = DTO.DescriptionEn,
@@ -37,9 +39,11 @@ namespace GymFlow.WebUI.Extensions
                 SalePrice = DTO.SalePrice,
                 Quantity = DTO.Quantity,
                 ReorderLevel = DTO.ReorderLevel,
+
                 Image = new ImageInputVM
                 {
                     ExistingUrl = DTO.ImageUrl.GetImageUrl("Categories"),
+                    Prefix = "Product.Image"
                 }
             };
         }
