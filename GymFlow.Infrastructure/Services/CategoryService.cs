@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace GymFlow.Infrastructure.Services
 {
-    public class CategoryService
+    public class CategoryService : ICategoryService
     {
         #region ========================= Fields & Properties =========================
         private readonly IAppDbContext _appDbContext;

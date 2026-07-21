@@ -21,7 +21,8 @@ namespace GymFlow.Infrastructure
             IConfiguration configuration)
         {
 
-            services.AddScoped<IFileService, FileService>();
+            //services.AddScoped<IFileService, FileService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IGymScheduleService, GymScheduleService>();
             services.AddScoped<ITrainerScheduleService, TrainerScheduleService>();
             services.AddScoped<ITrainerService, TrainerService>();
