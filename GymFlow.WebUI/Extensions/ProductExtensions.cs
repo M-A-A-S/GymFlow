@@ -1,4 +1,5 @@
-﻿using GymFlow.Domain.DTOs.Product;
+﻿using GymFlow.Domain.Constants;
+using GymFlow.Domain.DTOs.Product;
 using GymFlow.WebUI.ViewModels;
 using GymFlow.WebUI.ViewModels.Product;
 
@@ -10,6 +11,7 @@ namespace GymFlow.WebUI.Extensions
         {
             return new ProductDTO
             {
+                Id = VM.Id,
                 Code = VM.Code,
                 NameEn = VM.NameEn,
                 NameAr = VM.NameAr,
@@ -29,6 +31,7 @@ namespace GymFlow.WebUI.Extensions
         {
             return new ProductVM
             {
+                Id = DTO.Id,
                 Code = DTO.Code,
                 NameEn = DTO.NameEn,
                 NameAr = DTO.NameAr,
@@ -42,7 +45,7 @@ namespace GymFlow.WebUI.Extensions
 
                 Image = new ImageInputVM
                 {
-                    ExistingUrl = DTO.ImageUrl.GetImageUrl("Categories"),
+                    ExistingUrl = DTO.ImageUrl.GetImageUrl(Constants.ProductsFolder),
                     Prefix = "Product.Image"
                 }
             };
