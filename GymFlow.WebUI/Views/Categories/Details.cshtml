@@ -1,0 +1,37 @@
+﻿@using GymFlow.Domain.DTOs.Category
+@model CategoryDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="card shadow-sm">
+
+    <div class="card-header text-white">
+        <h5>
+            @Localizer["Details"] @Localizer["Category"]
+        </h5>
+    </div>
+
+    <div class="card-body">
+
+        <partial name="Partials/_CategoryDetails" model="Model" />
+
+    </div>
+
+    <div class="card-footer">
+
+        <a asp-action="Edit"
+           asp-route-id="@Model.Id"
+           class="btn btn-primary">
+            @Localizer["Edit"]
+        </a>
+
+        <a href="javascript:history.back()"
+           class="btn btn-secondary">
+            @Localizer["GoBack"]
+        </a>
+
+    </div>
+
+</div>
