@@ -12,7 +12,7 @@ namespace GymFlow.Domain.Entities
         public string NameAr { get; set; }
         public string? DescriptionEn { get; set; }
         public string? DescriptionAr { get; set; }
-        public string ? ImageUrl {  get; set; }
+        public string? ImageUrl {  get; set; }
         public bool IsActive { get; set; } = true;
 
         public ICollection<Product> Products { get; set; } = new List<Product>();

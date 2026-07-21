@@ -122,7 +122,6 @@ namespace GymFlow.Infrastructure.Services
             string folder, 
             CancellationToken cancellationToken = default)
         {
-            await Task.CompletedTask;
 
             if (string.IsNullOrWhiteSpace(fileName))
             {

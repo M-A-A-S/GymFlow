@@ -21,7 +21,8 @@
 
         <img id="preview_@id"
              src="@(Model.ExistingUrl ?? "")"
-             class="image-preview @(string.IsNullOrWhiteSpace(Model.ExistingUrl) ? "d-none" : "")" />
+             class="image-preview @(string.IsNullOrWhiteSpace(Model.ExistingUrl) ? "d-none" : "")"
+             onerror="this.src='/uploads/no-image.svg'" />
 
         <div id="noImage_@id"
              class="no-image-preview @(string.IsNullOrWhiteSpace(Model.ExistingUrl) ? "" : "d-none")">

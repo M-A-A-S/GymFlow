@@ -187,7 +187,7 @@ namespace GymFlow.Infrastructure.Services
                         validationResult.StatusCode);
                 }
 
-                var entity = dto.ToEntity();
+                //var entity = dto.ToEntity();
 
                 var category = _appDbContext.Categories.FirstOrDefault(x => x.Id == id);
 
@@ -195,8 +195,6 @@ namespace GymFlow.Infrastructure.Services
                 {
                     return Result<bool>.Failure(ResultCodes.NotFound, 404);
                 }
-
-                category.ImageUrl = dto.ImageUrl;
 
                 var imageResult = await _fileService.ReplaceAsync(
                     dto.Image,

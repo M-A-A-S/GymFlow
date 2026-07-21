@@ -29,7 +29,7 @@ namespace GymFlow.WebUI.Extensions
                 DescriptionAr = DTO.DescriptionAr,
                 Image = new ImageInputVM
                 {
-                    ExistingUrl = DTO.ImageUrl,
+                    ExistingUrl = DTO.ImageUrl.GetImageUrl("Categories"),
                 }
             };
         }

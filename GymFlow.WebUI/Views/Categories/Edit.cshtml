@@ -1,0 +1,37 @@
+﻿@using GymFlow.WebUI.ViewModels;
+@model CategoryVM
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="card shadow-sm">
+
+    <div class="card-header">
+        <h5>@Localizer["Edit"] @Localizer["Category"]</h5>
+    </div>
+
+    <div class="card-body">
+
+        <form asp-action="Edit" enctype="multipart/form-data">
+
+            <input type="hidden" asp-for="Id" />
+
+            <partial name="Partials/_CategoryForm" model="Model" />
+
+            <button type="submit" class="btn btn-primary">
+                @Localizer["Edit"]
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                @Localizer["Cancel"]
+            </a>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
