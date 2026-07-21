@@ -98,7 +98,7 @@ namespace GymFlow.Infrastructure.Services
         {
             try
             {
-                var products = await _appDbContext.Products
+                var products = await _appDbContext.Products.Include(x => x.Category)
                 .Select(m => m.ToDTO())
                 .AsNoTracking()
                 .ToListAsync();

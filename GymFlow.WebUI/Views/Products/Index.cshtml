@@ -1,0 +1,103 @@
+﻿@using GymFlow.Domain.DTOs.Product
+@model IEnumerable<ProductDTO>
+
+@using GymFlow.Domain.Constants;
+
+@using GymFlow.Domain.Resources.Shared
+@using GymFlow.WebUI.Extensions
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@using System.Globalization
+
+<div class="d-flex align-items-center justify-content-between my-4">
+    <h2>@Localizer["Products"]</h2>
+
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fa fa-plus me-1"></i>
+        @Localizer["CreateNew"]
+    </a>
+</div>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Localizer["Image"]</th>
+                <th>@Localizer["Code"]</th>
+                <th>@Localizer["Category"]</th>
+                <th>@Localizer["NameEn"]</th>
+                <th>@Localizer["NameAr"]</th>
+                <th>@Localizer["DescriptionEn"]</th>
+                <th>@Localizer["DescriptionAr"]</th>
+                <th>@Localizer["PurchasePrice"]</th>
+                <th>@Localizer["SalePrice"]</th>
+                <th>@Localizer["Quantity"]</th>
+                <th>@Localizer["ReorderLevel"]</th>
+                <th>@Localizer["Actions"]</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>
+                        <div class="table-image-wrapper">
+                            @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
+                            {
+                                @* <img src="@item.ImageUrl" *@
+                                <img src="@item.ImageUrl.GetImageUrl(Constants.ProductsFolder)"
+                                     class="table-image"
+                                     alt="@item.NameEn"
+                                     onerror="this.src='/uploads/no-image.svg'" />
+                            }
+                            else
+                            {
+                                <div class="table-no-image">
+                                    @Localizer["NoImage"]
+                                </div>
+                            }
+                        </div>
+                    </td>
+                    <td>@item.Code</td>
+                    <td>
+                    @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                        ? item?.Category?.NameAr
+                                        : item?.Category?.NameEn)
+                    </td>
+                    <td>@item.NameEn</td>
+                    <td>@item.NameAr</td>
+                    <td>@item.DescriptionEn</td>
+                    <td>@item.DescriptionAr</td>
+                <td>@item.PurchasePrice.ToString("N2")</td>
+                <td>@item.SalePrice.ToString("N2")</td>
+                <td>@item.Quantity.ToString("N0")</td>
+                <td>@item.ReorderLevel.ToString("N0")</td>
+                    <td>
+                        <a asp-action="Edit"
+                           asp-route-id="@item.Id"
+                           class="btn btn-icon btn-outline-primary tooltip-btn"
+                           data-tooltip="@Localizer["Edit"]">
+                            <i class="fa fa-pen"></i>
+                        </a>
+                        <a asp-action="Details"
+                           asp-route-id="@item.Id"
+                           class="btn btn-icon btn-outline-info tooltip-btn"
+                           data-tooltip="@Localizer["Details"]">
+                            <i class="fa fa-info"></i>
+                        </a>
+                        <a asp-action="Delete"
+                           asp-route-id="@item.Id"
+                           class="btn btn-icon btn-outline-danger tooltip-btn"
+                           data-tooltip="@Localizer["Delete"]">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
