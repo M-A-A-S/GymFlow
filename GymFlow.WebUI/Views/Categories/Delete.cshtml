@@ -1,0 +1,42 @@
+﻿@using GymFlow.Domain.DTOs.Category
+@model CategoryDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="card border-danger shadow-sm">
+
+    <div class="card-header bg-danger text-white">
+        <h5>@Localizer["Delete"] @Localizer["Category"]</h5>
+    </div>
+
+    <div class="card-body">
+
+        <div class="alert alert-warning">
+            @Localizer["DeleteConfirmationMessage"]
+        </div>
+
+        <partial name="Partials/_CategoryDetails" model="Model" />
+
+    </div>
+
+    <div class="card-footer">
+
+        <form asp-action="Delete">
+
+            <input type="hidden" asp-for="Id" />
+
+            <button type="submit" class="btn btn-danger">
+                @Localizer["Delete"]
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                @Localizer["Cancel"]
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
