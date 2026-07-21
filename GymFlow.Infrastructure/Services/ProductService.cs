@@ -385,6 +385,7 @@ namespace GymFlow.Infrastructure.Services
             var lastCode = await _appDbContext.Products
                 .OrderByDescending(x => x.Id)
                 .Select(x => x.Code)
+                .IgnoreQueryFilters()
                 .FirstOrDefaultAsync();
 
             if (string.IsNullOrWhiteSpace(lastCode))
