@@ -2,6 +2,7 @@
 @model IEnumerable<CategoryDTO>
 
 @using GymFlow.Domain.Resources.Shared
+@using GymFlow.WebUI.Extensions
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResource> Localizer
 
@@ -37,13 +38,22 @@
 
                 <tr>
                     <td>
-                        @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
-                        {
-                            <img src="@item.ImageUrl"
-                                        width="60"
-                                        height="60"
-                                 class="rounded" />
-                        }
+                        <div class="table-image-wrapper">
+                            @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
+                            {
+                                @* <img src="@item.ImageUrl" *@
+                                <img src="@item.ImageUrl.GetImageUrl("Categories")"
+                                     class="table-image"
+                                     alt="@item.NameEn"
+                                     onerror="this.src='/uploads/no-image.svg'" />
+                            }
+                            else
+                            {
+                                <div class="table-no-image">
+                                    @Localizer["NoImage"]
+                                </div>
+                            }
+                        </div>
                     </td>
                     <td>@item.NameEn</td>
                     <td>@item.NameAr</td>

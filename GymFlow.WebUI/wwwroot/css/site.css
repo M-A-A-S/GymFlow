@@ -643,3 +643,168 @@ html[dir="rtl"] .submenu a {
     padding: 1rem 2rem;
 }
 /* End Global */
+
+/* Start Table Image Preview */
+.table-image-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border-color);
+    background: #f8f9fa;
+    background-color: var(--card-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.table-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+.table-no-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+/* End Table Image Preview */
+
+/*Start Image Upload*/
+.image-upload-card {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+
+/* Preview */
+.image-preview-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px dashed var(--border-color);
+    background: #f9fafb;
+    background-color: var(--background-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.no-image-preview {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+
+/* Inputs area */
+.image-inputs {
+    flex: 1;
+    min-width: 0;
+}
+
+
+
+    .image-inputs .form-control {
+        height: 38px;
+        font-size: 14px;
+    }
+
+
+
+/* OR divider */
+.image-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+
+    .image-divider::before,
+    .image-divider::after {
+        content: "";
+        height: 1px;
+        background: #e5e7eb;
+        background-color: var(--border-color);
+        flex: 1;
+    }
+
+
+
+/* Upload button */
+.file-upload-label {
+    height: 55px;
+    border: 2px dashed #6366f1;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: #6366f1;
+    font-size: 13px;
+    transition: .2s;
+}
+
+
+    .file-upload-label:hover {
+        background: #eef2ff;
+    }
+
+
+    .file-upload-label i {
+        font-size: 18px;
+    }
+
+
+
+/* Mobile */
+@media(max-width:576px) {
+
+    .image-upload-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+
+    .image-preview-container {
+        width: 100%;
+        height: 180px;
+    }
+}
+/*End Image Upload*/

@@ -1,0 +1,160 @@
+﻿@using GymFlow.WebUI.ViewModels
+@model ImageInputVM
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    var id = Guid.NewGuid().ToString("N");
+}
+
+<div class="image-upload-card">
+
+    <div class="image-preview-container">
+
+        @* <img id="preview_@id"
+             src="@(string.IsNullOrWhiteSpace(Model.ExistingUrl)
+                                 ? "/images/no-image.png"
+                                 : Model.ExistingUrl)"
+             class="image-preview" /> *@
+
+        <img id="preview_@id"
+             src="@(Model.ExistingUrl ?? "")"
+             class="image-preview @(string.IsNullOrWhiteSpace(Model.ExistingUrl) ? "d-none" : "")" />
+
+        <div id="noImage_@id"
+             class="no-image-preview @(string.IsNullOrWhiteSpace(Model.ExistingUrl) ? "" : "d-none")">
+            @Localizer["NoImage"]
+        </div>
+
+    </div>
+
+
+    <div class="image-inputs">
+
+        <div class="mb-3">
+            <label asp-for="Url" class="form-label">
+                @Localizer["ImageUrl"]
+            </label>
+
+            @* <input asp-for="Url"
+                   id="url_@id"
+                   class="form-control"
+                   placeholder="https://example.com/image.jpg" /> *@
+
+            <input name="@($"{Model.Prefix}.Url")"
+                   value="@Model.Url"
+                   id="url_@id"
+                   class="form-control"
+                   placeholder="https://example.com/image.jpg" />
+        </div>
+
+
+        <div class="image-divider">
+            <span>@Localizer["Or"]</span>
+        </div>
+
+
+        <div class="file-upload-wrapper">
+
+            <label class="file-upload-label">
+
+                <i class="fa fa-cloud-upload-alt"></i>
+
+                <span>
+                    @Localizer["ChooseImage"]
+                </span>
+
+                <input name="@($"{Model.Prefix}.File")"
+                       id="file_@id"
+                       type="file"
+                       accept="image/*"
+                       hidden />
+
+            </label>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    (function () {
+
+            const fileInput = document.getElementById("file_@id");
+    const urlInput = document.getElementById("url_@id");
+
+    const preview = document.getElementById("preview_@id");
+    const noImage = document.getElementById("noImage_@id");
+
+
+    function showImage(src)
+    {
+        preview.src = src;
+
+        preview.classList.remove("d-none");
+        noImage.classList.add("d-none");
+    }
+
+
+    function showNoImage()
+    {
+        preview.src = "";
+
+        preview.classList.add("d-none");
+        noImage.classList.remove("d-none");
+    }
+
+
+
+    fileInput.addEventListener("change", function(){
+
+        const file = this.files[0];
+
+        if(!file)
+        {
+            showNoImage();
+            return;
+        }
+
+
+        const reader = new FileReader();
+
+
+        reader.onload = function(e){
+
+            showImage(e.target.result);
+
+        };
+
+
+        reader.readAsDataURL(file);
+
+    });
+
+
+
+    urlInput.addEventListener("input", function(){
+
+        const url = this.value.trim();
+
+
+        if(url)
+        {
+            showImage(url);
+        }
+        else
+        {
+            showNoImage();
+        }
+
+    });
+
+
+    })();
+
+</script>

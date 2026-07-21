@@ -156,6 +156,9 @@
   <data name="Cancelled" xml:space="preserve">
     <value>ملغي</value>
   </data>
+  <data name="Categories" xml:space="preserve">
+    <value>التصنيفات</value>
+  </data>
   <data name="Category" xml:space="preserve">
     <value>الفئة</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="CheckOutSuccess" xml:space="preserve">
     <value>تم تسجيل الخروج بنجاح</value>
+  </data>
+  <data name="ChooseImage" xml:space="preserve">
+    <value>اختر صورة</value>
   </data>
   <data name="Code" xml:space="preserve">
     <value>رمز المنتج</value>
@@ -330,6 +336,9 @@
   <data name="InvalidDuration" xml:space="preserve">
     <value>المدة يجب أن تكون أكبر من صفر</value>
   </data>
+  <data name="InvalidImage" xml:space="preserve">
+    <value>يرجى اختيار صورة صحيحة</value>
+  </data>
   <data name="InvalidPrice" xml:space="preserve">
     <value>السعر لا يمكن أن يكون قيمة سالبة</value>
   </data>
@@ -399,11 +408,17 @@
   <data name="No" xml:space="preserve">
     <value>لا</value>
   </data>
+  <data name="NoImage" xml:space="preserve">
+    <value>لا توجد صورة</value>
+  </data>
   <data name="NotArrived" xml:space="preserve">
     <value>لم يحضر</value>
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>السجل غير موجود</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>أو</value>
   </data>
   <data name="PhoneExists" xml:space="preserve">
     <value>رقم الهاتف موجود مسبقاً</value>
@@ -416,6 +431,9 @@
   </data>
   <data name="Product" xml:space="preserve">
     <value>المنتج</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>المنتجات</value>
   </data>
   <data name="PurchasePrice" xml:space="preserve">
     <value>سعر الشراء</value>
@@ -506,6 +524,9 @@
   </data>
   <data name="Supplier" xml:space="preserve">
     <value>المورد</value>
+  </data>
+  <data name="Suppliers" xml:space="preserve">
+    <value>الموردين</value>
   </data>
   <data name="Suspended" xml:space="preserve">
     <value>موقوف</value>

@@ -178,6 +178,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Categories.
+        /// </summary>
+        public static string Categories {
+            get {
+                return ResourceManager.GetString("Categories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Category.
         /// </summary>
         public static string Category {
@@ -219,6 +228,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string CheckOutSuccess {
             get {
                 return ResourceManager.GetString("CheckOutSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose Image.
+        /// </summary>
+        public static string ChooseImage {
+            get {
+                return ResourceManager.GetString("ChooseImage", resourceCulture);
             }
         }
         
@@ -700,6 +718,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select a valid image.
+        /// </summary>
+        public static string InvalidImage {
+            get {
+                return ResourceManager.GetString("InvalidImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Price cannot be negative.
         /// </summary>
         public static string InvalidPrice {
@@ -907,6 +934,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Image Available.
+        /// </summary>
+        public static string NoImage {
+            get {
+                return ResourceManager.GetString("NoImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not Arrived.
         /// </summary>
         public static string NotArrived {
@@ -921,6 +957,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string NotFound {
             get {
                 return ResourceManager.GetString("NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OR.
+        /// </summary>
+        public static string Or {
+            get {
+                return ResourceManager.GetString("Or", resourceCulture);
             }
         }
         
@@ -957,6 +1002,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Product {
             get {
                 return ResourceManager.GetString("Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Products.
+        /// </summary>
+        public static string Products {
+            get {
+                return ResourceManager.GetString("Products", resourceCulture);
             }
         }
         
@@ -1227,6 +1281,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Supplier {
             get {
                 return ResourceManager.GetString("Supplier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suppliers.
+        /// </summary>
+        public static string Suppliers {
+            get {
+                return ResourceManager.GetString("Suppliers", resourceCulture);
             }
         }
         

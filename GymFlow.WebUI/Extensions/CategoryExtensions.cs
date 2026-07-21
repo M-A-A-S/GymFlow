@@ -13,9 +13,9 @@ namespace GymFlow.WebUI.Extensions
                 NameAr = VM.NameAr,
                 DescriptionEn = VM.DescriptionEn,
                 DescriptionAr = VM.DescriptionAr,
-                ImageUrl = VM.ImageUrl,
+                ImageUrl = VM.Image.Url,
                 IsActive = VM.IsActive,
-                Image = VM.Image.ToFileUploadRequest(),
+                Image = VM.Image.File.ToFileUploadRequest(),
             };
         }
 
@@ -27,9 +27,10 @@ namespace GymFlow.WebUI.Extensions
                 NameAr = DTO.NameAr,
                 DescriptionEn = DTO.DescriptionEn,
                 DescriptionAr = DTO.DescriptionAr,
-                ImageUrl = DTO.ImageUrl,
-                IsActive = DTO.IsActive,
-                Image = DTO.Image.ToFormFile(),
+                Image = new ImageInputVM
+                {
+                    ExistingUrl = DTO.ImageUrl,
+                }
             };
         }
 

@@ -40,20 +40,13 @@ namespace GymFlow.WebUI.ViewModels
         public string? DescriptionAr { get; set; }
 
         [Display(
-            Name = nameof(SharedResource.Image),
-            ResourceType = typeof(SharedResource)
-        )]
-        public string? ImageUrl { get; set; }
-
-        [Display(
             Name = nameof(SharedResource.IsActive),
             ResourceType = typeof(SharedResource)
         )]
         public bool IsActive { get; set; } = true;
 
 
-
-        public IFormFile? Image { get; set; }
+        public ImageInputVM Image { get; set; } = new();
 
     }
 }
