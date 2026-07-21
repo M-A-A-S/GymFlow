@@ -1,4 +1,5 @@
-﻿using GymFlow.Domain.DTOs.Category;
+﻿using GymFlow.Domain.Constants;
+using GymFlow.Domain.DTOs.Category;
 using GymFlow.WebUI.ViewModels;
 
 namespace GymFlow.WebUI.Extensions
@@ -29,7 +30,7 @@ namespace GymFlow.WebUI.Extensions
                 DescriptionAr = DTO.DescriptionAr,
                 Image = new ImageInputVM
                 {
-                    ExistingUrl = DTO.ImageUrl.GetImageUrl("Categories"),
+                    ExistingUrl = DTO.ImageUrl.GetImageUrl(Constants.CategoriesFolder),
                 }
             };
         }

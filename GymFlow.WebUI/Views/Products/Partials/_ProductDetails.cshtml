@@ -1,0 +1,83 @@
+﻿@using GymFlow.Domain.DTOs.Product
+@model ProductDTO
+
+@using GymFlow.Domain.Constants;
+
+@using GymFlow.Domain.Resources.Shared
+@using GymFlow.WebUI.Extensions
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="row">
+
+    <div>
+        <div class="image-section">
+            <img src="@Model.ImageUrl.GetImageUrl(Constants.ProductsFolder)"
+                 class="details-image"
+                 alt="@Model.NameEn"
+                 onerror="this.src='/uploads/no-image.svg'" />
+
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["Code"]</label>
+        <div>@Model.Code</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["Category"]</label>
+        <div>
+            @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                        ? Model?.Category?.NameAr
+                        : Model?.Category?.NameEn)
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["NameEn"]</label>
+        <div>@Model.NameEn</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["NameAr"]</label>
+        <div>@Model.NameAr</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["DescriptionEn"]</label>
+        <div>@Model.DescriptionEn</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["DescriptionAr"]</label>
+        <div>@Model.DescriptionAr</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["DescriptionAr"]</label>
+        <div>@Model.DescriptionAr</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["PurchasePrice"]</label>
+        <div>@Model.PurchasePrice.Value.ToString("N2")</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["SalePrice"]</label>
+        <div>@Model.SalePrice.Value.ToString("N2")</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["Quantity"]</label>
+        <div>@Model.Quantity.Value.ToString("N0")</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["ReorderLevel"]</label>
+        <div>@Model.ReorderLevel.Value.ToString("N0")</div>
+    </div>
+
+</div>

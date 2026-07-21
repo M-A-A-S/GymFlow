@@ -1,6 +1,7 @@
 ﻿@using GymFlow.Domain.DTOs.Category
 @model CategoryDTO
 
+@using GymFlow.Domain.Constants;
 @using GymFlow.Domain.Resources.Shared
 @using GymFlow.WebUI.Extensions
 @using Microsoft.Extensions.Localization
@@ -10,15 +11,15 @@
 
     <div>
         <div class="image-section">
-            <img src="@Model.ImageUrl.GetImageUrl("categories")"
+            <img src="@Model.ImageUrl.GetImageUrl(Constants.CategoriesFolder)"
                  class="details-image"
                  alt="@Model.NameEn"
-                 onerror="this.src='/images/no-image.png'" />
+                 onerror="this.src='/uploads/no-image.svg'" />
 
         </div>
     </div>
 
-    <div class="col-sm-6 col-md-3 detail-item">
+    <div class="col-sm-6 col-md-3">
         <label class="fw-bold">@Localizer["NameEn"]</label>
         <div>@Model.NameEn</div>
     </div>

@@ -1,4 +1,5 @@
-﻿@using GymFlow.Domain.DTOs.Category
+﻿@using GymFlow.Domain.Constants
+@using GymFlow.Domain.DTOs.Category
 @model IEnumerable<CategoryDTO>
 
 @using GymFlow.Domain.Resources.Shared
@@ -42,7 +43,7 @@
                             @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
                             {
                                 @* <img src="@item.ImageUrl" *@
-                                <img src="@item.ImageUrl.GetImageUrl("Categories")"
+                                <img src="@item.ImageUrl.GetImageUrl(Constants.CategoriesFolder)"
                                      class="table-image"
                                      alt="@item.NameEn"
                                      onerror="this.src='/uploads/no-image.svg'" />

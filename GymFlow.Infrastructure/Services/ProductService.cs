@@ -126,6 +126,7 @@ namespace GymFlow.Infrastructure.Services
             try
             {
                 var product = await _appDbContext.Products
+                    .Include(x => x.Category)
                     .AsNoTracking()
                     .FirstOrDefaultAsync(x => x.Id == id);
 
