@@ -399,8 +399,14 @@
   <data name="NameAr" xml:space="preserve">
     <value>الاسم بالعربية</value>
   </data>
+  <data name="NameArAlreadyExists" xml:space="preserve">
+    <value>الاسم العربي موجود مسبقاً</value>
+  </data>
   <data name="NameEn" xml:space="preserve">
     <value>الاسم بالإنجليزية</value>
+  </data>
+  <data name="NameEnAlreadyExists" xml:space="preserve">
+    <value>الاسم الإنجليزي موجود مسبقاً.</value>
   </data>
   <data name="New" xml:space="preserve">
     <value>إضافة</value>
@@ -431,6 +437,9 @@
   </data>
   <data name="Product" xml:space="preserve">
     <value>المنتج</value>
+  </data>
+  <data name="ProductCodeAlreadyExists" xml:space="preserve">
+    <value>كود المنتج موجود مسبقاً</value>
   </data>
   <data name="Products" xml:space="preserve">
     <value>المنتجات</value>

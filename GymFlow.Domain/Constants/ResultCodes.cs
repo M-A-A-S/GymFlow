@@ -42,6 +42,11 @@ namespace GymFlow.Domain.Constants
         public const string GymScheduleOverlap = "GymScheduleOverlap";
 
 
+        public const string ProductCodeAlreadyExists = "ProductCodeAlreadyExists";
+        public const string NameEnAlreadyExists = "NameEnAlreadyExists";
+        public const string NameArAlreadyExists = "NameArAlreadyExists";
+
+
 
     }
 }

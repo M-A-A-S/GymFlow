@@ -907,11 +907,29 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Arabic name already exists.
+        /// </summary>
+        public static string NameArAlreadyExists {
+            get {
+                return ResourceManager.GetString("NameArAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English Name.
         /// </summary>
         public static string NameEn {
             get {
                 return ResourceManager.GetString("NameEn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English name already exists..
+        /// </summary>
+        public static string NameEnAlreadyExists {
+            get {
+                return ResourceManager.GetString("NameEnAlreadyExists", resourceCulture);
             }
         }
         
@@ -1002,6 +1020,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Product {
             get {
                 return ResourceManager.GetString("Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product code already exists.
+        /// </summary>
+        public static string ProductCodeAlreadyExists {
+            get {
+                return ResourceManager.GetString("ProductCodeAlreadyExists", resourceCulture);
             }
         }
         

@@ -9,5 +9,6 @@ namespace GymFlow.Domain.Constants
     public static class Constants
     {
         public static string CategoriesFolder { get; set; } = "Categories";
+        public static string ProductsFolder { get; set; } = "Products";
     }
 }
