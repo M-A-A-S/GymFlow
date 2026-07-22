@@ -1,0 +1,25 @@
+﻿@using GymFlow.Domain.DTOs.Supplier
+@model SupplierDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="row">
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["FullName"]</label>
+        <div>@Model.FullName</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["PhoneNumber"]</label>
+        <div>@Model.PhoneNumber</div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <label class="fw-bold">@Localizer["Address"]</label>
+        <div>@Model.Address</div>
+    </div>
+
+</div>
