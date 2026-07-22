@@ -29,6 +29,11 @@ namespace GymFlow.Domain.DTOs.Trainer
             ErrorMessageResourceName = nameof(Resources.Shared.SharedResource.Required),
             ErrorMessageResourceType = typeof(Resources.Shared.SharedResource)
         )]
+        [RegularExpression(
+            @"^(?:\+249|0)(?:[1-9][0-9])[0-9]{7}$",
+            ErrorMessageResourceName = nameof(Resources.Shared.SharedResource.InvalidPhone),
+            ErrorMessageResourceType = typeof(Resources.Shared.SharedResource)
+        )]
         public string PhoneNumber { get; set; }
 
         [Display(

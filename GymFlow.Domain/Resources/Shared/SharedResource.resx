@@ -339,6 +339,9 @@
   <data name="InvalidImage" xml:space="preserve">
     <value>Please select a valid image</value>
   </data>
+  <data name="InvalidPhone" xml:space="preserve">
+    <value>Invalid phone number</value>
+  </data>
   <data name="InvalidPrice" xml:space="preserve">
     <value>Price cannot be negative</value>
   </data>

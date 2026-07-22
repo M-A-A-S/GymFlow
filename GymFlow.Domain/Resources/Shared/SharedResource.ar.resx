@@ -339,6 +339,9 @@
   <data name="InvalidImage" xml:space="preserve">
     <value>يرجى اختيار صورة صحيحة</value>
   </data>
+  <data name="InvalidPhone" xml:space="preserve">
+    <value>رقم الهاتف غير صحيح</value>
+  </data>
   <data name="InvalidPrice" xml:space="preserve">
     <value>السعر لا يمكن أن يكون قيمة سالبة</value>
   </data>
