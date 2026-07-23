@@ -47,6 +47,19 @@ namespace GymFlow.Domain.Constants
         public const string NameArAlreadyExists = "NameArAlreadyExists";
 
 
+        public const string SupplierNotFound = "SupplierNotFound";
+        public const string ProductNotFound = "ProductNotFound";
+        public const string PurchaseDetailsRequired = "PurchaseDetailsRequired";
+        public const string InvalidQuantity = "InvalidQuantity";
+        public const string InvalidUnitPrice = "InvalidUnitPrice";
+        public const string InvalidPaymentAmount = "InvalidPaymentAmount";
+        public const string InvalidPaymentDate = "InvalidPaymentDate";
+        public const string DuplicateProductInInvoice = "DuplicateProductInInvoice";
+        public const string PaymentExceedsInvoiceTotal = "PaymentExceedsInvoiceTotal";
+        public const string InvoiceNumberRequired = "InvoiceNumberRequired ";
+        public const string InvoiceNumberExists = "InvoiceNumberExists ";
+
+
 
     }
 }

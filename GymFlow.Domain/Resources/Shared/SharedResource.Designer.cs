@@ -403,6 +403,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A product cannot be added more than once to the same purchase invoice.
+        /// </summary>
+        public static string DuplicateProductInInvoice {
+            get {
+                return ResourceManager.GetString("DuplicateProductInInvoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Duration (Days).
         /// </summary>
         public static string DurationDays {
@@ -763,6 +772,24 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payment amount must be greater than zero.
+        /// </summary>
+        public static string InvalidPaymentAmount {
+            get {
+                return ResourceManager.GetString("InvalidPaymentAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment date is invalid.
+        /// </summary>
+        public static string InvalidPaymentDate {
+            get {
+                return ResourceManager.GetString("InvalidPaymentDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid phone number.
         /// </summary>
         public static string InvalidPhone {
@@ -781,6 +808,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Quantity must be greater than zero.
+        /// </summary>
+        public static string InvalidQuantity {
+            get {
+                return ResourceManager.GetString("InvalidQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start time must be earlier than end time.
         /// </summary>
         public static string InvalidScheduleTime {
@@ -795,6 +831,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string InvalidTrainer {
             get {
                 return ResourceManager.GetString("InvalidTrainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit price must be greater than zero..
+        /// </summary>
+        public static string InvalidUnitPrice {
+            get {
+                return ResourceManager.GetString("InvalidUnitPrice", resourceCulture);
             }
         }
         
@@ -831,6 +876,24 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string InvoiceNo {
             get {
                 return ResourceManager.GetString("InvoiceNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invoice number already exists.
+        /// </summary>
+        public static string InvoiceNumberExists {
+            get {
+                return ResourceManager.GetString("InvoiceNumberExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invoice number is required.
+        /// </summary>
+        public static string InvoiceNumberRequired {
+            get {
+                return ResourceManager.GetString("InvoiceNumberRequired", resourceCulture);
             }
         }
         
@@ -1069,6 +1132,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total payments cannot exceed the invoice total.
+        /// </summary>
+        public static string PaymentExceedsInvoiceTotal {
+            get {
+                return ResourceManager.GetString("PaymentExceedsInvoiceTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payment Method.
         /// </summary>
         public static string PaymentMethod {
@@ -1132,6 +1204,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Product was not found.
+        /// </summary>
+        public static string ProductNotFound {
+            get {
+                return ResourceManager.GetString("ProductNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Products.
         /// </summary>
         public static string Products {
@@ -1146,6 +1227,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string PurchaseDetail {
             get {
                 return ResourceManager.GetString("PurchaseDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one purchase item is required.
+        /// </summary>
+        public static string PurchaseDetailsRequired {
+            get {
+                return ResourceManager.GetString("PurchaseDetailsRequired", resourceCulture);
             }
         }
         
@@ -1452,6 +1542,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Supplier {
             get {
                 return ResourceManager.GetString("Supplier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supplier was not found.
+        /// </summary>
+        public static string SupplierNotFound {
+            get {
+                return ResourceManager.GetString("SupplierNotFound", resourceCulture);
             }
         }
         

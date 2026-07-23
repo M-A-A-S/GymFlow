@@ -14,7 +14,7 @@ namespace GymFlow.Domain.Entities
         //public int? AccountId { get; set; }
         public decimal Amount { get; set; }
         public PaymentMethod PaymentMethod {  get; set; }
-        public DateTime PaymentDate { get; set; }
+        public DateTime PaymentDate { get; set; } = DateTime.UtcNow;
         public string? ReferenceNo { get; set; }
         public string? Notes { get; set; }
 

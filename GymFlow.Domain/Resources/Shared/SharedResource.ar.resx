@@ -231,6 +231,9 @@
   <data name="Details" xml:space="preserve">
     <value>تفاصيل</value>
   </data>
+  <data name="DuplicateProductInInvoice" xml:space="preserve">
+    <value>لا يمكن إضافة نفس المنتج أكثر من مرة في فاتورة الشراء</value>
+  </data>
   <data name="DurationDays" xml:space="preserve">
     <value>مدة الاشتراك (بالأيام)</value>
   </data>
@@ -351,17 +354,29 @@
   <data name="InvalidImage" xml:space="preserve">
     <value>يرجى اختيار صورة صحيحة</value>
   </data>
+  <data name="InvalidPaymentAmount" xml:space="preserve">
+    <value>يجب أن يكون مبلغ الدفع أكبر من صفر</value>
+  </data>
+  <data name="InvalidPaymentDate" xml:space="preserve">
+    <value>تاريخ الدفع غير صالح</value>
+  </data>
   <data name="InvalidPhone" xml:space="preserve">
     <value>رقم الهاتف غير صحيح</value>
   </data>
   <data name="InvalidPrice" xml:space="preserve">
     <value>السعر لا يمكن أن يكون قيمة سالبة</value>
   </data>
+  <data name="InvalidQuantity" xml:space="preserve">
+    <value>يجب أن تكون الكمية أكبر من صفر</value>
+  </data>
   <data name="InvalidScheduleTime" xml:space="preserve">
     <value>يجب أن يكون وقت البداية قبل وقت النهاية</value>
   </data>
   <data name="InvalidTrainer" xml:space="preserve">
     <value>المدرب المحدد غير صالح</value>
+  </data>
+  <data name="InvalidUnitPrice" xml:space="preserve">
+    <value>يجب أن يكون سعر الوحدة أكبر من صفر</value>
   </data>
   <data name="InvalidValue" xml:space="preserve">
     <value>القيمة غير صحيحة</value>
@@ -374,6 +389,12 @@
   </data>
   <data name="InvoiceNo" xml:space="preserve">
     <value>رقم الفاتورة</value>
+  </data>
+  <data name="InvoiceNumberExists" xml:space="preserve">
+    <value>رقم الفاتورة موجود مسبقاً</value>
+  </data>
+  <data name="InvoiceNumberRequired" xml:space="preserve">
+    <value>رقم الفاتورة مطلوب</value>
   </data>
   <data name="IsActive" xml:space="preserve">
     <value>نشط</value>
@@ -453,6 +474,9 @@
   <data name="PaymentDate" xml:space="preserve">
     <value>تاريخ الدفع</value>
   </data>
+  <data name="PaymentExceedsInvoiceTotal" xml:space="preserve">
+    <value>لا يمكن أن يتجاوز إجمالي المدفوعات إجمالي الفاتورة</value>
+  </data>
   <data name="PaymentMethod" xml:space="preserve">
     <value>طريقة الدفع</value>
   </data>
@@ -474,11 +498,17 @@
   <data name="ProductCodeAlreadyExists" xml:space="preserve">
     <value>كود المنتج موجود مسبقاً</value>
   </data>
+  <data name="ProductNotFound" xml:space="preserve">
+    <value>المنتج غير موجود</value>
+  </data>
   <data name="Products" xml:space="preserve">
     <value>المنتجات</value>
   </data>
   <data name="PurchaseDetail" xml:space="preserve">
     <value>تفاصيل فاتورة الشراء</value>
+  </data>
+  <data name="PurchaseDetailsRequired" xml:space="preserve">
+    <value>يجب إضافة عنصر واحد على الأقل إلى فاتورة الشراء</value>
   </data>
   <data name="PurchaseInvoice" xml:space="preserve">
     <value>فاتورة شراء</value>
@@ -581,6 +611,9 @@
   </data>
   <data name="Supplier" xml:space="preserve">
     <value>المورد</value>
+  </data>
+  <data name="SupplierNotFound" xml:space="preserve">
+    <value>المورد غير موجود</value>
   </data>
   <data name="Suppliers" xml:space="preserve">
     <value>الموردين</value>

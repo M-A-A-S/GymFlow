@@ -11,7 +11,7 @@ namespace GymFlow.Domain.Entities
     {
         public string InvoiceNo { get; set; } = string.Empty;
         public int SupplierId { get; set; }
-        public DateTime InvoiceDate { get; set; }
+        public DateTime InvoiceDate { get; set; } = DateTime.UtcNow;
         public decimal TotalAmount { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
         public string? Notes { get; set; }
