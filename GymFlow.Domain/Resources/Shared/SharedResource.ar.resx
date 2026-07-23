@@ -171,6 +171,9 @@
   <data name="Category" xml:space="preserve">
     <value>الفئة</value>
   </data>
+  <data name="ChartOfAccounts" xml:space="preserve">
+    <value>دليل الحسابات</value>
+  </data>
   <data name="CheckIn" xml:space="preserve">
     <value>وقت الدخول</value>
   </data>
@@ -399,6 +402,9 @@
   <data name="IsActive" xml:space="preserve">
     <value>نشط</value>
   </data>
+  <data name="JournalEntries" xml:space="preserve">
+    <value>القيود اليومية</value>
+  </data>
   <data name="Male" xml:space="preserve">
     <value>ذكر</value>
   </data>
@@ -471,6 +477,9 @@
   <data name="Or" xml:space="preserve">
     <value>أو</value>
   </data>
+  <data name="PaidAmount" xml:space="preserve">
+    <value>المبلغ المدفوع</value>
+  </data>
   <data name="PaymentDate" xml:space="preserve">
     <value>تاريخ الدفع</value>
   </data>
@@ -482,6 +491,9 @@
   </data>
   <data name="PaymentStatus" xml:space="preserve">
     <value>حالة السداد</value>
+  </data>
+  <data name="PaymentVouchers" xml:space="preserve">
+    <value>سندات الصرف</value>
   </data>
   <data name="PhoneExists" xml:space="preserve">
     <value>رقم الهاتف موجود مسبقاً</value>
@@ -513,6 +525,9 @@
   <data name="PurchaseInvoice" xml:space="preserve">
     <value>فاتورة شراء</value>
   </data>
+  <data name="PurchaseInvoices" xml:space="preserve">
+    <value>فواتير المشتريات</value>
+  </data>
   <data name="PurchasePayment" xml:space="preserve">
     <value>دفعة شراء</value>
   </data>
@@ -525,11 +540,17 @@
   <data name="Quantity" xml:space="preserve">
     <value>الكمية</value>
   </data>
+  <data name="ReceiptVouchers" xml:space="preserve">
+    <value>سندات القبض</value>
+  </data>
   <data name="ReferenceNo" xml:space="preserve">
     <value>الرقم المرجعي</value>
   </data>
   <data name="RegisterDate" xml:space="preserve">
     <value>تاريخ التسجيل</value>
+  </data>
+  <data name="RemainingAmount" xml:space="preserve">
+    <value>المبلغ المتبقي</value>
   </data>
   <data name="ReorderLevel" xml:space="preserve">
     <value>حد إعادة الطلب</value>
@@ -548,6 +569,9 @@
   </data>
   <data name="Sales" xml:space="preserve">
     <value>المبيعات</value>
+  </data>
+  <data name="SalesInvoices" xml:space="preserve">
+    <value>Sales Invoices</value>
   </data>
   <data name="Saturday" xml:space="preserve">
     <value>السبت</value>

@@ -26,9 +26,9 @@ namespace GymFlow.Infrastructure.Configurations
                 .IsUnique()
                 .HasFilter("[IsDeleted] = 0");
 
-            builder.HasIndex(x => x.SupplierId)
-                .IsUnique()
-                .HasFilter("[IsDeleted] = 0");
+            //builder.HasIndex(x => x.SupplierId)
+            //    .IsUnique()
+            //    .HasFilter("[IsDeleted] = 0");
 
             builder.Property(x => x.TotalAmount)
                 .HasPrecision(18, 2);

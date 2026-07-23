@@ -223,6 +223,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chart Of Accounts.
+        /// </summary>
+        public static string ChartOfAccounts {
+            get {
+                return ResourceManager.GetString("ChartOfAccounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check In.
         /// </summary>
         public static string CheckIn {
@@ -907,6 +916,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Journal Entries.
+        /// </summary>
+        public static string JournalEntries {
+            get {
+                return ResourceManager.GetString("JournalEntries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Male.
         /// </summary>
         public static string Male {
@@ -1123,6 +1141,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Paid Amount.
+        /// </summary>
+        public static string PaidAmount {
+            get {
+                return ResourceManager.GetString("PaidAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payment Date.
         /// </summary>
         public static string PaymentDate {
@@ -1155,6 +1182,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string PaymentStatus {
             get {
                 return ResourceManager.GetString("PaymentStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment Vouchers.
+        /// </summary>
+        public static string PaymentVouchers {
+            get {
+                return ResourceManager.GetString("PaymentVouchers", resourceCulture);
             }
         }
         
@@ -1249,6 +1285,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Purchase Invoices.
+        /// </summary>
+        public static string PurchaseInvoices {
+            get {
+                return ResourceManager.GetString("PurchaseInvoices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Purchase Payment.
         /// </summary>
         public static string PurchasePayment {
@@ -1285,6 +1330,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Receipt Vouchers.
+        /// </summary>
+        public static string ReceiptVouchers {
+            get {
+                return ResourceManager.GetString("ReceiptVouchers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reference Number.
         /// </summary>
         public static string ReferenceNo {
@@ -1299,6 +1353,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string RegisterDate {
             get {
                 return ResourceManager.GetString("RegisterDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining Amount.
+        /// </summary>
+        public static string RemainingAmount {
+            get {
+                return ResourceManager.GetString("RemainingAmount", resourceCulture);
             }
         }
         
@@ -1353,6 +1416,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Sales {
             get {
                 return ResourceManager.GetString("Sales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sales Invoices.
+        /// </summary>
+        public static string SalesInvoices {
+            get {
+                return ResourceManager.GetString("SalesInvoices", resourceCulture);
             }
         }
         

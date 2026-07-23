@@ -1,0 +1,91 @@
+﻿@using GymFlow.Domain.DTOs.PurchaseInvoice
+@model IEnumerable<PurchaseInvoiceDTO>
+
+@using GymFlow.Domain.Extensions
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@using System.Globalization
+
+<div class="d-flex align-items-center justify-content-between my-4">
+    <h2>@Localizer["PurchaseInvoices"]</h2>
+
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fa fa-plus me-1"></i>
+        @Localizer["CreateNew"]
+    </a>
+</div>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Localizer["InvoiceNo"]</th>
+                <th>@Localizer["Supplier"]</th>
+                <th>@Localizer["InvoiceDate"]</th>
+                <th>@Localizer["TotalAmount"]</th>
+                <th>@Localizer["PaidAmount"]</th>
+                <th>@Localizer["RemainingAmount"]</th>
+                <th>@Localizer["PaymentStatus"]</th>
+                <th>@Localizer["Notes"]</th>
+                <th>@Localizer["Actions"]</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>@item.InvoiceNo</td>
+                    <td>@item?.Supplier?.FullName</td>
+                    <td>@item.InvoiceDate</td>
+                    <td>@item.TotalAmount.ToString("N2")</td>
+                    @* <td>@item.PaidAmount.ToString("N2")</td> *@
+                    @* <td>@item.RemainingAmount.ToString("N2")</td> *@
+                    <td class="fw-bold text-success">
+                        @item.PaidAmount.ToString("N2")
+                    </td>
+
+                    <td class="fw-bold @(item.RemainingAmount > 0 ? "text-danger" : "text-success")">
+                        @item.RemainingAmount.ToString("N2")
+                    </td>
+
+                    <td>
+                        <span class="badge @item.PaymentStatus.ToBadgeClass()">
+                            @item.PaymentStatus.ToLocalizedString()
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge @item.PaymentStatus.ToBadgeClass()">
+                            @item.PaymentStatus.ToLocalizedString()
+                        </span>
+                    </td>
+                    <td>@item.Notes</td>
+                    <td>
+                        <a asp-action="Edit"
+                           asp-route-id="@item.Id"
+                           class="btn btn-icon btn-outline-primary tooltip-btn"
+                           data-tooltip="@Localizer["Edit"]">
+                            <i class="fa fa-pen"></i>
+                        </a>
+                        <a asp-action="Details"
+                           asp-route-id="@item.Id"
+                           class="btn btn-icon btn-outline-info tooltip-btn"
+                           data-tooltip="@Localizer["Details"]">
+                            <i class="fa fa-info"></i>
+                        </a>
+                        <a asp-action="Delete"
+                           asp-route-id="@item.Id"
+                           class="btn btn-icon btn-outline-danger tooltip-btn"
+                           data-tooltip="@Localizer["Delete"]">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

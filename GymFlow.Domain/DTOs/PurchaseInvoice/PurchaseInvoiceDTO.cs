@@ -60,5 +60,12 @@ namespace GymFlow.Domain.DTOs.PurchaseInvoice
         public ICollection<PurchaseDetailDTO> PurchaseDetails { get; set; } = new List<PurchaseDetailDTO>();
         public ICollection<PurchasePaymentDTO> PurchasePayments { get; set; } = new List<PurchasePaymentDTO>();
 
+
+        public decimal PaidAmount =>
+            PurchasePayments?.Sum(x => x.Amount) ?? 0;
+
+        public decimal RemainingAmount => 
+            TotalAmount - PaidAmount;
+
     }
 }

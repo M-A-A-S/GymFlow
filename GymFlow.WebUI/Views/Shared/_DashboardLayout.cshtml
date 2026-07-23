@@ -184,6 +184,64 @@
 								}
 								},
 
+								// Sales
+								new()
+								{
+								Key = "Sales",
+								Icon = "fa-shopping-bag",
+								Children =
+								{
+								new()
+								{
+								Key = "SalesInvoices",
+								Icon = "fa-file-invoice-dollar",
+								Controller = "SalesInvoices",
+								Action = "Index"
+								},
+
+								// new()
+								// {
+								// Key = "CustomerPayments",
+								// Icon = "fa-hand-holding-usd",
+								// Controller = "CustomerPayments",
+								// Action = "Index"
+								// }
+								}
+								},
+
+								// Purchases Module
+								new()
+								{
+								Key = "Purchases",
+								Icon = "fa-shopping-cart",
+								Children =
+								{
+								new()
+								{
+								Key = "PurchaseInvoices",
+								Icon = "fa-file-invoice",
+								Controller = "PurchaseInvoices",
+								Action = "Index"
+								},
+
+								// new()
+								// {
+								// Key = "PurchaseDetails",
+								// Icon = "fa-list-alt",
+								// Controller = "PurchaseDetails",
+								// Action = "Index"
+								// },
+
+								// new()
+								// {
+								// Key = "PurchasePayments",
+								// Icon = "fa-money-check-alt",
+								// Controller = "PurchasePayments",
+								// Action = "Index"
+								// }
+								}
+								},
+
 								};
 				}
 

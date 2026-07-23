@@ -171,6 +171,9 @@
   <data name="Category" xml:space="preserve">
     <value>Category</value>
   </data>
+  <data name="ChartOfAccounts" xml:space="preserve">
+    <value>Chart Of Accounts</value>
+  </data>
   <data name="CheckIn" xml:space="preserve">
     <value>Check In</value>
   </data>
@@ -399,6 +402,9 @@
   <data name="IsActive" xml:space="preserve">
     <value>Active</value>
   </data>
+  <data name="JournalEntries" xml:space="preserve">
+    <value>Journal Entries</value>
+  </data>
   <data name="Male" xml:space="preserve">
     <value>Male</value>
   </data>
@@ -471,6 +477,9 @@
   <data name="Or" xml:space="preserve">
     <value>OR</value>
   </data>
+  <data name="PaidAmount" xml:space="preserve">
+    <value>Paid Amount</value>
+  </data>
   <data name="PaymentDate" xml:space="preserve">
     <value>Payment Date</value>
   </data>
@@ -482,6 +491,9 @@
   </data>
   <data name="PaymentStatus" xml:space="preserve">
     <value>Payment Status</value>
+  </data>
+  <data name="PaymentVouchers" xml:space="preserve">
+    <value>Payment Vouchers</value>
   </data>
   <data name="PhoneExists" xml:space="preserve">
     <value>Phone number already exists</value>
@@ -513,6 +525,9 @@
   <data name="PurchaseInvoice" xml:space="preserve">
     <value>Purchase Invoice</value>
   </data>
+  <data name="PurchaseInvoices" xml:space="preserve">
+    <value>Purchase Invoices</value>
+  </data>
   <data name="PurchasePayment" xml:space="preserve">
     <value>Purchase Payment</value>
   </data>
@@ -525,11 +540,17 @@
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
   </data>
+  <data name="ReceiptVouchers" xml:space="preserve">
+    <value>Receipt Vouchers</value>
+  </data>
   <data name="ReferenceNo" xml:space="preserve">
     <value>Reference Number</value>
   </data>
   <data name="RegisterDate" xml:space="preserve">
     <value>Registration Date</value>
+  </data>
+  <data name="RemainingAmount" xml:space="preserve">
+    <value>Remaining Amount</value>
   </data>
   <data name="ReorderLevel" xml:space="preserve">
     <value>Reorder Level</value>
@@ -548,6 +569,9 @@
   </data>
   <data name="Sales" xml:space="preserve">
     <value>Sales</value>
+  </data>
+  <data name="SalesInvoices" xml:space="preserve">
+    <value>Sales Invoices</value>
   </data>
   <data name="Saturday" xml:space="preserve">
     <value>Saturday</value>
