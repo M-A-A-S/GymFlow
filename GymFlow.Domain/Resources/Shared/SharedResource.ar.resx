@@ -477,8 +477,14 @@
   <data name="Or" xml:space="preserve">
     <value>أو</value>
   </data>
+  <data name="Paid" xml:space="preserve">
+    <value>مدفوع</value>
+  </data>
   <data name="PaidAmount" xml:space="preserve">
     <value>المبلغ المدفوع</value>
+  </data>
+  <data name="Partial" xml:space="preserve">
+    <value>مدفوع جزئياً</value>
   </data>
   <data name="PaymentDate" xml:space="preserve">
     <value>تاريخ الدفع</value>
@@ -701,6 +707,9 @@
   </data>
   <data name="Unknown" xml:space="preserve">
     <value>غير محدد</value>
+  </data>
+  <data name="Unpaid" xml:space="preserve">
+    <value>غير مدفوع</value>
   </data>
   <data name="Unsuspended" xml:space="preserve">
     <value>تم رفع الإيقاف</value>

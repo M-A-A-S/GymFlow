@@ -1,0 +1,137 @@
+﻿@using GymFlow.Domain.DTOs.PurchaseInvoice
+@model PurchaseInvoiceDTO
+
+@using GymFlow.Domain.Extensions;
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<!-- ================= Header ================= -->
+<div class="row">
+
+    <h5 class="d-flex justify-content-between align-items-center mb-3">
+        <span>@Localizer["PurchaseInvoice"]</span>
+
+        <span class="badge @Model.PaymentStatus.ToBadgeClass()">
+
+            @Model.PaymentStatus.ToLocalizedString()
+
+        </span>
+    </h5>
+    <hr />
+
+    <div class="col-md-4">
+        <strong>@Localizer["InvoiceNo"]</strong>
+        <div>@Model.InvoiceNo</div>
+    </div>
+
+    <div class="col-md-4">
+        <strong>@Localizer["Supplier"]</strong>
+        <div>@Model?.Supplier?.FullName</div>
+    </div>
+
+    <div class="col-md-4">
+        <strong>@Localizer["PhoneNumber"]</strong>
+        <div>@Model.Supplier.PhoneNumber</div>
+    </div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(Model.Notes))
+{
+    <hr />
+    <div>
+        <strong>@Localizer["Notes"]</strong>
+        <div>@Model.Notes</div>
+    </div>
+}
+
+<!-- ================= Summary ================= -->
+<hr />
+<div class="mb-4 row">
+
+    <h5>@Localizer["Summary"]</h5>
+
+    <hr />
+
+    <div class="col-md-4">
+        <strong>@Localizer["TotalAmount"]</strong>
+        <div class="fs-4 fw-bold text-primary">@Model.TotalAmount.ToString("N2")</div>
+    </div>
+
+    <div class="col-md-4">
+        <strong>@Localizer["PaidAmount"]</strong>
+        <div class="fs-4 fw-bold text-success">@Model.PaidAmount.ToString("N2")</div>
+    </div>
+
+    <div class="col-md-4">
+        <strong>@Localizer["RemainingAmount"]</strong>
+        <div class="fs-4 fw-bold text-danger">@Model.RemainingAmount.ToString("N2")</div>
+    </div>
+
+</div>
+
+<!-- ================= Purchase Details ================= -->
+<hr />
+<div class="mb-4">
+    <h5>@Localizer["PurchaseDetails"]</h5>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Localizer["Product"]</th>
+                    <th>@Localizer["Quantity"]</th>
+                    <th>@Localizer["UnitPrice"]</th>
+                    <th>@Localizer["Total"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.PurchaseDetails)
+                {
+                    <tr>
+                        <td>
+                            @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                                    ? item?.Product?.NameAr
+                                                    : item?.Product?.NameEn)
+                        </td>
+                        <td>@item.Quantity</td>
+                    <td>@item.UnitPrice.ToString("N2")</td>
+                    <td>@item.Total.ToString("N2")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@* ================= Payments ================= *@
+<h5>@Localizer["Payments"]</h5>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Localizer["Amount"]</th>
+                <th>@Localizer["PaymentMethod"]</th>
+                <th>@Localizer["PaymentDate"]</th>
+                <th>@Localizer["ReferenceNo"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.PurchasePayments)
+            {
+                <tr>
+                    <td class="fw-bold text-success">@item.Amount.ToString("N2")</td>
+                    <td>
+                        <span class="badge @item.PaymentMethod.ToBadgeClass()">
+                            @item.PaymentMethod.ToLocalizedString()
+                        </span>
+                    </td>
+                    <td>@item.PaymentDate</td>
+                    <td>@item.ReferenceNo</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

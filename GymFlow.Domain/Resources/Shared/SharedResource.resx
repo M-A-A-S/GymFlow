@@ -477,8 +477,14 @@
   <data name="Or" xml:space="preserve">
     <value>OR</value>
   </data>
+  <data name="Paid" xml:space="preserve">
+    <value>Paid</value>
+  </data>
   <data name="PaidAmount" xml:space="preserve">
     <value>Paid Amount</value>
+  </data>
+  <data name="Partial" xml:space="preserve">
+    <value>Partial</value>
   </data>
   <data name="PaymentDate" xml:space="preserve">
     <value>Payment Date</value>
@@ -701,6 +707,9 @@
   </data>
   <data name="Unknown" xml:space="preserve">
     <value>Unknown</value>
+  </data>
+  <data name="Unpaid" xml:space="preserve">
+    <value>Unpaid</value>
   </data>
   <data name="Unsuspended" xml:space="preserve">
     <value>Unsuspended</value>

@@ -58,11 +58,11 @@
                             @item.PaymentStatus.ToLocalizedString()
                         </span>
                     </td>
-                    <td>
+                    @* <td>
                         <span class="badge @item.PaymentStatus.ToBadgeClass()">
                             @item.PaymentStatus.ToLocalizedString()
                         </span>
-                    </td>
+                    </td> *@
                     <td>@item.Notes</td>
                     <td>
                         <a asp-action="Edit"

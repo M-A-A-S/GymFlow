@@ -1,0 +1,39 @@
+﻿@using GymFlow.Domain.DTOs.PurchaseInvoice
+@model PurchaseInvoiceDTO
+
+@using GymFlow.Domain.Extensions
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="card shadow-sm">
+
+    <div class="card-header d-flex text-white align-items-center justify-content-between">
+        <h5>
+            @Localizer["Details"] @Localizer["PurchaseInvoice"]
+        </h5>
+    </div>
+
+    <div class="card-body">
+
+        <partial name="Partials/_PurchaseInvoiceDetails" model="Model" />
+
+    </div>
+
+    <div class="card-footer">
+
+        <a asp-action="Edit"
+           asp-route-id="@Model.Id"
+           class="btn btn-primary">
+            @Localizer["Edit"]
+        </a>
+
+
+        <a href="javascript:history.back()"
+           class="btn btn-secondary">
+            @Localizer["GoBack"]
+        </a>
+
+    </div>
+
+</div>
