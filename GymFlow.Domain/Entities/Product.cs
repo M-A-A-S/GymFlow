@@ -21,6 +21,8 @@ namespace GymFlow.Domain.Entities
         public int ReorderLevel { get; set; }
 
         public Category? Category { get; set; }
+        public ICollection<PurchaseDetail> PurchaseDetails { get; set; }
+            = new List<PurchaseDetail>();
 
     }
 }

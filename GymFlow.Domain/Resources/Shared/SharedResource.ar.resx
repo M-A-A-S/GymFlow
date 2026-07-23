@@ -138,6 +138,9 @@
   <data name="AlreadyExists" xml:space="preserve">
     <value>موجود مسبقاً</value>
   </data>
+  <data name="Amount" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
   <data name="Attendance" xml:space="preserve">
     <value>الحضور</value>
   </data>
@@ -147,6 +150,9 @@
   <data name="AttendanceNotFound" xml:space="preserve">
     <value>سجل الحضور غير موجود</value>
   </data>
+  <data name="Bankak" xml:space="preserve">
+    <value>بنكك</value>
+  </data>
   <data name="BirthDate" xml:space="preserve">
     <value>تاريخ الميلاد</value>
   </data>
@@ -155,6 +161,9 @@
   </data>
   <data name="Cancelled" xml:space="preserve">
     <value>ملغي</value>
+  </data>
+  <data name="Cash" xml:space="preserve">
+    <value>نقداً</value>
   </data>
   <data name="Categories" xml:space="preserve">
     <value>التصنيفات</value>
@@ -248,6 +257,9 @@
   </data>
   <data name="Expired" xml:space="preserve">
     <value>منتهي</value>
+  </data>
+  <data name="Fawry" xml:space="preserve">
+    <value>فوري</value>
   </data>
   <data name="Female" xml:space="preserve">
     <value>أنثى</value>
@@ -357,6 +369,12 @@
   <data name="Inventory" xml:space="preserve">
     <value>المخزون</value>
   </data>
+  <data name="InvoiceDate" xml:space="preserve">
+    <value>تاريخ الفاتورة</value>
+  </data>
+  <data name="InvoiceNo" xml:space="preserve">
+    <value>رقم الفاتورة</value>
+  </data>
   <data name="IsActive" xml:space="preserve">
     <value>نشط</value>
   </data>
@@ -423,11 +441,23 @@
   <data name="NotArrived" xml:space="preserve">
     <value>لم يحضر</value>
   </data>
+  <data name="Notes" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
   <data name="NotFound" xml:space="preserve">
     <value>السجل غير موجود</value>
   </data>
   <data name="Or" xml:space="preserve">
     <value>أو</value>
+  </data>
+  <data name="PaymentDate" xml:space="preserve">
+    <value>تاريخ الدفع</value>
+  </data>
+  <data name="PaymentMethod" xml:space="preserve">
+    <value>طريقة الدفع</value>
+  </data>
+  <data name="PaymentStatus" xml:space="preserve">
+    <value>حالة السداد</value>
   </data>
   <data name="PhoneExists" xml:space="preserve">
     <value>رقم الهاتف موجود مسبقاً</value>
@@ -447,6 +477,15 @@
   <data name="Products" xml:space="preserve">
     <value>المنتجات</value>
   </data>
+  <data name="PurchaseDetail" xml:space="preserve">
+    <value>تفاصيل فاتورة الشراء</value>
+  </data>
+  <data name="PurchaseInvoice" xml:space="preserve">
+    <value>فاتورة شراء</value>
+  </data>
+  <data name="PurchasePayment" xml:space="preserve">
+    <value>دفعة شراء</value>
+  </data>
   <data name="PurchasePrice" xml:space="preserve">
     <value>سعر الشراء</value>
   </data>
@@ -455,6 +494,9 @@
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>الكمية</value>
+  </data>
+  <data name="ReferenceNo" xml:space="preserve">
+    <value>الرقم المرجعي</value>
   </data>
   <data name="RegisterDate" xml:space="preserve">
     <value>تاريخ التسجيل</value>
@@ -549,6 +591,12 @@
   <data name="Thursday" xml:space="preserve">
     <value>الخميس</value>
   </data>
+  <data name="Total" xml:space="preserve">
+    <value>الإجمالي</value>
+  </data>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>الإجمالي</value>
+  </data>
   <data name="Trainer" xml:space="preserve">
     <value>المدرب</value>
   </data>
@@ -575,6 +623,9 @@
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>حدث خطأ غير متوقع</value>
+  </data>
+  <data name="UnitPrice" xml:space="preserve">
+    <value>سعر الوحدة</value>
   </data>
   <data name="Unknown" xml:space="preserve">
     <value>غير محدد</value>

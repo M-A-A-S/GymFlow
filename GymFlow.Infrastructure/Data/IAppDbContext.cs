@@ -23,6 +23,10 @@ namespace GymFlow.Infrastructure.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
 
+        public DbSet<PurchaseInvoice> PurchaseInvoices { get; set; }
+        public DbSet<PurchaseDetail> PurchaseDetails { get; set; }
+        public DbSet<PurchasePayment> PurchasePayments { get; set; }
+
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
     }
