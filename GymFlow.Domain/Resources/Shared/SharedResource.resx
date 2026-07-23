@@ -651,6 +651,9 @@
   <data name="SubscriptionTypes" xml:space="preserve">
     <value>Subscription Types</value>
   </data>
+  <data name="Summary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
   <data name="Sunday" xml:space="preserve">
     <value>Sunday</value>
   </data>
