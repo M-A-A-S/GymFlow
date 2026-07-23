@@ -59,7 +59,7 @@ namespace GymFlow.Infrastructure.Tests.Helpers
         public DbSet<PurchaseDetail> PurchaseDetails { get; set; }
         public DbSet<PurchasePayment> PurchasePayments { get; set; }
 
-        public Task<int> SaveChangesAsync(
+        public virtual Task<int> SaveChangesAsync(
         CancellationToken cancellationToken)
         {
             return base.SaveChangesAsync(cancellationToken);

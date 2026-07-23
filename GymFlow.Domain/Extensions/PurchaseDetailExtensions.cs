@@ -44,7 +44,8 @@ namespace GymFlow.Domain.Extensions
                 ProductId = DTO.ProductId,
                 Quantity = DTO.Quantity,
                 UnitPrice = DTO.UnitPrice,
-                Total = DTO.Total,
+                //Total = DTO.Total,
+                Total = DTO.Quantity * DTO.UnitPrice,
             };
         }
 
