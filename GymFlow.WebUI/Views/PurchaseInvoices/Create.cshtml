@@ -1,0 +1,40 @@
+﻿@using GymFlow.Domain.DTOs.PurchaseInvoice
+@model PurchaseInvoiceAddUpdateDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@using System.Text.Json
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="card shadow-sm">
+
+    <div class="card-header">
+        <h5>@Localizer["Create"] @Localizer["PurchaseInvoice"]</h5>
+    </div>
+
+    <div class="card-body">
+
+        <form asp-action="Create" method="post">
+
+            <partial name="Partials/_PurchaseInvoiceForm" model="Model" />
+
+            <button type="submit" class="btn btn-success">
+                @Localizer["Save"]
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                @Localizer["Cancel"]
+            </a>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+
+    <script src="~/js/purchase-invoice.js"></script>
+
+}

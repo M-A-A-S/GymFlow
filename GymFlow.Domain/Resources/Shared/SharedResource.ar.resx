@@ -489,6 +489,9 @@
   <data name="PaymentMethod" xml:space="preserve">
     <value>طريقة الدفع</value>
   </data>
+  <data name="Payments" xml:space="preserve">
+    <value>الدفعات</value>
+  </data>
   <data name="PaymentStatus" xml:space="preserve">
     <value>حالة السداد</value>
   </data>
@@ -518,6 +521,9 @@
   </data>
   <data name="PurchaseDetail" xml:space="preserve">
     <value>تفاصيل فاتورة الشراء</value>
+  </data>
+  <data name="PurchaseDetails" xml:space="preserve">
+    <value>تفاصيل المشتريات</value>
   </data>
   <data name="PurchaseDetailsRequired" xml:space="preserve">
     <value>يجب إضافة عنصر واحد على الأقل إلى فاتورة الشراء</value>
@@ -594,11 +600,20 @@
   <data name="SelectMember" xml:space="preserve">
     <value>-- اختر العضو --</value>
   </data>
+  <data name="SelectPaymentMethod" xml:space="preserve">
+    <value>-- اختر طريقة الدفع --</value>
+  </data>
+  <data name="SelectProduct" xml:space="preserve">
+    <value>-- اختر المنتج --</value>
+  </data>
   <data name="SelectStatus" xml:space="preserve">
     <value>-- اختر الحالة --</value>
   </data>
   <data name="SelectSubscriptionType" xml:space="preserve">
     <value>-- اختر نوع الاشتراك --</value>
+  </data>
+  <data name="SelectSupplier" xml:space="preserve">
+    <value>-- اختر المورد --</value>
   </data>
   <data name="SelectTrainer" xml:space="preserve">
     <value>-- اختر المدرب --</value>

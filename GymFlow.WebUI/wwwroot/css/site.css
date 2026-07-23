@@ -642,8 +642,10 @@ html[dir="rtl"] .submenu a {
     background-color: var(--card-background);
     padding: 1rem 2rem;
 }
+.text-primary {
+    color: var(--primary-color) !important;
+}
 /* End Global */
-
 /* Start Table Image Preview */
 .table-image-wrapper {
     width: 60px;

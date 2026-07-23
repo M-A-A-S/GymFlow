@@ -1,0 +1,56 @@
+﻿@using GymFlow.Domain.DTOs.PurchaseInvoice
+@model PurchaseInvoiceAddUpdateDTO
+
+
+@using System.Text.Json
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div>
+    <partial name="Partials/_PurchaseInvoiceHeader"
+              model="Model" />
+
+
+    <partial name="Partials/_PurchaseDetails"
+             model="Model" />
+
+
+    <partial name="Partials/_PurchasePayments"
+             model="Model"  />
+</div>
+
+
+<script>
+    window.GymFlow = window.GymFlow || {};
+
+    window.GymFlow.PurchaseInvoice = {
+
+        messages: {
+
+            selectProduct:
+                @Html.Raw(JsonSerializer.Serialize(Localizer["SelectProduct"].Value)),
+
+            invalidQuantity:
+                @Html.Raw(JsonSerializer.Serialize(Localizer["InvalidQuantity"].Value)),
+
+            invalidPrice:
+                @Html.Raw(JsonSerializer.Serialize(Localizer["InvalidUnitPrice"].Value)),
+
+            duplicateProduct:
+                @Html.Raw(JsonSerializer.Serialize(Localizer["DuplicateProductInInvoice"].Value)),
+
+            invalidAmount:
+                @Html.Raw(JsonSerializer.Serialize(Localizer["InvalidPaymentAmount"].Value)),
+
+            selectPaymentMethod:
+                @Html.Raw(JsonSerializer.Serialize(Localizer["SelectPaymentMethod"].Value)),
+
+            invalidPaymentDate:
+                @Html.Raw(JsonSerializer.Serialize(Localizer["InvalidPaymentDate"].Value))
+
+        }
+
+    };
+</script>

@@ -16,6 +16,7 @@ namespace GymFlow.Application.Services
         Task<Result<IEnumerable<PurchaseInvoiceSearchDTO>>> SearchAsync(string search);
         Task<Result<bool>> UpdateAsync(int id, PurchaseInvoiceDTO dto);
         Task<Result<bool>> DeleteAsync(int id);
+        Task<Result<PurchaseInvoiceAddUpdateDTO>> GetPurchaseInvoiceAddUpdateDTO(int? id = null);
 
     }
 }

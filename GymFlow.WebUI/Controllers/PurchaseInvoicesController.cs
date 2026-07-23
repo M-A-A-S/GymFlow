@@ -1,6 +1,7 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.DTOs.PurchaseInvoice;
 using GymFlow.Domain.Resources.Shared;
+using GymFlow.WebUI.ViewModels.Product;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
@@ -53,24 +54,48 @@ namespace GymFlow.WebUI.Controllers
         #region ========================= Create =========================
         public async Task<IActionResult> Create()
         {
-            return View(new PurchaseInvoiceDTO());
+            var result = await _service.GetPurchaseInvoiceAddUpdateDTO();
+            return View(result.Data);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PurchaseInvoiceDTO DTO)
+        public async Task<IActionResult> Create(PurchaseInvoiceAddUpdateDTO DTO)
         {
+            //foreach (var key in ModelState.Keys
+            //.Where(x =>
+            //    x.StartsWith("Supplier") ||
+            //    x.StartsWith("PurchaseDetails") ||
+            //    x.StartsWith("PurchasePayments"))
+            //.ToList())
+            //{
+            //    ModelState.Remove(key);
+            //}
+            foreach (var key in ModelState.Keys
+    .Where(x => x.StartsWith("PurchaseInvoice.Supplier"))
+    .ToList())
+            {
+                ModelState.Remove(key);
+            }
             if (InvalidModel())
             {
-                return View(DTO);
+                var result = await _service.GetPurchaseInvoiceAddUpdateDTO();
+                result.Data.PurchaseInvoice = DTO.PurchaseInvoice;
+                result.Data.PurchaseInvoice.PurchaseDetails = DTO.PurchaseInvoice.PurchaseDetails;
+                result.Data.PurchaseInvoice.PurchasePayments = DTO.PurchaseInvoice.PurchasePayments;
+                return View(result.Data);
             }
 
-            var addResult = await _service.AddAsync(DTO);
+            var addResult = await _service.AddAsync(DTO.PurchaseInvoice);
 
             if (!addResult.IsSuccess)
             {
                 Error(addResult.Code);
-                return View(DTO);
+                var result = await _service.GetPurchaseInvoiceAddUpdateDTO();
+                result.Data.PurchaseInvoice = DTO.PurchaseInvoice;
+                result.Data.PurchaseInvoice.PurchaseDetails = DTO.PurchaseInvoice.PurchaseDetails;
+                result.Data.PurchaseInvoice.PurchasePayments = DTO.PurchaseInvoice.PurchasePayments;
+                return View(result.Data);
             }
 
             Success(addResult.Code);
@@ -81,30 +106,39 @@ namespace GymFlow.WebUI.Controllers
         #region ========================= Update =========================
         public async Task<IActionResult> Edit(int id)
         {
-            var purchaseInvoice = await GetEntityOrNull(_service.GetByIdAsync(id));
+            var result = await _service.GetPurchaseInvoiceAddUpdateDTO(id);
 
-            if (purchaseInvoice is null)
+            if (!result.IsSuccess)
             {
+                Error(result.Code);
                 return NotFound();
             }
 
-            return View(purchaseInvoice);
+            return View(result.Data);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(PurchaseInvoiceDTO DTO)
+        public async Task<IActionResult> Edit(PurchaseInvoiceAddUpdateDTO DTO)
         {
             if (InvalidModel())
             {
-                return View(DTO);
+                var result = await _service.GetPurchaseInvoiceAddUpdateDTO(DTO.PurchaseInvoice.Id);
+                result.Data.PurchaseInvoice = DTO.PurchaseInvoice;
+                result.Data.PurchaseInvoice.PurchaseDetails = DTO.PurchaseInvoice.PurchaseDetails;
+                result.Data.PurchaseInvoice.PurchasePayments = DTO.PurchaseInvoice.PurchasePayments;
+                return View(result.Data);
             }
 
-            var updateResult = await _service.UpdateAsync(DTO.Id, DTO);
+            var updateResult = await _service.UpdateAsync(DTO.PurchaseInvoice.Id, DTO.PurchaseInvoice);
             if (!updateResult.IsSuccess)
             {
                 Error(updateResult.Code);
-                return View(DTO);
+                var result = await _service.GetPurchaseInvoiceAddUpdateDTO(DTO.PurchaseInvoice.Id);
+                result.Data.PurchaseInvoice = DTO.PurchaseInvoice;
+                result.Data.PurchaseInvoice.PurchaseDetails = DTO.PurchaseInvoice.PurchaseDetails;
+                result.Data.PurchaseInvoice.PurchasePayments = DTO.PurchaseInvoice.PurchasePayments;
+                return View(result.Data);
             }
 
             Success(updateResult.Code);

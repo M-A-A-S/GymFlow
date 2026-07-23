@@ -1,6 +1,13 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.Constants;
+using GymFlow.Domain.DTOs.Product;
+using GymFlow.Domain.DTOs.PurchaseDetail;
 using GymFlow.Domain.DTOs.PurchaseInvoice;
+using GymFlow.Domain.DTOs.PurchasePayment;
+using GymFlow.Domain.DTOs.Supplier;
+using GymFlow.Domain.DTOs.Trainer;
+using GymFlow.Domain.DTOs.TrainerSchedule;
+using GymFlow.Domain.Entities;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
@@ -188,6 +195,58 @@ namespace GymFlow.Infrastructure.Services
                 .ToListAsync();
 
             return Result<IEnumerable<PurchaseInvoiceSearchDTO>>.Success(purchaseInvoices);
+        }
+
+        public async Task<Result<PurchaseInvoiceAddUpdateDTO>> GetPurchaseInvoiceAddUpdateDTO(int? id = null)
+        {
+            var DTO = new PurchaseInvoiceAddUpdateDTO();
+
+            if (id.HasValue)
+            {
+                var purchaseInvoice = await _appDbContext.PurchaseInvoices
+                    .Include(x => x.Supplier)
+                    .Include(x => x.PurchaseDetails)
+                    .ThenInclude(x => x.Product)
+                    .Include(x => x.PurchasePayments)
+                    .AsNoTracking()
+                    .AsSplitQuery()
+                    .FirstOrDefaultAsync(x => x.Id == id);
+
+                if (purchaseInvoice is null)
+                {
+                    return Result<PurchaseInvoiceAddUpdateDTO>.Failure(
+                        ResultCodes.NotFound);
+                }
+
+                DTO.PurchaseInvoice = purchaseInvoice.ToDTO();
+                DTO.PurchaseInvoice.PurchaseDetails = purchaseInvoice.PurchaseDetails
+                    .Select(x => x.ToDTO()).ToList();
+                DTO.PurchaseInvoice.PurchasePayments = purchaseInvoice.PurchasePayments
+                    .Select(x => x.ToDTO()).ToList();
+                DTO.PurchaseInvoice.Supplier = purchaseInvoice.Supplier.ToDTO();
+            }
+
+            DTO.Suppliers = await _appDbContext.Suppliers
+                .Select(x => new SupplierSearchDTO
+                {
+                    Id = x.Id,
+                    FullName = x.FullName,
+                    PhoneNumber = x.PhoneNumber,
+                }).ToListAsync();
+
+            DTO.Products = await _appDbContext.Products
+                .Select(x => new ProductSearchDTO
+                {
+                    Id = x.Id,
+                    Code = x.Code,
+                    NameEn = x.NameEn,
+                    NameAr = x.NameAr,
+                    PurchasePrice = x.PurchasePrice,
+                    SalePrice = x.SalePrice,
+                }).ToListAsync();
+
+            return Result<PurchaseInvoiceAddUpdateDTO>.Success(DTO);
+
         }
 
         #endregion

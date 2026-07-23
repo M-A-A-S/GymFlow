@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GymFlow.Domain.Resources.Shared;
+using GymFlow.Domain.DTOs.Product;
 
 namespace GymFlow.Domain.DTOs.PurchaseInvoice
 {
@@ -57,8 +58,8 @@ namespace GymFlow.Domain.DTOs.PurchaseInvoice
         public string? Notes { get; set; }
 
         public SupplierDTO? Supplier { get; set; } = null!;
-        public ICollection<PurchaseDetailDTO> PurchaseDetails { get; set; } = new List<PurchaseDetailDTO>();
-        public ICollection<PurchasePaymentDTO> PurchasePayments { get; set; } = new List<PurchasePaymentDTO>();
+        public IList<PurchaseDetailDTO> PurchaseDetails { get; set; } = new List<PurchaseDetailDTO>();
+        public IList<PurchasePaymentDTO> PurchasePayments { get; set; } = new List<PurchasePaymentDTO>();
 
 
         public decimal PaidAmount =>

@@ -1,0 +1,87 @@
+﻿@using GymFlow.Domain.DTOs.PurchaseInvoice
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@model PurchaseInvoiceAddUpdateDTO
+
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+<h5 class="mt-4">
+    @Localizer["PurchaseDetails"]
+</h5>
+
+
+@* ================= Add Purchase Detail ================= *@
+<div class="row g-2 mb-3">
+
+    @* ================= Product ================= *@
+    <div class="col-md-5">
+        <select 
+                class="form-select"
+                id="productSelect">
+
+            <option value="" disabled selected>@Localizer["SelectSupplier"]</option>
+
+            @foreach (var product in Model.Products)
+            {
+                <option value="@product.Id"
+                        data-name="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                                ? product.NameAr
+                                                : product.NameEn)">
+
+                    @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                    ? product?.NameAr
+                                    : product?.NameEn)
+            </option>
+            }
+        </select>
+    </div>
+
+    @* ================= Quantity ================= *@
+    <div class="col-md-3">
+
+        <input id="quantityInput"
+               class="form-control"
+               placeholder="@Localizer["Quantity"]"
+               type="number"
+               value="1" />
+
+    </div>
+
+    @* ================= Price ================= *@
+    <div class="col-md-3">
+        <input id="priceInput"
+               class="form-control"
+               placeholder="@Localizer["UnitPrice"]"
+               type="number"
+               step="0.01" />
+    </div>
+
+    @* ================= Add Button ================= *@
+    <div class="col-md-1">
+        <button type="button"
+                id="addProduct"
+                class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+        </button>
+    </div>
+
+</div>
+
+@* ================= Purchase Details ================= *@
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Localizer["Product"]</th>
+                <th>@Localizer["Quantity"]</th>
+                <th>@Localizer["UnitPrice"]</th>
+                <th>@Localizer["Total"]</th>
+                <th>@Localizer["Actions"]</th>
+            </tr>
+        </thead>
+        <tbody id="detailsTable"></tbody>
+    </table>
+</div>

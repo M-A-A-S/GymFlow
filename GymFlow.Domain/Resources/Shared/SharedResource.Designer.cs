@@ -1177,6 +1177,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payments.
+        /// </summary>
+        public static string Payments {
+            get {
+                return ResourceManager.GetString("Payments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payment Status.
         /// </summary>
         public static string PaymentStatus {
@@ -1263,6 +1272,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string PurchaseDetail {
             get {
                 return ResourceManager.GetString("PurchaseDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase Details.
+        /// </summary>
+        public static string PurchaseDetails {
+            get {
+                return ResourceManager.GetString("PurchaseDetails", resourceCulture);
             }
         }
         
@@ -1492,6 +1510,24 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -- Select Payment Method --.
+        /// </summary>
+        public static string SelectPaymentMethod {
+            get {
+                return ResourceManager.GetString("SelectPaymentMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -- Select Product --.
+        /// </summary>
+        public static string SelectProduct {
+            get {
+                return ResourceManager.GetString("SelectProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -- Select Status --.
         /// </summary>
         public static string SelectStatus {
@@ -1506,6 +1542,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string SelectSubscriptionType {
             get {
                 return ResourceManager.GetString("SelectSubscriptionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -- Select Supplier --.
+        /// </summary>
+        public static string SelectSupplier {
+            get {
+                return ResourceManager.GetString("SelectSupplier", resourceCulture);
             }
         }
         

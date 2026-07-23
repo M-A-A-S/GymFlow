@@ -1,0 +1,82 @@
+﻿@using GymFlow.Domain.DTOs.PurchaseInvoice
+@using GymFlow.Domain.Enums
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@model PurchaseInvoiceAddUpdateDTO
+
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+<h5 class="mt-4">
+    @Localizer["Payments"]
+</h5>
+
+@* ================= Add Payment ================= *@
+<div class="row g-2 mb-3">
+
+    @* ================= Amount ================= *@
+    <div class="col-md-3">
+        <input id="paymentAmount"
+               class="form-control"
+               type="number"
+               step="0.01"
+               placeholder="@Localizer["Amount"]" />
+    </div>
+
+    @* ================= Payment Method ================= *@
+    <div class="col-md-3">
+
+        <select id="paymentMethod"
+                class="form-select"
+                asp-items="Html.GetEnumSelectList<PaymentMethod>()">
+            <option value="">
+                @Localizer["SelectPaymentMethod"]
+            </option>
+        </select>
+
+    </div>
+
+    @* ================= Reference No ================= *@
+    <div class="col-md-3">
+        <input id="referenceNo"
+               class="form-control"
+               placeholder="@Localizer["ReferenceNo"]" />
+    </div>
+
+    @* ================= Payment Date ================= *@
+    <div class="col-md-3">
+        <input id="paymentDate"
+               type="date"
+               class="form-control"
+               value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+    </div>
+
+    @* ================= Add Button ================= *@
+    <div class="col-md-3">
+        <button type="button"
+                id="addPayment"
+                class="btn btn-primary">
+
+            <i class="fa fa-plus"></i>
+        </button>
+    </div>
+
+</div>
+
+
+@* ================= Payments ================= *@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Localizer["Amount"]</th>
+                <th>@Localizer["PaymentMethod"]</th>
+                <th>@Localizer["ReferenceNo"]</th>
+                <th>@Localizer["PaymentDate"]</th>
+                <th>@Localizer["Actions"]</th>
+            </tr>
+        </thead>
+        <tbody id="paymentsTable"></tbody>
+    </table>
+</div>
+

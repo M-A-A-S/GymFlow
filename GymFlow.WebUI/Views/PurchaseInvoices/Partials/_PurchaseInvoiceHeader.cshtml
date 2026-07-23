@@ -1,0 +1,114 @@
+﻿@using GymFlow.Domain.DTOs.PurchaseInvoice
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@model PurchaseInvoiceAddUpdateDTO
+
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+<div class="row g-3">
+
+    @* ================= Supplier ================= *@
+    <div class="col-md-6">
+
+        <label asp-for="PurchaseInvoice.SupplierId"
+               class="form-label">
+        </label>
+
+        <select asp-for="PurchaseInvoice.SupplierId" class="form-select"
+                id="supplierSelect">
+            @* <option></option> *@
+            <option value="" disabled selected>@Localizer["SelectSupplier"]</option>
+            @foreach (var supplier in Model.Suppliers)
+            {
+                <option value="@supplier.Id">
+                    @supplier.FullName
+            </option>
+            }
+        </select>
+        <span asp-validation-for="PurchaseInvoice.SupplierId" class="text-danger"></span>
+
+    </div>
+
+
+    @* ================= Invoice Date ================= *@
+    <div class="col-md-6">
+
+        <label asp-for="PurchaseInvoice.InvoiceDate"
+               class="form-label">
+        </label>
+
+
+        <input asp-for="PurchaseInvoice.InvoiceDate"
+               class="form-control"
+               type="date" />
+
+
+    </div>
+
+
+    @* ================= Notes ================= *@
+    <div class="col-md-12">
+
+        <label asp-for="PurchaseInvoice.Notes"
+               class="form-label">
+        </label>
+
+
+<textarea asp-for="PurchaseInvoice.Notes"
+          class="form-control">
+</textarea>
+
+
+    </div>
+
+
+    @* ================= Invoice Summary ================= *@
+
+    <div class="row mt-3 mb-4">
+
+        @* ================= Total Amount ================= *@
+        <div class="col-md-4">
+
+            <div class="fw-bold">
+                @Localizer["TotalAmount"]
+            </div>
+
+            <div id="invoiceTotal"
+                 class="fw-bold text-primary fs-5">
+                @Model.PurchaseInvoice.TotalAmount.ToString("N2")
+            </div>
+
+        </div>
+
+        @* ================= Paid Amount ================= *@
+        <div class="col-md-4">
+
+        <div class="fw-bold">
+            @Localizer["PaidAmount"]
+        </div>
+
+        <div id="paidAmount"
+             class="fw-bold text-success fs-5">
+            @Model.PurchaseInvoice.PaidAmount.ToString("N2")
+        </div>
+
+    </div>
+
+        @* ================= Remaining Amount ================= *@
+        <div class="col-md-4">
+
+            <div class="fw-bold">
+                @Localizer["RemainingAmount"]
+            </div>
+
+            <div id="remainingAmount"
+                 class="fw-bold text-danger fs-5">
+                @Model.PurchaseInvoice.RemainingAmount.ToString("N2")
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

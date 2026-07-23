@@ -489,6 +489,9 @@
   <data name="PaymentMethod" xml:space="preserve">
     <value>Payment Method</value>
   </data>
+  <data name="Payments" xml:space="preserve">
+    <value>Payments</value>
+  </data>
   <data name="PaymentStatus" xml:space="preserve">
     <value>Payment Status</value>
   </data>
@@ -518,6 +521,9 @@
   </data>
   <data name="PurchaseDetail" xml:space="preserve">
     <value>Purchase Detail</value>
+  </data>
+  <data name="PurchaseDetails" xml:space="preserve">
+    <value>Purchase Details</value>
   </data>
   <data name="PurchaseDetailsRequired" xml:space="preserve">
     <value>At least one purchase item is required</value>
@@ -594,11 +600,20 @@
   <data name="SelectMember" xml:space="preserve">
     <value>-- Select Member --</value>
   </data>
+  <data name="SelectPaymentMethod" xml:space="preserve">
+    <value>-- Select Payment Method --</value>
+  </data>
+  <data name="SelectProduct" xml:space="preserve">
+    <value>-- Select Product --</value>
+  </data>
   <data name="SelectStatus" xml:space="preserve">
     <value>-- Select Status --</value>
   </data>
   <data name="SelectSubscriptionType" xml:space="preserve">
     <value>-- Select Subscription Type --</value>
+  </data>
+  <data name="SelectSupplier" xml:space="preserve">
+    <value>-- Select Supplier --</value>
   </data>
   <data name="SelectTrainer" xml:space="preserve">
     <value>-- Select Trainer --</value>

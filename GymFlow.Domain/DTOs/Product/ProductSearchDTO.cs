@@ -29,5 +29,17 @@ namespace GymFlow.Domain.DTOs.Product
         )]
         public string NameAr { get; set; }
 
+        [Display(
+            Name = nameof(Resources.Shared.SharedResource.PurchasePrice),
+            ResourceType = typeof(Resources.Shared.SharedResource)
+        )]
+        public decimal PurchasePrice { get; set; }
+
+        [Display(
+            Name = nameof(Resources.Shared.SharedResource.SalePrice),
+            ResourceType = typeof(Resources.Shared.SharedResource)
+        )]
+        public decimal SalePrice { get; set; }
+
     }
 }
