@@ -1,0 +1,65 @@
+﻿@using GymFlow.Domain.DTOs.PurchaseInvoice
+@model PurchaseInvoiceAddUpdateDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@using System.Text.Json
+@using System.Globalization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="card shadow-sm">
+
+    <div class="card-header">
+        <h5>@Localizer["Edit"] @Localizer["PurchaseInvoice"]</h5>
+    </div>
+
+    <div class="card-body">
+
+        <form asp-action="Edit">
+
+            <input type="hidden" asp-for="PurchaseInvoice.Id" />
+
+            <partial name="Partials/_PurchaseInvoiceForm" model="Model" />
+
+            <button type="submit" class="btn btn-primary">
+                @Localizer["Edit"]
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                @Localizer["Cancel"]
+            </a>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        window.existingPurchaseDetails =
+            @Html.Raw(JsonSerializer.Serialize(Model.PurchaseInvoice.PurchaseDetails));
+
+                window.existingPurchasePayments =
+        @Html.Raw(JsonSerializer.Serialize(
+            Model.PurchaseInvoice.PurchasePayments.Select(x => new
+            {
+                    Amount = x.Amount,
+                    PaymentMethod = x.PaymentMethod,
+                    PaymentMethodText = Localizer[x.PaymentMethod.ToString()].Value,
+                    ReferenceNo = x.ReferenceNo,
+                    PaymentDate = x.PaymentDate.ToString("yyyy-MM-dd")
+            })
+        ));
+
+
+                window.currentLanguage =
+        @Html.Raw(JsonSerializer.Serialize(
+            CultureInfo.CurrentUICulture.TwoLetterISOLanguageName
+        ));
+
+</script>
+
+    <script src="~/js/purchase-invoice.js"></script>
+}

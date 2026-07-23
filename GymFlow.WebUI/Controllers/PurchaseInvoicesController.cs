@@ -121,6 +121,12 @@ namespace GymFlow.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(PurchaseInvoiceAddUpdateDTO DTO)
         {
+            foreach (var key in ModelState.Keys
+            .Where(x => x.StartsWith("PurchaseInvoice.Supplier"))
+            .ToList())
+            {
+                ModelState.Remove(key);
+            }
             if (InvalidModel())
             {
                 var result = await _service.GetPurchaseInvoiceAddUpdateDTO(DTO.PurchaseInvoice.Id);

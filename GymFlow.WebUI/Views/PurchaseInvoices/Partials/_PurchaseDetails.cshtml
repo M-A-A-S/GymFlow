@@ -82,6 +82,16 @@
                 <th>@Localizer["Actions"]</th>
             </tr>
         </thead>
-        <tbody id="detailsTable"></tbody>
+        <tbody id="detailsTable">
+            @* @foreach (var item in Model.PurchaseInvoice.PurchaseDetails)
+            {
+                <tr>
+                    <td>@item.Product.NameEn</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.UnitPrice</td>
+                    <td>@item.Total</td>
+                </tr>
+            } *@
+        </tbody>
     </table>
 </div>

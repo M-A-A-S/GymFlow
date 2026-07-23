@@ -17,7 +17,102 @@ $(document).ready(function () {
 
     calculateInvoiceTotal();
 
+    // Edit mode
+    loadExistingPurchaseDetails();
+
+    loadExistingPurchasePayments();
+
+    initializeExistingRows();
+
 });
+
+
+// ======================================================
+// Load Existing Purchase Payments (Edit Mode)
+// ======================================================
+function loadExistingPurchasePayments() {
+    if (!window.existingPurchaseDetails) {
+        return;
+    }
+
+    console.log("existingPurchasePayments -> ", existingPurchasePayments)
+
+    window.existingPurchasePayments.forEach(function (item) {
+
+
+        let payment = {
+            amount: item.Amount,
+            paymentMethod: item.PaymentMethod,
+            paymentMethodText: item.PaymentMethodText,
+            referenceNo: item.ReferenceNo,
+            paymentDate: item.PaymentDate
+
+        };
+
+
+        $("#paymentsTable")
+            .append(buildPaymentRow(payment));
+
+
+        paymentIndex++;
+
+    });
+
+}
+
+// ======================================================
+// Load Existing Purchase Details (Edit Mode)
+// ======================================================
+function loadExistingPurchaseDetails() {
+    if (!window.existingPurchaseDetails) {
+        return;
+    }
+
+    console.log("window.existingPurchaseDetails -> ", window.existingPurchaseDetails)
+
+    window.existingPurchaseDetails.forEach(function (item) {
+
+
+        //let productOption =
+        //    $("#productSelect option[value='" + item.productId + "']");
+
+
+        //let product = {
+
+        //    productId: item.productId,
+
+        //    productName:
+        //        productOption.data("name"),
+
+        //    quantity:
+        //        item.quantity,
+
+        //    price:
+        //        item.unitPrice
+
+        //};
+
+        let product = {
+            productId: item.ProductId,
+            productName:
+                window.currentLanguage === "ar"
+                ? item.Product.NameAr
+                : item.Product.NameEn,
+            quantity: item.Quantity,
+            price: item.UnitPrice,
+        }
+
+
+        $("#detailsTable")
+            .append(buildProductRow(product));
+
+
+        detailIndex++;
+
+    });
+
+}
+
 
 
 // ======================================================
