@@ -59,6 +59,10 @@ namespace GymFlow.Infrastructure.Tests.Helpers
         public DbSet<PurchaseDetail> PurchaseDetails { get; set; }
         public DbSet<PurchasePayment> PurchasePayments { get; set; }
 
+        public DbSet<SalesInvoice> SalesInvoices { get; set; }
+        public DbSet<SalesInvoiceDetail> SalesInvoiceDetails { get; set; }
+        public DbSet<SalesPayment> SalesPayments { get; set; }
+
         public virtual Task<int> SaveChangesAsync(
         CancellationToken cancellationToken)
         {

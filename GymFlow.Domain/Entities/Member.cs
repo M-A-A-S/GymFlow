@@ -18,8 +18,9 @@ namespace GymFlow.Domain.Entities
         public DateOnly? RegisterDate { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
         public MemberStatus Status { get; set; } = MemberStatus.Active;
 
-        public ICollection<MemberSubscription> MemberSubscriptions { get; set; }
-        public ICollection<MemberAttendance> MemberAttendances { get; set; }
+        public ICollection<MemberSubscription> MemberSubscriptions { get; set; } = new List<MemberSubscription>();
+        public ICollection<MemberAttendance> MemberAttendances { get; set; } = new List<MemberAttendance>();
+        public ICollection<SalesInvoice> SalesInvoices { get; set; } = new List<SalesInvoice>();
 
     }
 }

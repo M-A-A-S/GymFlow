@@ -19,7 +19,7 @@ namespace GymFlow.Domain.Resources.Shared {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class SharedResource {
@@ -385,6 +385,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Arabic Description.
         /// </summary>
         public static string DescriptionAr {
@@ -408,6 +417,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Details {
             get {
                 return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discount.
+        /// </summary>
+        public static string Discount {
+            get {
+                return ResourceManager.GetString("Discount", resourceCulture);
             }
         }
         
@@ -907,6 +925,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invoice Status.
+        /// </summary>
+        public static string InvoiceStatus {
+            get {
+                return ResourceManager.GetString("InvoiceStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
         public static string IsActive {
@@ -916,11 +943,47 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Voided.
+        /// </summary>
+        public static string IsVoided {
+            get {
+                return ResourceManager.GetString("IsVoided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Item.
+        /// </summary>
+        public static string Item {
+            get {
+                return ResourceManager.GetString("Item", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Item Type.
+        /// </summary>
+        public static string ItemType {
+            get {
+                return ResourceManager.GetString("ItemType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Journal Entries.
         /// </summary>
         public static string JournalEntries {
             get {
                 return ResourceManager.GetString("JournalEntries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locker Rental.
+        /// </summary>
+        public static string LockerRental {
+            get {
+                return ResourceManager.GetString("LockerRental", resourceCulture);
             }
         }
         
@@ -1078,6 +1141,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Net Amount.
+        /// </summary>
+        public static string NetAmount {
+            get {
+                return ResourceManager.GetString("NetAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         public static string New {
@@ -1137,6 +1209,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Or {
             get {
                 return ResourceManager.GetString("Or", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other.
+        /// </summary>
+        public static string Other {
+            get {
+                return ResourceManager.GetString("Other", resourceCulture);
             }
         }
         
@@ -1218,6 +1299,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string PaymentVouchers {
             get {
                 return ResourceManager.GetString("PaymentVouchers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Personal Training.
+        /// </summary>
+        public static string PersonalTraining {
+            get {
+                return ResourceManager.GetString("PersonalTraining", resourceCulture);
             }
         }
         
@@ -1402,6 +1492,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remaining Balance.
+        /// </summary>
+        public static string RemainingBalance {
+            get {
+                return ResourceManager.GetString("RemainingBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reorder Level.
         /// </summary>
         public static string ReorderLevel {
@@ -1456,11 +1555,56 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sales Invoice.
+        /// </summary>
+        public static string SalesInvoice {
+            get {
+                return ResourceManager.GetString("SalesInvoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sales Invoice Detail.
+        /// </summary>
+        public static string SalesInvoiceDetail {
+            get {
+                return ResourceManager.GetString("SalesInvoiceDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sales Invoice Details.
+        /// </summary>
+        public static string SalesInvoiceDetails {
+            get {
+                return ResourceManager.GetString("SalesInvoiceDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sales Invoices.
         /// </summary>
         public static string SalesInvoices {
             get {
                 return ResourceManager.GetString("SalesInvoices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sales Payment.
+        /// </summary>
+        public static string SalesPayment {
+            get {
+                return ResourceManager.GetString("SalesPayment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sales Payments.
+        /// </summary>
+        public static string SalesPayments {
+            get {
+                return ResourceManager.GetString("SalesPayments", resourceCulture);
             }
         }
         
@@ -1591,6 +1735,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Service.
+        /// </summary>
+        public static string Service {
+            get {
+                return ResourceManager.GetString("Service", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start Date.
         /// </summary>
         public static string StartDate {
@@ -1614,6 +1767,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Status {
             get {
                 return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subscription.
+        /// </summary>
+        public static string Subscription {
+            get {
+                return ResourceManager.GetString("Subscription", resourceCulture);
             }
         }
         
@@ -1659,6 +1821,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string SubscriptionTypes {
             get {
                 return ResourceManager.GetString("SubscriptionTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub Total.
+        /// </summary>
+        public static string SubTotal {
+            get {
+                return ResourceManager.GetString("SubTotal", resourceCulture);
             }
         }
         
@@ -1713,6 +1884,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Suspended {
             get {
                 return ResourceManager.GetString("Suspended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tax.
+        /// </summary>
+        public static string Tax {
+            get {
+                return ResourceManager.GetString("Tax", resourceCulture);
             }
         }
         
@@ -1893,6 +2073,33 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string ValueOutOfRange {
             get {
                 return ResourceManager.GetString("ValueOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Void Date.
+        /// </summary>
+        public static string VoidDate {
+            get {
+                return ResourceManager.GetString("VoidDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voided.
+        /// </summary>
+        public static string Voided {
+            get {
+                return ResourceManager.GetString("Voided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Void Reason.
+        /// </summary>
+        public static string VoidReason {
+            get {
+                return ResourceManager.GetString("VoidReason", resourceCulture);
             }
         }
         

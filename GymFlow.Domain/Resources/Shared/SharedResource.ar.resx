@@ -225,6 +225,9 @@
   <data name="DeleteFailed" xml:space="preserve">
     <value>تعذر حذف الملف</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
   <data name="DescriptionAr" xml:space="preserve">
     <value>الوصف (عربي)</value>
   </data>
@@ -233,6 +236,9 @@
   </data>
   <data name="Details" xml:space="preserve">
     <value>تفاصيل</value>
+  </data>
+  <data name="Discount" xml:space="preserve">
+    <value>الخصم</value>
   </data>
   <data name="DuplicateProductInInvoice" xml:space="preserve">
     <value>لا يمكن إضافة نفس المنتج أكثر من مرة في فاتورة الشراء</value>
@@ -399,11 +405,26 @@
   <data name="InvoiceNumberRequired" xml:space="preserve">
     <value>رقم الفاتورة مطلوب</value>
   </data>
+  <data name="InvoiceStatus" xml:space="preserve">
+    <value>حالة الفاتورة</value>
+  </data>
   <data name="IsActive" xml:space="preserve">
     <value>نشط</value>
   </data>
+  <data name="IsVoided" xml:space="preserve">
+    <value>ملغاة</value>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>العنصر</value>
+  </data>
+  <data name="ItemType" xml:space="preserve">
+    <value>نوع العنصر</value>
+  </data>
   <data name="JournalEntries" xml:space="preserve">
     <value>القيود اليومية</value>
+  </data>
+  <data name="LockerRental" xml:space="preserve">
+    <value>تأجير خزانة</value>
   </data>
   <data name="Male" xml:space="preserve">
     <value>ذكر</value>
@@ -456,6 +477,9 @@
   <data name="NameEnAlreadyExists" xml:space="preserve">
     <value>الاسم الإنجليزي موجود مسبقاً.</value>
   </data>
+  <data name="NetAmount" xml:space="preserve">
+    <value>الصافي</value>
+  </data>
   <data name="New" xml:space="preserve">
     <value>إضافة</value>
   </data>
@@ -476,6 +500,9 @@
   </data>
   <data name="Or" xml:space="preserve">
     <value>أو</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>أخرى</value>
   </data>
   <data name="Paid" xml:space="preserve">
     <value>مدفوع</value>
@@ -503,6 +530,9 @@
   </data>
   <data name="PaymentVouchers" xml:space="preserve">
     <value>سندات الصرف</value>
+  </data>
+  <data name="PersonalTraining" xml:space="preserve">
+    <value>تدريب شخصي</value>
   </data>
   <data name="PhoneExists" xml:space="preserve">
     <value>رقم الهاتف موجود مسبقاً</value>
@@ -564,6 +594,9 @@
   <data name="RemainingAmount" xml:space="preserve">
     <value>المبلغ المتبقي</value>
   </data>
+  <data name="RemainingBalance" xml:space="preserve">
+    <value>الرصيد المتبقي</value>
+  </data>
   <data name="ReorderLevel" xml:space="preserve">
     <value>حد إعادة الطلب</value>
   </data>
@@ -582,8 +615,23 @@
   <data name="Sales" xml:space="preserve">
     <value>المبيعات</value>
   </data>
+  <data name="SalesInvoice" xml:space="preserve">
+    <value>فاتورة مبيعات</value>
+  </data>
+  <data name="SalesInvoiceDetail" xml:space="preserve">
+    <value>تفاصيل فاتورة المبيعات</value>
+  </data>
+  <data name="SalesInvoiceDetails" xml:space="preserve">
+    <value>تفاصيل فواتير المبيعات</value>
+  </data>
   <data name="SalesInvoices" xml:space="preserve">
-    <value>Sales Invoices</value>
+    <value>فواتير المبيعات</value>
+  </data>
+  <data name="SalesPayment" xml:space="preserve">
+    <value>دفعة مبيعات</value>
+  </data>
+  <data name="SalesPayments" xml:space="preserve">
+    <value>دفعات المبيعات</value>
   </data>
   <data name="Saturday" xml:space="preserve">
     <value>السبت</value>
@@ -627,6 +675,9 @@
   <data name="ServerError" xml:space="preserve">
     <value>حدث خطأ في الخادم</value>
   </data>
+  <data name="Service" xml:space="preserve">
+    <value>خدمة</value>
+  </data>
   <data name="StartDate" xml:space="preserve">
     <value>تاريخ البداية</value>
   </data>
@@ -635,6 +686,9 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>الحالة</value>
+  </data>
+  <data name="Subscription" xml:space="preserve">
+    <value>اشتراك</value>
   </data>
   <data name="SubscriptionOverlap" xml:space="preserve">
     <value>لدى العضو اشتراك آخر خلال هذه الفترة</value>
@@ -650,6 +704,9 @@
   </data>
   <data name="SubscriptionTypes" xml:space="preserve">
     <value>أنواع الاشتراكات</value>
+  </data>
+  <data name="SubTotal" xml:space="preserve">
+    <value>الإجمالي</value>
   </data>
   <data name="Summary" xml:space="preserve">
     <value>الملخص</value>
@@ -668,6 +725,9 @@
   </data>
   <data name="Suspended" xml:space="preserve">
     <value>موقوف</value>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>الضريبة</value>
   </data>
   <data name="Thursday" xml:space="preserve">
     <value>الخميس</value>
@@ -728,6 +788,15 @@
   </data>
   <data name="ValueOutOfRange" xml:space="preserve">
     <value>القيمة خارج النطاق المسموح</value>
+  </data>
+  <data name="VoidDate" xml:space="preserve">
+    <value>تاريخ الإلغاء</value>
+  </data>
+  <data name="Voided" xml:space="preserve">
+    <value>ملغاة</value>
+  </data>
+  <data name="VoidReason" xml:space="preserve">
+    <value>سبب الإلغاء</value>
   </data>
   <data name="Wednesday" xml:space="preserve">
     <value>الأربعاء</value>

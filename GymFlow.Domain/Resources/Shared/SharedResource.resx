@@ -225,6 +225,9 @@
   <data name="DeleteFailed" xml:space="preserve">
     <value>Failed to delete the file</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="DescriptionAr" xml:space="preserve">
     <value>Arabic Description</value>
   </data>
@@ -233,6 +236,9 @@
   </data>
   <data name="Details" xml:space="preserve">
     <value>Details</value>
+  </data>
+  <data name="Discount" xml:space="preserve">
+    <value>Discount</value>
   </data>
   <data name="DuplicateProductInInvoice" xml:space="preserve">
     <value>A product cannot be added more than once to the same purchase invoice</value>
@@ -399,11 +405,26 @@
   <data name="InvoiceNumberRequired" xml:space="preserve">
     <value>Invoice number is required</value>
   </data>
+  <data name="InvoiceStatus" xml:space="preserve">
+    <value>Invoice Status</value>
+  </data>
   <data name="IsActive" xml:space="preserve">
     <value>Active</value>
   </data>
+  <data name="IsVoided" xml:space="preserve">
+    <value>Voided</value>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="ItemType" xml:space="preserve">
+    <value>Item Type</value>
+  </data>
   <data name="JournalEntries" xml:space="preserve">
     <value>Journal Entries</value>
+  </data>
+  <data name="LockerRental" xml:space="preserve">
+    <value>Locker Rental</value>
   </data>
   <data name="Male" xml:space="preserve">
     <value>Male</value>
@@ -456,6 +477,9 @@
   <data name="NameEnAlreadyExists" xml:space="preserve">
     <value>English name already exists.</value>
   </data>
+  <data name="NetAmount" xml:space="preserve">
+    <value>Net Amount</value>
+  </data>
   <data name="New" xml:space="preserve">
     <value>New</value>
   </data>
@@ -476,6 +500,9 @@
   </data>
   <data name="Or" xml:space="preserve">
     <value>OR</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Other</value>
   </data>
   <data name="Paid" xml:space="preserve">
     <value>Paid</value>
@@ -503,6 +530,9 @@
   </data>
   <data name="PaymentVouchers" xml:space="preserve">
     <value>Payment Vouchers</value>
+  </data>
+  <data name="PersonalTraining" xml:space="preserve">
+    <value>Personal Training</value>
   </data>
   <data name="PhoneExists" xml:space="preserve">
     <value>Phone number already exists</value>
@@ -564,6 +594,9 @@
   <data name="RemainingAmount" xml:space="preserve">
     <value>Remaining Amount</value>
   </data>
+  <data name="RemainingBalance" xml:space="preserve">
+    <value>Remaining Balance</value>
+  </data>
   <data name="ReorderLevel" xml:space="preserve">
     <value>Reorder Level</value>
   </data>
@@ -582,8 +615,23 @@
   <data name="Sales" xml:space="preserve">
     <value>Sales</value>
   </data>
+  <data name="SalesInvoice" xml:space="preserve">
+    <value>Sales Invoice</value>
+  </data>
+  <data name="SalesInvoiceDetail" xml:space="preserve">
+    <value>Sales Invoice Detail</value>
+  </data>
+  <data name="SalesInvoiceDetails" xml:space="preserve">
+    <value>Sales Invoice Details</value>
+  </data>
   <data name="SalesInvoices" xml:space="preserve">
     <value>Sales Invoices</value>
+  </data>
+  <data name="SalesPayment" xml:space="preserve">
+    <value>Sales Payment</value>
+  </data>
+  <data name="SalesPayments" xml:space="preserve">
+    <value>Sales Payments</value>
   </data>
   <data name="Saturday" xml:space="preserve">
     <value>Saturday</value>
@@ -627,6 +675,9 @@
   <data name="ServerError" xml:space="preserve">
     <value>Server error occurred</value>
   </data>
+  <data name="Service" xml:space="preserve">
+    <value>Service</value>
+  </data>
   <data name="StartDate" xml:space="preserve">
     <value>Start Date</value>
   </data>
@@ -635,6 +686,9 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="Subscription" xml:space="preserve">
+    <value>Subscription</value>
   </data>
   <data name="SubscriptionOverlap" xml:space="preserve">
     <value>The member already has a subscription during this period</value>
@@ -650,6 +704,9 @@
   </data>
   <data name="SubscriptionTypes" xml:space="preserve">
     <value>Subscription Types</value>
+  </data>
+  <data name="SubTotal" xml:space="preserve">
+    <value>Sub Total</value>
   </data>
   <data name="Summary" xml:space="preserve">
     <value>Summary</value>
@@ -668,6 +725,9 @@
   </data>
   <data name="Suspended" xml:space="preserve">
     <value>Suspended</value>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>Tax</value>
   </data>
   <data name="Thursday" xml:space="preserve">
     <value>Thursday</value>
@@ -728,6 +788,15 @@
   </data>
   <data name="ValueOutOfRange" xml:space="preserve">
     <value>The value is outside the allowed range</value>
+  </data>
+  <data name="VoidDate" xml:space="preserve">
+    <value>Void Date</value>
+  </data>
+  <data name="Voided" xml:space="preserve">
+    <value>Voided</value>
+  </data>
+  <data name="VoidReason" xml:space="preserve">
+    <value>Void Reason</value>
   </data>
   <data name="Wednesday" xml:space="preserve">
     <value>Wednesday</value>
