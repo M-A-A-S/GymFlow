@@ -130,7 +130,14 @@ namespace GymFlow.Infrastructure.Services
                 foreach (var item in SalesInvoices)
                 {
                     var dto = item.ToDTO();
-                    dto.Details = item.Details.Select(x => x.ToDTO()).ToList();
+                    //dto.Details = item.Details.Select(x => x.ToDTO()).ToList();
+                    foreach (var detail in  item.Details)
+                    {
+                        var detailDTO = detail.ToDTO();
+                        detailDTO.Product = detail.Product.ToDTO();
+                        detailDTO.SubscriptionType = detail.SubscriptionType.ToDTO();
+                        dto.Details.Add(detailDTO);
+                    }
                     dto.Payments = item.Payments.Select(x => x.ToDTO()).ToList();
                     if (item.Member != null)
                     {
@@ -177,10 +184,17 @@ namespace GymFlow.Infrastructure.Services
 
 
                 var result = SalesInvoice.ToDTO();
-                result.Details = SalesInvoice.Details.Select(x => x.ToDTO()).ToList();
+                //result.Details = SalesInvoice.Details.Select(x => x.ToDTO()).ToList();
+                foreach (var detail in SalesInvoice.Details)
+                {
+                    var detailDTO = detail.ToDTO();
+                    detailDTO.Product = detail.Product.ToDTO();
+                    detailDTO.SubscriptionType = detail.SubscriptionType.ToDTO();
+                    result.Details.Add(detailDTO);
+                }
                 result.Payments = SalesInvoice.Payments.Select(x => x.ToDTO()).ToList();
 
-                if (result.Member is not null)
+                if (SalesInvoice.Member is not null)
                 {
                     result.Member = SalesInvoice.Member.ToDTO();
                 }
@@ -258,8 +272,15 @@ namespace GymFlow.Infrastructure.Services
 
                 DTO.SalesInvoice = SalesInvoice.ToDTO();
 
-                DTO.SalesInvoice.Details = SalesInvoice.Details
-                    .Select(x => x.ToDTO()).ToList();
+                //DTO.SalesInvoice.Details = SalesInvoice.Details
+                //    .Select(x => x.ToDTO()).ToList();
+                foreach (var detail in SalesInvoice.Details)
+                {
+                    var detailDTO = detail.ToDTO();
+                    detailDTO.Product = detail.Product.ToDTO();
+                    detailDTO.SubscriptionType = detail.SubscriptionType.ToDTO();
+                    DTO.SalesInvoice.Details.Add(detailDTO);
+                }
 
                 DTO.SalesInvoice.Payments = SalesInvoice.Payments
                     .Select(x => x.ToDTO()).ToList();
@@ -452,8 +473,8 @@ namespace GymFlow.Infrastructure.Services
                 if (!decreaseStock.IsSuccess)
                 {
                     return Result<bool>.Failure(
-                        restoreStock.Code,
-                        restoreStock.StatusCode);
+                        decreaseStock.Code,
+                        decreaseStock.StatusCode);
                 }
 
                 SalesInvoice.CalculateTotal();
