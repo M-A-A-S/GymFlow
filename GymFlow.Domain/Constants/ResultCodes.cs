@@ -56,8 +56,25 @@ namespace GymFlow.Domain.Constants
         public const string InvalidPaymentDate = "InvalidPaymentDate";
         public const string DuplicateProductInInvoice = "DuplicateProductInInvoice";
         public const string PaymentExceedsInvoiceTotal = "PaymentExceedsInvoiceTotal";
-        public const string InvoiceNumberRequired = "InvoiceNumberRequired ";
-        public const string InvoiceNumberExists = "InvoiceNumberExists ";
+        public const string InvoiceNumberRequired = "InvoiceNumberRequired";
+        public const string InvoiceNumberExists = "InvoiceNumberExists";
+
+        public const string SalesDetailsRequired = "SalesDetailsRequired";
+        public const string DuplicateItemInInvoice = "DuplicateItemInInvoice";
+        public const string InvalidSaleItemType = "InvalidSaleItemType";
+        //public const string ProductNotFound = "ProductNotFound";
+        public const string SubscriptionPlanNotFound = "SubscriptionPlanNotFound";
+        public const string ServiceNotFound = "ServiceNotFound";
+        public const string MemberNotFound = "MemberNotFound";
+        public const string InvoiceNotFound = "InvoiceNotFound";
+        public const string AlreadyCancelled = "AlreadyCancelled";
+        public const string CannotEditPostedInvoice = "CannotEditPostedInvoice";
+        public const string CannotPayDraftInvoice = "CannotPayDraftInvoice";
+        public const string InvoiceAlreadyConfirmed = "InvoiceAlreadyConfirmed";
+
+        public const string InsufficientStock = "InsufficientStock";
+        public const string InvalidStockQuantity = "InvalidStockQuantity";
+        public const string InvalidStockMovementType = "InvalidStockMovementType ";
 
 
 

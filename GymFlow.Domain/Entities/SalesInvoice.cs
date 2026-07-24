@@ -18,7 +18,7 @@ namespace GymFlow.Domain.Entities
         public decimal NetAmount { get; set; }
         public decimal PaidAmount { get; set; }
         public decimal RemainingBalance { get; set; }
-        public InvoiceStatus Status { get; set; } = InvoiceStatus.Unpaid;
+        public InvoiceStatus Status { get; set; } = InvoiceStatus.Draft;
         public string? Notes { get; set; }
 
         // Navigation
@@ -26,5 +26,16 @@ namespace GymFlow.Domain.Entities
         public Member? Member { get; set; }
         public ICollection<SalesInvoiceDetail> Details { get; set; } = new List<SalesInvoiceDetail>();
         public ICollection<SalesPayment> Payments { get; set; } = new List<SalesPayment>();
+
+        public void CalculateTotal()
+        {
+            SubTotal = Details.Sum(x => x.Total);
+
+            NetAmount = SubTotal - Discount + Tax;
+
+            PaidAmount = Payments.Where(x => !x.IsVoided).Sum(x => x.Amount);
+
+            RemainingBalance = NetAmount - PaidAmount;
+        }
     }
 }

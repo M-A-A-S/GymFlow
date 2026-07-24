@@ -17,5 +17,11 @@ namespace GymFlow.Domain.DTOs.Member
         )]
         public string FullName { get; set; }
 
+        [Display(
+            Name = nameof(Resources.Shared.SharedResource.PhoneNumber),
+            ResourceType = typeof(Resources.Shared.SharedResource)
+        )]
+        public string PhoneNumber { get; set; }
+
     }
 }

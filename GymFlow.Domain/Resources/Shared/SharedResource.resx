@@ -132,6 +132,9 @@
   <data name="Address" xml:space="preserve">
     <value>Address</value>
   </data>
+  <data name="AlreadyCancelled" xml:space="preserve">
+    <value>Invoice is already cancelled</value>
+  </data>
   <data name="AlreadyCheckedOut" xml:space="preserve">
     <value>Member already checked out</value>
   </data>
@@ -161,6 +164,12 @@
   </data>
   <data name="Cancelled" xml:space="preserve">
     <value>Cancelled</value>
+  </data>
+  <data name="CannotEditPostedInvoice" xml:space="preserve">
+    <value>Only draft invoices can be edited</value>
+  </data>
+  <data name="CannotPayDraftInvoice" xml:space="preserve">
+    <value>Cannot add payment to a draft invoice</value>
   </data>
   <data name="Cash" xml:space="preserve">
     <value>Cash</value>
@@ -239,6 +248,12 @@
   </data>
   <data name="Discount" xml:space="preserve">
     <value>Discount</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="DuplicateItemInInvoice" xml:space="preserve">
+    <value>Duplicate item exists in invoice</value>
   </data>
   <data name="DuplicateProductInInvoice" xml:space="preserve">
     <value>A product cannot be added more than once to the same purchase invoice</value>
@@ -351,6 +366,9 @@
   <data name="Inside" xml:space="preserve">
     <value>Inside </value>
   </data>
+  <data name="InsufficientStock" xml:space="preserve">
+    <value>Insufficient stock quantity</value>
+  </data>
   <data name="InvalidData" xml:space="preserve">
     <value>Invalid data</value>
   </data>
@@ -378,8 +396,17 @@
   <data name="InvalidQuantity" xml:space="preserve">
     <value>Quantity must be greater than zero</value>
   </data>
+  <data name="InvalidSaleItemType" xml:space="preserve">
+    <value>Invalid sale item type</value>
+  </data>
   <data name="InvalidScheduleTime" xml:space="preserve">
     <value>Start time must be earlier than end time</value>
+  </data>
+  <data name="InvalidStockMovementType" xml:space="preserve">
+    <value>Invalid stock movement type</value>
+  </data>
+  <data name="InvalidStockQuantity" xml:space="preserve">
+    <value>Stock quantity must be greater than zero</value>
   </data>
   <data name="InvalidTrainer" xml:space="preserve">
     <value>Invalid trainer selected</value>
@@ -393,11 +420,17 @@
   <data name="Inventory" xml:space="preserve">
     <value>Inventory</value>
   </data>
+  <data name="InvoiceAlreadyConfirmed" xml:space="preserve">
+    <value>Invoice has already been confirmed</value>
+  </data>
   <data name="InvoiceDate" xml:space="preserve">
     <value>Invoice Date</value>
   </data>
   <data name="InvoiceNo" xml:space="preserve">
     <value>Invoice Number</value>
+  </data>
+  <data name="InvoiceNotFound" xml:space="preserve">
+    <value>Invoice not found</value>
   </data>
   <data name="InvoiceNumberExists" xml:space="preserve">
     <value>Invoice number already exists</value>
@@ -443,6 +476,9 @@
   </data>
   <data name="MemberManagement" xml:space="preserve">
     <value>Member Management</value>
+  </data>
+  <data name="MemberNotFound" xml:space="preserve">
+    <value>Member not found</value>
   </data>
   <data name="Members" xml:space="preserve">
     <value>Members</value>
@@ -615,6 +651,9 @@
   <data name="Sales" xml:space="preserve">
     <value>Sales</value>
   </data>
+  <data name="SalesDetailsRequired" xml:space="preserve">
+    <value>Invoice must contain at least one item</value>
+  </data>
   <data name="SalesInvoice" xml:space="preserve">
     <value>Sales Invoice</value>
   </data>
@@ -678,6 +717,9 @@
   <data name="Service" xml:space="preserve">
     <value>Service</value>
   </data>
+  <data name="ServiceNotFound" xml:space="preserve">
+    <value>Service not found</value>
+  </data>
   <data name="StartDate" xml:space="preserve">
     <value>Start Date</value>
   </data>
@@ -692,6 +734,9 @@
   </data>
   <data name="SubscriptionOverlap" xml:space="preserve">
     <value>The member already has a subscription during this period</value>
+  </data>
+  <data name="SubscriptionPlanNotFound" xml:space="preserve">
+    <value>Subscription plan not found</value>
   </data>
   <data name="Subscriptions" xml:space="preserve">
     <value>Subscriptions</value>
@@ -794,6 +839,9 @@
   </data>
   <data name="Voided" xml:space="preserve">
     <value>Voided</value>
+  </data>
+  <data name="VoidedBy" xml:space="preserve">
+    <value>Voided By </value>
   </data>
   <data name="VoidReason" xml:space="preserve">
     <value>Void Reason</value>

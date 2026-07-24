@@ -1,6 +1,7 @@
 ﻿using GymFlow.Domain.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,13 @@ namespace GymFlow.Domain.Entities
 
         // Navigation
         public SalesInvoice SalesInvoice { get; set; } = null!;
+
+        // Not mapped navigation properties
+
+        [NotMapped]
+        public Product? Product { get; set; }
+        [NotMapped]
+        public SubscriptionType? SubscriptionType { get; set; }
 
     }
 }

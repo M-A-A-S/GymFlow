@@ -132,6 +132,9 @@
   <data name="Address" xml:space="preserve">
     <value>العنوان</value>
   </data>
+  <data name="AlreadyCancelled" xml:space="preserve">
+    <value>الفاتورة ملغاة مسبقاً</value>
+  </data>
   <data name="AlreadyCheckedOut" xml:space="preserve">
     <value>تم تسجيل الخروج مسبقاً</value>
   </data>
@@ -161,6 +164,12 @@
   </data>
   <data name="Cancelled" xml:space="preserve">
     <value>ملغي</value>
+  </data>
+  <data name="CannotEditPostedInvoice" xml:space="preserve">
+    <value>يمكن تعديل الفواتير المسودة فقط</value>
+  </data>
+  <data name="CannotPayDraftInvoice" xml:space="preserve">
+    <value>لا يمكن إضافة دفعة إلى فاتورة مسودة</value>
   </data>
   <data name="Cash" xml:space="preserve">
     <value>نقداً</value>
@@ -239,6 +248,12 @@
   </data>
   <data name="Discount" xml:space="preserve">
     <value>الخصم</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>مسودة</value>
+  </data>
+  <data name="DuplicateItemInInvoice" xml:space="preserve">
+    <value>يوجد صنف مكرر في الفاتورة</value>
   </data>
   <data name="DuplicateProductInInvoice" xml:space="preserve">
     <value>لا يمكن إضافة نفس المنتج أكثر من مرة في فاتورة الشراء</value>
@@ -351,6 +366,9 @@
   <data name="Inside" xml:space="preserve">
     <value>داخل النادي</value>
   </data>
+  <data name="InsufficientStock" xml:space="preserve">
+    <value>الكمية المتوفرة في المخزون غير كافية</value>
+  </data>
   <data name="InvalidData" xml:space="preserve">
     <value>بيانات غير صالحة</value>
   </data>
@@ -378,8 +396,17 @@
   <data name="InvalidQuantity" xml:space="preserve">
     <value>يجب أن تكون الكمية أكبر من صفر</value>
   </data>
+  <data name="InvalidSaleItemType" xml:space="preserve">
+    <value>نوع الصنف غير صحيح</value>
+  </data>
   <data name="InvalidScheduleTime" xml:space="preserve">
     <value>يجب أن يكون وقت البداية قبل وقت النهاية</value>
+  </data>
+  <data name="InvalidStockMovementType" xml:space="preserve">
+    <value>نوع حركة المخزون غير صالح</value>
+  </data>
+  <data name="InvalidStockQuantity" xml:space="preserve">
+    <value>يجب أن تكون كمية المخزون أكبر من صفر</value>
   </data>
   <data name="InvalidTrainer" xml:space="preserve">
     <value>المدرب المحدد غير صالح</value>
@@ -393,11 +420,17 @@
   <data name="Inventory" xml:space="preserve">
     <value>المخزون</value>
   </data>
+  <data name="InvoiceAlreadyConfirmed" xml:space="preserve">
+    <value>تم تأكيد الفاتورة مسبقاً</value>
+  </data>
   <data name="InvoiceDate" xml:space="preserve">
     <value>تاريخ الفاتورة</value>
   </data>
   <data name="InvoiceNo" xml:space="preserve">
     <value>رقم الفاتورة</value>
+  </data>
+  <data name="InvoiceNotFound" xml:space="preserve">
+    <value>الفاتورة غير موجودة</value>
   </data>
   <data name="InvoiceNumberExists" xml:space="preserve">
     <value>رقم الفاتورة موجود مسبقاً</value>
@@ -443,6 +476,9 @@
   </data>
   <data name="MemberManagement" xml:space="preserve">
     <value>إدارة الأعضاء</value>
+  </data>
+  <data name="MemberNotFound" xml:space="preserve">
+    <value>العضو غير موجود</value>
   </data>
   <data name="Members" xml:space="preserve">
     <value>الأعضاء</value>
@@ -615,6 +651,9 @@
   <data name="Sales" xml:space="preserve">
     <value>المبيعات</value>
   </data>
+  <data name="SalesDetailsRequired" xml:space="preserve">
+    <value>يجب أن تحتوي الفاتورة على صنف واحد على الأقل</value>
+  </data>
   <data name="SalesInvoice" xml:space="preserve">
     <value>فاتورة مبيعات</value>
   </data>
@@ -678,6 +717,9 @@
   <data name="Service" xml:space="preserve">
     <value>خدمة</value>
   </data>
+  <data name="ServiceNotFound" xml:space="preserve">
+    <value>الخدمة غير موجودة</value>
+  </data>
   <data name="StartDate" xml:space="preserve">
     <value>تاريخ البداية</value>
   </data>
@@ -692,6 +734,9 @@
   </data>
   <data name="SubscriptionOverlap" xml:space="preserve">
     <value>لدى العضو اشتراك آخر خلال هذه الفترة</value>
+  </data>
+  <data name="SubscriptionPlanNotFound" xml:space="preserve">
+    <value>خطة الاشتراك غير موجودة</value>
   </data>
   <data name="Subscriptions" xml:space="preserve">
     <value>الاشتراكات</value>
@@ -794,6 +839,9 @@
   </data>
   <data name="Voided" xml:space="preserve">
     <value>ملغاة</value>
+  </data>
+  <data name="VoidedBy" xml:space="preserve">
+    <value>تم الإلغاء بواسطة</value>
   </data>
   <data name="VoidReason" xml:space="preserve">
     <value>سبب الإلغاء</value>

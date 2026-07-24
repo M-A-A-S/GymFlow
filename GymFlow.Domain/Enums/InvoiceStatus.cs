@@ -8,9 +8,15 @@ namespace GymFlow.Domain.Enums
 {
     public enum InvoiceStatus
     {
-        Unpaid = 1,
-        Partial = 2,
-        Paid = 3,
-        Cancelled = 4
+        // can edit freely
+        Draft = 1, 
+
+        // financial document, do not edit
+        Unpaid = 2,
+        Partial = 3,
+        Paid = 4,
+
+        // locked
+        Cancelled = 5
     }
 }
