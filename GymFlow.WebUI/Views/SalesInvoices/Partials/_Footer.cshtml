@@ -1,0 +1,241 @@
+﻿@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceAddUpdateDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="card shadow-sm border-0 mb-3">
+
+    <div class="card-body">
+
+        <div class="d-flex gap-2 justify-content-end">
+
+
+            <button type="button"
+                    class="btn btn-secondary"
+                    id="btnCancelInvoice">
+
+                <i class="fa fa-times"></i>
+
+                @Localizer["Cancel"]
+
+            </button>
+
+
+
+            <button type="button"
+                    class="btn btn-primary"
+                    id="btnSaveDraft">
+
+                <i class="fa fa-save"></i>
+
+                @Localizer["SaveDraft"]
+
+            </button>
+
+
+
+            <button type="button"
+                    class="btn btn-outline-primary"
+                    id="btnPrintInvoice">
+
+                <i class="fa fa-print"></i>
+
+                @Localizer["PrintInvoice"]
+
+            </button>
+
+
+
+            <button type="button"
+                    class="btn btn-success px-4"
+                    id="btnCompleteSale">
+
+                <i class="fa fa-check"></i>
+
+                @Localizer["CompleteSale"]
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+@*                     <script>
+                        function getInvoiceData()
+{
+
+    return {
+
+        memberId:
+            $("#MemberId").val(),
+
+
+        items:
+            cart,
+
+
+        payments:
+            payments,
+
+
+        discount:
+            Number($("#invoiceDiscount").val()) || 0,
+
+
+        tax:
+            Number($("#invoiceTax").val()) || 0
+
+    };
+
+}
+                    </script>
+
+                    <script>
+                            $("#btnCompleteSale").click(function(){
+
+
+        if(!validatePayment())
+        {
+
+            alert(
+                "Payment amount is not enough"
+            );
+
+            return;
+
+        }
+
+
+
+        let data =
+            getInvoiceData();
+
+
+
+        $.ajax({
+
+            url:"/SalesInvoice/Create",
+
+            type:"POST",
+
+            contentType:"application/json",
+
+            data:
+                JSON.stringify(data),
+
+
+            success:function(result){
+
+
+                if(result.success)
+                {
+
+                    toastr.success(
+                        "Invoice saved successfully"
+                    );
+
+
+                    clearInvoice();
+
+
+                }
+                else
+                {
+
+                    toastr.error(
+                        result.message
+                    );
+
+                }
+
+
+            },
+
+
+            error:function(){
+
+                toastr.error(
+                    "Error while saving invoice"
+                );
+
+            }
+
+
+        });
+
+
+    });
+                    </script>
+
+                    <script>
+                            $("#btnSaveDraft").click(function(){
+
+        saveInvoice("Draft");
+
+    });
+                    </script>
+
+                    <script>
+                        function saveInvoice(status)
+{
+
+    let data=getInvoiceData();
+
+    data.status=status;
+
+
+}
+                    </script>
+
+                    <script>
+                            $("#btnCancelInvoice").click(function(){
+
+        if(confirm("Clear invoice?"))
+        {
+
+            clearInvoice();
+
+        }
+
+    });
+                    </script>
+
+                    <script>
+                        function clearInvoice()
+{
+
+    cart=[];
+
+    payments=[];
+
+
+    renderCart();
+
+
+    calculateInvoice();
+
+
+    $("#MemberId")
+        .val(null)
+        .trigger("change");
+
+
+}
+                    </script>
+
+                    <script>
+                            $("#btnPrintInvoice").click(function(){
+
+        window.open(
+            "/SalesInvoice/Print?id="
+            + invoiceId,
+            "_blank"
+        );
+
+    });
+                    </script> *@

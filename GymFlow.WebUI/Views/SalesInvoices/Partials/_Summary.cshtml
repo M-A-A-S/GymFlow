@@ -1,0 +1,252 @@
+﻿@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceAddUpdateDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="card shadow-sm border-0 mb-3">
+
+    <div class="card-header">
+
+        <h5 class="mb-0">
+
+            <i class="fa fa-calculator me-2"></i>
+
+            @Localizer["Summary"]
+
+        </h5>
+
+    </div>
+
+
+    <div class="card-body">
+
+
+        <div class="d-flex justify-content-between mb-2">
+
+            <span>
+                @Localizer["SubTotal"]
+            </span>
+
+            <strong id="subtotal">
+                0.00
+            </strong>
+
+        </div>
+
+
+
+        <div class="d-flex justify-content-between mb-2">
+
+            <span>
+                @Localizer["Discount"]
+            </span>
+
+
+            <input type="number"
+                   id="invoiceDiscount"
+                   value="0"
+                   min="0"
+                   class="form-control form-control-sm w-50 text-end" />
+
+        </div>
+
+
+
+        <div class="d-flex justify-content-between mb-2">
+
+            <span>
+                @Localizer["Tax"]
+            </span>
+
+
+            <input type="number"
+                   id="invoiceTax"
+                   value="0"
+                   min="0"
+                   class="form-control form-control-sm w-50 text-end" />
+
+        </div>
+
+
+        <hr />
+
+
+        <div class="d-flex justify-content-between">
+
+            <h5>
+                @Localizer["GrandTotal"]
+            </h5>
+
+
+            <h5 class="text-primary">
+
+                <span id="grandTotal">
+                    0.00
+                </span>
+
+            </h5>
+
+        </div>
+
+
+        <hr />
+
+
+        <div class="d-flex justify-content-between mb-2">
+
+            <span>
+                @Localizer["Paid"]
+            </span>
+
+            <strong id="paidAmount">
+
+                0.00
+
+            </strong>
+
+        </div>
+
+
+        <div class="d-flex justify-content-between mb-2">
+
+            <span>
+                @Localizer["Remaining"]
+            </span>
+
+
+            <strong id="remainingAmount"
+                    class="text-danger">
+
+                0.00
+
+            </strong>
+
+
+        </div>
+
+
+
+        <div class="d-flex justify-content-between">
+
+            <span>
+                @Localizer["Change"]
+            </span>
+
+
+            <strong id="changeAmount"
+                    class="text-success">
+
+                0.00
+
+            </strong>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+@*                <script>
+                   // Replace the Previous
+
+                   function calculateInvoice()
+{
+
+    let subtotal = 0;
+
+
+    cart.forEach(item => {
+
+        subtotal += item.total;
+
+    });
+
+
+    let discount =
+        Number($("#invoiceDiscount").val()) || 0;
+
+
+    let tax =
+        Number($("#invoiceTax").val()) || 0;
+
+
+    let total =
+        subtotal - discount + tax;
+
+
+
+    $("#subtotal")
+        .text(subtotal.toLocaleString());
+
+
+    $("#grandTotal")
+        .text(total.toLocaleString());
+
+
+    calculatePaymentStatus();
+
+}
+               </script>
+
+               <script>
+                       $(document).on(
+    "keyup change",
+    "#invoiceDiscount,#invoiceTax",
+    function(){
+
+        calculateInvoice();
+
+    });
+               </script>
+
+               <script>
+                   function calculatePaymentStatus()
+{
+
+    let total =
+        Number(
+            $("#grandTotal").text().replace(/,/g,'')
+        );
+
+
+    let paid =
+        payments.reduce(
+            (sum,p)=>sum+p.amount,
+            0
+        );
+
+
+    let remaining = total - paid;
+
+
+    let change = 0;
+
+
+    if(remaining < 0)
+    {
+        change = Math.abs(remaining);
+        remaining = 0;
+    }
+
+
+    $("#paidAmount")
+        .text(paid.toLocaleString());
+
+
+    $("#remainingAmount")
+        .text(remaining.toLocaleString());
+
+
+    $("#changeAmount")
+        .text(change.toLocaleString());
+
+
+}
+               </script>
+
+               <script></script>
+
+               <script></script> *@

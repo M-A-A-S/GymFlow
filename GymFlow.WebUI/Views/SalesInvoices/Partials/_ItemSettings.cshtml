@@ -1,0 +1,452 @@
+﻿@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceAddUpdateDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="offcanvas offcanvas-end"
+     tabindex="-1"
+     id="itemSettingsOffcanvas"
+     aria-labelledby="itemSettingsLabel">
+
+    <div class="offcanvas-header">
+
+        <h5 id="itemSettingsLabel">
+            @Localizer["ItemSettings"]
+        </h5>
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas">
+        </button>
+
+    </div>
+
+    <div class="offcanvas-body">
+
+        <form id="frmItemSettings">
+
+            <input type="hidden" id="ItemId" />
+            <input type="hidden" id="ItemType" />
+
+            <!-- Loaded dynamically -->
+            <div id="itemSettingsContainer"></div>
+
+            <hr />
+
+            <button type="button"
+                    class="btn btn-primary w-100"
+                    id="btnAddToCart">
+
+                <i class="fa fa-cart-plus"></i>
+
+                @Localizer["AddToCart"]
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- PRODUCT TEMPLATE -->
+
+<script type="text/template" id="productSettingsTemplate">
+
+
+    <div class="mb-3">
+
+    <label class="form-label">
+
+    @Localizer["Product"]
+
+    </label>
+
+
+    <input id="ProductName"
+           class="form-control"
+           readonly />
+
+    </div>
+
+
+
+    <div class="mb-3">
+
+    <label class="form-label">
+
+    @Localizer["Price"]
+
+    </label>
+
+
+    <input id="UnitPrice"
+           class="form-control"
+           readonly />
+
+    </div>
+
+
+
+
+    <div class="mb-3">
+
+    <label class="form-label">
+
+    @Localizer["Quantity"]
+
+    </label>
+
+
+    <input id="Quantity"
+           type="number"
+           class="form-control"
+           value="1"
+           min="1"/>
+
+    </div>
+
+
+
+    <div class="mb-3">
+
+    <label class="form-label">
+
+    @Localizer["Discount"]
+
+    </label>
+
+
+    <input id="Discount"
+           type="number"
+           class="form-control"
+           value="0"/>
+
+    </div>
+
+
+
+    <div class="alert alert-primary">
+
+    @Localizer["Total"] :
+
+    <span id="ProductTotal">
+    0
+    </span>
+
+
+    </div>
+
+
+</script>
+
+
+
+
+
+<!-- SUBSCRIPTION TEMPLATE -->
+
+
+<script type="text/template" id="subscriptionSettingsTemplate">
+
+
+    <div class="mb-3">
+
+
+    <label class="form-label">
+
+    @Localizer["Subscription"]
+
+    </label>
+
+
+    <input id="SubscriptionName"
+           class="form-control"
+           readonly />
+
+
+    </div>
+
+
+
+
+    <div class="mb-3">
+
+
+    <label class="form-label">
+
+    @Localizer["Price"]
+
+    </label>
+
+
+    <input id="SubscriptionPrice"
+           class="form-control"
+           readonly />
+
+
+    </div>
+
+
+
+
+
+    <div class="mb-3">
+
+
+    <label class="form-label">
+
+    @Localizer["StartDate"]
+
+    </label>
+
+
+    <input id="StartDate"
+           type="date"
+           class="form-control"/>
+
+
+    </div>
+
+
+
+
+
+    <div class="mb-3">
+
+
+    <label class="form-label">
+
+    @Localizer["EndDate"]
+
+    </label>
+
+
+    <input id="EndDate"
+           type="date"
+           class="form-control"/>
+
+
+    </div>
+
+
+
+    <div class="alert alert-primary">
+
+    @Localizer["Duration"] :
+
+    <span id="SubscriptionDuration">
+
+    </span>
+
+    </div>
+
+
+
+</script>
+
+@* Product Settings *@
+@* <div id="productSettings">
+
+    <div class="mb-3">
+
+        <label>@Localizer["Product"]</label>
+
+        <input class="form-control"
+               id="ProductName"
+               readonly />
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>@Localizer["Quantity"]</label>
+
+            <input type="number"
+                   id="Quantity"
+                   value="1"
+                   min="1"
+                   class="form-control" />
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>@Localizer["Unit Price"]</label>
+
+            <input type="number"
+                   id="UnitPrice"
+                   class="form-control" />
+
+        </div>
+
+    </div>
+
+    <div class="mt-3">
+
+        <label>@Localizer["Discount"]</label>
+
+        <input type="number"
+               id="Discount"
+               value="0"
+               class="form-control" />
+
+    </div>
+
+    <div class="mt-3">
+
+        <div class="alert alert-light">
+
+            <strong>@Localizer["Total"] :</strong>
+
+            <span id="ProductTotal">
+
+                0.00
+
+            </span>
+
+        </div>
+
+    </div>
+
+</div> *@
+
+@* Subscription Settings *@
+@* <div id="subscriptionSettings">
+
+    <div class="mb-3">
+
+        <label>@Localizer["Subscription"]</label>
+
+        <input id="SubscriptionName"
+               readonly
+               class="form-control" />
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>@Localizer["Start Date"]</label>
+
+            <input type="date"
+                   id="StartDate"
+                   class="form-control" />
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>@Localizer["End Date"]</label>
+
+            <input type="date"
+                   id="EndDate"
+                   readonly
+                   class="form-control" />
+
+        </div>
+
+    </div>
+
+    <div class="mt-3">
+
+        <label>@Localizer["Price"]</label>
+
+        <input id="SubscriptionPrice"
+               class="form-control" />
+
+    </div>
+
+</div> *@
+
+    @*                <script>
+                           $(document).on("click", ".btnAddProduct", function () {
+
+        const id = $(this).data("id");
+
+        const product = products.find(x => x.id == id);
+
+        $("#ItemType").val("Product");
+        $("#ItemId").val(product.id);
+
+        $("#itemSettingsContainer").html($("#productSettings").html());
+
+        $("#ProductName").val(product.name);
+        $("#UnitPrice").val(product.price);
+        $("#Quantity").val(1);
+
+        calculateProductTotal();
+
+        new bootstrap.Offcanvas("#itemSettingsOffcanvas").show();
+
+    });
+                   </script>
+
+                   <script>
+                           $(document).on("click", ".btnAddSubscription", function () {
+
+        const id = $(this).data("id");
+
+        const plan = subscriptions.find(x => x.id == id);
+
+        $("#ItemType").val("Subscription");
+        $("#ItemId").val(plan.id);
+
+        $("#itemSettingsContainer").html($("#subscriptionSettings").html());
+
+        $("#SubscriptionName").val(plan.name);
+        $("#SubscriptionPrice").val(plan.price);
+
+        const start = new Date();
+
+        $("#StartDate").val(start.toISOString().substring(0,10));
+
+        calculateEndDate(plan.duration);
+
+        new bootstrap.Offcanvas("#itemSettingsOffcanvas").show();
+
+    });
+                   </script>
+                   <script>
+                           function calculateProductTotal(){
+
+        let qty = Number($("#Quantity").val());
+
+        let price = Number($("#UnitPrice").val());
+
+        let discount = Number($("#Discount").val());
+
+        let total = qty * price - discount;
+
+        $("#ProductTotal").text(total.toFixed(2));
+
+    }
+
+    $(document).on("keyup change",
+    "#Quantity,#UnitPrice,#Discount",
+    calculateProductTotal);
+                   </script>
+                   <script>
+                           function calculateEndDate(days){
+
+        let start = new Date($("#StartDate").val());
+
+        start.setDate(start.getDate()+days);
+
+        $("#EndDate").val(start.toISOString().substring(0,10));
+
+    }
+
+    $(document).on("change","#StartDate",function(){
+
+        const plan = subscriptions.find(x=>x.id==$("#ItemId").val());
+
+        calculateEndDate(plan.duration);
+
+    });
+                   </script> *@

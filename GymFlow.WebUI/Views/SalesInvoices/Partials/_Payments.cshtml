@@ -1,0 +1,224 @@
+﻿@using GymFlow.Domain.DTOs.SalesInvoice
+@using GymFlow.Domain.Enums
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+
+@model SalesInvoiceAddUpdateDTO
+
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+
+<div class="card shadow-sm border-0 mb-3">
+
+
+    <div class="card-header d-flex justify-content-between align-items-center">
+
+
+        <h5 class="mb-0">
+
+            <i class="fa fa-credit-card me-2"></i>
+
+            @Localizer["Payments"]
+
+        </h5>
+
+
+    </div>
+
+
+
+    <div class="card-body">
+
+
+
+        <!-- Add Payment -->
+
+
+        <div class="row g-2 mb-3">
+
+
+            <!-- Amount -->
+
+            <div class="col-md-3">
+
+                <input id="paymentAmount"
+                       class="form-control"
+                       type="number"
+                       step="0.01"
+                       placeholder="@Localizer["Amount"]" />
+
+            </div>
+
+
+
+
+            <!-- Payment Method -->
+
+            <div class="col-md-3">
+
+
+                <select id="paymentMethod"
+                        class="form-select"
+                        asp-items="Html.GetEnumSelectList<PaymentMethod>()">
+
+
+                    <option value="">
+                        @Localizer["SelectPaymentMethod"]
+                    </option>
+
+
+                </select>
+
+
+            </div>
+
+
+
+
+            <!-- Reference -->
+
+            <div class="col-md-3">
+
+                <input id="referenceNo"
+                       class="form-control"
+                       placeholder="@Localizer["ReferenceNo"]" />
+
+            </div>
+
+
+
+
+            <!-- Date -->
+
+            <div class="col-md-3">
+
+
+                <input id="paymentDate"
+                       type="date"
+                       class="form-control"
+                       value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+
+
+            </div>
+
+
+
+
+            <!-- Button -->
+
+            <div class="col-md-3">
+
+
+                <button type="button"
+                        id="btnAddPayment"
+                        class="btn btn-primary w-100">
+
+
+                    <i class="fa fa-plus"></i>
+
+                    @Localizer["Add"]
+
+
+                </button>
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+        <!-- Payments Table -->
+
+
+        <div class="table-responsive">
+
+
+            <table class="table table-hover align-middle">
+
+
+                <thead>
+
+
+                    <tr>
+
+
+                        <th>
+                            @Localizer["Amount"]
+                        </th>
+
+
+                        <th>
+                            @Localizer["PaymentMethod"]
+                        </th>
+
+
+                        <th>
+                            @Localizer["ReferenceNo"]
+                        </th>
+
+
+                        <th>
+                            @Localizer["PaymentDate"]
+                        </th>
+
+
+                        <th>
+                            @Localizer["Actions"]
+                        </th>
+
+
+                    </tr>
+
+
+                </thead>
+
+
+
+                <tbody id="paymentsTable">
+                </tbody>
+
+
+
+            </table>
+
+
+        </div>
+
+
+
+
+
+        <div class="alert  mt-3">
+
+
+            <div class="d-flex justify-content-between">
+
+
+                <span>
+                    @Localizer["Paid"]
+                    @* @Localizer["TotalPaid"] *@
+                </span>
+
+
+                <strong id="totalPaid">
+                    0.00
+                </strong>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+</div>

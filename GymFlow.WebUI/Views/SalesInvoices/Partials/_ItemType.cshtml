@@ -1,0 +1,100 @@
+﻿@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceAddUpdateDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="card shadow-sm border-0 mb-3">
+
+    <div class="card-header">
+
+        <h5 class="mb-0">
+            <i class="fa fa-box me-2"></i>
+            @Localizer["ItemType"]
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="row g-3">
+
+            <div class="col-6">
+
+                <button type="button"
+                        class="btn btn-primary w-100 item-type active"
+                        data-type="Product">
+
+                    <i class="fa fa-shopping-bag fa-2x mb-2"></i>
+
+                    <div class="fw-bold">
+                        @Localizer["Products"]
+                    </div>
+
+                </button>
+
+            </div>
+
+            <div class="col-6">
+
+                <button type="button"
+                        class="btn btn-outline-primary w-100 item-type"
+                        data-type="Subscription">
+
+                    <i class="fa fa-id-card fa-2x mb-2"></i>
+
+                    <div class="fw-bold">
+                        @Localizer["Subscriptions"]
+                    </div>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<input type="hidden"
+       id="SelectedItemType"
+       value="Product" />
+
+
+@*                 <script>
+                        $(document).on("click", ".item-type", function () {
+
+        $(".item-type")
+            .removeClass("btn-primary active")
+            .addClass("btn-outline-primary");
+
+        $(this)
+            .removeClass("btn-outline-primary")
+            .addClass("btn-primary active");
+
+        let type = $(this).data("type");
+
+        $("#SelectedItemType").val(type);
+
+        loadCategories(type);
+
+    });
+                </script>
+                <script>
+                    function loadCategories(type) {
+
+    if (type === "Product") {
+
+        loadProductCategories();
+
+    }
+    else {
+
+        loadSubscriptionCategories();
+
+    }
+
+}
+                </script> *@

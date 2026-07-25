@@ -129,8 +129,17 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="AddPayment" xml:space="preserve">
+    <value>Add Payment</value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>Address</value>
+  </data>
+  <data name="AddToCart" xml:space="preserve">
+    <value>Add To Cart</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
   </data>
   <data name="AlreadyCancelled" xml:space="preserve">
     <value>Invoice is already cancelled</value>
@@ -153,6 +162,9 @@
   <data name="AttendanceNotFound" xml:space="preserve">
     <value>Attendance record not found</value>
   </data>
+  <data name="Balance" xml:space="preserve">
+    <value>Balance</value>
+  </data>
   <data name="Bankak" xml:space="preserve">
     <value>Bankak</value>
   </data>
@@ -171,6 +183,9 @@
   <data name="CannotPayDraftInvoice" xml:space="preserve">
     <value>Cannot add payment to a draft invoice</value>
   </data>
+  <data name="Cart" xml:space="preserve">
+    <value>Cart</value>
+  </data>
   <data name="Cash" xml:space="preserve">
     <value>Cash</value>
   </data>
@@ -179,6 +194,9 @@
   </data>
   <data name="Category" xml:space="preserve">
     <value>Category</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Change</value>
   </data>
   <data name="ChartOfAccounts" xml:space="preserve">
     <value>Chart Of Accounts</value>
@@ -198,11 +216,23 @@
   <data name="ChooseImage" xml:space="preserve">
     <value>Choose Image</value>
   </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="ClearInvoice" xml:space="preserve">
+    <value>Clear invoice?</value>
+  </data>
   <data name="Code" xml:space="preserve">
     <value>Code</value>
   </data>
   <data name="Completed" xml:space="preserve">
     <value>Completed </value>
+  </data>
+  <data name="CompleteSale" xml:space="preserve">
+    <value>Complete Sale</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
   </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
@@ -213,11 +243,18 @@
   <data name="CreateNew" xml:space="preserve">
     <value>Create New</value>
   </data>
+  <data name="CurrentSubscription" xml:space="preserve">
+    <value>Current Subscription</value>
+  </data>
   <data name="Dashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
   <data name="Day" xml:space="preserve">
     <value>Day</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Days</value>
+    <comment>أيام</comment>
   </data>
   <data name="DaysPerWeek" xml:space="preserve">
     <value>Days Per Week</value>
@@ -258,6 +295,9 @@
   <data name="DuplicateProductInInvoice" xml:space="preserve">
     <value>A product cannot be added more than once to the same purchase invoice</value>
   </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
   <data name="DurationDays" xml:space="preserve">
     <value>Duration (Days)</value>
   </data>
@@ -281,6 +321,9 @@
   </data>
   <data name="EndTime" xml:space="preserve">
     <value>End Time</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error while saving invoice</value>
   </data>
   <data name="Expired" xml:space="preserve">
     <value>Expired</value>
@@ -323,6 +366,9 @@
   </data>
   <data name="GoBack" xml:space="preserve">
     <value>Go Back</value>
+  </data>
+  <data name="GrandTotal" xml:space="preserve">
+    <value>Grand Total</value>
   </data>
   <data name="GymSchedule" xml:space="preserve">
     <value>Gym Schedule</value>
@@ -438,6 +484,12 @@
   <data name="InvoiceNumberRequired" xml:space="preserve">
     <value>Invoice number is required</value>
   </data>
+  <data name="InvoiceSaved" xml:space="preserve">
+    <value>Invoice saved successfully</value>
+  </data>
+  <data name="Invoicesavedsuccessfully" xml:space="preserve">
+    <value>Invoice saved successfully</value>
+  </data>
   <data name="InvoiceStatus" xml:space="preserve">
     <value>Invoice Status</value>
   </data>
@@ -449,6 +501,12 @@
   </data>
   <data name="Item" xml:space="preserve">
     <value>Item</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>Items</value>
+  </data>
+  <data name="ItemSettings" xml:space="preserve">
+    <value>Item Settings</value>
   </data>
   <data name="ItemType" xml:space="preserve">
     <value>Item Type</value>
@@ -476,6 +534,9 @@
   </data>
   <data name="MemberManagement" xml:space="preserve">
     <value>Member Management</value>
+  </data>
+  <data name="MemberNo" xml:space="preserve">
+    <value>Member No</value>
   </data>
   <data name="MemberNotFound" xml:space="preserve">
     <value>Member not found</value>
@@ -558,6 +619,9 @@
   <data name="PaymentMethod" xml:space="preserve">
     <value>Payment Method</value>
   </data>
+  <data name="PaymentNotEnough" xml:space="preserve">
+    <value>Payment amount is not enough</value>
+  </data>
   <data name="Payments" xml:space="preserve">
     <value>Payments</value>
   </data>
@@ -570,6 +634,9 @@
   <data name="PersonalTraining" xml:space="preserve">
     <value>Personal Training</value>
   </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
   <data name="PhoneExists" xml:space="preserve">
     <value>Phone number already exists</value>
   </data>
@@ -578,6 +645,9 @@
   </data>
   <data name="Price" xml:space="preserve">
     <value>Price</value>
+  </data>
+  <data name="PrintInvoice" xml:space="preserve">
+    <value>Print Invoice</value>
   </data>
   <data name="Product" xml:space="preserve">
     <value>Product</value>
@@ -621,17 +691,29 @@
   <data name="ReceiptVouchers" xml:space="preserve">
     <value>Receipt Vouchers</value>
   </data>
+  <data name="Reference" xml:space="preserve">
+    <value>Reference</value>
+  </data>
   <data name="ReferenceNo" xml:space="preserve">
     <value>Reference Number</value>
   </data>
   <data name="RegisterDate" xml:space="preserve">
     <value>Registration Date</value>
   </data>
+  <data name="Remaining" xml:space="preserve">
+    <value>Remaining</value>
+  </data>
   <data name="RemainingAmount" xml:space="preserve">
     <value>Remaining Amount</value>
   </data>
   <data name="RemainingBalance" xml:space="preserve">
     <value>Remaining Balance</value>
+  </data>
+  <data name="RemainingDays" xml:space="preserve">
+    <value>Remaining Days</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
   </data>
   <data name="ReorderLevel" xml:space="preserve">
     <value>Reorder Level</value>
@@ -678,8 +760,20 @@
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="SaveDraft" xml:space="preserve">
+    <value>Save Draft</value>
+  </data>
+  <data name="SaveInvoiceFirst" xml:space="preserve">
+    <value>Please save invoice first</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="SearchItems" xml:space="preserve">
+    <value>Search Items</value>
+  </data>
+  <data name="SearchMember" xml:space="preserve">
+    <value>Search Member</value>
   </data>
   <data name="SelectCategory" xml:space="preserve">
     <value>-- Select Category --</value>
@@ -728,6 +822,9 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="Stock" xml:space="preserve">
+    <value>Stock</value>
   </data>
   <data name="Subscription" xml:space="preserve">
     <value>Subscription</value>
@@ -806,6 +903,9 @@
   </data>
   <data name="Tuesday" xml:space="preserve">
     <value>Tuesday</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>An unexpected error occurred</value>

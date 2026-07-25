@@ -1,0 +1,165 @@
+﻿@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceAddUpdateDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="card shadow-sm border-0 mb-3">
+
+    <div class="card-header d-flex justify-content-between align-items-center">
+
+        <h5 class="mb-0">
+            <i class="fa fa-user me-2"></i>
+            @Localizer["Member"]
+        </h5>
+
+        @* <button type="button"
+                class="btn btn-sm btn-outline-primary"
+                id="btnClearMember">
+
+            <i class="fa fa-times"></i>
+            @Localizer["Clear"]
+
+        </button> *@
+        <button type="button"
+                class="btn btn-sm text-white"
+                id="btnClearMember">
+
+            <i class="fa fa-times"></i>
+            @Localizer["Clear"]
+
+        </button>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                @Localizer["SearchMember"]
+
+            </label>
+
+            @* <select id="MemberId"
+                    class="form-select select2">
+            </select> *@
+            <select id="MemberId" class="form-select">
+                <option value="" disabled selected>@Localizer["SelectMember"]</option>
+                @foreach (var member in Model.Members)
+                {
+                    <option value="@member.Id" 
+                        data-member-name="@member.FullName"
+                        data-member-phone="@member.PhoneNumber"
+                    >
+                        @member.FullName
+                    </option>
+                }
+            </select>
+
+        </div>
+
+        <div id="memberInfo" style="display:none;">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <small class="text-muted">
+                        @Localizer["FullName"]
+                    </small>
+
+                    <div id="memberName"
+                         class="fw-bold">
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <small class="text-muted">
+                        @Localizer["Phone"]
+                    </small>
+
+                    <div id="memberPhone"
+                         class="fw-bold">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@*                     <script>
+                        $('#MemberId').select2({
+
+    width: '100%',
+
+    placeholder: localizer.searchMember,
+
+    allowClear: true,
+
+    ajax: {
+
+        url: '/Member/Search',
+
+        dataType: 'json',
+
+        delay: 300,
+
+        data: function (params) {
+
+            return {
+
+                term: params.term
+
+            };
+
+        },
+
+        processResults: function (data) {
+
+            return {
+
+                results: data
+
+            };
+
+        }
+
+    }
+
+});
+
+
+
+
+                    </script>
+                    <script>
+                            $('#MemberId').on('select2:select', function (e) {
+
+        let member = e.params.data;
+
+        $('#memberInfo').show();
+
+        $('#lblMemberNo').text(member.memberNo);
+
+        $('#lblPhone').text(member.phone);
+
+        $('#lblSubscription').text(member.subscription);
+
+        $('#lblRemaining').text(member.remainingDays);
+
+        $('#lblBalance').text(member.balance);
+
+        $('#lblStatus').html(member.statusBadge);
+
+    });
+                    </script> *@

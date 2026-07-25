@@ -1,0 +1,126 @@
+﻿@using System.Globalization
+@using System.Text.Json
+@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceAddUpdateDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["Sales Invoice"];
+}
+
+<div class="container-fluid py-3">
+
+    <div class="row">
+
+        <!-- Left Side -->
+        <div class="col-lg-6">
+
+            @await Html.PartialAsync("Partials/_Member", Model)
+
+            @await Html.PartialAsync("Partials/_ItemType")
+
+            @await Html.PartialAsync("Partials/_Category", Model)
+
+            @await Html.PartialAsync("Partials/_ItemGrid", Model)
+
+            @await Html.PartialAsync("Partials/_ItemSettings")
+
+        </div>
+
+        <!-- Right Side -->
+        <div class="col-lg-6">
+
+            @await Html.PartialAsync("Partials/_Cart")
+
+            @await Html.PartialAsync("Partials/_Summary")
+
+            @await Html.PartialAsync("Partials/_Payments")
+
+            @await Html.PartialAsync("Partials/_Footer")
+
+        </div>
+
+    </div>
+
+</div>
+
+<form id="invoiceForm" asp-action="Create" method="post">
+    <div id="hiddenInvoiceData"></div> 
+</form>
+
+@section Scripts {
+
+    <script>
+        window.currentLanguage =
+        @Html.Raw(JsonSerializer.Serialize(
+                CultureInfo.CurrentUICulture.TwoLetterISOLanguageName
+        ));
+
+        window.resources =
+        @Html.Raw(JsonSerializer.Serialize(
+                        CultureInfo.CurrentUICulture.TwoLetterISOLanguageName
+        ));
+
+        window.members =
+            @Html.Raw(JsonSerializer.Serialize(Model.Members));
+
+        window.products =
+            @Html.Raw(JsonSerializer.Serialize(Model.Products));
+
+        window.subscriptions =
+            @Html.Raw(JsonSerializer.Serialize(Model.SubscriptionTypes));
+
+
+            const resources = {
+
+            add: @Html.Raw(Json.Serialize(Localizer["Add"].Value)),
+
+            days:  @Html.Raw(Json.Serialize(Localizer["Days"].Value)),
+
+            day: @Html.Raw(Json.Serialize(Localizer["Day"].Value)),
+
+            remove: @Html.Raw(Json.Serialize(Localizer["Remove"].Value)),
+
+            search: @Html.Raw(Json.Serialize(Localizer["Search"].Value)),
+
+            product: @Html.Raw(Json.Serialize(Localizer["Product"].Value)),
+
+            subscription: @Html.Raw(Json.Serialize(Localizer["Subscription"].Value)),
+
+            saved: @Html.Raw(Json.Serialize(Localizer["InvoiceSaved"].Value)),
+
+            paymentRequired: @Html.Raw(Json.Serialize(Localizer["PaymentRequired"].Value)),
+
+            paymentExceedsInvoiceTotal: @Html.Raw(Json.Serialize(Localizer["PaymentExceedsInvoiceTotal"].Value)),
+
+
+        error:
+        @Html.Raw(Json.Serialize(Localizer["Error"].Value)),
+
+
+        paymentNotEnough:
+        @Html.Raw(Json.Serialize(Localizer["PaymentNotEnough"].Value)),
+
+
+        confirm:
+        @Html.Raw(Json.Serialize(Localizer["Confirm"].Value)),
+
+
+        clearInvoice:
+        @Html.Raw(Json.Serialize(Localizer["ClearInvoice"].Value)),
+
+
+        saveFirst:
+        @Html.Raw(Json.Serialize(Localizer["SaveInvoiceFirst"].Value))
+
+        };
+
+
+    </script>
+
+     <script src="~/js/pos.js"></script> 
+
+}

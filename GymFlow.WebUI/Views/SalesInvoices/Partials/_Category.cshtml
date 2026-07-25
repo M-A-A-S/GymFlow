@@ -1,0 +1,108 @@
+﻿@using System.Globalization
+@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceAddUpdateDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="card shadow-sm border-0 mb-3">
+
+    <div class="card-header d-flex justify-content-between align-items-center">
+
+        <h5 class="mb-0">
+            <i class="fa fa-tags me-2"></i>
+            @Localizer["Categories"]
+        </h5>
+
+        <input type="text"
+               id="txtCategorySearch"
+               class="form-control form-control-sm w-auto"
+               placeholder="@Localizer["Search"]" />
+
+    </div>
+
+    <div class="card-body">
+
+        <div id="categoryContainer" class="d-flex flex-wrap gap-2">
+
+            <button class="btn btn-primary category-btn active"
+                    data-id="0">
+
+                @Localizer["All"]
+
+            </button>
+
+            @foreach (var category in Model.Categories)
+            {
+                <button class="btn btn-outline-primary category-btn"
+                        data-type="Product"
+                        data-id="@category.Id">
+
+                    @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                        ? category?.NameAr
+                                        : category?.NameEn)
+                </button>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+<input type="hidden"
+       id="SelectedCategoryId"
+       value="0" />
+
+
+@*             <script>
+                    $(document).on("click", ".category-btn", function () {
+
+        $(".category-btn")
+            .removeClass("btn-primary active")
+            .addClass("btn-outline-primary");
+
+        $(this)
+            .removeClass("btn-outline-primary")
+            .addClass("btn-primary active");
+
+        let categoryId = $(this).data("id");
+
+        $("#SelectedCategoryId").val(categoryId);
+
+        filterItems();
+
+    });
+            </script>
+            <script>
+                    $("#txtCategorySearch").on("keyup", function () {
+
+        let value = $(this).val().toLowerCase();
+
+        $(".category-btn").each(function () {
+
+            let text = $(this).text().toLowerCase();
+
+            if (text.indexOf(value) > -1)
+                $(this).show();
+            else
+                $(this).hide();
+
+        });
+
+    });
+            </script>
+            <script>
+                function filterItems() {
+
+    let type = $("#SelectedItemType").val();
+
+    let categoryId = Number($("#SelectedCategoryId").val());
+
+    let search = $("#txtItemSearch").val();
+
+    loadItems(type, categoryId, search);
+
+}
+            </script> *@

@@ -24,6 +24,7 @@ html {
     --text-color: #0f172a;
     --background-color: #f8fafc;
     --card-background: #fff;
+    --elevated-background: #f5f7fa;
     --primary-color: #e89a0a;
     --primary-color-hover-lighter: #ffbf4d;
     --primary-color-hover-darker: #b37305;
@@ -42,6 +43,9 @@ html {
     /* ---------------- Others ---------------- */
     --transition: 0.3s ease-in-out all;
     --border-radius: 12px;
+        --product-card-background: #fdfdfd;
+    --product-card-hover: #f5f7fa;
+    --product-card-header: #f1f5f9;
 }
 
 /* Hide the scroll bar */
@@ -58,6 +62,7 @@ html[data-theme="dark"] {
     --text-color: #f1f5f9;
     --background-color: #0f172a;
     --card-background: #1e2637;
+    --elevated-background: #273246;
     --primary-color: #ffbf4d;
     --primary-color-hover-lighter: #b37305;
     --primary-color-hover-darker: #88520a;
@@ -68,6 +73,9 @@ html[data-theme="dark"] {
     /* ---------------- Inputs ---------------- */
     --input-text-color: #f1f5f9;
     --input-placeholder-color: #64748b;
+    --product-card-background: #273246;
+    --product-card-hover: #313d54;
+    --product-card-header: #36445d;
 }
 
 html[dir="rtl"] {
@@ -837,3 +845,116 @@ html[dir="rtl"] .submenu a {
 }
 
 /* End Details Image Section */
+
+/*Start POS*/
+.card {
+    border-radius: 12px;
+}
+
+.card-header {
+    border-bottom: 1px solid #eee;
+}
+
+    .card-header h6 {
+        color: #0d6efd;
+    }
+
+.pos-card {
+    min-height: 120px;
+}
+
+.category-pill {
+    cursor: pointer;
+}
+
+.product-card {
+    cursor: pointer;
+    transition: .2s;
+    background: var(--elevated-background);
+}
+
+    .product-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    }
+
+.cart-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.item-type {
+    background-color: var(--elevated-background);
+    height: 120px;
+    border-radius: 12px;
+    transition: .25s;
+}
+
+    .item-type:hover {
+        transform: translateY(-3px);
+    }
+
+    .item-type.active {
+        box-shadow: 0 0 15px rgba(13,110,253,.25);
+    }
+
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    
+}
+.btn-outline-primary {
+    border-color: var(--primary-color) !important;
+    color: var(--primary-color) !important;
+}
+.btn-outline-primary:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.category-btn {
+/*    background-color: var(--elevated-background);*/
+background-color: transparent;
+    border-radius: 30px;
+    padding: .45rem 1rem;
+    transition: .2s;
+}
+
+    .category-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .category-btn.active {
+        box-shadow: 0 0 12px rgba(13,110,253,.25);
+    }
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.product-card {
+    cursor: pointer;
+    transition: .25s;
+}
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 .75rem 1.5rem rgba(0,0,0,.15);
+    }
+
+    .product-card .card-footer {
+        border-top: none;
+    }
+
+.alert-primary {
+    color: var(--primary-color-hover-darker);
+    background-color: color-mix( in srgb, var(--primary-color) 20%, white );
+    border-color: var(--primary-color);
+}
+
+.offcanvas {
+    background-color: var(--card-background);
+}
+.btn-close {
+    color: var(--text-color) !important;
+}
+/*End POS*/
