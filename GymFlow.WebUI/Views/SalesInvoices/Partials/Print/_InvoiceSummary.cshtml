@@ -1,0 +1,85 @@
+﻿@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+@functions {
+
+    string Money(decimal value)
+    {
+        return value.ToString("N2",
+            CultureInfo.CurrentCulture);
+    }
+
+}
+
+
+<div class="summary">
+
+
+    <table>
+
+
+        <tr>
+
+            <td>
+                @Localizer["SubTotal"]
+            </td>
+
+            <td class="money">
+                @Money(Model.SubTotal)
+            </td>
+
+        </tr>
+
+
+
+        <tr>
+
+            <td>
+                @Localizer["Discount"]
+            </td>
+
+            <td class="money">
+                @Money(Model.Discount)
+            </td>
+
+        </tr>
+
+
+
+        <tr>
+
+            <td>
+                @Localizer["Tax"]
+            </td>
+
+            <td class="money">
+                @Money(Model.Tax)
+            </td>
+
+        </tr>
+
+
+
+        <tr class="total">
+
+            <td>
+                @Localizer["GrandTotal"]
+            </td>
+
+            <td class="money">
+                @Money(Model.NetAmount)
+            </td>
+
+        </tr>
+
+
+    </table>
+
+
+</div>

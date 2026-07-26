@@ -167,7 +167,7 @@ namespace GymFlow.Infrastructure.Services
         {
             try
             {
-                var SalesInvoice = await _appDbContext.SalesInvoices
+                var salesInvoice = await _appDbContext.SalesInvoices
                     .Include(x => x.Member)
                     .Include(x => x.Details)
                     .Include(x => x.Payments)
@@ -175,28 +175,36 @@ namespace GymFlow.Infrastructure.Services
                     .AsSplitQuery()
                     .FirstOrDefaultAsync(x => x.Id == id);
 
-                if (SalesInvoice == null)
+                var settings = await _appDbContext.SystemSettings.FirstOrDefaultAsync();
+                
+
+                if (salesInvoice == null)
                 {
                     return Result<SalesInvoiceDTO>.Failure(ResultCodes.NotFound, HttpStatusCodes.NotFound);
                 }
 
-                await LoadItemDetails(SalesInvoice.Details.ToList());
+                await LoadItemDetails(salesInvoice.Details.ToList());
 
 
-                var result = SalesInvoice.ToDTO();
+                var result = salesInvoice.ToDTO();
                 //result.Details = SalesInvoice.Details.Select(x => x.ToDTO()).ToList();
-                foreach (var detail in SalesInvoice.Details)
+                foreach (var detail in salesInvoice.Details)
                 {
                     var detailDTO = detail.ToDTO();
                     detailDTO.Product = detail.Product.ToDTO();
                     detailDTO.SubscriptionType = detail.SubscriptionType.ToDTO();
                     result.Details.Add(detailDTO);
                 }
-                result.Payments = SalesInvoice.Payments.Select(x => x.ToDTO()).ToList();
+                result.Payments = salesInvoice.Payments.Select(x => x.ToDTO()).ToList();
 
-                if (SalesInvoice.Member is not null)
+                if (salesInvoice.Member is not null)
                 {
-                    result.Member = SalesInvoice.Member.ToDTO();
+                    result.Member = salesInvoice.Member.ToDTO();
+                }
+
+                if (settings is not null)
+                {
+                    result.SystemSetting = settings.ToDTO();
                 }
 
                 return Result<SalesInvoiceDTO>.Success(result);

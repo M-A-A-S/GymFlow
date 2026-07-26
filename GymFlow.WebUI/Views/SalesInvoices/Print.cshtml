@@ -1,0 +1,69 @@
+﻿
+@using GymFlow.Domain.DTOs.SalesInvoice
+@using GymFlow.Domain.Enums
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+
+@model SalesInvoiceDTO
+
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    Layout = "_PrintLayout";
+
+    bool rtl = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+
+    string Money(decimal value)
+    {
+        return value.ToString("N2", CultureInfo.CurrentCulture);
+    }
+}
+
+
+
+<div class="invoice">
+
+    <partial name="Partials/Print/_PrintHeader" model="Model" />
+
+    <partial name="Partials/Print/_MemberInfo" model="Model" />
+
+    <partial name="Partials/Print/_InvoiceItems" model="Model" />
+
+    <partial name="Partials/Print/_Payments" model="Model" />
+
+    <partial name="Partials/Print/_InvoiceSummary" model="Model" />
+
+    <partial name="Partials/Print/_Signatures" model="Model" />
+
+    <partial name="Partials/Print/_PrintFooter" model="Model" />
+
+</div>
+
+<div class="actions">
+
+    <button class="btn-print"
+            onclick="window.print()">
+
+        <i class="bi bi-printer-fill"></i>
+
+        @Localizer["Print"]
+
+    </button>
+
+</div>
+
+<script>
+
+    // Uncomment if you want to print immediately.
+    // window.onload = function () {
+    //     window.print();
+    // };
+
+    // Uncomment if you want to go back after printing.
+    // window.onafterprint = function () {
+    //     window.location.href='@Url.Action("Index")';
+    // };
+
+</script>
+

@@ -1,0 +1,109 @@
+﻿@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceDTO
+
+@using System.Globalization
+
+
+@using GymFlow.Domain.Extensions
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+
+
+@functions {
+
+    string Money(decimal value)
+    {
+        return value.ToString("N2",
+            CultureInfo.CurrentCulture);
+    }
+
+}
+
+
+@if (Model.Payments != null && Model.Payments.Any())
+{
+
+    <div class="card mt-4">
+
+
+        <h4>
+
+            <i class="bi bi-credit-card-fill"></i>
+
+            @Localizer["Payments"]
+
+        </h4>
+
+
+
+        <table>
+
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        @Localizer["PaymentMethod"]
+                    </th>
+
+                    <th>
+                        @Localizer["ReferenceNo"]
+                    </th>
+
+                    <th>
+                        @Localizer["Amount"]
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+
+            <tbody>
+
+
+                @foreach (var payment in Model.Payments)
+                {
+
+                    <tr>
+
+                        <td>
+
+                            @payment.PaymentMethod.ToLocalizedString()
+
+                        </td>
+
+
+                        <td>
+
+                            @(payment.ReferenceNo ?? "-")
+
+                        </td>
+
+
+                        <td class="money">
+
+                            @Money(payment.Amount)
+
+                        </td>
+
+
+                    </tr>
+
+                }
+
+
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
+}

@@ -649,7 +649,7 @@
     <value>طباعة الفاتورة</value>
   </data>
   <data name="Product" xml:space="preserve">
-    <value>المنتج</value>
+    <value>منتج</value>
   </data>
   <data name="ProductCodeAlreadyExists" xml:space="preserve">
     <value>كود المنتج موجود مسبقاً</value>

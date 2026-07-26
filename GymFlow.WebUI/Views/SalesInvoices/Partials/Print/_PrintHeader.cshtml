@@ -1,0 +1,131 @@
+﻿@using System.Globalization
+@model GymFlow.Domain.DTOs.SalesInvoice.SalesInvoiceDTO
+
+
+@using GymFlow.Domain.Constants
+@using GymFlow.Domain.Resources.Shared
+@using GymFlow.WebUI.Extensions
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+@{
+    bool rtl = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+}
+
+<div class="invoice-header">
+
+    <div class="company-section">
+
+        @* @if (!string.IsNullOrEmpty(Model.SystemSetting?.LogoUrl))
+        {
+            <img class="logo"
+                 src="@Url.Content(Model.SystemSetting.LogoUrl)" />
+        } *@
+
+        <div class="table-image-wrapper"> 
+            @if (!string.IsNullOrWhiteSpace(Model?.SystemSetting?.LogoUrl))
+            {
+                @* <img src="@item.ImageUrl" *@
+                <img src="@Model?.SystemSetting?.LogoUrl.GetImageUrl(Constants.SystemSettingsFolder)"
+                     class="table-image"
+                     alt="@(rtl? Model.SystemSetting.NameAr : Model.SystemSetting.NameEn)"
+                     onerror="this.src='/uploads/no-image.svg'" />
+            }
+            else
+            {
+                <div class="table-no-image">
+                    @Localizer["NoImage"]
+                </div>
+            }
+         </div>
+
+        <div class="company-details">
+            <h1>
+
+                @(rtl
+                                ? Model.SystemSetting.NameAr
+                                : Model.SystemSetting.NameEn)
+
+            </h1>
+
+            <p>
+                <i class="bi bi-geo-alt-fill"></i>
+
+                @(rtl
+                                ? Model.SystemSetting.AddressAr
+                                : Model.SystemSetting.AddressEn)
+
+            </p>
+
+
+            <p>
+
+                <i class="bi bi-telephone-fill"></i>
+
+                @Model.SystemSetting.Phone
+
+            </p>
+
+
+            <p>
+
+                <i class="bi bi-envelope-fill"></i>
+
+                @Model.SystemSetting.Email
+
+            </p>
+
+
+            <p>
+
+                <i class="bi bi-globe"></i>
+
+                @Model.SystemSetting.Website
+
+            </p>
+
+        </div>        
+
+
+    </div>
+
+
+    <div class="invoice-info">
+
+
+        <h2>
+
+            <i class="bi bi-receipt"></i>
+
+            
+            @Localizer["SalesInvoice"]
+
+        </h2>
+
+
+        <strong>
+            @Localizer["InvoiceNo"]
+        </strong>
+
+        <br />
+
+        @Model.InvoiceNo
+
+
+        <br />
+
+
+        <strong>
+            @Localizer["InvoiceDate"]
+        </strong>
+
+        <br />
+
+        @Model.InvoiceDate.ToString("dd/MM/yyyy HH:mm")
+
+
+    </div>
+
+
+</div>

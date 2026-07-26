@@ -1,0 +1,30 @@
+﻿@using System.Globalization
+@model GymFlow.Domain.DTOs.SalesInvoice.SalesInvoiceDTO
+
+
+@{
+	bool rtl =
+	CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+}
+
+
+<div class="footer">
+
+	<i class="bi bi-heart-fill text-danger"></i>
+
+	@(rtl
+		?
+		Model.SystemSetting.ReceiptFooterAr
+		:
+		Model.SystemSetting.ReceiptFooterEn)
+
+
+	<br />
+
+
+	@* <i class="bi bi-heart-fill text-danger"></i>
+
+	Thank you for choosing GymFlow *@
+
+
+</div>

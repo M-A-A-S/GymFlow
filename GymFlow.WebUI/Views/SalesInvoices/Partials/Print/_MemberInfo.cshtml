@@ -1,0 +1,72 @@
+﻿
+@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+<div class="info">
+
+
+    <div class="card">
+
+
+        <h4>
+
+            <i class="bi bi-person-fill"></i>
+
+            @Localizer["Member"]
+
+        </h4>
+
+
+        <strong>
+
+            @Model?.Member?.FullName
+
+        </strong>
+
+
+        @if (!string.IsNullOrEmpty(Model?.Member?.PhoneNumber))
+        {
+            <p>
+
+                <i class="bi bi-telephone"></i>
+
+                @Model?.Member?.PhoneNumber
+
+            </p>
+        }
+
+
+    </div>
+
+
+
+    @if (User.Identity.Name is not null)
+    {
+        <div class="card">
+
+
+            <h4>
+
+                <i class="bi bi-person-badge"></i>
+
+                @Localizer["Cashier"]
+
+
+            </h4>
+
+
+            @User.Identity?.Name
+
+
+        </div>
+    }
+
+    
+
+
+</div>

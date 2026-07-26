@@ -70,11 +70,20 @@
                     </td>
                     <td>@item.Notes</td>
                     <td>
-                        <a asp-action="Edit"
+                        @* <a asp-action="Edit"
                            asp-route-id="@item.Id"
                            class="btn btn-icon btn-outline-primary tooltip-btn"
                            data-tooltip="@Localizer["Edit"]">
                             <i class="fa fa-pen"></i>
+                        </a> *@
+                        <a asp-action="Print"
+                           asp-route-id="@item.Id"
+                           target="_blank"
+                           class="btn btn-icon btn-outline-secondary tooltip-btn"
+                           data-tooltip="@Localizer["Print"]">
+
+                            <i class="fa fa-print"></i>
+
                         </a>
                         <a asp-action="Details"
                            asp-route-id="@item.Id"
@@ -82,12 +91,12 @@
                            data-tooltip="@Localizer["Details"]">
                             <i class="fa fa-info"></i>
                         </a>
-                        <a asp-action="Delete"
+                        @* <a asp-action="Delete"
                            asp-route-id="@item.Id"
                            class="btn btn-icon btn-outline-danger tooltip-btn"
                            data-tooltip="@Localizer["Delete"]">
                             <i class="fa fa-trash"></i>
-                        </a>
+                        </a> *@
                     </td>
                 </tr>
             }

@@ -1,0 +1,296 @@
+/* Import English and Arabic fonts */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Nunito:wght@400;700&family=Cairo:wght@400;700&family=Tajawal:wght@400;700&display=swap");
+
+:root {
+    --primary-color: #e89a0a;
+    --text-color: #0f172a;
+    --background-color: #f8fafc;
+    --card-background: #fff;
+}
+
+html[dir="rtl"] {
+    --heading-font: "Cairo", sans-serif;
+    --body-font: "Tajawal", sans-serif;
+}
+
+html[dir="ltr"] {
+    --heading-font: "Roboto", sans-serif;
+    --body-font: "Nunito", sans-serif;
+}
+
+body {
+    font-family: var(--body-font);
+    font-weight: 400;
+    line-height: 1.75;
+    color: var(--text-color);
+}
+
+
+/* Main invoice container */
+
+.invoice {
+    max-width: 900px;
+    margin: 30px auto;
+    background-color: var(--background-color);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.12);
+}
+
+
+/* Header */
+
+.invoice-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 30px;
+    align-items: start;
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+
+.company-section {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+
+.logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+}
+
+
+.table-image-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border-color);
+    background: #f8f9fa;
+    background-color: var(--card-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.table-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+.table-no-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+.company h1 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 30px;
+    font-weight: 700;
+}
+
+
+.company p {
+    margin: 5px 0;
+    color: #666;
+}
+
+
+.invoice-info {
+    text-align: right;
+}
+
+
+    .invoice-info h2 {
+        margin: 0 0 15px;
+        color: var(--primary-color);
+    }
+
+
+/* Information cards */
+
+.info {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+
+.card {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 18px;
+}
+
+
+    .card h4 {
+        margin-top: 0;
+        color: #0d6efd;
+        color: var(--primary-color);
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 8px;
+    }
+
+
+/* Tables */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+thead {
+    background-color: #0d6efd;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+
+th {
+    padding: 12px;
+    font-weight: 600;
+}
+
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+
+tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
+
+.money {
+    text-align: right;
+}
+
+
+/* Payment table */
+
+.payment-icon {
+    margin-right: 5px;
+}
+
+
+/* Summary */
+
+.summary {
+    width: 350px;
+    margin-left: auto;
+    margin-top: 30px;
+}
+
+
+    .summary td {
+        border: none;
+    }
+
+
+    .summary .total {
+        border-top: 2px solid #333;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+
+/* Signatures */
+
+.signatures {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 70px;
+}
+
+
+.signature {
+    width: 220px;
+    text-align: center;
+}
+
+
+    .signature div {
+        border-top: 1px solid black;
+        margin-bottom: 10px;
+    }
+
+
+/* Footer */
+
+.footer {
+    margin-top: 50px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}
+
+
+/* Print button */
+
+.actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+
+.btn-print {
+    background: #0d6efd;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+/* Printing */
+
+@media print {
+
+
+    body {
+        background: white;
+    }
+
+
+    .invoice {
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+    }
+
+
+    .actions {
+        display: none;
+    }
+
+
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+}

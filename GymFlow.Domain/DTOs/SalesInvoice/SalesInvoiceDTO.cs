@@ -1,6 +1,7 @@
 ﻿using GymFlow.Domain.DTOs.Member;
 using GymFlow.Domain.DTOs.SalesInvoiceDetail;
 using GymFlow.Domain.DTOs.SalesPayment;
+using GymFlow.Domain.DTOs.SystemSetting;
 using GymFlow.Domain.Enums;
 using GymFlow.Domain.Resources.Shared;
 using System;
@@ -87,6 +88,8 @@ namespace GymFlow.Domain.DTOs.SalesInvoice
         public MemberDTO? Member { get; set; }
         public ICollection<SalesInvoiceDetailDTO> Details { get; set; } = new List<SalesInvoiceDetailDTO>();
         public ICollection<SalesPaymentDTO> Payments { get; set; } = new List<SalesPaymentDTO>();
+
+        public SystemSettingDTO? SystemSetting { get; set; }
 
     }
 }

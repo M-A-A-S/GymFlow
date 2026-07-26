@@ -90,8 +90,25 @@ namespace GymFlow.WebUI.Controllers
             }
 
             Success(addResult.Code);
-            return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Print), new { id = addResult.Data });
         }
+        #endregion
+
+        #region ========================= Print =========================
+        [HttpGet]
+        public async Task<IActionResult> Print(int id)
+        {
+            var salesInvoice = await GetEntityOrNull(_service.GetByIdAsync(id));
+
+            if (salesInvoice is null)
+            {
+                return NotFound();
+            }
+
+            return View(salesInvoice);
+        }
+
         #endregion
 
         #region ========================= Update =========================

@@ -1,0 +1,123 @@
+﻿@using GymFlow.Domain.DTOs.SalesInvoice
+@using GymFlow.Domain.Enums
+@using System.Globalization
+
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@model SalesInvoiceDTO
+
+@{
+    bool rtl = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+}
+
+@functions {
+
+    string Money(decimal value)
+    {
+        return value.ToString("N2",
+            CultureInfo.CurrentCulture);
+    }
+
+}
+
+
+<table>
+
+    <thead>
+
+        <tr>
+
+            <th>#</th>
+
+            <th>@Localizer["Item"]</th>
+
+            <th>@Localizer["Type"]</th>
+
+            <th>@Localizer["Quantity"]</th>
+
+            <th>@Localizer["Price"]</th>
+
+            <th>@Localizer["Total"]</th>
+
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+
+
+        @{
+            int index = 1;
+        }
+
+
+        @foreach (var item in Model.Details)
+        {
+
+            <tr>
+
+
+                <td>
+                    @index
+                </td>
+
+
+                <td>
+
+                    @if (item.ItemType == SaleItemType.Product)
+                    {
+                        @(rtl ? item.Product.NameAr : item.Product.NameEn)
+                    }
+                    else
+                    {
+                        @(rtl ? item.SubscriptionType.NameAr : item.SubscriptionType.NameEn)
+                    }
+
+
+                </td>
+
+
+                <td>
+
+                    @Localizer[item.ItemType.ToString()]
+
+                </td>
+
+
+                <td>
+
+                    @item.Quantity
+
+                </td>
+
+
+                <td class="money">
+
+                    @Money(item.UnitPrice)
+
+                </td>
+
+
+                <td class="money">
+
+                    @Money(item.Total)
+
+                </td>
+
+
+            </tr>
+
+
+            index++;
+
+        }
+
+
+    </tbody>
+
+
+</table>

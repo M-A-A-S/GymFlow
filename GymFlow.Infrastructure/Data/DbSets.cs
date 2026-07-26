@@ -31,5 +31,7 @@ namespace GymFlow.Infrastructure.Data
         public DbSet<SalesInvoiceDetail> SalesInvoiceDetails { get; set; }
         public DbSet<SalesPayment> SalesPayments { get; set; }
 
+        public DbSet<SystemSetting> SystemSettings { get; set; }
+
     }
 }
