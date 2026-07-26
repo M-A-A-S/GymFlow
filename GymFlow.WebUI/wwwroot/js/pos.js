@@ -535,6 +535,11 @@ function openItemSettings() {
     $("#ItemId").val(id);
     $("#ItemType").val(type);
 
+    if (type === "Subscription" && !$("#MemberId").val()) {
+        toastr.error(resources.memberRequiredForSubscription);
+        return;
+    }
+
     if (type === "Product") {
         loadProductSettings(id);
     }
@@ -1200,6 +1205,8 @@ $("#txtItemSearch").on("keyup", function () {
 
 function addPayment() {
 
+
+
     let payment =
     {
 
@@ -1227,10 +1234,20 @@ function addPayment() {
 
     };
 
-
     
 
     if (payment.amount <= 0) {
+        toastr.error(resources.invalidPaymentAmount);
+        return;
+    }
+
+    if (!payment.paymentMethod || payment.paymentMethod <= 0) {
+        toastr.error(resources.paymentMethodRequired);
+        return;
+    }
+
+    if (!payment.paymentDate) {
+        toastr.error(resources.invalidPaymentDate);
         return;
     }
 
@@ -1550,6 +1567,8 @@ function completeSale() {
 
     }
 
+    console.log("cart -> ", cart)
+
 
 
     buildInvoiceModel();
@@ -1817,8 +1836,13 @@ function buildInvoiceModelDetails(container) {
 
         if (item.type === "Subscription") {
 
+            //container.append(createHidden(
+            //    `SalesInvoice.Details[${index}].StartDate`,
+            //    item.startDate
+            //));
+
             container.append(createHidden(
-                `SalesInvoice.Details[${index}].StartDate`,
+                `SalesInvoice.Details[${index}].SubscriptionStartDate`,
                 item.startDate
             ));
 

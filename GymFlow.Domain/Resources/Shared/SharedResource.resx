@@ -537,6 +537,9 @@
   <data name="MemberAlreadyCheckedIn" xml:space="preserve">
     <value>Member already checked in today</value>
   </data>
+  <data name="MemberAlreadyHasSubscription" xml:space="preserve">
+    <value>The member already has an active subscription that overlaps with the selected period</value>
+  </data>
   <data name="MemberAttendance" xml:space="preserve">
     <value>Member Attendance</value>
   </data>
@@ -551,6 +554,9 @@
   </data>
   <data name="MemberNotFound" xml:space="preserve">
     <value>Member not found</value>
+  </data>
+  <data name="MemberRequiredForSubscription" xml:space="preserve">
+    <value>A member must be selected when selling a subscription</value>
   </data>
   <data name="Members" xml:space="preserve">
     <value>Members</value>
@@ -629,6 +635,9 @@
   </data>
   <data name="PaymentMethod" xml:space="preserve">
     <value>Payment Method</value>
+  </data>
+  <data name="PaymentMethodRequired" xml:space="preserve">
+    <value>Payment method is required</value>
   </data>
   <data name="PaymentNotEnough" xml:space="preserve">
     <value>Payment amount is not enough</value>
@@ -857,6 +866,9 @@
   </data>
   <data name="Subscriptions" xml:space="preserve">
     <value>Subscriptions</value>
+  </data>
+  <data name="SubscriptionStartDateRequired" xml:space="preserve">
+    <value>Subscription start date is required</value>
   </data>
   <data name="SubscriptionStatus" xml:space="preserve">
     <value>Subscription Status</value>

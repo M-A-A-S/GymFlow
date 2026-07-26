@@ -96,6 +96,14 @@
 
             paymentExceedsInvoiceTotal: @Html.Raw(Json.Serialize(Localizer["PaymentExceedsInvoiceTotal"].Value)),
 
+    paymentMethodRequired : @Html.Raw(Json.Serialize(Localizer["PaymentMethodRequired"].Value)),
+
+    invalidPaymentAmount : @Html.Raw(Json.Serialize(Localizer["InvalidPaymentAmount"].Value)),
+
+    invalidPaymentDate : @Html.Raw(Json.Serialize(Localizer["InvalidPaymentDate"].Value)),
+
+    memberRequiredForSubscription : @Html.Raw(Json.Serialize(Localizer["MemberRequiredForSubscription"].Value)),
+
 
         error:
         @Html.Raw(Json.Serialize(Localizer["Error"].Value)),

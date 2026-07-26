@@ -1321,6 +1321,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The member already has an active subscription that overlaps with the selected period.
+        /// </summary>
+        public static string MemberAlreadyHasSubscription {
+            get {
+                return ResourceManager.GetString("MemberAlreadyHasSubscription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Member Attendance.
         /// </summary>
         public static string MemberAttendance {
@@ -1362,6 +1371,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string MemberNotFound {
             get {
                 return ResourceManager.GetString("MemberNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A member must be selected when selling a subscription.
+        /// </summary>
+        public static string MemberRequiredForSubscription {
+            get {
+                return ResourceManager.GetString("MemberRequiredForSubscription", resourceCulture);
             }
         }
         
@@ -1596,6 +1614,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string PaymentMethod {
             get {
                 return ResourceManager.GetString("PaymentMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment method is required.
+        /// </summary>
+        public static string PaymentMethodRequired {
+            get {
+                return ResourceManager.GetString("PaymentMethodRequired", resourceCulture);
             }
         }
         
@@ -2280,6 +2307,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Subscriptions {
             get {
                 return ResourceManager.GetString("Subscriptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subscription start date is required.
+        /// </summary>
+        public static string SubscriptionStartDateRequired {
+            get {
+                return ResourceManager.GetString("SubscriptionStartDateRequired", resourceCulture);
             }
         }
         

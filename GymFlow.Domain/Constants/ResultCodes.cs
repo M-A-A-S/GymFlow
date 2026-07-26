@@ -74,7 +74,12 @@ namespace GymFlow.Domain.Constants
 
         public const string InsufficientStock = "InsufficientStock";
         public const string InvalidStockQuantity = "InvalidStockQuantity";
-        public const string InvalidStockMovementType = "InvalidStockMovementType ";
+        public const string InvalidStockMovementType = "InvalidStockMovementType";
+
+
+        public const string SubscriptionStartDateRequired = "SubscriptionStartDateRequired";
+        public const string MemberAlreadyHasSubscription = "MemberAlreadyHasSubscription";
+        public const string MemberRequiredForSubscription = "MemberRequiredForSubscription";
 
 
 

@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,6 +59,15 @@ namespace GymFlow.Infrastructure.Services
                         validationResult.StatusCode);
                 }
 
+                var subscriptionValidation = await ValidateSubscriptionDetailsAsync(dto);
+
+                if (!subscriptionValidation.IsSuccess)
+                {
+                    return Result<int>.Failure(
+                        subscriptionValidation.Code,
+                        subscriptionValidation.StatusCode);
+                }
+
                 var entity = dto.ToEntity();
                 entity.Status = InvoiceStatus.Unpaid;
                 entity.InvoiceNo = await GenerateInvoiceNumber();
@@ -86,6 +96,7 @@ namespace GymFlow.Infrastructure.Services
                     return Result<int>.Failure(stockResult.Code, stockResult.StatusCode);
                 }
 
+                await CreateMemberSubscriptionsAsync(dto);
 
                 _appDbContext.SalesInvoices.Add(entity);
                 await _appDbContext.SaveChangesAsync();
@@ -774,6 +785,110 @@ namespace GymFlow.Infrastructure.Services
             }
 
             return Result<bool>.Success(true);
+
+        }
+
+        private async Task<Result<bool>> ValidateSubscriptionDetailsAsync(SalesInvoiceDTO dto)
+        {
+            if (!dto.MemberId.HasValue)
+            {
+                return Result<bool>.Success(true);
+            }
+
+            var subscriptionDetails = dto.Details
+                .Where(x => x.ItemType == SaleItemType.Subscription)
+                .ToList();
+
+            if (!subscriptionDetails.Any())
+            {
+                return Result<bool>.Success(true);
+            }
+
+            if (!dto.MemberId.HasValue)
+            {
+                return Result<bool>.Failure(
+                        ResultCodes.MemberRequiredForSubscription,
+                        HttpStatusCodes.BadRequest);
+            }
+
+            foreach (var detail in subscriptionDetails)
+            {
+                if (!detail.SubscriptionStartDate.HasValue)
+                {
+                    return Result<bool>.Failure(
+                        ResultCodes.SubscriptionStartDateRequired,
+                        HttpStatusCodes.BadRequest);
+
+                    
+                }
+
+                var subscription = await _appDbContext.SubscriptionTypes
+                        .FirstOrDefaultAsync(x => x.Id == detail.ItemId);
+
+                if (subscription == null)
+                {
+                    return Result<bool>.Failure(
+                        ResultCodes.SubscriptionPlanNotFound,
+                        HttpStatusCodes.NotFound);
+                }
+
+                var startDate = detail.SubscriptionStartDate.Value;
+                var endDate = startDate.AddDays(subscription.DurationDays);
+
+                bool hasOverlap = await _appDbContext.MemberSubscriptions
+                    .AnyAsync(x =>
+                    x.MemberId == dto.MemberId &&
+                    x.SubscriptionTypeId == detail.ItemId &&
+                    x.StartDate <= endDate &&
+                    x.EndDate >= startDate);
+
+                if (hasOverlap)
+                {
+                    return Result<bool>.Failure(
+                        ResultCodes.MemberAlreadyHasSubscription,
+                        HttpStatusCodes.BadRequest);
+                }
+
+            }
+
+            return Result<bool>.Success(true);
+
+        }
+
+        private async Task CreateMemberSubscriptionsAsync(SalesInvoiceDTO invoice)
+        {
+            if (!invoice.MemberId.HasValue)
+            {
+                return;
+            }
+
+            var subscriptionDetails = invoice.Details
+                .Where(x => x.ItemType == SaleItemType.Subscription)
+                .ToList();
+
+            if (!subscriptionDetails.Any())
+            {
+                return;
+            }
+
+            foreach (var detail in subscriptionDetails)
+            {
+                var subscriptionType = await _appDbContext.SubscriptionTypes
+                    .FirstOrDefaultAsync(x => x.Id == detail.ItemId);
+
+                var startDate = detail.SubscriptionStartDate!.Value;
+                var endDate = startDate.AddDays(subscriptionType.DurationDays);
+
+                _appDbContext.MemberSubscriptions.Add(new MemberSubscription
+                {
+                    MemberId = invoice.MemberId.Value,
+                    SubscriptionTypeId = detail.ItemId,
+                    StartDate = startDate,
+                    EndDate = endDate,
+                    Status = SubscriptionStatus.Active,
+                    Price = subscriptionType.Price,
+                });
+            }
 
         }
 

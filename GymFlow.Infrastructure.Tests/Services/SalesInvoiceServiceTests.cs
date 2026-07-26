@@ -444,6 +444,174 @@ namespace GymFlow.Infrastructure.Tests.Services
                 result.Code);
         }
 
+        [Fact]
+        public async Task AddAsync_ShouldReturnSubscriptionStartDateRequired_WhenSubscriptionStartDateIsMissing()
+        {
+            // Arrange
+            var subscription = await CreateSubscriptionTypeEntity();
+
+            var member = await CreateMemberEntity();
+
+            var dto = new SalesInvoiceDTO
+            {
+                MemberId = member.Id,
+                Details = new List<SalesInvoiceDetailDTO>
+        {
+            new()
+            {
+                ItemId = subscription.Id,
+                ItemType = SaleItemType.Subscription,
+                Quantity = 1,
+                UnitPrice = 100
+            }
+        }
+            };
+
+            // Act
+            var result = await _service.AddAsync(dto);
+
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.Equal(
+                ResultCodes.SubscriptionStartDateRequired,
+                result.Code);
+        }
+
+        [Fact]
+        public async Task AddAsync_ShouldReturnMemberAlreadyHasSubscription_WhenSubscriptionOverlaps()
+        {
+            // Arrange
+            var member = await CreateMemberEntity();
+
+            //var subscription = await CreateSubscriptionTypeEntity(durationDays: 30);
+            var subscription = await CreateSubscriptionTypeEntity();
+
+            _context.MemberSubscriptions.Add(new MemberSubscription
+            {
+                MemberId = member.Id,
+                SubscriptionTypeId = subscription.Id,
+                StartDate = DateOnly.FromDateTime(DateTime.Today),
+                EndDate = DateOnly.FromDateTime(DateTime.Today.AddDays(30))
+            });
+
+            await _context.SaveChangesAsync();
+
+            var dto = new SalesInvoiceDTO
+            {
+                MemberId = member.Id,
+                Details = new List<SalesInvoiceDetailDTO>
+        {
+            new()
+            {
+                ItemId = subscription.Id,
+                ItemType = SaleItemType.Subscription,
+                Quantity = 1,
+                UnitPrice = 100,
+                SubscriptionStartDate = DateOnly.FromDateTime(DateTime.Today.AddDays(5))
+            }
+        }
+            };
+
+            // Act
+            var result = await _service.AddAsync(dto);
+
+            // Assert
+            Assert.False(result.IsSuccess);
+
+            Assert.Equal(
+                ResultCodes.MemberAlreadyHasSubscription,
+                result.Code);
+        }
+
+        [Fact]
+        public async Task AddAsync_ShouldCreateMemberSubscription_WhenInvoiceContainsSubscription()
+        {
+            // Arrange
+            var member = await CreateMemberEntity();
+
+            //var subscription = await CreateSubscriptionTypeEntity(durationDays: 30);
+            var subscription = await CreateSubscriptionTypeEntity();
+
+            var dto = new SalesInvoiceDTO
+            {
+                MemberId = member.Id,
+                Details = new List<SalesInvoiceDetailDTO>
+        {
+            new()
+            {
+                ItemId = subscription.Id,
+                ItemType = SaleItemType.Subscription,
+                Quantity = 1,
+                UnitPrice = 200,
+                SubscriptionStartDate = DateOnly.FromDateTime(DateTime.Today)
+            }
+        }
+            };
+
+            // Act
+            var result = await _service.AddAsync(dto);
+
+            // Assert
+            Assert.True(result.IsSuccess);
+
+            var memberSubscription = await _context.MemberSubscriptions.FirstOrDefaultAsync();
+
+            Assert.NotNull(memberSubscription);
+
+            Assert.Equal(member.Id, memberSubscription.MemberId);
+
+            Assert.Equal(subscription.Id, memberSubscription.SubscriptionTypeId);
+
+            Assert.Equal(
+                DateOnly.FromDateTime(DateTime.Today),
+                memberSubscription.StartDate);
+
+            Assert.Equal(
+                DateOnly.FromDateTime(DateTime.Today.AddDays(30)),
+                memberSubscription.EndDate);
+        }
+
+        [Fact]
+        public async Task AddAsync_ShouldCreateInvoice_WhenPreviousSubscriptionDoesNotOverlap()
+        {
+            // Arrange
+            var member = await CreateMemberEntity();
+
+            var subscription = await CreateSubscriptionTypeEntity();
+
+            _context.MemberSubscriptions.Add(new MemberSubscription
+            {
+                MemberId = member.Id,
+                SubscriptionTypeId = subscription.Id,
+                StartDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-60)),
+                EndDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-30))
+            });
+
+            await _context.SaveChangesAsync();
+
+            var dto = new SalesInvoiceDTO
+            {
+                MemberId = member.Id,
+                Details = new List<SalesInvoiceDetailDTO>
+        {
+            new()
+            {
+                ItemId = subscription.Id,
+                ItemType = SaleItemType.Subscription,
+                Quantity = 1,
+                UnitPrice = 100,
+                SubscriptionStartDate = DateOnly.FromDateTime(DateTime.Today)
+            }
+        }
+            };
+
+            // Act
+            var result = await _service.AddAsync(dto);
+
+            // Assert
+            Assert.True(result.IsSuccess);
+        }
+
         #endregion
 
 

@@ -95,6 +95,12 @@ namespace GymFlow.Domain.DTOs.SalesInvoiceDetail
         // Navigation
         public SalesInvoiceDTO? SalesInvoice { get; set; } = null!;
 
+        [Display(
+            Name = nameof(SharedResource.StartDate),
+            ResourceType = typeof(SharedResource)
+        )]
+        public DateOnly? SubscriptionStartDate { get; set; }
+
 
         [NotMapped]
         public ProductDTO? Product { get; set; }

@@ -537,6 +537,9 @@
   <data name="MemberAlreadyCheckedIn" xml:space="preserve">
     <value>تم تسجيل دخول العضو مسبقاً اليوم</value>
   </data>
+  <data name="MemberAlreadyHasSubscription" xml:space="preserve">
+    <value>العضو لديه اشتراك فعال يتداخل مع الفترة المحددة</value>
+  </data>
   <data name="MemberAttendance" xml:space="preserve">
     <value>سجل الحضور</value>
   </data>
@@ -551,6 +554,9 @@
   </data>
   <data name="MemberNotFound" xml:space="preserve">
     <value>العضو غير موجود</value>
+  </data>
+  <data name="MemberRequiredForSubscription" xml:space="preserve">
+    <value>يجب اختيار عضو عند بيع اشتراك</value>
   </data>
   <data name="Members" xml:space="preserve">
     <value>الأعضاء</value>
@@ -629,6 +635,9 @@
   </data>
   <data name="PaymentMethod" xml:space="preserve">
     <value>طريقة الدفع</value>
+  </data>
+  <data name="PaymentMethodRequired" xml:space="preserve">
+    <value>طريقة الدفع مطلوبة</value>
   </data>
   <data name="PaymentNotEnough" xml:space="preserve">
     <value>المبلغ المدفوع غير كاف</value>
@@ -857,6 +866,9 @@
   </data>
   <data name="Subscriptions" xml:space="preserve">
     <value>الاشتراكات</value>
+  </data>
+  <data name="SubscriptionStartDateRequired" xml:space="preserve">
+    <value>تاريخ بداية الاشتراك مطلوب</value>
   </data>
   <data name="SubscriptionStatus" xml:space="preserve">
     <value>حالة الاشتراك</value>
