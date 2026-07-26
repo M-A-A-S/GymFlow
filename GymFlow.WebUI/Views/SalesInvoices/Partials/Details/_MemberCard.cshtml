@@ -1,0 +1,61 @@
+﻿@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+<div class="card shadow-sm mb-3">
+
+	<div class="card-header">
+
+		<i class="fa fa-user"></i>
+
+		@Localizer["Member"]
+
+	</div>
+
+
+	<div class="card-body">
+
+
+		<div class="row">
+
+
+			<div class="col-md-4">
+
+				<strong>
+
+					@Model?.Member?.FullName
+
+				</strong>
+
+			</div>
+
+
+			<div class="col-md-4">
+
+				<i class="fa fa-phone"></i>
+
+				@Model?.Member?.PhoneNumber
+
+			</div>
+
+
+	@* 		<div class="col-md-4">
+
+				<i class="bi bi-card-text"></i>
+
+				@Model?.Member?.MemberNo
+
+			</div> *@
+
+
+		</div>
+
+
+	</div>
+
+
+</div>

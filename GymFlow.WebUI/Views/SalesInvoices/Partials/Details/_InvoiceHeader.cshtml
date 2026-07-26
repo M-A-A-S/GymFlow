@@ -1,0 +1,72 @@
+﻿
+@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceDTO
+
+@using GymFlow.Domain.Extensions
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+
+	var currentUICulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+}
+
+@using GymFlow.Domain.Enums
+@using System.Globalization
+
+<div class="card shadow-sm mb-3">
+
+	<div class="card-body">
+
+
+		<div class="row">
+
+
+			<div class="col-md-6">
+
+				<h5 class="text-primary">
+
+					<i class="bi bi-receipt"></i>
+
+					@Model.InvoiceNo
+
+				</h5>
+
+
+				<p class="mb-1">
+
+					<strong>
+						@Localizer["InvoiceDate"]:
+					</strong>
+
+					@Model.InvoiceDate.ToString("dd/MM/yyyy HH:mm")
+
+				</p>
+
+
+			</div>
+
+
+			<div class="col-md-6 @(currentUICulture == "en" ? "text-md-end" : "text-md-start")">
+
+
+				<span class="badge @Model.Status.ToBadgeClass()">
+					@Model.Status.ToLocalizedString()
+				</span>
+				@* <span class="badge bg-success fs-6">
+
+					@Localizer["Completed"]
+
+				</span> *@
+
+
+			</div>
+
+
+		</div>
+
+
+	</div>
+
+</div>

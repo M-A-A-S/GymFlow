@@ -1,0 +1,93 @@
+﻿@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceDTO
+
+@using GymFlow.Domain.Extensions
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+<div class="card shadow-sm mb-3">
+
+
+	<div class="card-header">
+
+		<i class="fa fa-credit-card"></i>
+
+		@Localizer["Payments"]
+
+	</div>
+
+
+	<div class="card-body">
+
+
+		<table class="table">
+
+
+			<thead>
+
+				<tr>
+
+					<th>
+						@Localizer["PaymentMethod"]
+					</th>
+
+
+					<th>
+						@Localizer["Reference"]
+					</th>
+
+
+					<th>
+						@Localizer["Amount"]
+					</th>
+
+				</tr>
+
+			</thead>
+
+
+			<tbody>
+
+
+				@foreach (var payment in Model.Payments)
+				{
+
+					<tr>
+
+						<td>
+
+							@payment.PaymentMethod.ToLocalizedString()
+
+						</td>
+
+
+						<td>
+
+							@(payment.ReferenceNo ?? "-")
+
+						</td>
+
+
+						<td>
+
+							@payment.Amount.ToString("N2")
+
+						</td>
+
+
+					</tr>
+
+				}
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+
+</div>

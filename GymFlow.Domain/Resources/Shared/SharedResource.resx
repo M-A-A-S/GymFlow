@@ -162,6 +162,9 @@
   <data name="AttendanceNotFound" xml:space="preserve">
     <value>Attendance record not found</value>
   </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
   <data name="Balance" xml:space="preserve">
     <value>Balance</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="Cash" xml:space="preserve">
     <value>Cash</value>
+  </data>
+  <data name="Cashier" xml:space="preserve">
+    <value>Cashier</value>
   </data>
   <data name="Categories" xml:space="preserve">
     <value>Categories</value>
@@ -246,6 +252,9 @@
   <data name="CurrentSubscription" xml:space="preserve">
     <value>Current Subscription</value>
   </data>
+  <data name="Customer" xml:space="preserve">
+    <value>Customer</value>
+  </data>
   <data name="Dashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
@@ -254,7 +263,6 @@
   </data>
   <data name="Days" xml:space="preserve">
     <value>Days</value>
-    <comment>أيام</comment>
   </data>
   <data name="DaysPerWeek" xml:space="preserve">
     <value>Days Per Week</value>
@@ -466,6 +474,9 @@
   <data name="Inventory" xml:space="preserve">
     <value>Inventory</value>
   </data>
+  <data name="Invoice" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
   <data name="InvoiceAlreadyConfirmed" xml:space="preserve">
     <value>Invoice has already been confirmed</value>
   </data>
@@ -646,6 +657,9 @@
   <data name="Price" xml:space="preserve">
     <value>Price</value>
   </data>
+  <data name="Print" xml:space="preserve">
+    <value>Print</value>
+  </data>
   <data name="PrintInvoice" xml:space="preserve">
     <value>Print Invoice</value>
   </data>
@@ -688,6 +702,9 @@
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
   </data>
+  <data name="Receipt" xml:space="preserve">
+    <value>Receipt</value>
+  </data>
   <data name="ReceiptVouchers" xml:space="preserve">
     <value>Receipt Vouchers</value>
   </data>
@@ -695,6 +712,9 @@
     <value>Reference</value>
   </data>
   <data name="ReferenceNo" xml:space="preserve">
+    <value>Reference Number</value>
+  </data>
+  <data name="ReferenceNumber" xml:space="preserve">
     <value>Reference Number</value>
   </data>
   <data name="RegisterDate" xml:space="preserve">
@@ -871,6 +891,9 @@
   <data name="Tax" xml:space="preserve">
     <value>Tax</value>
   </data>
+  <data name="ThankYou" xml:space="preserve">
+    <value>Thank you for choosing us</value>
+  </data>
   <data name="Thursday" xml:space="preserve">
     <value>Thursday</value>
   </data>
@@ -879,6 +902,9 @@
   </data>
   <data name="TotalAmount" xml:space="preserve">
     <value>Total Amount</value>
+  </data>
+  <data name="TotalPaid" xml:space="preserve">
+    <value>Total Paid</value>
   </data>
   <data name="Trainer" xml:space="preserve">
     <value>Trainer</value>
@@ -945,6 +971,9 @@
   </data>
   <data name="VoidReason" xml:space="preserve">
     <value>Void Reason</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Website</value>
   </data>
   <data name="Wednesday" xml:space="preserve">
     <value>Wednesday</value>

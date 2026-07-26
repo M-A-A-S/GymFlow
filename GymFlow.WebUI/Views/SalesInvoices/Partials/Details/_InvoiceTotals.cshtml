@@ -1,0 +1,100 @@
+﻿@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceDTO
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+<div class="card shadow-sm">
+
+
+	<div class="card-body">
+
+
+		<div class="row">
+
+
+			<div class="col-md-4 ms-auto">
+
+
+				<table class="table table-borderless">
+
+
+					<tr>
+
+						<td>
+							@Localizer["SubTotal"]
+						</td>
+
+						<td class="text-end">
+
+							@Model.SubTotal.ToString("N2")
+
+						</td>
+
+					</tr>
+
+
+
+					<tr>
+
+						<td>
+							@Localizer["Discount"]
+						</td>
+
+						<td class="text-end">
+
+							@Model.Discount.ToString("N2")
+
+						</td>
+
+					</tr>
+
+
+
+					<tr>
+
+						<td>
+							@Localizer["Tax"]
+						</td>
+
+						<td class="text-end">
+
+							@Model.Tax.ToString("N2")
+
+						</td>
+
+					</tr>
+
+
+
+					<tr class="border-top fw-bold fs-5">
+
+						<td>
+
+							@Localizer["NetAmount"]
+
+						</td>
+
+						<td class="text-end">
+
+							@Model.NetAmount.ToString("N2")
+
+						</td>
+
+					</tr>
+
+
+				</table>
+
+
+			</div>
+
+
+		</div>
+
+
+	</div>
+
+</div>

@@ -162,6 +162,9 @@
   <data name="AttendanceNotFound" xml:space="preserve">
     <value>سجل الحضور غير موجود</value>
   </data>
+  <data name="Back" xml:space="preserve">
+    <value>رجوع</value>
+  </data>
   <data name="Balance" xml:space="preserve">
     <value>الرصيد</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="Cash" xml:space="preserve">
     <value>نقداً</value>
+  </data>
+  <data name="Cashier" xml:space="preserve">
+    <value>أمين الصندوق</value>
   </data>
   <data name="Categories" xml:space="preserve">
     <value>التصنيفات</value>
@@ -245,6 +251,9 @@
   </data>
   <data name="CurrentSubscription" xml:space="preserve">
     <value>الاشتراك الحالي</value>
+  </data>
+  <data name="Customer" xml:space="preserve">
+    <value>العميل</value>
   </data>
   <data name="Dashboard" xml:space="preserve">
     <value>لوحة التحكم</value>
@@ -465,6 +474,9 @@
   <data name="Inventory" xml:space="preserve">
     <value>المخزون</value>
   </data>
+  <data name="Invoice" xml:space="preserve">
+    <value>فاتورة</value>
+  </data>
   <data name="InvoiceAlreadyConfirmed" xml:space="preserve">
     <value>تم تأكيد الفاتورة مسبقاً</value>
   </data>
@@ -645,6 +657,9 @@
   <data name="Price" xml:space="preserve">
     <value>السعر</value>
   </data>
+  <data name="Print" xml:space="preserve">
+    <value>طباعة</value>
+  </data>
   <data name="PrintInvoice" xml:space="preserve">
     <value>طباعة الفاتورة</value>
   </data>
@@ -687,6 +702,9 @@
   <data name="Quantity" xml:space="preserve">
     <value>الكمية</value>
   </data>
+  <data name="Receipt" xml:space="preserve">
+    <value>إيصال</value>
+  </data>
   <data name="ReceiptVouchers" xml:space="preserve">
     <value>سندات القبض</value>
   </data>
@@ -694,6 +712,9 @@
     <value>المرجع</value>
   </data>
   <data name="ReferenceNo" xml:space="preserve">
+    <value>الرقم المرجعي</value>
+  </data>
+  <data name="ReferenceNumber" xml:space="preserve">
     <value>الرقم المرجعي</value>
   </data>
   <data name="RegisterDate" xml:space="preserve">
@@ -870,6 +891,9 @@
   <data name="Tax" xml:space="preserve">
     <value>الضريبة</value>
   </data>
+  <data name="ThankYou" xml:space="preserve">
+    <value>شكراً لاختياركم لنا</value>
+  </data>
   <data name="Thursday" xml:space="preserve">
     <value>الخميس</value>
   </data>
@@ -878,6 +902,9 @@
   </data>
   <data name="TotalAmount" xml:space="preserve">
     <value>الإجمالي</value>
+  </data>
+  <data name="TotalPaid" xml:space="preserve">
+    <value>إجمالي المدفوع</value>
   </data>
   <data name="Trainer" xml:space="preserve">
     <value>المدرب</value>
@@ -944,6 +971,9 @@
   </data>
   <data name="VoidReason" xml:space="preserve">
     <value>سبب الإلغاء</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>الموقع الإلكتروني</value>
   </data>
   <data name="Wednesday" xml:space="preserve">
     <value>الأربعاء</value>

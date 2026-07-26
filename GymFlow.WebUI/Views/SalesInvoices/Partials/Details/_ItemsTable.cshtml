@@ -1,0 +1,129 @@
+﻿@using GymFlow.Domain.DTOs.SalesInvoice
+@model SalesInvoiceDTO
+
+@using GymFlow.Domain.Enums
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+
+    var currentUICulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+}
+
+<div class="card shadow-sm mb-3">
+
+
+    <div class="card-header">
+
+        <i class="fa fa-shopping-cart"></i>
+
+        @Localizer["Items"]
+
+    </div>
+
+
+    <div class="card-body table-responsive p-0">
+
+
+        <table class="table table-hover mb-0">
+
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+
+                    <th>@Localizer["Item"]</th>
+
+                    <th>@Localizer["Type"]</th>
+
+                    <th>@Localizer["Quantity"]</th>
+
+                    <th>@Localizer["Price"]</th>
+
+                    <th>@Localizer["Total"]</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+                @{
+                    int index = 1;
+                }
+
+
+                @foreach (var item in Model.Details)
+                {
+
+                    <tr>
+
+
+                        <td>@index</td>
+
+
+                        <td>
+
+                            @if (item.ItemType == SaleItemType.Product)
+                            {
+                                @(currentUICulture == "en" ? item.Product.NameEn : item.Product.NameAr)
+                                
+                            }
+                            else
+                            {
+                                @(currentUICulture == "en" ? item.SubscriptionType.NameEn : item.SubscriptionType.NameAr)
+                            }
+
+                        </td>
+
+
+                        <td>
+
+                            @Localizer[@item.ItemType.ToString()]
+
+                        </td>
+
+
+                        <td>
+                            @Localizer[@item.Quantity.ToString()]
+
+                        </td>
+
+
+                        <td>
+
+                            @item.UnitPrice.ToString("N2")
+
+                        </td>
+
+
+                        <td>
+
+                            @item.Total.ToString("N2")
+
+                        </td>
+
+
+                    </tr>
+
+
+                    index++;
+
+                }
+
+
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
+</div>
