@@ -3,6 +3,7 @@ using GymFlow.Domain.Constants;
 using GymFlow.Domain.DTOs.Category;
 using GymFlow.Domain.DTOs.Inventory;
 using GymFlow.Domain.DTOs.Member;
+using GymFlow.Domain.DTOs.MemberSubscription;
 using GymFlow.Domain.DTOs.Product;
 using GymFlow.Domain.DTOs.SalesInvoice;
 using GymFlow.Domain.DTOs.SubscriptionType;
@@ -270,11 +271,18 @@ namespace GymFlow.Infrastructure.Services
         public async Task<Result<SalesInvoiceAddUpdateDTO>> GetSalesInvoiceAddUpdateDTO(int? id = null)
         {
             var DTO = new SalesInvoiceAddUpdateDTO();
+            var today = DateOnly.FromDateTime(DateTime.UtcNow);
 
             if (id.HasValue)
             {
                 var SalesInvoice = await _appDbContext.SalesInvoices
                     .Include(x => x.Member)
+                        .ThenInclude(x => x.MemberSubscriptions
+                            .Where(x => 
+                                x.StartDate <= today &&
+                                x.EndDate >= today &&
+                                x.Status == SubscriptionStatus.Active))
+                            .ThenInclude(x => x.SubscriptionType)
                     .Include(x => x.Details)
                     .Include(x => x.Payments)
                     .AsNoTracking()
@@ -306,19 +314,53 @@ namespace GymFlow.Infrastructure.Services
 
                 if (SalesInvoice.Member is not null)
                 {
-                    DTO.SalesInvoice.Member = SalesInvoice.Member.ToDTO();
+                    var memberDTO = SalesInvoice.Member.ToDTO();
+
+                    var currentSubscription = SalesInvoice.Member.MemberSubscriptions
+                        .FirstOrDefault();
+
+                    if (currentSubscription is not null)
+                    {
+                        memberDTO.CurrentSubscription = new CurrentSubscriptionDTO
+                        {
+                            Id = currentSubscription.Id,
+                            NameEn = currentSubscription.SubscriptionType.NameEn,
+                            NameAr = currentSubscription.SubscriptionType.NameAr,
+                            StartDate = currentSubscription.StartDate,
+                            EndDate = currentSubscription.EndDate,
+                        };
+                    }
+
+                    DTO.SalesInvoice.Member = memberDTO;
                 }
             }
 
             DTO.Members = await _appDbContext.Members
+                .AsNoTracking()
                 .Select(x => new MemberSearchDTO
                 {
                     Id = x.Id,
                     FullName = x.FullName,
                     PhoneNumber = x.PhoneNumber,
+
+                    CurrentSubscription = x.MemberSubscriptions
+                    .Where(x => 
+                        x.StartDate <= today && 
+                        x.EndDate >= today && 
+                        x.Status == SubscriptionStatus.Active)
+                    .OrderByDescending(x => x.EndDate)
+                    .Select(x => new CurrentSubscriptionDTO
+                    {
+                        Id = x.Id,
+                        NameEn = x.SubscriptionType.NameEn,
+                        NameAr = x.SubscriptionType.NameAr,
+                        StartDate = x.StartDate,
+                        EndDate = x.EndDate
+                    }).FirstOrDefault()
                 }).ToListAsync();
 
             DTO.Products = await _appDbContext.Products
+                .AsNoTracking()
                 .Select(x => new ProductSearchDTO
                 {
                     Id = x.Id,
@@ -330,6 +372,7 @@ namespace GymFlow.Infrastructure.Services
                 }).ToListAsync();
 
             DTO.SubscriptionTypes = await _appDbContext.SubscriptionTypes
+                .AsNoTracking()
                 .Select(x => new SubscriptionTypeSearchDTO
                 {
                     Id = x.Id,
@@ -340,6 +383,7 @@ namespace GymFlow.Infrastructure.Services
                 }).ToListAsync();
 
             DTO.Categories = await _appDbContext.Categories
+                .AsNoTracking()
                 .Select(x => new CategorySearchDTO
                 {
                     Id = x.Id,

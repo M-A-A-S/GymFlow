@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GymFlow.Domain.DTOs.MemberSubscription;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -22,6 +23,8 @@ namespace GymFlow.Domain.DTOs.Member
             ResourceType = typeof(Resources.Shared.SharedResource)
         )]
         public string PhoneNumber { get; set; }
+
+        public CurrentSubscriptionDTO? CurrentSubscription { get; set; }
 
     }
 }

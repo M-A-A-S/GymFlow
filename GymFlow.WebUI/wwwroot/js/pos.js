@@ -6,12 +6,15 @@ let products =  window.products ?? [];
 
 let subscriptions = window.subscriptions ?? [];
 
+let members = window.members ?? [];
+
 // let resources = window.resources ?? {};
 
 let currentLanguage = window.currentLanguage ?? "en";
 
 console.log('products -> ', products)
 console.log('subscriptions -> ', subscriptions)
+console.log('members -> ', members)
 
 let selectedType = "Product";
 
@@ -45,29 +48,47 @@ function initializeSelect2() {
 }
 
 // On select member
-$('#MemberId').on('select2:select', function (e) {
+//$('#MemberId').on('select2:select', function (e) {
 
-    let option = $(this).find(':selected')
+//    let option = $(this).find(':selected')
+//    console.log('option -> ', option)
 
-    $('#memberInfo').show();
+//    console.log(option[0]);
+//    console.log(option.attr('data-member-subscriptionName'));
+//    console.log(option.attr('data-member-subscriptionStartDate'));
+//    console.log(option.attr('data-member-subscriptionEndDate'));
+//    console.log(option.data());
 
-    $('#memberName').text(option.data('member-name'));
+//    //$('#memberInfo').show();
 
-    $('#memberPhone').text(option.data('member-phone'));
+//    console.log(option.data('member-subscriptionName'))
 
-    // $('#lblSubscription').text(member.subscription);
+//    $('#memberName').text(option.data('member-name'));
 
-    // $('#lblRemaining').text(member.remainingDays);
+//    $('#memberPhone').text(option.data('member-phone'));
 
-    // $('#lblBalance').text(member.balance);
+//    $('#memberSubscription').text(option.data('member-subscriptionName'));
 
-    // $('#lblStatus').html(member.statusBadge);
+//    $('#subscriptionStartDate').text(option.data('member-subscriptionStartDate'));
 
-});
+//    $('#subscriptionEndDate').text(option.data('member-subscriptionEndDate'));
+
+//    // $('#lblSubscription').text(member.subscription);
+
+//    // $('#lblRemaining').text(member.remainingDays);
+
+//    // $('#lblBalance').text(member.balance);
+
+//    // $('#lblStatus').html(member.statusBadge);
+
+//});
 
 
 // Events Initialization
 function initializeEvents() {
+
+    $('#MemberId').on('select2:select', handleMemberChange)
+
 
     $(".item-type")
         .on("click", changeItemType);
@@ -150,6 +171,75 @@ function initializeEvents() {
         );
 
 }
+
+function handleMemberChange(e) {
+
+    console.log("text");
+
+    const memberId = Number($("#MemberId").val());
+
+    console.log("memberId -> ", memberId);
+
+    const member = members.find(x => x.Id === memberId);
+
+    console.log("members -> ", members);
+
+    console.log("member -> ", member);
+
+    if (!member) {
+        $("#memberInfo").hide();
+        return;
+    }
+
+    $("#memberInfo").show();
+
+    $('#memberName').text(member.FullName);
+
+    $('#memberPhone').text(member.PhoneNumber);
+
+    if (member.CurrentSubscription) {
+        $('#memberSubscription').text(currentLanguage == "en" ? member.CurrentSubscription.NameEn : member.CurrentSubscription.NameAr)
+    }
+    else {
+        $('#memberSubscription').text("-");
+    }
+
+    $('#subscriptionStartDate').text(member?.CurrentSubscription?.StartDate ?? "-");
+
+    $('#subscriptionEndDate').text(member?.CurrentSubscription?.EndDate ?? "-");
+
+}
+
+
+//function handleMemberChange(e) {
+//    console.log('e -> ', e)
+//    let option = $(this).find(':selected')
+//    console.log('option -> ', option)
+
+//    console.log(option[0].outerHTML);
+
+//    //console.log('members -> ', members)
+
+//    console.log(option[0]);
+//    console.log(option.attr('data-member-subscriptionName'));
+//    console.log(option.attr('data-member-subscriptionStartDate'));
+//    console.log(option.attr('data-member-subscriptionEndDate'));
+//    console.log(option.data());
+
+//    $('#memberInfo').show();
+
+//    console.log(option.data('member-subscriptionName'))
+
+//    $('#memberName').text(option.data('member-name'));
+
+//    $('#memberPhone').text(option.data('member-phone'));
+
+//    $('#memberSubscription').text(option.data('member-subscriptionName'));
+
+//    $('#subscriptionStartDate').text(option.data('member-subscriptionStartDate'));
+
+//    $('#subscriptionEndDate').text(option.data('member-subscriptionEndDate'));
+//}
 
 // Item Type Change
 function changeItemType() {

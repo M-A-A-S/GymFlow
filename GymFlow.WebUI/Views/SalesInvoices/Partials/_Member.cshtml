@@ -3,7 +3,13 @@
 
 @using GymFlow.Domain.Resources.Shared
 @using Microsoft.Extensions.Localization
+@using System.Globalization
 @inject IStringLocalizer<SharedResource> Localizer
+
+@{
+
+    var currentUICulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+}
 
 <div class="card shadow-sm border-0 mb-3">
 
@@ -46,14 +52,27 @@
             @* <select id="MemberId"
                     class="form-select select2">
             </select> *@
-            <select id="MemberId" class="form-select">
+            @* <select id="MemberId" class="form-select">
                 <option value="" disabled selected>@Localizer["SelectMember"]</option>
                 @foreach (var member in Model.Members)
                 {
-                    <option value="@member.Id" 
-                        data-member-name="@member.FullName"
-                        data-member-phone="@member.PhoneNumber"
-                    >
+                    <option value="@member.Id"
+                            data-member-name="@member.FullName"
+                            data-member-phone="@member.PhoneNumber"
+                            data-member-subscription-name="@(currentUICulture == "en" ? member?.CurrentSubscription?.NameEn : member?.CurrentSubscription?.NameAr)"
+                            data-member-subscription-start-date="@member?.CurrentSubscription?.StartDate"
+                            data-member-subscription-end-date="@member?.CurrentSubscription?.EndDate">
+                            @member.FullName
+                    </option>
+                }
+            </select> *@
+
+            <select id="MemberId" class="form-select">
+                <option value="" disabled selected>@Localizer["SelectMember"]</option>
+
+                @foreach (var member in Model.Members)
+                {
+                    <option value="@member.Id">
                         @member.FullName
                     </option>
                 }
@@ -66,11 +85,9 @@
             <div class="row">
 
                 <div class="col-md-6 mb-3">
-
                     <small class="text-muted">
                         @Localizer["FullName"]
                     </small>
-
                     <div id="memberName"
                          class="fw-bold">
                     </div>
@@ -78,15 +95,34 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-
                     <small class="text-muted">
                         @Localizer["Phone"]
                     </small>
-
                     <div id="memberPhone"
                          class="fw-bold">
                     </div>
+                </div>
 
+                <div class="col-md-6 mb-3">
+                    <small class="text-muted">
+                        @Localizer["Subscription"]
+                    </small>
+                    <div id="memberSubscription" class="fw-bold"></div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <small class="text-muted">
+                        @Localizer["StartDate"]
+                    </small>
+                    <div id="subscriptionStartDate" class="fw-bold"></div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <small class="text-muted">
+                        @* @Localizer["ExpiryDate"] *@
+                        @Localizer["EndDate"]
+                    </small>
+                    <div id="subscriptionEndDate" class="fw-bold"></div>
                 </div>
 
             </div>

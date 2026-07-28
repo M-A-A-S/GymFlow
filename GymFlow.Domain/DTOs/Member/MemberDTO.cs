@@ -1,4 +1,5 @@
-﻿using GymFlow.Domain.Enums;
+﻿using GymFlow.Domain.DTOs.MemberSubscription;
+using GymFlow.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -78,6 +79,8 @@ namespace GymFlow.Domain.DTOs.Member
             ResourceType = typeof(Resources.Shared.SharedResource)
         )]
         public MemberStatus? Status { get; set; } = MemberStatus.Active;
+
+        public CurrentSubscriptionDTO? CurrentSubscription { get; set; }
 
     }
 }
