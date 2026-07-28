@@ -14,11 +14,11 @@ namespace GymFlow.Domain.Extensions
             return status switch
             {
                 SubscriptionStatus.Active => "bg-success",
-                SubscriptionStatus.Inactive => "bg-danger",
-                SubscriptionStatus.Suspended => "bg-danger",
-                SubscriptionStatus.Unsuspended => "bg-secondary",
-                SubscriptionStatus.Expired => "bg-warning",
-                SubscriptionStatus.Cancelled => "bg-secondary",
+                SubscriptionStatus.Inactive => "bg-secondary",
+                SubscriptionStatus.Suspended => "bg-warning",
+                //SubscriptionStatus.Unsuspended => "bg-secondary",
+                //SubscriptionStatus.Expired => "bg-warning",
+                SubscriptionStatus.Cancelled => "bg-danger",
                 _ => "bg-secondary"
             };
         }

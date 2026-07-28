@@ -256,7 +256,7 @@
     <value>إضافة جديد</value>
   </data>
   <data name="Current" xml:space="preserve">
-    <value>حالي</value>
+    <value>ساري</value>
   </data>
   <data name="CurrentSubscription" xml:space="preserve">
     <value>الاشتراك الحالي</value>
@@ -888,6 +888,9 @@
   <data name="SubscriptionStartDateRequired" xml:space="preserve">
     <value>تاريخ بداية الاشتراك مطلوب</value>
   </data>
+  <data name="SubscriptionState" xml:space="preserve">
+    <value>وضع الاشتراك</value>
+  </data>
   <data name="SubscriptionStatus" xml:space="preserve">
     <value>حالة الاشتراك</value>
   </data>
@@ -926,6 +929,9 @@
   </data>
   <data name="Thursday" xml:space="preserve">
     <value>الخميس</value>
+  </data>
+  <data name="TimeStatus" xml:space="preserve">
+    <value>حالة الاشتراك</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>الإجمالي</value>
@@ -977,6 +983,9 @@
   </data>
   <data name="Unsuspended" xml:space="preserve">
     <value>تم رفع الإيقاف</value>
+  </data>
+  <data name="Upcoming" xml:space="preserve">
+    <value>لم يبدأ</value>
   </data>
   <data name="UpdatedSuccessfully" xml:space="preserve">
     <value>تم التحديث بنجاح</value>

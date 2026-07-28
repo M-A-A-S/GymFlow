@@ -2374,6 +2374,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Subscription State.
+        /// </summary>
+        public static string SubscriptionState {
+            get {
+                return ResourceManager.GetString("SubscriptionState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subscription Status.
         /// </summary>
         public static string SubscriptionStatus {
@@ -2487,6 +2496,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Thursday {
             get {
                 return ResourceManager.GetString("Thursday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subscription Status.
+        /// </summary>
+        public static string TimeStatus {
+            get {
+                return ResourceManager.GetString("TimeStatus", resourceCulture);
             }
         }
         
@@ -2640,6 +2658,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Unsuspended {
             get {
                 return ResourceManager.GetString("Unsuspended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upcoming.
+        /// </summary>
+        public static string Upcoming {
+            get {
+                return ResourceManager.GetString("Upcoming", resourceCulture);
             }
         }
         

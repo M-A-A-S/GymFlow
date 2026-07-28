@@ -111,14 +111,21 @@ namespace GymFlow.Infrastructure.Services
                         .Max(x => (DateOnly?)x.AttendanceDate),
 
 
-                    IsStarted = m.StartDate <= today,
+                    //IsStarted = m.StartDate <= today,
 
-                    IsCurrent = 
-                        m.Status == SubscriptionStatus.Active &&
-                        m.StartDate <= today &&
-                        m.EndDate >= today,
+                    //IsCurrent = 
+                    //    m.Status == SubscriptionStatus.Active &&
+                    //    m.StartDate <= today &&
+                    //    m.EndDate >= today,
 
-                    IsExpired = m.EndDate < today,
+                    //IsExpired = m.EndDate < today,
+
+                    TimeStatus =
+                            m.EndDate < today
+                                ? SubscriptionTimeStatus.Expired
+                                : m.StartDate > today
+                                    ? SubscriptionTimeStatus.Upcoming
+                                    : SubscriptionTimeStatus.Current,
 
 
                     Member = new MemberDTO
@@ -198,14 +205,21 @@ namespace GymFlow.Infrastructure.Services
                         .Max(x => (DateOnly?)x.AttendanceDate),
 
 
-                        IsStarted = m.StartDate <= today,
+                        //IsStarted = m.StartDate <= today,
 
-                        IsCurrent =
-                        m.Status == SubscriptionStatus.Active &&
-                        m.StartDate <= today &&
-                        m.EndDate >= today,
+                        //IsCurrent =
+                        //m.Status == SubscriptionStatus.Active &&
+                        //m.StartDate <= today &&
+                        //m.EndDate >= today,
 
-                        IsExpired = m.EndDate < today,
+                        //IsExpired = m.EndDate < today,
+
+                        TimeStatus =
+                            m.EndDate < today
+                                ? SubscriptionTimeStatus.Expired
+                                : m.StartDate > today
+                                    ? SubscriptionTimeStatus.Upcoming
+                                    : SubscriptionTimeStatus.Current,
 
 
                         Member = m.Member == null ? null : new MemberDTO

@@ -87,7 +87,7 @@ namespace GymFlow.Infrastructure.Configurations
                 StartDate = new DateOnly(2025, 1, 10),
                 EndDate = new DateOnly(2026, 1, 10),
                 Price = 450,
-                Status = SubscriptionStatus.Expired
+                Status = SubscriptionStatus.Suspended
             }
 
         };

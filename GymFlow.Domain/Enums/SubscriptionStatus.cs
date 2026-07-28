@@ -16,8 +16,8 @@ namespace GymFlow.Domain.Enums
         [Display(Name = nameof(SharedResource.Inactive), ResourceType = typeof(SharedResource))]
         Inactive = 2,
 
-        [Display(Name = nameof(SharedResource.Expired), ResourceType = typeof(SharedResource))]
-        Expired = 3,
+        //[Display(Name = nameof(SharedResource.Expired), ResourceType = typeof(SharedResource))]
+        //Expired = 3,
 
         [Display(Name = nameof(SharedResource.Cancelled), ResourceType = typeof(SharedResource))]
         Cancelled = 4,
@@ -25,7 +25,7 @@ namespace GymFlow.Domain.Enums
         [Display(Name = nameof(SharedResource.Suspended), ResourceType = typeof(SharedResource))]
         Suspended = 5,
 
-        [Display(Name = nameof(SharedResource.Unsuspended), ResourceType = typeof(SharedResource))]
-        Unsuspended = 6
+        //[Display(Name = nameof(SharedResource.Unsuspended), ResourceType = typeof(SharedResource))]
+        //Unsuspended = 6
     }
 }

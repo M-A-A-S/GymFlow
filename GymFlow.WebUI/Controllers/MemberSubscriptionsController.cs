@@ -28,6 +28,10 @@ namespace GymFlow.WebUI.Controllers
         public async Task<IActionResult> Index()
         {
             var getAllResult = await _service.GetAllAsync();
+            if (!getAllResult.IsSuccess)
+            {
+                Error(getAllResult.Code);
+            }
             return View(getAllResult.Data);
         }
 

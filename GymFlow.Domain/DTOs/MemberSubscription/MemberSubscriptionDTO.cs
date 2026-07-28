@@ -73,6 +73,7 @@ namespace GymFlow.Domain.DTOs.MemberSubscription
             ErrorMessageResourceType = typeof(Resources.Shared.SharedResource)
         )]
         public SubscriptionStatus Status { get; set; } = SubscriptionStatus.Active;
+        public SubscriptionTimeStatus TimeStatus { get; set; }
 
         public MemberDTO? Member { get; set; }
         public SubscriptionTypeDTO? SubscriptionType { get; set; }
@@ -82,9 +83,9 @@ namespace GymFlow.Domain.DTOs.MemberSubscription
         public int RemainingDays { get; set; }
         public int AttendanceDays { get; set; }
         public DateOnly? LastAttendanceDate {  get; set; }
-        public bool IsStarted { get; set; }
-        public bool IsCurrent { get; set; }
-        public bool IsExpired { get; set; }
+        //public bool IsStarted { get; set; }
+        //public bool IsCurrent { get; set; }
+        //public bool IsExpired { get; set; }
 
     }
 }

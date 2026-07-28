@@ -3,7 +3,6 @@
 @using GymFlow.Domain.DTOs.MemberSubscription
 @model IEnumerable<MemberSubscriptionDTO>
 
-@using GymFlow.Domain.Enums
 @using GymFlow.Domain.Extensions
 @using GymFlow.Domain.Resources.Shared
 @using Microsoft.Extensions.Localization
@@ -29,14 +28,12 @@
                 <th>@Localizer["StartDate"]</th>
                 <th>@Localizer["EndDate"]</th>
                 <th>@Localizer["Price"]</th>
-                <th>@Localizer["Status"]</th>
+                <th>@Localizer["SubscriptionStatus"]</th>
                 <th>@Localizer["ActualDurationDays"]</th>
                 <th>@Localizer["RemainingDays"]</th>
                 <th>@Localizer["AttendanceDays"]</th>
                 <th>@Localizer["LastAttendanceDate"]</th>
-                <th>@Localizer["Started"]</th>
-                <th>@Localizer["Current"]</th>
-                <th>@Localizer["Expired"]</th>
+                <th>@Localizer["SubscriptionState"]</th>
                 <th>@Localizer["Actions"]</th>
                 <th></th>
             </tr>
@@ -67,18 +64,8 @@
                 <td>@item.LastAttendanceDate</td>
                 <td>
 
-                    <span class="fw-bold badge @(item.IsStarted ? "bg-success" : "bg-danger")">
-                            @(item.IsStarted? Localizer["Yes"] : Localizer["No"])
-                    </span>
-                </td>
-                <td >
-                        <span class="fw-bold badge @(item.IsCurrent ? "bg-success" : "bg-danger")">
-                            @(item.IsCurrent? Localizer["Yes"] : Localizer["No"])
-                        </span>
-                </td>
-                <td >
-                        <span class="fw-bold badge @(item.IsExpired ? "bg-success" : "bg-danger")">
-                            @(item.IsExpired? Localizer["Yes"] : Localizer["No"])
+                        <span class="badge @item.TimeStatus.ToBadgeClass()">
+                            @Localizer[item.TimeStatus.ToString()]
                         </span>
                 </td>
                     @* <td class="text-nowrap"> *@

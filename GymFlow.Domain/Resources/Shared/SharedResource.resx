@@ -888,6 +888,9 @@
   <data name="SubscriptionStartDateRequired" xml:space="preserve">
     <value>Subscription start date is required</value>
   </data>
+  <data name="SubscriptionState" xml:space="preserve">
+    <value>Subscription State</value>
+  </data>
   <data name="SubscriptionStatus" xml:space="preserve">
     <value>Subscription Status</value>
   </data>
@@ -926,6 +929,9 @@
   </data>
   <data name="Thursday" xml:space="preserve">
     <value>Thursday</value>
+  </data>
+  <data name="TimeStatus" xml:space="preserve">
+    <value>Subscription Status</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>
@@ -977,6 +983,9 @@
   </data>
   <data name="Unsuspended" xml:space="preserve">
     <value>Unsuspended</value>
+  </data>
+  <data name="Upcoming" xml:space="preserve">
+    <value>Upcoming</value>
   </data>
   <data name="UpdatedSuccessfully" xml:space="preserve">
     <value>Updated successfully</value>

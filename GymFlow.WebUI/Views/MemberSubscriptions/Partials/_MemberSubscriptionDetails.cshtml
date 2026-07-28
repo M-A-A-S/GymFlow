@@ -40,7 +40,7 @@
     </div>
 
     <div class="col-sm-6 col-md-3">
-        <label class="fw-bold">@Localizer["Status"]</label>
+        <label class="fw-bold">@Localizer["SubscriptionStatus"]</label>
         <div>
             <span class="badge @Model.Status.ToBadgeClass()">
                 @Model.Status.ToLocalizedString()
@@ -69,28 +69,10 @@
     </div>
 
     <div class="col-sm-6 col-md-3">
-        <label class="fw-bold">@Localizer["Started"]</label>
+        <label class="fw-bold">@Localizer["SubscriptionState"]</label>
         <div>
-            <span class="fw-bold badge @(Model.IsStarted ? "bg-success" : "bg-danger")">
-                @(Model.IsStarted? Localizer["Yes"] : Localizer["No"])
-            </span>
-        </div>
-    </div>
-
-    <div class="col-sm-6 col-md-3">
-        <label class="fw-bold">@Localizer["Current"]</label>
-        <div>
-            <span class="fw-bold badge @(Model.IsCurrent ? "bg-success" : "bg-danger")">
-                @(Model.IsCurrent? Localizer["Yes"] : Localizer["No"])
-            </span>
-        </div>
-    </div>
-
-    <div class="col-sm-6 col-md-3">
-        <label class="fw-bold">@Localizer["Expired"]</label>
-        <div>
-            <span class="fw-bold badge @(Model.IsExpired ? "bg-success" : "bg-danger")">
-                @(Model.IsExpired? Localizer["Yes"] : Localizer["No"])
+            <span class="badge @Model.TimeStatus.ToBadgeClass()">
+                @Localizer[Model.TimeStatus.ToString()]
             </span>
         </div>
     </div>
