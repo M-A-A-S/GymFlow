@@ -126,6 +126,9 @@
   <data name="Active" xml:space="preserve">
     <value>نشط</value>
   </data>
+  <data name="ActualDurationDays" xml:space="preserve">
+    <value>مدة الاشتراك الفعلية</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>إضافة</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="AttendanceDate" xml:space="preserve">
     <value>تاريخ الحضور</value>
+  </data>
+  <data name="AttendanceDays" xml:space="preserve">
+    <value>أيام الحضور</value>
   </data>
   <data name="AttendanceNotFound" xml:space="preserve">
     <value>سجل الحضور غير موجود</value>
@@ -248,6 +254,9 @@
   </data>
   <data name="CreateNew" xml:space="preserve">
     <value>إضافة جديد</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>حالي</value>
   </data>
   <data name="CurrentSubscription" xml:space="preserve">
     <value>الاشتراك الحالي</value>
@@ -525,6 +534,9 @@
   <data name="JournalEntries" xml:space="preserve">
     <value>القيود اليومية</value>
   </data>
+  <data name="LastAttendanceDate" xml:space="preserve">
+    <value>آخر تاريخ حضور</value>
+  </data>
   <data name="LockerRental" xml:space="preserve">
     <value>تأجير خزانة</value>
   </data>
@@ -611,6 +623,9 @@
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>السجل غير موجود</value>
+  </data>
+  <data name="NotStarted" xml:space="preserve">
+    <value>لم يبدأ</value>
   </data>
   <data name="Or" xml:space="preserve">
     <value>أو</value>
@@ -845,6 +860,9 @@
   </data>
   <data name="StartDate" xml:space="preserve">
     <value>تاريخ البداية</value>
+  </data>
+  <data name="Started" xml:space="preserve">
+    <value>بدأ</value>
   </data>
   <data name="StartTime" xml:space="preserve">
     <value>وقت البداية</value>

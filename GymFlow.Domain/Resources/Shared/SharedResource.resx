@@ -126,6 +126,9 @@
   <data name="Active" xml:space="preserve">
     <value>Active</value>
   </data>
+  <data name="ActualDurationDays" xml:space="preserve">
+    <value>Actual Duration Days</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="AttendanceDate" xml:space="preserve">
     <value>Attendance Date</value>
+  </data>
+  <data name="AttendanceDays" xml:space="preserve">
+    <value>Attendance Days</value>
   </data>
   <data name="AttendanceNotFound" xml:space="preserve">
     <value>Attendance record not found</value>
@@ -248,6 +254,9 @@
   </data>
   <data name="CreateNew" xml:space="preserve">
     <value>Create New</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>Current</value>
   </data>
   <data name="CurrentSubscription" xml:space="preserve">
     <value>Current Subscription</value>
@@ -525,6 +534,9 @@
   <data name="JournalEntries" xml:space="preserve">
     <value>Journal Entries</value>
   </data>
+  <data name="LastAttendanceDate" xml:space="preserve">
+    <value>Last Attendance Date</value>
+  </data>
   <data name="LockerRental" xml:space="preserve">
     <value>Locker Rental</value>
   </data>
@@ -611,6 +623,9 @@
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>Record not found</value>
+  </data>
+  <data name="NotStarted" xml:space="preserve">
+    <value>Not Started</value>
   </data>
   <data name="Or" xml:space="preserve">
     <value>OR</value>
@@ -845,6 +860,9 @@
   </data>
   <data name="StartDate" xml:space="preserve">
     <value>Start Date</value>
+  </data>
+  <data name="Started" xml:space="preserve">
+    <value>Started</value>
   </data>
   <data name="StartTime" xml:space="preserve">
     <value>Start Time</value>

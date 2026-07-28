@@ -30,6 +30,13 @@
                 <th>@Localizer["EndDate"]</th>
                 <th>@Localizer["Price"]</th>
                 <th>@Localizer["Status"]</th>
+                <th>@Localizer["ActualDurationDays"]</th>
+                <th>@Localizer["RemainingDays"]</th>
+                <th>@Localizer["AttendanceDays"]</th>
+                <th>@Localizer["LastAttendanceDate"]</th>
+                <th>@Localizer["Started"]</th>
+                <th>@Localizer["Current"]</th>
+                <th>@Localizer["Expired"]</th>
                 <th>@Localizer["Actions"]</th>
                 <th></th>
             </tr>
@@ -54,25 +61,49 @@
                             @item.Status.ToLocalizedString()
                         </span>
                     </td>
-                    <td>
-                        <a asp-action="Edit"
-                           asp-route-id="@item.Id"
-                           class="btn btn-icon btn-outline-primary tooltip-btn"
-                           data-tooltip="@Localizer["Edit"]">
-                            <i class="fa fa-pen"></i>
-                        </a>
-                        <a asp-action="Details"
-                           asp-route-id="@item.Id"
-                           class="btn btn-icon btn-outline-info tooltip-btn"
-                           data-tooltip="@Localizer["Details"]">
-                            <i class="fa fa-info"></i>
-                        </a>
-                        <a asp-action="Delete"
-                           asp-route-id="@item.Id"
-                           class="btn btn-icon btn-outline-danger tooltip-btn"
-                           data-tooltip="@Localizer["Delete"]">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                <td>@item.ActualDurationDays</td>
+                <td>@item.RemainingDays</td>
+                <td>@item.AttendanceDays</td>
+                <td>@item.LastAttendanceDate</td>
+                <td>
+
+                    <span class="fw-bold badge @(item.IsStarted ? "bg-success" : "bg-danger")">
+                            @(item.IsStarted? Localizer["Yes"] : Localizer["No"])
+                    </span>
+                </td>
+                <td >
+                        <span class="fw-bold badge @(item.IsCurrent ? "bg-success" : "bg-danger")">
+                            @(item.IsCurrent? Localizer["Yes"] : Localizer["No"])
+                        </span>
+                </td>
+                <td >
+                        <span class="fw-bold badge @(item.IsExpired ? "bg-success" : "bg-danger")">
+                            @(item.IsExpired? Localizer["Yes"] : Localizer["No"])
+                        </span>
+                </td>
+                    @* <td class="text-nowrap"> *@
+                        <td>
+                            <div class="d-flex gap-1 flex-nowrap">
+                            <a asp-action="Edit"
+                               asp-route-id="@item.Id"
+                               class="btn btn-icon btn-outline-primary tooltip-btn"
+                               data-tooltip="@Localizer["Edit"]">
+                                <i class="fa fa-pen"></i>
+                            </a>
+                            <a asp-action="Details"
+                               asp-route-id="@item.Id"
+                               class="btn btn-icon btn-outline-info tooltip-btn"
+                               data-tooltip="@Localizer["Details"]">
+                                <i class="fa fa-info"></i>
+                            </a>
+                            <a asp-action="Delete"
+                               asp-route-id="@item.Id"
+                               class="btn btn-icon btn-outline-danger tooltip-btn"
+                               data-tooltip="@Localizer["Delete"]">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            </div>
+                        
                     </td>
                 </tr>
             }

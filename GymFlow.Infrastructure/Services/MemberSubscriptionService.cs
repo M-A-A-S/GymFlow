@@ -4,6 +4,7 @@ using GymFlow.Domain.DTOs.Member;
 using GymFlow.Domain.DTOs.MemberSubscription;
 using GymFlow.Domain.DTOs.SubscriptionType;
 using GymFlow.Domain.Entities;
+using GymFlow.Domain.Enums;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
@@ -73,7 +74,11 @@ namespace GymFlow.Infrastructure.Services
         {
             try
             {
+                var today = DateOnly.FromDateTime(DateTime.UtcNow);
+
                 var memberSubscriptions = await _appDbContext.MemberSubscriptions
+                .AsNoTracking()
+                .OrderByDescending(x => x.StartDate)
                 .Select(m => new MemberSubscriptionDTO
                 {
                     Id = m.Id,
@@ -83,6 +88,37 @@ namespace GymFlow.Infrastructure.Services
                     EndDate = m.EndDate,
                     Status = m.Status,
                     Price = m.Price,
+
+                    // Include both start and end dates in duration calculation
+                    ActualDurationDays = m.EndDate.DayNumber - m.StartDate.DayNumber + 1,
+
+                    RemainingDays = m.EndDate >= today
+                        ? m.EndDate.DayNumber - today.DayNumber + 1
+                        : 0,
+
+                    AttendanceDays = m.Member.MemberAttendances
+                        .Where(a =>
+                            a.AttendanceDate >= m.StartDate &&
+                            a.AttendanceDate <= m.EndDate)
+                        .Select(a => a.AttendanceDate)
+                        .Distinct()
+                        .Count(),
+
+                    LastAttendanceDate = m.Member.MemberAttendances
+                        .Where(x => 
+                            x.AttendanceDate >= m.StartDate &&
+                            x.AttendanceDate <= m.EndDate)
+                        .Max(x => (DateOnly?)x.AttendanceDate),
+
+
+                    IsStarted = m.StartDate <= today,
+
+                    IsCurrent = 
+                        m.Status == SubscriptionStatus.Active &&
+                        m.StartDate <= today &&
+                        m.EndDate >= today,
+
+                    IsExpired = m.EndDate < today,
 
 
                     Member = new MemberDTO
@@ -102,8 +138,7 @@ namespace GymFlow.Infrastructure.Services
                         DurationDays = m.SubscriptionType.DurationDays,
 
                     },
-                })
-                .AsNoTracking()          
+                })        
                 .ToListAsync();
 
                 return Result<IEnumerable<MemberSubscriptionDTO>>.Success(memberSubscriptions);
@@ -127,7 +162,10 @@ namespace GymFlow.Infrastructure.Services
         {
             try
             {
+                var today = DateOnly.FromDateTime(DateTime.UtcNow);
+
                 var memberSubscription = await _appDbContext.MemberSubscriptions
+                    .AsNoTracking()
                     .Select(m => new MemberSubscriptionDTO
                     {
                         Id = m.Id,
@@ -137,6 +175,37 @@ namespace GymFlow.Infrastructure.Services
                         EndDate = m.EndDate,
                         Status = m.Status,
                         Price = m.Price,
+
+                        // Include both start and end dates in duration calculation
+                        ActualDurationDays = m.EndDate.DayNumber - m.StartDate.DayNumber + 1,
+
+                        RemainingDays = m.EndDate >= today
+                        ? m.EndDate.DayNumber - today.DayNumber + 1
+                        : 0,
+
+                        AttendanceDays = m.Member.MemberAttendances
+                        .Where(a =>
+                            a.AttendanceDate >= m.StartDate &&
+                            a.AttendanceDate <= m.EndDate)
+                        .Select(a => a.AttendanceDate)
+                        .Distinct()
+                        .Count(),
+
+                        LastAttendanceDate = m.Member.MemberAttendances
+                        .Where(x =>
+                            x.AttendanceDate >= m.StartDate &&
+                            x.AttendanceDate <= m.EndDate)
+                        .Max(x => (DateOnly?)x.AttendanceDate),
+
+
+                        IsStarted = m.StartDate <= today,
+
+                        IsCurrent =
+                        m.Status == SubscriptionStatus.Active &&
+                        m.StartDate <= today &&
+                        m.EndDate >= today,
+
+                        IsExpired = m.EndDate < today,
 
 
                         Member = m.Member == null ? null : new MemberDTO
@@ -156,8 +225,7 @@ namespace GymFlow.Infrastructure.Services
                             DurationDays = m.SubscriptionType.DurationDays,
 
                         },
-                    })
-                    .AsNoTracking()
+                    }) 
                     .FirstOrDefaultAsync(x => x.Id == id);
 
                 if (memberSubscription == null)

@@ -76,5 +76,15 @@ namespace GymFlow.Domain.DTOs.MemberSubscription
 
         public MemberDTO? Member { get; set; }
         public SubscriptionTypeDTO? SubscriptionType { get; set; }
+
+        // For reports
+        public int ActualDurationDays {  get; set; }
+        public int RemainingDays { get; set; }
+        public int AttendanceDays { get; set; }
+        public DateOnly? LastAttendanceDate {  get; set; }
+        public bool IsStarted { get; set; }
+        public bool IsCurrent { get; set; }
+        public bool IsExpired { get; set; }
+
     }
 }
