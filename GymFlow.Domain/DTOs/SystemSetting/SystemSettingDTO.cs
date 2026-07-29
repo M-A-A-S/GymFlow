@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GymFlow.Domain.DTOs.File;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,8 @@ namespace GymFlow.Domain.DTOs.SystemSetting
         public string? ReceiptFooterAr { get; set; }
         //public string LogoPath { get; set; }
         public string? LogoUrl { get; set; }
+
+        public FileUploadRequest? Image { get; set; }
 
 
         //public string WhatsApp { get; set; }

@@ -21,6 +21,7 @@ namespace GymFlow.Infrastructure
             IConfiguration configuration)
         {
 
+            services.AddScoped<ISystemSettingService, SystemSettingService>();
             services.AddScoped<ISalesInvoiceService, SalesInvoiceService>();
             services.AddScoped<IInventoryService, InventoryService>();
             services.AddScoped<IPurchaseInvoiceService, PurchaseInvoiceService>();
