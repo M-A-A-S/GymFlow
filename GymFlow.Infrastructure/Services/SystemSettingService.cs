@@ -60,8 +60,8 @@ namespace GymFlow.Infrastructure.Services
                 if (!imageResult.IsSuccess)
                 {
                     return Result<int>.Failure(
-                        validationResult.Code,
-                        validationResult.StatusCode);
+                        imageResult.Code,
+                        imageResult.StatusCode);
                 }
 
                 var entity = dto.ToEntity();
