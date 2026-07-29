@@ -985,3 +985,9 @@ background-color: transparent;
     box-shadow: var(--shadow-3);
 }
 /*End System Settings*/
+/*Starte Filting & Pangination*/
+.sort-btn
+{
+    color: var(--text-color)
+}
+/*Starte Filting & Pangination*/

@@ -387,6 +387,12 @@
   <data name="Friday" xml:space="preserve">
     <value>الجمعة</value>
   </data>
+  <data name="From" xml:space="preserve">
+    <value>من</value>
+  </data>
+  <data name="FromDate" xml:space="preserve">
+    <value>من تاريخ</value>
+  </data>
   <data name="FullName" xml:space="preserve">
     <value>الاسم الكامل</value>
   </data>
@@ -891,6 +897,24 @@
   <data name="Settings" xml:space="preserve">
     <value>الإعدادات</value>
   </data>
+  <data name="SortAZ" xml:space="preserve">
+    <value>ترتيب من A إلى Z</value>
+  </data>
+  <data name="SortHighToLow" xml:space="preserve">
+    <value>ترتيب من الأعلى إلى الأقل</value>
+  </data>
+  <data name="SortLowToHigh" xml:space="preserve">
+    <value>ترتيب من الأقل إلى الأعلى</value>
+  </data>
+  <data name="SortNewestFirst" xml:space="preserve">
+    <value>ترتيب من الأحدث إلى الأقدم</value>
+  </data>
+  <data name="SortOldestFirst" xml:space="preserve">
+    <value>ترتيب من الأقدم إلى الأحدث</value>
+  </data>
+  <data name="SortZA" xml:space="preserve">
+    <value>ترتيب من Z إلى A</value>
+  </data>
   <data name="StartDate" xml:space="preserve">
     <value>تاريخ البداية</value>
   </data>
@@ -971,6 +995,12 @@
   </data>
   <data name="TimeStatus" xml:space="preserve">
     <value>حالة الاشتراك</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>إلى</value>
+  </data>
+  <data name="ToDate" xml:space="preserve">
+    <value>إلى تاريخ</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>الإجمالي</value>

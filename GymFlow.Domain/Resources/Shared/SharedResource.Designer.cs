@@ -871,6 +871,24 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        public static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From Date.
+        /// </summary>
+        public static string FromDate {
+            get {
+                return ResourceManager.GetString("FromDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Full Name.
         /// </summary>
         public static string FullName {
@@ -2383,6 +2401,60 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sort A to Z.
+        /// </summary>
+        public static string SortAZ {
+            get {
+                return ResourceManager.GetString("SortAZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort High to Low.
+        /// </summary>
+        public static string SortHighToLow {
+            get {
+                return ResourceManager.GetString("SortHighToLow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort Low to High.
+        /// </summary>
+        public static string SortLowToHigh {
+            get {
+                return ResourceManager.GetString("SortLowToHigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort Newest First.
+        /// </summary>
+        public static string SortNewestFirst {
+            get {
+                return ResourceManager.GetString("SortNewestFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort Oldest First.
+        /// </summary>
+        public static string SortOldestFirst {
+            get {
+                return ResourceManager.GetString("SortOldestFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort Z to A.
+        /// </summary>
+        public static string SortZA {
+            get {
+                return ResourceManager.GetString("SortZA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start Date.
         /// </summary>
         public static string StartDate {
@@ -2622,6 +2694,24 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string TimeStatus {
             get {
                 return ResourceManager.GetString("TimeStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To Date.
+        /// </summary>
+        public static string ToDate {
+            get {
+                return ResourceManager.GetString("ToDate", resourceCulture);
             }
         }
         

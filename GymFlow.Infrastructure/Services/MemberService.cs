@@ -5,6 +5,7 @@ using GymFlow.Domain.Enums;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
+using GymFlow.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -107,6 +108,87 @@ namespace GymFlow.Infrastructure.Services
                 return Result<IEnumerable<MemberDTO>>.Failure(
                     ResultCodes.UnexpectedError,
                     500,
+                    "An unexpected error occurred.");
+            }
+        }
+
+        public async Task<Result<PagedResult<MemberDTO>>> GetAllAsync(MemberFilterDTO filter)
+        {
+            try
+            {
+                //var members = await _appDbContext.Members
+                //.Select(m => m.ToDTO())
+                //.AsNoTracking()
+                //.ToListAsync();
+
+                var query = 
+                    _appDbContext.Members
+                    .AsNoTracking();
+
+                // Search
+                if (!string.IsNullOrEmpty(filter.Search))
+                {
+                    query = query.Where(x =>
+                        x.FullName.Contains(filter.Search) ||
+                        x.PhoneNumber.Contains(filter.Search)
+                        );
+                }
+
+                // Gender filter
+                if (filter.Gender.HasValue)
+                {
+                    query =
+                        query.Where(x => x.Gender == filter.Gender);
+                }
+
+                // Status filter
+                if (filter.Status.HasValue)
+                {
+                    query =
+                        query.Where(x => x.Status == filter.Status);
+                }
+
+                // Date filter
+                if (filter.RegisterDateFrom.HasValue)
+                {
+                    query =
+                        query.Where(x => x.RegisterDate >= filter.RegisterDateFrom);
+                }
+
+                if (filter.RegisterDateTo.HasValue)
+                {
+                    query =
+                        query.Where(x => x.RegisterDate <= filter.RegisterDateTo);
+                }
+
+                //query = query.OrderByDescending(x => x.Id);
+                query = query.OrderByProperty(filter.SortBy, filter.Descending);
+
+                var pagedResult = await query.ToPagedListAsync(filter.PageNumber, filter.PageSize);
+
+                var result = new PagedResult<MemberDTO>
+                {
+                    Items = pagedResult.Items.Select(x => x.ToDTO()),
+                    PageNumber = pagedResult.PageNumber,
+                    PageSize = pagedResult.PageSize,
+                    TotalCount = pagedResult.TotalCount,
+                    TotalPages = pagedResult.TotalPages,
+                };
+
+
+                return Result<PagedResult<MemberDTO>>.Success(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                   ex,
+                   "Error in Type : {Type}, Method: {Method},",
+                   nameof(MemberService),
+                   nameof(GetAllAsync));
+
+                return Result<PagedResult<MemberDTO>>.Failure(
+                    ResultCodes.UnexpectedError,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
             }
         }

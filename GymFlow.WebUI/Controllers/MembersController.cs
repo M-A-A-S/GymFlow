@@ -2,6 +2,7 @@
 using GymFlow.Domain.Constants;
 using GymFlow.Domain.DTOs.Member;
 using GymFlow.Domain.Resources.Shared;
+using GymFlow.WebUI.ViewModels.Member;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
@@ -20,10 +21,15 @@ namespace GymFlow.WebUI.Controllers
         }
 
         #region ========================= Get =========================
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(MemberFilterDTO filter)
         {
-            var getAllResult = await _service.GetAllAsync();
-            return View(getAllResult.Data);
+            var getAllResult = await _service.GetAllAsync(filter);
+            var result = new MemberIndexVM
+            {
+                Members = getAllResult.Data,
+                Filter = filter,
+            };
+            return View(result);
         }
 
         public async Task<IActionResult> Details(int id)
