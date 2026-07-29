@@ -16,6 +16,7 @@ namespace GymFlow.Application.Services
         Task<Result<bool>> DeleteAsync(int id);
         Task<Result<SystemSettingDTO>> GetByIdAsync(int id);
         Task<Result<IEnumerable<SystemSettingDTO>>> GetAllAsync();
+        Task<Result<SystemSettingDTO>> GetCurrentAsync();
 
     }
 }

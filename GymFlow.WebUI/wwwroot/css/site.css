@@ -301,7 +301,7 @@ select:-webkit-autofill:focus {
     flex-direction: column;
     box-shadow: var(--shadow-2);
     position: fixed;
-    z-index: 1000;
+    z-index: 10000;
     transition: var(--transition);
 }
 
@@ -962,7 +962,7 @@ background-color: transparent;
 .sticky-save-bar {
     position: sticky;
     top: 70px;
-    z-index: 1000;
+    z-index: 2;
     padding: 10px 0;
     padding: 5px;
     background-color: var(--card-background);
@@ -970,5 +970,18 @@ background-color: transparent;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-2);
     margin-bottom: 20px;
+}
+.logo {
+    color: var(--primary-color);
+}
+.logo img
+{
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-1);
+    object-fit: cover;
+    transition: var(--transition);
+}
+.logo img:hover {
+    box-shadow: var(--shadow-3);
 }
 /*End System Settings*/

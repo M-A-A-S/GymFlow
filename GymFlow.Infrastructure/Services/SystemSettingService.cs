@@ -5,6 +5,7 @@ using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace GymFlow.Infrastructure.Services
         private readonly IAppDbContext _appDbContext;
         private readonly ILogger<SystemSettingService> _logger;
         private readonly IFileService _fileService;
+        private readonly IMemoryCache _cache;
+        private const string Cache_SystemSetting = "SystemSetting";
 
         #endregion
 
@@ -28,11 +31,13 @@ namespace GymFlow.Infrastructure.Services
         public SystemSettingService(
             IAppDbContext appDbContext,
             ILogger<SystemSettingService> logger,
-            IFileService fileService)
+            IFileService fileService,
+            IMemoryCache cache)
         {
             _appDbContext = appDbContext;
             _logger = logger;
             _fileService = fileService;
+            _cache = cache;
         }
 
         #endregion
@@ -70,6 +75,7 @@ namespace GymFlow.Infrastructure.Services
 
                 _appDbContext.SystemSettings.Add(entity);
                 await _appDbContext.SaveChangesAsync();
+                _cache.Remove(Cache_SystemSetting);
                 return Result<int>.Success(entity.Id, ResultCodes.CreatedSuccessfully);
 
             }
@@ -146,6 +152,30 @@ namespace GymFlow.Infrastructure.Services
             }
         }
 
+        public async Task<Result<SystemSettingDTO>> GetCurrentAsync()
+        {
+            var setting = await _cache.GetOrCreateAsync(
+                Cache_SystemSetting,
+                async entry =>
+                {
+                    entry.SlidingExpiration = TimeSpan.FromHours(1);
+
+                    return await _appDbContext.SystemSettings
+                        .AsNoTracking()
+                        .Select(x => x.ToDTO())
+                        .FirstOrDefaultAsync();
+                });
+
+            if (setting == null)
+            {
+                return Result<SystemSettingDTO>.Failure(
+                    ResultCodes.NotFound,
+                    HttpStatusCodes.NotFound);
+            }
+
+            return Result<SystemSettingDTO>.Success(setting);
+        }
+
         #endregion
 
         #region ========================= Update =========================
@@ -204,6 +234,7 @@ namespace GymFlow.Infrastructure.Services
                 SystemSetting.UpdatedAt = DateTime.UtcNow;
 
                 await _appDbContext.SaveChangesAsync();
+                _cache.Remove(Cache_SystemSetting);
                 return Result<bool>.Success(true, ResultCodes.UpdatedSuccessfully);
             }
             catch (Exception ex)
@@ -251,6 +282,7 @@ namespace GymFlow.Infrastructure.Services
                 SystemSetting.DeletedAt = DateTime.UtcNow;
 
                 await _appDbContext.SaveChangesAsync();
+                _cache.Remove(Cache_SystemSetting);
                 return Result<bool>.Success(true, ResultCodes.DeletedSuccessfully);
             }
             catch (Exception ex)

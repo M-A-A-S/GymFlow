@@ -1,0 +1,33 @@
+﻿@using System.Globalization
+@using GymFlow.Domain.Constants
+@using GymFlow.Domain.DTOs.SystemSetting
+@using GymFlow.WebUI.Extensions
+@model SystemSettingDTO?
+
+@if (Model == null)
+{
+	<span>GymFlow</span>
+}
+else
+{
+	<div class="d-flex align-items-center logo">
+
+		@if (!string.IsNullOrEmpty(Model.LogoUrl))
+		{
+			<img src="@Model.LogoUrl.GetImageUrl(Constants.SystemSettingsFolder)"
+					width="40"
+					height="40"
+					class="rounded-circle m-2"
+					onerror="this.src='/uploads/no-image.svg'"   
+					/>
+		}
+
+		<span class="fw-bold">
+			@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+				? Model.NameAr
+				: Model.NameEn)
+
+		</span>
+
+	</div>
+}

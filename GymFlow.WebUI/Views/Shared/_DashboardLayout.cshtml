@@ -41,7 +41,11 @@
 				</a>
 
 			</div>
-			<a class="navbar-brand" href="#">GymFlow</a>
+			@* <a class="navbar-brand" href="#">GymFlow</a> *@
+			<div>
+				@* <vc:system-setting /> *@
+				@await Component.InvokeAsync("SystemSetting")
+			</div>
 		</nav>
 	</header>
 
@@ -49,7 +53,8 @@
 	<aside class="sidebar close" id="sidebar">
 		@* Top *@
 		<div class="sidebar-top">
-			<div class="logo">GymFlow</div>
+			@* <div class="logo">GymFlow</div> *@
+			@await Component.InvokeAsync("SystemSetting")
 			@* <button onClick={onClose}> *@
 			<button id="closeSidebarBtn">
 				<i class="fa-solid fa-xmark"></i>
