@@ -1978,6 +1978,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Receipt Settings.
+        /// </summary>
+        public static string ReceiptSettings {
+            get {
+                return ResourceManager.GetString("ReceiptSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Receipt Vouchers.
         /// </summary>
         public static string ReceiptVouchers {

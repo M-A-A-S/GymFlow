@@ -51,14 +51,17 @@ namespace GymFlow.WebUI.Controllers
         {
             if (InvalidModel())
             {
-                return View(VM);
+                //return View(VM);
+                return View(nameof(Index));
             }
 
-            var updateResult = await _service.UpdateAsync(VM.Id, VM.ToDTO());
+            //var updateResult = await _service.UpdateAsync(VM.Id, VM.ToDTO());
+            var updateResult = await _service.UpdateAsync(1, VM.ToDTO());
             if (!updateResult.IsSuccess)
             {
                 Error(updateResult.Code);
-                return View(VM);
+                //return View(VM);
+                return View(nameof(Index));
             }
 
             Success(updateResult.Code);

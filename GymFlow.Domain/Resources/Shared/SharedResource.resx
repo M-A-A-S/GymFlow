@@ -756,6 +756,9 @@
   <data name="ReceiptFooterEn" xml:space="preserve">
     <value>Receipt Footer (English)</value>
   </data>
+  <data name="ReceiptSettings" xml:space="preserve">
+    <value>Receipt Settings</value>
+  </data>
   <data name="ReceiptVouchers" xml:space="preserve">
     <value>Receipt Vouchers</value>
   </data>

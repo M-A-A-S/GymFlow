@@ -756,6 +756,9 @@
   <data name="ReceiptFooterEn" xml:space="preserve">
     <value>تذييل الإيصال (بالإنجليزية)</value>
   </data>
+  <data name="ReceiptSettings" xml:space="preserve">
+    <value>إعدادات الإيصال</value>
+  </data>
   <data name="ReceiptVouchers" xml:space="preserve">
     <value>سندات القبض</value>
   </data>

@@ -12,6 +12,7 @@ namespace GymFlow.WebUI.Extensions
         {
             return new SystemSettingDTO
             {
+                Id = VM.Id,
                 NameEn = VM.NameEn,
                 NameAr = VM.NameAr,
                 AddressEn = VM.AddressEn,
@@ -34,6 +35,7 @@ namespace GymFlow.WebUI.Extensions
         {
             return new SystemSettingVM
             {
+                Id = DTO.Id,
                 NameEn = DTO.NameEn,
                 NameAr = DTO.NameAr,
                 AddressEn = DTO.AddressEn,
