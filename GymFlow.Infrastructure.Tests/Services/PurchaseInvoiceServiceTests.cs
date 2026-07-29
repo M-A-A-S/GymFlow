@@ -1,9 +1,12 @@
-﻿using GymFlow.Domain.Constants;
+﻿using GymFlow.Application.Services;
+using GymFlow.Domain.Constants;
+using GymFlow.Domain.DTOs.Inventory;
 using GymFlow.Domain.DTOs.PurchaseDetail;
 using GymFlow.Domain.DTOs.PurchaseInvoice;
 using GymFlow.Domain.DTOs.PurchasePayment;
 using GymFlow.Domain.Entities;
 using GymFlow.Domain.Enums;
+using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Services;
 using GymFlow.Infrastructure.Tests.Helpers;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +26,7 @@ namespace GymFlow.Infrastructure.Tests.Services
 
         private readonly TestDbContext _context;
         private readonly PurchaseInvoiceService _service;
+        private readonly Mock<IInventoryService> _inventoryMock;
 
         #endregion
 
@@ -39,9 +43,20 @@ namespace GymFlow.Infrastructure.Tests.Services
 
             var logger = new Mock<ILogger<PurchaseInvoiceService>>();
 
+            _inventoryMock = new Mock<IInventoryService>();
+
+            _inventoryMock
+                .Setup(x => x.DecreaseStockAsync(It.IsAny<IEnumerable<StockMovementDTO>>()))
+                .ReturnsAsync(Result<bool>.Success(true));
+
+
+            _inventoryMock
+                .Setup(x => x.IncreaseStockAsync(It.IsAny<IEnumerable<StockMovementDTO>>()))
+                .ReturnsAsync(Result<bool>.Success(true));
+
             _service = new PurchaseInvoiceService(
                 _context,
-                logger.Object);
+                logger.Object, _inventoryMock.Object);
         }
 
         #endregion
@@ -411,6 +426,61 @@ namespace GymFlow.Infrastructure.Tests.Services
             Assert.Equal(
                 ResultCodes.PaymentExceedsInvoiceTotal,
                 result.Code);
+        }
+
+        [Fact]
+        public async Task AddAsync_ShouldCallIncreaseStock_WhenInvoiceIsValid()
+        {
+            // Arrange
+            var supplier = await CreateSupplierEntity();
+            var product = await CreateProductEntity();
+
+            var dto = CreatePurchaseInvoiceDTO(
+                supplier.Id,
+                product.Id);
+
+            // Act
+            var result = await _service.AddAsync(dto);
+
+            // Assert
+            Assert.True(result.IsSuccess);
+
+            _inventoryMock.Verify(
+                x => x.IncreaseStockAsync(
+                    It.Is<IEnumerable<StockMovementDTO>>(m =>
+                        m.Count() == 1 &&
+                        m.First().ProductId == product.Id &&
+                        m.First().Quantity == 2)),
+                Times.Once);
+        }
+
+        [Fact]
+        public async Task AddAsync_ShouldReturnFailure_WhenIncreaseStockFails()
+        {
+            // Arrange
+            var supplier = await CreateSupplierEntity();
+            var product = await CreateProductEntity();
+
+            var dto = CreatePurchaseInvoiceDTO(
+                supplier.Id,
+                product.Id);
+
+            _inventoryMock
+                .Setup(x => x.IncreaseStockAsync(It.IsAny<IEnumerable<StockMovementDTO>>()))
+                .ReturnsAsync(Result<bool>.Failure(
+                    ResultCodes.InsufficientStock,
+                    HttpStatusCodes.BadRequest));
+
+            // Act
+            var result = await _service.AddAsync(dto);
+
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.Equal(ResultCodes.InsufficientStock, result.Code);
+
+            _inventoryMock.Verify(
+                x => x.IncreaseStockAsync(It.IsAny<IEnumerable<StockMovementDTO>>()),
+                Times.Once);
         }
 
         #endregion
@@ -929,6 +999,117 @@ namespace GymFlow.Infrastructure.Tests.Services
                 result.Code);
         }
 
+        [Fact]
+        public async Task UpdateAsync_ShouldCallDecreaseAndIncreaseStock()
+        {
+            // Arrange
+            var supplier = await CreateSupplierEntity();
+
+            var oldProduct = await CreateProductEntity();
+            var newProduct = await CreateProductEntity();
+
+            var invoice = await CreatePurchaseInvoiceEntity(
+                supplier.Id,
+                oldProduct.Id);
+
+            var dto = CreatePurchaseInvoiceDTO(
+                supplier.Id,
+                newProduct.Id);
+
+            dto.PurchaseDetails.First().Quantity = 5;
+
+            // Act
+            var result = await _service.UpdateAsync(
+                invoice.Id,
+                dto);
+
+            // Assert
+            Assert.True(result.IsSuccess);
+
+            _inventoryMock.Verify(
+                x => x.DecreaseStockAsync(It.IsAny<IEnumerable<StockMovementDTO>>()),
+                Times.Once);
+
+            _inventoryMock.Verify(
+                x => x.IncreaseStockAsync(It.IsAny<IEnumerable<StockMovementDTO>>()),
+                Times.Once);
+        }
+
+        [Fact]
+        public async Task UpdateAsync_ShouldReturnFailure_WhenDecreaseStockFails()
+        {
+            // Arrange
+            var supplier = await CreateSupplierEntity();
+            var product = await CreateProductEntity();
+
+            var invoice = await CreatePurchaseInvoiceEntity(
+                supplier.Id,
+                product.Id);
+
+            var dto = CreatePurchaseInvoiceDTO(
+                supplier.Id,
+                product.Id);
+
+            _inventoryMock
+                .Setup(x => x.DecreaseStockAsync(It.IsAny<IEnumerable<StockMovementDTO>>()))
+                .ReturnsAsync(Result<bool>.Failure(
+                    ResultCodes.InsufficientStock,
+                    HttpStatusCodes.BadRequest));
+
+            // Act
+            var result = await _service.UpdateAsync(
+                invoice.Id,
+                dto);
+
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.Equal(ResultCodes.InsufficientStock, result.Code);
+
+            _inventoryMock.Verify(
+                x => x.IncreaseStockAsync(It.IsAny<IEnumerable<StockMovementDTO>>()),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task UpdateAsync_ShouldReturnFailure_WhenIncreaseStockFails()
+        {
+            // Arrange
+            var supplier = await CreateSupplierEntity();
+
+            var oldProduct = await CreateProductEntity();
+            var newProduct = await CreateProductEntity();
+
+            var invoice = await CreatePurchaseInvoiceEntity(
+                supplier.Id,
+                oldProduct.Id);
+
+            var dto = CreatePurchaseInvoiceDTO(
+                supplier.Id,
+                newProduct.Id);
+
+            _inventoryMock
+                .Setup(x => x.IncreaseStockAsync(It.IsAny<IEnumerable<StockMovementDTO>>()))
+                .ReturnsAsync(Result<bool>.Failure(
+                    ResultCodes.InsufficientStock,
+                    HttpStatusCodes.BadRequest));
+
+            // Act
+            var result = await _service.UpdateAsync(
+                invoice.Id,
+                dto);
+
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.Equal(ResultCodes.InsufficientStock, result.Code);
+
+            _inventoryMock.Verify(
+                x => x.DecreaseStockAsync(It.IsAny<IEnumerable<StockMovementDTO>>()),
+                Times.Once);
+
+            _inventoryMock.Verify(
+                x => x.IncreaseStockAsync(It.IsAny<IEnumerable<StockMovementDTO>>()),
+                Times.Once);
+        }
 
         #endregion
 
@@ -1001,6 +1182,61 @@ namespace GymFlow.Infrastructure.Tests.Services
             Assert.Equal(
                 HttpStatusCodes.NotFound,
                 result.StatusCode);
+        }
+
+        [Fact]
+        public async Task DeleteAsync_ShouldCallDecreaseStock()
+        {
+            // Arrange
+            var supplier = await CreateSupplierEntity();
+            var product = await CreateProductEntity();
+
+            var invoice = await CreatePurchaseInvoiceEntity(
+                supplier.Id,
+                product.Id);
+
+            // Act
+            var result = await _service.DeleteAsync(invoice.Id);
+
+            // Assert
+            Assert.True(result.IsSuccess);
+
+            _inventoryMock.Verify(
+                x => x.DecreaseStockAsync(
+                    It.Is<IEnumerable<StockMovementDTO>>(m =>
+                        m.Count() == 1 &&
+                        m.First().ProductId == product.Id &&
+                        m.First().Quantity == 2)),
+                Times.Once);
+        }
+
+        [Fact]
+        public async Task DeleteAsync_ShouldReturnFailure_WhenDecreaseStockFails()
+        {
+            // Arrange
+            var supplier = await CreateSupplierEntity();
+            var product = await CreateProductEntity();
+
+            var invoice = await CreatePurchaseInvoiceEntity(
+                supplier.Id,
+                product.Id);
+
+            _inventoryMock
+                .Setup(x => x.DecreaseStockAsync(It.IsAny<IEnumerable<StockMovementDTO>>()))
+                .ReturnsAsync(Result<bool>.Failure(
+                    ResultCodes.InsufficientStock,
+                    HttpStatusCodes.BadRequest));
+
+            // Act
+            var result = await _service.DeleteAsync(invoice.Id);
+
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.Equal(ResultCodes.InsufficientStock, result.Code);
+
+            _inventoryMock.Verify(
+                x => x.DecreaseStockAsync(It.IsAny<IEnumerable<StockMovementDTO>>()),
+                Times.Once);
         }
 
         #endregion

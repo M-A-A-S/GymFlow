@@ -1,5 +1,6 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.Constants;
+using GymFlow.Domain.DTOs.Inventory;
 using GymFlow.Domain.DTOs.Product;
 using GymFlow.Domain.DTOs.PurchaseDetail;
 using GymFlow.Domain.DTOs.PurchaseInvoice;
@@ -8,6 +9,7 @@ using GymFlow.Domain.DTOs.Supplier;
 using GymFlow.Domain.DTOs.Trainer;
 using GymFlow.Domain.DTOs.TrainerSchedule;
 using GymFlow.Domain.Entities;
+using GymFlow.Domain.Enums;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
@@ -26,16 +28,19 @@ namespace GymFlow.Infrastructure.Services
         #region ========================= Fields & Properties =========================
         private readonly IAppDbContext _appDbContext;
         private readonly ILogger<PurchaseInvoiceService> _logger;
+        private readonly IInventoryService _inventoryService;
 
         #endregion
 
         #region ========================= Constructors =========================
         public PurchaseInvoiceService(
             IAppDbContext appDbContext,
-            ILogger<PurchaseInvoiceService> logger)
+            ILogger<PurchaseInvoiceService> logger,
+            IInventoryService inventoryService)
         {
             _appDbContext = appDbContext;
             _logger = logger;
+            _inventoryService = inventoryService;
         }
 
         #endregion
@@ -65,6 +70,17 @@ namespace GymFlow.Infrastructure.Services
                 entity.PurchasePayments = dto.PurchasePayments.Select(x => x.ToEntity()).ToList();
                 entity.CalculateTotal();
                 entity.UpdatePaymentStatus();
+
+                var stockResult = 
+                    await _inventoryService.IncreaseStockAsync(
+                        GetStockMovements(entity.PurchaseDetails));
+
+                if (!stockResult.IsSuccess)
+                {
+                    return Result<int>.Failure(
+                        stockResult.Code,
+                        stockResult.StatusCode);
+                }
 
 
                 _appDbContext.PurchaseInvoices.Add(entity);
@@ -284,11 +300,33 @@ namespace GymFlow.Infrastructure.Services
                 purchaseInvoice.Notes = dto.Notes;
                 purchaseInvoice.UpdatedAt = DateTime.UtcNow;
 
+                var decreaseResult =
+                    await _inventoryService.DecreaseStockAsync(
+                        GetStockMovements(purchaseInvoice.PurchaseDetails));
+
+                if (!decreaseResult.IsSuccess)
+                {
+                    return Result<bool>.Failure(
+                        decreaseResult.Code,
+                        decreaseResult.StatusCode);
+                }
+
                 _appDbContext.PurchaseDetails.RemoveRange(purchaseInvoice.PurchaseDetails);
                 _appDbContext.PurchasePayments.RemoveRange(purchaseInvoice.PurchasePayments);
 
                 purchaseInvoice.PurchaseDetails = dto.PurchaseDetails.Select(x => x.ToEntity()).ToList();
                 purchaseInvoice.PurchasePayments = dto.PurchasePayments.Select(x => x.ToEntity()).ToList();
+
+                var increaseResult =
+                    await _inventoryService.IncreaseStockAsync(
+                        GetStockMovements(purchaseInvoice.PurchaseDetails));
+
+                if (!increaseResult.IsSuccess)
+                {
+                    return Result<bool>.Failure(
+                        increaseResult.Code,
+                        increaseResult.StatusCode);
+                }
 
                 purchaseInvoice.CalculateTotal();
                 purchaseInvoice.UpdatePaymentStatus();
@@ -327,6 +365,17 @@ namespace GymFlow.Infrastructure.Services
                     return Result<bool>.Failure(
                         ResultCodes.NotFound,
                         HttpStatusCodes.NotFound);
+                }
+
+                var stockResult =
+                    await _inventoryService.DecreaseStockAsync(
+                        GetStockMovements(purchaseInvoice.PurchaseDetails));
+
+                if (!stockResult.IsSuccess)
+                {
+                    return Result<bool>.Failure(
+                        stockResult.Code,
+                        stockResult.StatusCode);
                 }
 
                 var now = DateTime.UtcNow; 
@@ -527,6 +576,16 @@ namespace GymFlow.Infrastructure.Services
 
             // fallback in case old data has invalid format
             return $"{prefix}{DateTime.UtcNow:MMddHHmmss}";
+        }
+
+        private static List<StockMovementDTO> GetStockMovements(IEnumerable<PurchaseDetail> details)
+        {
+            return details
+                .Select(x => new StockMovementDTO
+                {
+                    ProductId = x.ProductId,
+                    Quantity = x.Quantity
+                }).ToList();
         }
 
         #endregion
