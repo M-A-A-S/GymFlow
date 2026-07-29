@@ -239,8 +239,27 @@
 								// Controller = "PurchasePayments",
 								// Action = "Index"
 								// }
+
+								// Settings
+
 								}
 								},
+
+								new()
+{
+	Key = "Settings",
+	Icon = "fa-cog",
+	Children =
+	{
+		new()
+		{
+			Key = "SystemSettings",
+			Icon = "fa-sliders",
+			Controller = "SystemSettings",
+			Action = "Index"
+		}
+	}
+},
 
 								};
 				}

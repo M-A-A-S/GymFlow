@@ -138,6 +138,12 @@
   <data name="Address" xml:space="preserve">
     <value>العنوان</value>
   </data>
+  <data name="AddressAr" xml:space="preserve">
+    <value>العنوان (بالعربية)</value>
+  </data>
+  <data name="AddressEn" xml:space="preserve">
+    <value>الاسم (بالإنجليزية)</value>
+  </data>
   <data name="AddToCart" xml:space="preserve">
     <value>إضافة إلى السلة</value>
   </data>
@@ -237,6 +243,9 @@
   <data name="Code" xml:space="preserve">
     <value>رمز المنتج</value>
   </data>
+  <data name="CompanyInformation" xml:space="preserve">
+    <value>معلومات الشركة</value>
+  </data>
   <data name="Completed" xml:space="preserve">
     <value>مكتمل</value>
   </data>
@@ -254,6 +263,9 @@
   </data>
   <data name="CreateNew" xml:space="preserve">
     <value>إضافة جديد</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>العملة</value>
   </data>
   <data name="Current" xml:space="preserve">
     <value>ساري</value>
@@ -345,6 +357,9 @@
   <data name="Expired" xml:space="preserve">
     <value>منتهي</value>
   </data>
+  <data name="Facebook" xml:space="preserve">
+    <value>فيسبوك</value>
+  </data>
   <data name="Fawry" xml:space="preserve">
     <value>فوري</value>
   </data>
@@ -428,6 +443,9 @@
   </data>
   <data name="Inside" xml:space="preserve">
     <value>داخل النادي</value>
+  </data>
+  <data name="Instagram" xml:space="preserve">
+    <value>إنستغرام</value>
   </data>
   <data name="InsufficientStock" xml:space="preserve">
     <value>الكمية المتوفرة في المخزون غير كافية</value>
@@ -539,6 +557,9 @@
   </data>
   <data name="LockerRental" xml:space="preserve">
     <value>تأجير خزانة</value>
+  </data>
+  <data name="Logo" xml:space="preserve">
+    <value>الشعار</value>
   </data>
   <data name="Male" xml:space="preserve">
     <value>ذكر</value>
@@ -729,6 +750,12 @@
   <data name="Receipt" xml:space="preserve">
     <value>إيصال</value>
   </data>
+  <data name="ReceiptFooterAr" xml:space="preserve">
+    <value>تذييل الإيصال (بالعربية)</value>
+  </data>
+  <data name="ReceiptFooterEn" xml:space="preserve">
+    <value>تذييل الإيصال (بالإنجليزية)</value>
+  </data>
   <data name="ReceiptVouchers" xml:space="preserve">
     <value>سندات القبض</value>
   </data>
@@ -858,6 +885,9 @@
   <data name="ServiceNotFound" xml:space="preserve">
     <value>الخدمة غير موجودة</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>الإعدادات</value>
+  </data>
   <data name="StartDate" xml:space="preserve">
     <value>تاريخ البداية</value>
   </data>
@@ -921,8 +951,14 @@
   <data name="Suspended" xml:space="preserve">
     <value>موقوف</value>
   </data>
+  <data name="SystemSettings" xml:space="preserve">
+    <value>إعدادات النظام</value>
+  </data>
   <data name="Tax" xml:space="preserve">
     <value>الضريبة</value>
+  </data>
+  <data name="TaxNumber" xml:space="preserve">
+    <value>الرقم الضريبي</value>
   </data>
   <data name="ThankYou" xml:space="preserve">
     <value>شكراً لاختياركم لنا</value>

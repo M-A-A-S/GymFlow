@@ -138,6 +138,12 @@
   <data name="Address" xml:space="preserve">
     <value>Address</value>
   </data>
+  <data name="AddressAr" xml:space="preserve">
+    <value>Address (Arabic)</value>
+  </data>
+  <data name="AddressEn" xml:space="preserve">
+    <value>Address (English)</value>
+  </data>
   <data name="AddToCart" xml:space="preserve">
     <value>Add To Cart</value>
   </data>
@@ -237,6 +243,9 @@
   <data name="Code" xml:space="preserve">
     <value>Code</value>
   </data>
+  <data name="CompanyInformation" xml:space="preserve">
+    <value>Company Information</value>
+  </data>
   <data name="Completed" xml:space="preserve">
     <value>Completed </value>
   </data>
@@ -254,6 +263,9 @@
   </data>
   <data name="CreateNew" xml:space="preserve">
     <value>Create New</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Currency</value>
   </data>
   <data name="Current" xml:space="preserve">
     <value>Current</value>
@@ -345,6 +357,9 @@
   <data name="Expired" xml:space="preserve">
     <value>Expired</value>
   </data>
+  <data name="Facebook" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
   <data name="Fawry" xml:space="preserve">
     <value>Fawry</value>
   </data>
@@ -428,6 +443,9 @@
   </data>
   <data name="Inside" xml:space="preserve">
     <value>Inside </value>
+  </data>
+  <data name="Instagram" xml:space="preserve">
+    <value>Instagram</value>
   </data>
   <data name="InsufficientStock" xml:space="preserve">
     <value>Insufficient stock quantity</value>
@@ -539,6 +557,9 @@
   </data>
   <data name="LockerRental" xml:space="preserve">
     <value>Locker Rental</value>
+  </data>
+  <data name="Logo" xml:space="preserve">
+    <value>Logo</value>
   </data>
   <data name="Male" xml:space="preserve">
     <value>Male</value>
@@ -729,6 +750,12 @@
   <data name="Receipt" xml:space="preserve">
     <value>Receipt</value>
   </data>
+  <data name="ReceiptFooterAr" xml:space="preserve">
+    <value>Receipt Footer (Arabic)</value>
+  </data>
+  <data name="ReceiptFooterEn" xml:space="preserve">
+    <value>Receipt Footer (English)</value>
+  </data>
   <data name="ReceiptVouchers" xml:space="preserve">
     <value>Receipt Vouchers</value>
   </data>
@@ -858,6 +885,9 @@
   <data name="ServiceNotFound" xml:space="preserve">
     <value>Service not found</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="StartDate" xml:space="preserve">
     <value>Start Date</value>
   </data>
@@ -921,8 +951,14 @@
   <data name="Suspended" xml:space="preserve">
     <value>Suspended</value>
   </data>
+  <data name="SystemSettings" xml:space="preserve">
+    <value>System Settings</value>
+  </data>
   <data name="Tax" xml:space="preserve">
     <value>Tax</value>
+  </data>
+  <data name="TaxNumber" xml:space="preserve">
+    <value>Tax Number</value>
   </data>
   <data name="ThankYou" xml:space="preserve">
     <value>Thank you for choosing us</value>
