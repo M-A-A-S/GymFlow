@@ -1,0 +1,120 @@
+﻿@using GymFlow.Domain.Extensions;
+@using GymFlow.WebUI.ViewModels
+@using GymFlow.WebUI.ViewModels.Pagination
+@using GymFlow.WebUI.ViewModels.SubscriptionType
+
+
+@model SubscriptionTypeIndexVM
+
+@{
+
+    var routes = Model.Filter.ToRouteDictionary();
+
+}
+
+@if (!Model.PagedSubscriptionTypeResult.Items.Any())
+{
+    <div class="alert alert-info">
+
+        @Localizer["NoRecordsFound"]
+
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "NameEn",
+                                     Title = Localizer["NameEn"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+                    </th>
+                    <th>
+                    <partial name="_SortableHeader"
+                             model='new SortHeaderVM
+                             {
+                                 Column = "NameAr",
+                                 Title = Localizer["NameAr"],
+                                 Filter = Model.Filter,
+                                 Routes = routes
+                             }' />
+                </th>
+                    <th>
+                    <partial name="_SortableHeader"
+                             model='new SortHeaderVM
+                             {
+                                 Column = "DaysPerWeek",
+                                 Title = Localizer["DaysPerWeek"],
+                                 Filter = Model.Filter,
+                                 Routes = routes
+                             }' />
+                </th>
+                    <th>
+                    <partial name="_SortableHeader"
+                             model='new SortHeaderVM
+                             {
+                                 Column = "DurationDays",
+                                 Title = Localizer["DurationDays"],
+                                 Filter = Model.Filter,
+                                 Routes = routes
+                             }' />
+                </th>
+                    <th>
+                    <partial name="_SortableHeader"
+                             model='new SortHeaderVM
+                             {
+                                 Column = "Price",
+                                 Title = Localizer["Price"],
+                                 Filter = Model.Filter,
+                                 Routes = routes
+                             }' />
+                </th>
+                    <th>
+                    <partial name="_SortableHeader"
+                             model='new SortHeaderVM
+                             {
+                                 Column = "IsActive",
+                                 Title = Localizer["IsActive"],
+                                 Filter = Model.Filter,
+                                 Routes = routes
+                             }' />
+                </th>
+                    <th>@Localizer["Actions"]</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.PagedSubscriptionTypeResult.Items)
+                {
+
+                    <tr>
+                        <td>@item.NameEn</td>
+                        <td>@item.NameAr</td>
+                        <td>@item.DaysPerWeek</td>
+                        <td>@item.DurationDays</td>
+                        <td>@item.Price</td>
+                        <td class="fw-bold @(item.IsActive ? "text-success" : "text-danger")">@(item.IsActive? @Localizer["Yes"] : @Localizer["No"])</td>
+                        <td>
+
+                            <partial name="_Actions"
+                                     model='new ActionButtonsVM
+                                     {
+                                         Controller = "SubscriptionTypes",
+                                         Id = item.Id
+                                     }' />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+

@@ -2,10 +2,12 @@
 using GymFlow.Domain.Constants;
 using GymFlow.Domain.DTOs.Member;
 using GymFlow.Domain.DTOs.SubscriptionType;
+using GymFlow.Domain.Entities;
 using GymFlow.Domain.Enums;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
+using GymFlow.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,9 +20,13 @@ namespace GymFlow.Infrastructure.Services
 {
     public class SubscriptionTypeService : ISubscriptionTypeService
     {
+        #region ========================= Fields & Properties =========================
         private readonly IAppDbContext _appDbContext;
         private readonly ILogger<SubscriptionTypeService> _logger;
 
+        #endregion
+
+        #region ========================= Constructors =========================
         public SubscriptionTypeService(
             IAppDbContext appDbContext,
             ILogger<SubscriptionTypeService> logger)
@@ -28,6 +34,8 @@ namespace GymFlow.Infrastructure.Services
             _appDbContext = appDbContext;
             _logger = logger;
         }
+
+        #endregion
 
         #region ========================= Add =========================
         public async Task<Result<int>> AddAsync(SubscriptionTypeDTO dto)
@@ -90,6 +98,118 @@ namespace GymFlow.Infrastructure.Services
                 return Result<IEnumerable<SubscriptionTypeDTO>>.Failure(
                     ResultCodes.UnexpectedError,
                     500,
+                    "An unexpected error occurred.");
+            }
+        }
+
+        public async Task<Result<PagedResult<SubscriptionTypeDTO>>> GetAllAsync(SubscriptionTypeFilterDTO filter)
+        {
+            try
+            {
+
+                var query =
+                    _appDbContext.SubscriptionTypes
+                    .AsNoTracking();
+
+                // Search
+                if (!string.IsNullOrEmpty(filter.Search))
+                {
+                    query = query.Where(x =>
+                        x.NameEn.Contains(filter.Search) ||
+                        x.NameEn.Contains(filter.Search)
+                        );
+                }
+
+                // Active / inactive
+                if (filter.IsActive.HasValue)
+                {
+                    query =
+                        query.Where(x => x.IsActive == filter.IsActive.Value);
+                }
+
+                // Days per week
+                if (filter.MinDaysPerWeek.HasValue)
+                {
+                    query =
+                        query.Where(x => x.DaysPerWeek >= filter.MinDaysPerWeek.Value);
+                }
+
+                if (filter.MaxDaysPerWeek.HasValue)
+                {
+                    query =
+                        query.Where(x => x.DaysPerWeek <= filter.MaxDaysPerWeek.Value);
+                }
+
+                // Price
+                if (filter.MinPrice.HasValue)
+                {
+                    query =
+                        query.Where(x => x.Price >= filter.MinPrice.Value);
+                }
+
+                if (filter.MaxPrice.HasValue)
+                {
+                    query =
+                        query.Where(x => x.Price <= filter.MaxPrice.Value);
+                }
+
+                // Duration
+                if (filter.MinDurationDays.HasValue)
+                {
+                    query =
+                        query.Where(x => x.DurationDays >= filter.MinDurationDays.Value);
+                }
+
+                if (filter.MaxDurationDays.HasValue)
+                {
+                    query =
+                        query.Where(x => x.DurationDays <= filter.MaxDurationDays.Value);
+                }
+
+                if (filter.HasMembers.HasValue)
+                {
+                    if (filter.HasMembers.Value)
+                    {
+                        // Has at least one member
+                        query = 
+                            query.Where(x => x.MemberSubscriptions.Any());
+                    }
+                    else
+                    {
+                        query =
+                            query.Where(x => !x.MemberSubscriptions.Any());
+                    }
+                }
+
+
+                //query = query.OrderByDescending(x => x.Id);
+                query = query.OrderByProperty(filter.SortBy, filter.Descending);
+
+                var pagedResult = await query.ToPagedListAsync(filter.PageNumber, filter.PageSize);
+
+                var result = new PagedResult<SubscriptionTypeDTO>
+                {
+                    Items = pagedResult.Items.Select(x => x.ToDTO()),
+                    PageNumber = pagedResult.PageNumber,
+                    PageSize = pagedResult.PageSize,
+                    TotalCount = pagedResult.TotalCount,
+                    TotalPages = pagedResult.TotalPages,
+                };
+
+
+                return Result<PagedResult<SubscriptionTypeDTO>>.Success(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                   ex,
+                   "Error in Type : {Type}, Method: {Method},",
+                   nameof(SubscriptionTypeService),
+                   nameof(GetAllAsync));
+
+                return Result<PagedResult<SubscriptionTypeDTO>>.Failure(
+                    ResultCodes.UnexpectedError,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
             }
         }

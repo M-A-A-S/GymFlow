@@ -1,6 +1,7 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.DTOs.SubscriptionType;
 using GymFlow.Domain.Resources.Shared;
+using GymFlow.WebUI.ViewModels.SubscriptionType;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
@@ -8,8 +9,11 @@ namespace GymFlow.WebUI.Controllers
 {
     public class SubscriptionTypesController : BaseController
     {
+        #region ========================= Fields & Properties =========================
         private readonly ISubscriptionTypeService _service;
+        #endregion
 
+        #region ========================= Constructors =========================
         public SubscriptionTypesController(
             ISubscriptionTypeService memberService,
             IStringLocalizer<SharedResource> localizer
@@ -18,11 +22,18 @@ namespace GymFlow.WebUI.Controllers
             _service = memberService;
         }
 
+        #endregion
+
         #region ========================= Get =========================
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(SubscriptionTypeFilterDTO filter)
         {
-            var getAllResult = await _service.GetAllAsync();
-            return View(getAllResult.Data);
+            var getAllResult = await _service.GetAllAsync(filter);
+            var result = new SubscriptionTypeIndexVM
+            {
+                PagedSubscriptionTypeResult = getAllResult.Data,
+                Filter = filter
+            };
+            return View(result);
         }
 
         public async Task<IActionResult> Details(int id)

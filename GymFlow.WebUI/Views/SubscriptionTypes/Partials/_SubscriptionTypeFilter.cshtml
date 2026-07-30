@@ -1,0 +1,201 @@
+﻿@using GymFlow.Domain.DTOs.SubscriptionType
+@using GymFlow.WebUI.ViewModels.SubscriptionType
+@using GymFlow.Domain.Resources.Shared
+
+@model SubscriptionTypeFilterDTO
+
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+
+<form method="get"
+      class="card shadow-sm mb-4">
+
+
+    <div class="card-body">
+        <div class="row g-3 align-items-end">
+            <!-- Search -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <label asp-for="Search"
+                       class="form-label">
+                    @Localizer["Search"]
+                </label>
+                <input asp-for="Search"
+                       class="form-control"
+                       placeholder="@Localizer["Search"]" />
+            </div>
+
+            <!-- Active Status -->
+            <div class="col-12 col-sm-6 col-lg-2">
+
+                <label asp-for="IsActive"
+                       class="form-label">
+                    @Localizer["Status"]
+                </label>
+                <select asp-for="IsActive"
+                        class="form-select">
+                    <option value="">
+                        @Localizer["All"]
+                    </option>
+
+                    <option value="true">
+                        @Localizer["Active"]
+                    </option>
+                    <option value="false">
+                        @Localizer["Inactive"]
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- Has Members -->
+            <div class="col-12 col-sm-6 col-lg-2">
+
+                <label asp-for="HasMembers"
+                       class="form-label">
+                    @Localizer["Members"]
+                </label>
+
+                <select asp-for="HasMembers"
+                        class="form-select">
+                    <option value="">
+                        @Localizer["All"]
+                    </option>
+
+                    <option value="true">
+                        @Localizer["HasMembers"]
+                    </option>
+
+                    <option value="false">
+                        @Localizer["NoMembers"]
+                    </option>
+
+
+                </select>
+
+
+            </div>
+
+            <!-- Minimum Days -->
+            <div class="col-12 col-sm-6 col-lg-2">
+
+                <label asp-for="MinDaysPerWeek"
+                       class="form-label">
+                    @Localizer["MinDaysPerWeek"]
+
+                </label>
+
+                <input asp-for="MinDaysPerWeek"
+                       type="number"
+                       min="1"
+                       max="7"
+                       class="form-control" />
+
+            </div>
+
+            <!-- Maximum Days -->
+            <div class="col-12 col-sm-6 col-lg-2">
+                <label asp-for="MaxDaysPerWeek"
+                       class="form-label">
+
+                    @Localizer["MaxDaysPerWeek"]
+
+                </label>
+                <input asp-for="MaxDaysPerWeek"
+                       type="number"
+                       min="1"
+                       max="7"
+                       class="form-control" />
+
+
+            </div>
+
+            <!-- Minimum Duration -->
+            <div class="col-12 col-sm-6 col-lg-2">
+                <label asp-for="MinDurationDays"
+                       class="form-label">
+
+                    @Localizer["MinDuration"]
+                </label>
+
+                <input asp-for="MinDurationDays"
+                       type="number"
+                       class="form-control" />
+
+            </div>
+
+            <!-- Maximum Duration -->
+            <div class="col-12 col-sm-6 col-lg-2">
+
+                <label asp-for="MaxDurationDays"
+                       class="form-label">
+
+                    @Localizer["MaxDuration"]
+
+                </label>
+
+
+                <input asp-for="MaxDurationDays"
+                       type="number"
+                       class="form-control" />
+
+            </div>
+
+            <!-- Minimum Price -->
+            <div class="col-12 col-sm-6 col-lg-2">
+
+                <label asp-for="MinPrice"
+                       class="form-label">
+
+                    @Localizer["MinPrice"]
+
+                </label>
+                <input asp-for="MinPrice"
+                       type="number"
+                       step="0.01"
+                       class="form-control" />
+
+            </div>
+
+            <!-- Maximum Price -->
+            <div class="col-12 col-sm-6 col-lg-2">
+
+                <label asp-for="MaxPrice"
+                       class="form-label">
+
+                    @Localizer["MaxPrice"]
+
+                </label>
+                <input asp-for="MaxPrice"
+                       type="number"
+                       step="0.01"
+                       class="form-control" />
+
+
+            </div>
+
+
+            <!-- Buttons -->
+            <div class="col-auto">
+                <button type="submit"
+                        class="btn btn-primary">
+                    <i class="fa fa-search me-1"></i>
+                    @Localizer["Search"]
+                </button>
+            </div>
+
+            <div class="col-auto">
+                <a asp-action="Index"
+                   class="btn btn-outline-secondary">
+                    <i class="fa fa-times me-1"></i>
+                    @Localizer["Clear"]
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+
+</form>

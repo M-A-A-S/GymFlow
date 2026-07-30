@@ -420,6 +420,9 @@
   <data name="GymSchedules" xml:space="preserve">
     <value>جدول النادي</value>
   </data>
+  <data name="HasMembers" xml:space="preserve">
+    <value>لديه أعضاء</value>
+  </data>
   <data name="HireDate" xml:space="preserve">
     <value>تاريخ التعيين</value>
   </data>
@@ -576,6 +579,15 @@
   <data name="Male" xml:space="preserve">
     <value>ذكر</value>
   </data>
+  <data name="MaxDaysPerWeek" xml:space="preserve">
+    <value>أعلى عدد أيام بالأسبوع</value>
+  </data>
+  <data name="MaxDuration" xml:space="preserve">
+    <value>أعلى مدة</value>
+  </data>
+  <data name="MaxPrice" xml:space="preserve">
+    <value>أعلى سعر</value>
+  </data>
   <data name="Member" xml:space="preserve">
     <value>العضو</value>
   </data>
@@ -621,6 +633,15 @@
   <data name="MemberSubscriptions" xml:space="preserve">
     <value>اشتراكات العضو</value>
   </data>
+  <data name="MinDaysPerWeek" xml:space="preserve">
+    <value>أقل عدد أيام بالأسبوع</value>
+  </data>
+  <data name="MinDuration" xml:space="preserve">
+    <value>أقل مدة</value>
+  </data>
+  <data name="MinPrice" xml:space="preserve">
+    <value>أقل سعر</value>
+  </data>
   <data name="Monday" xml:space="preserve">
     <value>الإثنين</value>
   </data>
@@ -651,8 +672,14 @@
   <data name="NoImage" xml:space="preserve">
     <value>لا توجد صورة</value>
   </data>
+  <data name="NoMembers" xml:space="preserve">
+    <value>بدون أعضاء</value>
+  </data>
   <data name="NoMembersFound" xml:space="preserve">
     <value>لم يتم العثور على أعضاء</value>
+  </data>
+  <data name="NoRecordsFound" xml:space="preserve">
+    <value>لم يتم العثور على سجلات</value>
   </data>
   <data name="NotArrived" xml:space="preserve">
     <value>لم يحضر</value>

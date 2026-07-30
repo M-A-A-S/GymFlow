@@ -420,6 +420,9 @@
   <data name="GymSchedules" xml:space="preserve">
     <value>Gym Schedules</value>
   </data>
+  <data name="HasMembers" xml:space="preserve">
+    <value>Has Members</value>
+  </data>
   <data name="HireDate" xml:space="preserve">
     <value>Hire Date</value>
   </data>
@@ -576,6 +579,15 @@
   <data name="Male" xml:space="preserve">
     <value>Male</value>
   </data>
+  <data name="MaxDaysPerWeek" xml:space="preserve">
+    <value>Maximum Days / Week</value>
+  </data>
+  <data name="MaxDuration" xml:space="preserve">
+    <value>Maximum Duration</value>
+  </data>
+  <data name="MaxPrice" xml:space="preserve">
+    <value>Maximum Price</value>
+  </data>
   <data name="Member" xml:space="preserve">
     <value>Member</value>
   </data>
@@ -621,6 +633,15 @@
   <data name="MemberSubscriptions" xml:space="preserve">
     <value>Member Subscriptions</value>
   </data>
+  <data name="MinDaysPerWeek" xml:space="preserve">
+    <value>Minimum Days / Week</value>
+  </data>
+  <data name="MinDuration" xml:space="preserve">
+    <value>Minimum Duration</value>
+  </data>
+  <data name="MinPrice" xml:space="preserve">
+    <value>Minimum Price</value>
+  </data>
   <data name="Monday" xml:space="preserve">
     <value>Monday</value>
   </data>
@@ -651,8 +672,14 @@
   <data name="NoImage" xml:space="preserve">
     <value>No Image Available</value>
   </data>
+  <data name="NoMembers" xml:space="preserve">
+    <value>No Members</value>
+  </data>
   <data name="NoMembersFound" xml:space="preserve">
     <value>No members found</value>
+  </data>
+  <data name="NoRecordsFound" xml:space="preserve">
+    <value>No records found</value>
   </data>
   <data name="NotArrived" xml:space="preserve">
     <value>Not Arrived</value>
