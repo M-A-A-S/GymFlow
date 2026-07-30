@@ -1,14 +1,28 @@
 ﻿@using GymFlow.Domain.Enums;
+@using GymFlow.WebUI.ViewModels.MemberSubscription
+@using GymFlow.WebUI.ViewModels.Pagination
 
-@using GymFlow.Domain.DTOs.MemberSubscription
-@model IEnumerable<MemberSubscriptionDTO>
+
+@model MemberSubscriptionIndexVM
 
 @using GymFlow.Domain.Extensions
-@using GymFlow.Domain.Resources.Shared
-@using Microsoft.Extensions.Localization
-@inject IStringLocalizer<SharedResource> Localizer
 
 @using System.Globalization
+
+@{
+
+    var routes = Model.Filter.ToRouteDictionary();
+
+    var pagination = new PaginationVM
+    {
+        PageNumber = Model.PagedResult.PageNumber,
+        PageSize = Model.PagedResult.PageSize,
+        TotalPages = Model.PagedResult.TotalPages,
+        TotalCount = Model.PagedResult.TotalCount,
+        RouteValues = routes
+
+    };
+}
 
 <div class="d-flex align-items-center justify-content-between my-4">
     <h2>@Localizer["MemberSubscriptions"]</h2>
@@ -19,81 +33,29 @@
     </a>
 </div>
 
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>@Localizer["Member"]</th>
-                <th>@Localizer["SubscriptionType"]</th>
-                <th>@Localizer["StartDate"]</th>
-                <th>@Localizer["EndDate"]</th>
-                <th>@Localizer["Price"]</th>
-                <th>@Localizer["SubscriptionStatus"]</th>
-                <th>@Localizer["ActualDurationDays"]</th>
-                <th>@Localizer["RemainingDays"]</th>
-                <th>@Localizer["AttendanceDays"]</th>
-                <th>@Localizer["LastAttendanceDate"]</th>
-                <th>@Localizer["SubscriptionState"]</th>
-                <th>@Localizer["Actions"]</th>
-                <th></th>
-            </tr>
-        </thead>
 
-        <tbody>
-            @foreach (var item in Model)
-            {
+<partial name="Partials/_MemberSubscriptionFilter"/>
 
-                <tr>
-                    <td>@item?.Member?.FullName</td>
-                    <td>
-                        @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
-                                            ? item?.SubscriptionType?.NameAr
-                                            : item?.SubscriptionType?.NameEn)
-                    </td>
-                    <td>@item.StartDate</td>
-                    <td>@item.EndDate</td>
-                    <td>@item.Price</td>
-                    <td>
-                        <span class="badge @item.Status.ToBadgeClass()">
-                            @item.Status.ToLocalizedString()
-                        </span>
-                    </td>
-                <td>@item.ActualDurationDays</td>
-                <td>@item.RemainingDays</td>
-                <td>@item.AttendanceDays</td>
-                <td>@item.LastAttendanceDate</td>
-                <td>
+<partial name="_Pagination"
+         model="pagination" />
 
-                        <span class="badge @item.TimeStatus.ToBadgeClass()">
-                            @Localizer[item.TimeStatus.ToString()]
-                        </span>
-                </td>
-                    @* <td class="text-nowrap"> *@
-                        <td>
-                            <div class="d-flex gap-1 flex-nowrap">
-                            <a asp-action="Edit"
-                               asp-route-id="@item.Id"
-                               class="btn btn-icon btn-outline-primary tooltip-btn"
-                               data-tooltip="@Localizer["Edit"]">
-                                <i class="fa fa-pen"></i>
-                            </a>
-                            <a asp-action="Details"
-                               asp-route-id="@item.Id"
-                               class="btn btn-icon btn-outline-info tooltip-btn"
-                               data-tooltip="@Localizer["Details"]">
-                                <i class="fa fa-info"></i>
-                            </a>
-                            <a asp-action="Delete"
-                               asp-route-id="@item.Id"
-                               class="btn btn-icon btn-outline-danger tooltip-btn"
-                               data-tooltip="@Localizer["Delete"]">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                            </div>
-                        
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+<partial name="Partials/_MemberSubscriptionTable"/>
+
+<partial name="_Pagination"
+         model="pagination" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $("#MemberId").select2({
+            width: "100%",
+            allowClear: true,
+        });
+        $("#SubscriptionTypeId").select2({
+            width: "100%",
+            allowClear: true,
+        });
+
+    </script>
+}

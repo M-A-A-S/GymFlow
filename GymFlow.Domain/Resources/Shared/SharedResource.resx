@@ -174,6 +174,12 @@
   <data name="AttendanceNotFound" xml:space="preserve">
     <value>Attendance record not found</value>
   </data>
+  <data name="AttendanceStatus" xml:space="preserve">
+    <value>Attendance Status</value>
+  </data>
+  <data name="Attended" xml:space="preserve">
+    <value>Attended</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>Back</value>
   </data>
@@ -348,6 +354,12 @@
   <data name="EndDate" xml:space="preserve">
     <value>End Date</value>
   </data>
+  <data name="EndDateFrom" xml:space="preserve">
+    <value>End Date From</value>
+  </data>
+  <data name="EndDateTo" xml:space="preserve">
+    <value>End Date To</value>
+  </data>
   <data name="EndTime" xml:space="preserve">
     <value>End Time</value>
   </data>
@@ -356,6 +368,12 @@
   </data>
   <data name="Expired" xml:space="preserve">
     <value>Expired</value>
+  </data>
+  <data name="Expiring" xml:space="preserve">
+    <value>Expiring Soon</value>
+  </data>
+  <data name="ExpiringSoon" xml:space="preserve">
+    <value>Expiring Soon</value>
   </data>
   <data name="Facebook" xml:space="preserve">
     <value>Facebook</value>
@@ -419,6 +437,9 @@
   </data>
   <data name="GymSchedules" xml:space="preserve">
     <value>Gym Schedules</value>
+  </data>
+  <data name="HasAttendance" xml:space="preserve">
+    <value>Attendance Status</value>
   </data>
   <data name="HasMembers" xml:space="preserve">
     <value>Has Members</value>
@@ -570,6 +591,12 @@
   <data name="LastAttendanceDate" xml:space="preserve">
     <value>Last Attendance Date</value>
   </data>
+  <data name="LastAttendanceFrom" xml:space="preserve">
+    <value>Last Attendance From</value>
+  </data>
+  <data name="LastAttendanceTo" xml:space="preserve">
+    <value>Last Attendance To</value>
+  </data>
   <data name="LockerRental" xml:space="preserve">
     <value>Locker Rental</value>
   </data>
@@ -579,14 +606,23 @@
   <data name="Male" xml:space="preserve">
     <value>Male</value>
   </data>
+  <data name="MaxAttendanceDays" xml:space="preserve">
+    <value>Maximum Attendance Days</value>
+  </data>
   <data name="MaxDaysPerWeek" xml:space="preserve">
     <value>Maximum Days / Week</value>
   </data>
   <data name="MaxDuration" xml:space="preserve">
     <value>Maximum Duration</value>
   </data>
+  <data name="MaxDurationDays" xml:space="preserve">
+    <value>Maximum Duration Days</value>
+  </data>
   <data name="MaxPrice" xml:space="preserve">
     <value>Maximum Price</value>
+  </data>
+  <data name="MaxRemainingDays" xml:space="preserve">
+    <value>Maximum Remaining Days</value>
   </data>
   <data name="Member" xml:space="preserve">
     <value>Member</value>
@@ -633,14 +669,23 @@
   <data name="MemberSubscriptions" xml:space="preserve">
     <value>Member Subscriptions</value>
   </data>
+  <data name="MinAttendanceDays" xml:space="preserve">
+    <value>Minimum Attendance Days</value>
+  </data>
   <data name="MinDaysPerWeek" xml:space="preserve">
     <value>Minimum Days / Week</value>
   </data>
   <data name="MinDuration" xml:space="preserve">
     <value>Minimum Duration</value>
   </data>
+  <data name="MinDurationDays" xml:space="preserve">
+    <value>Minimum Duration Days</value>
+  </data>
   <data name="MinPrice" xml:space="preserve">
     <value>Minimum Price</value>
+  </data>
+  <data name="MinRemainingDays" xml:space="preserve">
+    <value>Minimum Remaining Days</value>
   </data>
   <data name="Monday" xml:space="preserve">
     <value>Monday</value>
@@ -684,8 +729,14 @@
   <data name="NotArrived" xml:space="preserve">
     <value>Not Arrived</value>
   </data>
+  <data name="NotAttended" xml:space="preserve">
+    <value>Not Attended</value>
+  </data>
   <data name="Notes" xml:space="preserve">
     <value>Notes</value>
+  </data>
+  <data name="NotExpiring" xml:space="preserve">
+    <value>Not Expiring</value>
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>Record not found</value>
@@ -974,6 +1025,12 @@
   </data>
   <data name="StartDate" xml:space="preserve">
     <value>Start Date</value>
+  </data>
+  <data name="StartDateFrom" xml:space="preserve">
+    <value>Start Date From</value>
+  </data>
+  <data name="StartDateTo" xml:space="preserve">
+    <value>Start Date To</value>
   </data>
   <data name="Started" xml:space="preserve">
     <value>Started</value>

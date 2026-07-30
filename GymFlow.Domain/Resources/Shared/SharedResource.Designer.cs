@@ -19,7 +19,7 @@ namespace GymFlow.Domain.Resources.Shared {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class SharedResource {
@@ -228,6 +228,24 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string AttendanceNotFound {
             get {
                 return ResourceManager.GetString("AttendanceNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attendance Status.
+        /// </summary>
+        public static string AttendanceStatus {
+            get {
+                return ResourceManager.GetString("AttendanceStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attended.
+        /// </summary>
+        public static string Attended {
+            get {
+                return ResourceManager.GetString("Attended", resourceCulture);
             }
         }
         
@@ -754,6 +772,24 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End Date From.
+        /// </summary>
+        public static string EndDateFrom {
+            get {
+                return ResourceManager.GetString("EndDateFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Date To.
+        /// </summary>
+        public static string EndDateTo {
+            get {
+                return ResourceManager.GetString("EndDateTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End Time.
         /// </summary>
         public static string EndTime {
@@ -777,6 +813,24 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Expired {
             get {
                 return ResourceManager.GetString("Expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expiring Soon.
+        /// </summary>
+        public static string Expiring {
+            get {
+                return ResourceManager.GetString("Expiring", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expiring Soon.
+        /// </summary>
+        public static string ExpiringSoon {
+            get {
+                return ResourceManager.GetString("ExpiringSoon", resourceCulture);
             }
         }
         
@@ -966,6 +1020,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string GymSchedules {
             get {
                 return ResourceManager.GetString("GymSchedules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attendance Status.
+        /// </summary>
+        public static string HasAttendance {
+            get {
+                return ResourceManager.GetString("HasAttendance", resourceCulture);
             }
         }
         
@@ -1420,6 +1483,24 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Attendance From.
+        /// </summary>
+        public static string LastAttendanceFrom {
+            get {
+                return ResourceManager.GetString("LastAttendanceFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Attendance To.
+        /// </summary>
+        public static string LastAttendanceTo {
+            get {
+                return ResourceManager.GetString("LastAttendanceTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Locker Rental.
         /// </summary>
         public static string LockerRental {
@@ -1447,6 +1528,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum Attendance Days.
+        /// </summary>
+        public static string MaxAttendanceDays {
+            get {
+                return ResourceManager.GetString("MaxAttendanceDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum Days / Week.
         /// </summary>
         public static string MaxDaysPerWeek {
@@ -1465,11 +1555,29 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum Duration Days.
+        /// </summary>
+        public static string MaxDurationDays {
+            get {
+                return ResourceManager.GetString("MaxDurationDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum Price.
         /// </summary>
         public static string MaxPrice {
             get {
                 return ResourceManager.GetString("MaxPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Remaining Days.
+        /// </summary>
+        public static string MaxRemainingDays {
+            get {
+                return ResourceManager.GetString("MaxRemainingDays", resourceCulture);
             }
         }
         
@@ -1609,6 +1717,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minimum Attendance Days.
+        /// </summary>
+        public static string MinAttendanceDays {
+            get {
+                return ResourceManager.GetString("MinAttendanceDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Minimum Days / Week.
         /// </summary>
         public static string MinDaysPerWeek {
@@ -1627,11 +1744,29 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minimum Duration Days.
+        /// </summary>
+        public static string MinDurationDays {
+            get {
+                return ResourceManager.GetString("MinDurationDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Minimum Price.
         /// </summary>
         public static string MinPrice {
             get {
                 return ResourceManager.GetString("MinPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Remaining Days.
+        /// </summary>
+        public static string MinRemainingDays {
+            get {
+                return ResourceManager.GetString("MinRemainingDays", resourceCulture);
             }
         }
         
@@ -1762,11 +1897,29 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not Attended.
+        /// </summary>
+        public static string NotAttended {
+            get {
+                return ResourceManager.GetString("NotAttended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notes.
         /// </summary>
         public static string Notes {
             get {
                 return ResourceManager.GetString("Notes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not Expiring.
+        /// </summary>
+        public static string NotExpiring {
+            get {
+                return ResourceManager.GetString("NotExpiring", resourceCulture);
             }
         }
         
@@ -2631,6 +2784,24 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string StartDate {
             get {
                 return ResourceManager.GetString("StartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Date From.
+        /// </summary>
+        public static string StartDateFrom {
+            get {
+                return ResourceManager.GetString("StartDateFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Date To.
+        /// </summary>
+        public static string StartDateTo {
+            get {
+                return ResourceManager.GetString("StartDateTo", resourceCulture);
             }
         }
         

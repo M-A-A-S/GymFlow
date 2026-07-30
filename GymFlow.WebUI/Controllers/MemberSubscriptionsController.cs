@@ -1,6 +1,7 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.DTOs.MemberSubscription;
 using GymFlow.Domain.Resources.Shared;
+using GymFlow.WebUI.ViewModels.MemberSubscription;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
@@ -10,29 +11,46 @@ namespace GymFlow.WebUI.Controllers
     {
         #region ========================= Fields & Properties =========================
         private readonly IMemberSubscriptionService _service;
+        private readonly IMemberService _memberService;
+        private readonly ISubscriptionTypeService _subscriptionTypeService;
 
         #endregion
 
         #region ========================= Constructors =========================
         public MemberSubscriptionsController(
-            IMemberSubscriptionService memberService,
-            IStringLocalizer<SharedResource> localizer
+            IMemberSubscriptionService service,
+            IStringLocalizer<SharedResource> localizer,
+            IMemberService memberService,
+            ISubscriptionTypeService subscriptionTypeService
             ) : base(localizer)
         {
-            _service = memberService;
+            _service = service;
+            _memberService = memberService;
+            _subscriptionTypeService = subscriptionTypeService;
         }
 
         #endregion
 
         #region ========================= Get =========================
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(MemberSubscriptionFilterDTO filter)
         {
-            var getAllResult = await _service.GetAllAsync();
+            var getAllResult = await _service.GetAllAsync(filter);
             if (!getAllResult.IsSuccess)
             {
                 Error(getAllResult.Code);
             }
-            return View(getAllResult.Data);
+
+            var members = await _memberService.GetForSelectAsync();
+            var subscriptionTypes = await _subscriptionTypeService.GetForSelectAsync();
+
+            var result = new MemberSubscriptionIndexVM
+            {
+                PagedResult = getAllResult.Data,
+                Filter = filter,
+                Members = members.Data,
+                SubscriptionTypes = subscriptionTypes.Data,
+            };
+            return View(result);
         }
 
         public async Task<IActionResult> Details(int id)

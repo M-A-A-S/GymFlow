@@ -9,6 +9,7 @@ using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
 using GymFlow.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -23,16 +24,19 @@ namespace GymFlow.Infrastructure.Services
         #region ========================= Fields & Properties =========================
         private readonly IAppDbContext _appDbContext;
         private readonly ILogger<SubscriptionTypeService> _logger;
+        private readonly IMemoryCache _cache;
 
         #endregion
 
         #region ========================= Constructors =========================
         public SubscriptionTypeService(
             IAppDbContext appDbContext,
-            ILogger<SubscriptionTypeService> logger)
+            ILogger<SubscriptionTypeService> logger,
+            IMemoryCache cache)
         {
             _appDbContext = appDbContext;
             _logger = logger;
+            _cache = cache;
         }
 
         #endregion
@@ -55,6 +59,7 @@ namespace GymFlow.Infrastructure.Services
             {
                 _appDbContext.SubscriptionTypes.Add(entity);
                 await _appDbContext.SaveChangesAsync();
+                _cache.Remove(CacheKeys.SubscriptionTypesSelect);
                 return Result<int>.Success(entity.Id, ResultCodes.CreatedSuccessfully);
 
             }
@@ -68,7 +73,7 @@ namespace GymFlow.Infrastructure.Services
 
                 return Result<int>.Failure(
                     ResultCodes.UnexpectedError,
-                    500,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
 
             }
@@ -97,7 +102,7 @@ namespace GymFlow.Infrastructure.Services
 
                 return Result<IEnumerable<SubscriptionTypeDTO>>.Failure(
                     ResultCodes.UnexpectedError,
-                    500,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
             }
         }
@@ -224,7 +229,7 @@ namespace GymFlow.Infrastructure.Services
 
                 if (subscriptionType == null)
                 {
-                    return Result<SubscriptionTypeDTO>.Failure(ResultCodes.NotFound, 404);
+                    return Result<SubscriptionTypeDTO>.Failure(ResultCodes.NotFound, HttpStatusCodes.NotFound);
                 }
                 return Result<SubscriptionTypeDTO>.Success(subscriptionType.ToDTO());
             }
@@ -238,7 +243,7 @@ namespace GymFlow.Infrastructure.Services
 
                 return Result<SubscriptionTypeDTO>.Failure(
                     ResultCodes.UnexpectedError,
-                    500,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
             }
         }
@@ -270,6 +275,60 @@ namespace GymFlow.Infrastructure.Services
             return Result<IEnumerable<SubscriptionTypeSearchDTO>>.Success(subscriptionTypes);
         }
 
+        public async Task<Result<IEnumerable<SubscriptionTypeSearchDTO>>> GetForSelectAsync()
+        {
+            try
+            {
+                if (_cache.TryGetValue(
+                    CacheKeys.SubscriptionTypesSelect,
+                    out IEnumerable<SubscriptionTypeSearchDTO>? subscriptionTypes))
+                {
+                    return Result<IEnumerable<SubscriptionTypeSearchDTO>>
+                        .Success(subscriptionTypes);
+                }
+
+
+                subscriptionTypes = await _appDbContext.SubscriptionTypes
+                    .AsNoTracking()
+                    .OrderBy(x => x.NameEn)
+                    .Select(x => new SubscriptionTypeSearchDTO
+                    {
+                        Id = x.Id,
+                        NameEn = x.NameEn,
+                        NameAr = x.NameAr,
+                        Price = x.Price,
+                        DurationDays = x.DurationDays,
+                    })
+                    .ToListAsync();
+
+
+                _cache.Set(
+                    CacheKeys.SubscriptionTypesSelect,
+                    subscriptionTypes,
+                    new MemoryCacheEntryOptions
+                    {
+                        SlidingExpiration = TimeSpan.FromMinutes(30),
+                        AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(2)
+                    });
+
+
+                return Result<IEnumerable<SubscriptionTypeSearchDTO>>
+                    .Success(subscriptionTypes);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                    ex,
+                    "Error loading subscriptionTypes for select");
+
+                return Result<IEnumerable<SubscriptionTypeSearchDTO>>
+                    .Failure(
+                        ResultCodes.UnexpectedError,
+                        HttpStatusCodes.InternalServerError,
+                        "An unexpected error occurred.");
+            }
+        }
+
         #endregion
 
         #region ========================= Update =========================
@@ -292,7 +351,7 @@ namespace GymFlow.Infrastructure.Services
 
                 if (subscriptionType == null)
                 {
-                    return Result<bool>.Failure(ResultCodes.NotFound, 404);
+                    return Result<bool>.Failure(ResultCodes.NotFound, HttpStatusCodes.NotFound);
                 }
 
 
@@ -306,6 +365,7 @@ namespace GymFlow.Infrastructure.Services
 
 
                 await _appDbContext.SaveChangesAsync();
+                _cache.Remove(CacheKeys.SubscriptionTypesSelect);
                 return Result<bool>.Success(true, ResultCodes.UpdatedSuccessfully);
             }
             catch (Exception ex)
@@ -318,7 +378,7 @@ namespace GymFlow.Infrastructure.Services
 
                 return Result<bool>.Failure(
                     ResultCodes.UnexpectedError,
-                    500, "An unexpected error occurred.");
+                    HttpStatusCodes.InternalServerError, "An unexpected error occurred.");
             }
         }
         #endregion
@@ -334,7 +394,7 @@ namespace GymFlow.Infrastructure.Services
                 {
                     return Result<bool>.Failure(
                         ResultCodes.NotFound,
-                        404);
+                        HttpStatusCodes.NotFound);
                 }
 
                 subscriptionType.IsDeleted = true;
@@ -342,6 +402,7 @@ namespace GymFlow.Infrastructure.Services
                 subscriptionType.DeletedAt = DateTime.UtcNow;
 
                 await _appDbContext.SaveChangesAsync();
+                _cache.Remove(CacheKeys.SubscriptionTypesSelect);
                 return Result<bool>.Success(true, ResultCodes.DeletedSuccessfully);
             }
             catch (Exception ex)
@@ -354,7 +415,7 @@ namespace GymFlow.Infrastructure.Services
 
                 return Result<bool>.Failure(
                     ResultCodes.UnexpectedError,
-                    500,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
             }
 
@@ -369,28 +430,28 @@ namespace GymFlow.Infrastructure.Services
             {
                 return Result<bool>.Failure(
                     ResultCodes.InvalidData,
-                    400);
+                    HttpStatusCodes.BadRequest);
             }
 
             if (DTO.DaysPerWeek < 1 || DTO.DaysPerWeek > 7)
             {
                 return Result<bool>.Failure(
                     ResultCodes.InvalidDaysPerWeek,
-                    400);
+                    HttpStatusCodes.BadRequest);
             }
 
             if (DTO.DurationDays <= 0)
             {
                 return Result<bool>.Failure(
                     ResultCodes.InvalidDuration,
-                    400);
+                    HttpStatusCodes.BadRequest);
             }
 
             if (DTO.Price < 0)
             {
                 return Result<bool>.Failure(
                     ResultCodes.InvalidPrice,
-                    400);
+                    HttpStatusCodes.BadRequest);
             }
 
             return Result<bool>.Success(true);

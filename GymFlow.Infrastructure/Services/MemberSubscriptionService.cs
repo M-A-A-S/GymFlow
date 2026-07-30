@@ -8,6 +8,7 @@ using GymFlow.Domain.Enums;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
+using GymFlow.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,9 +21,13 @@ namespace GymFlow.Infrastructure.Services
 {
     public class MemberSubscriptionService : IMemberSubscriptionService
     {
+        #region ========================= Fields & Properties =========================
         private readonly IAppDbContext _appDbContext;
         private readonly ILogger<MemberSubscriptionService> _logger;
 
+        #endregion
+
+        #region ========================= Constructors =========================
         public MemberSubscriptionService(
             IAppDbContext appDbContext,
             ILogger<MemberSubscriptionService> logger)
@@ -30,6 +35,8 @@ namespace GymFlow.Infrastructure.Services
             _appDbContext = appDbContext;
             _logger = logger;
         }
+
+        #endregion
 
         #region ========================= Add =========================
         public async Task<Result<int>> AddAsync(MemberSubscriptionDTO dto)
@@ -161,6 +168,55 @@ namespace GymFlow.Infrastructure.Services
                 return Result<IEnumerable<MemberSubscriptionDTO>>.Failure(
                     ResultCodes.UnexpectedError,
                     500,
+                    "An unexpected error occurred.");
+            }
+        }
+
+        public async Task<Result<PagedResult<MemberSubscriptionDTO>>> GetAllAsync(MemberSubscriptionFilterDTO filter)
+        {
+            try
+            {
+                var today = DateOnly.FromDateTime(DateTime.UtcNow);
+
+                var query =
+                    _appDbContext.MemberSubscriptions
+                    .AsNoTracking();
+
+                query = ApplyFilters(query, filter, today);
+
+                query = query.OrderByProperty(filter.SortBy, filter.Descending);
+
+
+
+                //query = query.OrderByDescending(x => x.Id);
+
+
+                //var pagedResult = await query.ToPagedListAsync(filter.PageNumber, filter.PageSize);
+                var pagedResult = await ProjectToDTO(query, today).ToPagedListAsync(filter.PageNumber, filter.PageSize);
+
+                //var result = new PagedResult<MemberSubscriptionDTO>
+                //{
+                //    Items = pagedResult.Items,
+                //    PageNumber = pagedResult.PageNumber,
+                //    PageSize = pagedResult.PageSize,
+                //    TotalCount = pagedResult.TotalCount,
+                //    TotalPages = pagedResult.TotalPages,
+                //};
+
+
+                return Result<PagedResult<MemberSubscriptionDTO>>.Success(pagedResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                   ex,
+                   "Error in Type : {Type}, Method: {Method},",
+                   nameof(MemberSubscriptionService),
+                   nameof(GetAllAsync));
+
+                return Result<PagedResult<MemberSubscriptionDTO>>.Failure(
+                    ResultCodes.UnexpectedError,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
             }
         }
@@ -446,6 +502,298 @@ namespace GymFlow.Infrastructure.Services
                 (excludeId == null || x.Id != excludeId) && 
                 x.StartDate <= endDate &&
                 x.EndDate >= startDate);
+        }
+
+        private IQueryable<MemberSubscription> ApplyFilters(
+            IQueryable<MemberSubscription> query,
+            MemberSubscriptionFilterDTO filter,
+            DateOnly today)
+        {
+            // ========================== Search ==========================
+            if (!string.IsNullOrEmpty(filter.Search))
+            {
+                query = query.Where(x =>
+                    x.Member.FullName.Contains(filter.Search) ||
+                    x.Member.PhoneNumber.Contains(filter.Search) ||
+                    x.SubscriptionType.NameEn.Contains(filter.Search) ||
+                    x.SubscriptionType.NameAr.Contains(filter.Search)
+                    );
+            }
+
+            // ========================== Status ==========================
+            if (filter.Status.HasValue)
+            {
+                query =
+                    query.Where(x => x.Status == filter.Status.Value);
+            }
+
+            // ========================== Time Status ==========================
+            if (filter.TimeStatus.HasValue)
+            {
+                switch (filter.TimeStatus.Value)
+                {
+                    case SubscriptionTimeStatus.Expired:
+                        query = query.Where(x =>
+                            x.EndDate < today);
+                        break;
+
+                    case SubscriptionTimeStatus.Upcoming:
+                        query = query.Where(x =>
+                            x.StartDate > today);
+                        break;
+
+                    case SubscriptionTimeStatus.Current:
+                        query = query.Where(x =>
+                            x.StartDate <= today &&
+                            x.EndDate >= today);
+                        break;
+                }
+            }
+
+            // ========================== Subscription Type ==========================
+            if (filter.SubscriptionTypeId.HasValue)
+            {
+                query =
+                    query.Where(x => x.SubscriptionTypeId == filter.SubscriptionTypeId.Value);
+            }
+
+            // ========================== Member ==========================
+            if (filter.MemberId.HasValue)
+            {
+                query =
+                    query.Where(x => x.MemberId == filter.MemberId.Value);
+            }
+
+            // ========================== Start Date ==========================
+            if (filter.StartDateFrom.HasValue)
+            {
+                query =
+                    query.Where(x => x.StartDate >= filter.StartDateFrom.Value);
+            }
+
+            if (filter.StartDateTo.HasValue)
+            {
+                query =
+                    query.Where(x => x.StartDate <= filter.StartDateTo.Value);
+            }
+
+            // ========================== End Date ==========================
+            if (filter.EndDateFrom.HasValue)
+            {
+                query =
+                    query.Where(x => x.EndDate >= filter.EndDateFrom.Value);
+            }
+
+            if (filter.EndDateTo.HasValue)
+            {
+                query =
+                    query.Where(x => x.EndDate <= filter.EndDateTo.Value);
+            }
+
+
+            // ========================== Price ==========================
+            if (filter.MinPrice.HasValue)
+            {
+                query =
+                    query.Where(x => x.Price >= filter.MinPrice.Value);
+            }
+
+            if (filter.MaxPrice.HasValue)
+            {
+                query =
+                    query.Where(x => x.Price <= filter.MaxPrice.Value);
+            }
+
+            // ========================== Expiring Soon ==========================
+            // subscriptions ending within 7 days
+            if (filter.ExpiringSoon == true)
+            {
+                var limitDate = today.AddDays(7);
+
+                query =
+                    query.Where(x =>
+                        x.EndDate >= today &&
+                        x.EndDate <= limitDate);
+            }
+
+            // ========================== Actual Duration Days ==========================
+            if (filter.MinDurationDays.HasValue)
+            {
+                query = query.Where(x =>
+                    x.EndDate >= x.StartDate.AddDays(filter.MinDurationDays.Value - 1));
+            }
+
+            if (filter.MaxDurationDays.HasValue)
+            {
+                query = query.Where(x =>
+                    x.EndDate <= x.StartDate.AddDays(filter.MaxDurationDays.Value - 1));
+            }
+            //if (filter.MinDurationDays.HasValue)
+            //{
+            //    query =
+            //        query.Where(x =>
+            //            (x.EndDate.DayNumber - x.StartDate.DayNumber + 1) >= filter.MinDurationDays.Value);
+            //}
+
+            //if (filter.MaxDurationDays.HasValue)
+            //{
+            //    query =
+            //        query.Where(x =>
+            //            (x.EndDate.DayNumber - x.StartDate.DayNumber + 1) <= filter.MaxDurationDays.Value);
+            //}
+
+            // ========================== Remaining Days ==========================
+            if (filter.MinRemainingDays.HasValue)
+            {
+                query = query.Where(x =>
+                    x.EndDate >= today.AddDays(filter.MinRemainingDays.Value - 1));
+            }
+
+            if (filter.MaxRemainingDays.HasValue)
+            {
+                query = query.Where(x =>
+                    x.EndDate <= today.AddDays(filter.MaxRemainingDays.Value - 1));
+            }
+            //if (filter.MinRemainingDays.HasValue)
+            //{
+            //    query =
+            //        query.Where(x =>
+            //            (x.EndDate.DayNumber - today.DayNumber + 1) >= filter.MinRemainingDays.Value);
+            //}
+
+            //if (filter.MaxRemainingDays.HasValue)
+            //{
+            //    query =
+            //        query.Where(x =>
+            //            (x.EndDate.DayNumber - today.DayNumber + 1) <= filter.MaxRemainingDays.Value);
+            //}
+
+            // ========================== Attendance Days ==========================
+            if (filter.MinAttendanceDays.HasValue)
+            {
+                query =
+                    query.Where(x => 
+                        x.Member.MemberAttendances
+                            .Count(a => 
+                                a.AttendanceDate >= x.StartDate &&
+                                a.AttendanceDate <= x.EndDate)
+                        >= filter.MinAttendanceDays.Value);
+            }
+
+            if (filter.MaxAttendanceDays.HasValue)
+            {
+                query =
+                    query.Where(x => 
+                        x.Member.MemberAttendances
+                            .Count(a => 
+                                a.AttendanceDate >= x.StartDate &&
+                                a.AttendanceDate <= x.EndDate)
+                        <= filter.MaxAttendanceDays.Value);
+            }
+
+
+            // ========================== Attendance Days ==========================
+            if (filter.LastAttendanceFrom.HasValue)
+            {
+                query = query.Where(x =>
+                    x.Member.MemberAttendances
+                    .Any(a =>
+                        a.AttendanceDate >=
+                        filter.LastAttendanceFrom.Value));
+            }
+
+            if (filter.LastAttendanceTo.HasValue)
+            {
+                query = query.Where(x =>
+                    x.Member.MemberAttendances
+                    .Any(a =>
+                        a.AttendanceDate <=
+                        filter.LastAttendanceTo.Value));
+            }
+
+            // ========================== Has Attendance ==========================
+            if (filter.HasAttendance.HasValue)
+            {
+
+                if (filter.HasAttendance.Value)
+                {
+                    query = query.Where(x =>
+                        x.Member.MemberAttendances.Any(a =>
+                            a.AttendanceDate >= x.StartDate &&
+                            a.AttendanceDate <= x.EndDate));
+                }
+                else
+                {
+                    query = query.Where(x =>
+                        !x.Member.MemberAttendances.Any(a =>
+                            a.AttendanceDate >= x.StartDate &&
+                            a.AttendanceDate <= x.EndDate));
+                }
+
+            }
+
+            return query;
+
+
+        }
+
+        private IQueryable<MemberSubscriptionDTO> ProjectToDTO(
+            IQueryable<MemberSubscription> query,
+            DateOnly today)
+        {
+            return query.Select(x => new MemberSubscriptionDTO
+            {
+                Id = x.Id,
+                MemberId = x.MemberId,
+                SubscriptionTypeId = x.SubscriptionTypeId,
+                StartDate = x.StartDate,
+                EndDate = x.EndDate,
+                Price = x.Price,
+                Status = x.Status,
+                ActualDurationDays = x.EndDate.DayNumber - x.StartDate.DayNumber + 1,
+
+                RemainingDays = x.EndDate >= today ? x.EndDate.DayNumber - today.DayNumber + 1 : 0,
+
+                AttendanceDays = 
+                    x.Member.MemberAttendances
+                    .Count(a => 
+                        a.AttendanceDate >= x.StartDate && 
+                        a.AttendanceDate <= x.EndDate),
+
+                LastAttendanceDate = 
+                    x.Member.MemberAttendances
+                    .Where(a => 
+                        a.AttendanceDate >= x.StartDate && 
+                        a.AttendanceDate <= x.EndDate)
+                    .Max(a =>
+                        (DateOnly?)a.AttendanceDate),
+
+                TimeStatus =
+                    x.EndDate < today
+                        ? SubscriptionTimeStatus.Expired
+                        : x.StartDate > today
+                            ? SubscriptionTimeStatus.Upcoming
+                            : SubscriptionTimeStatus.Current,
+
+
+                Member = new MemberDTO
+                {
+                    Id = x.Member.Id,
+                    FullName = x.Member.FullName,
+                    PhoneNumber = x.Member.PhoneNumber,
+                    Gender = x.Member.Gender,
+                },
+
+                SubscriptionType = new SubscriptionTypeDTO
+                {
+                    Id = x.SubscriptionType.Id,
+                    NameEn = x.SubscriptionType.NameEn,
+                    NameAr = x.SubscriptionType.NameAr,
+                    Price = x.SubscriptionType.Price,
+                    DurationDays = x.SubscriptionType.DurationDays,
+
+                },
+            });
         }
 
         #endregion

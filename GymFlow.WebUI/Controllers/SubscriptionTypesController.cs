@@ -31,7 +31,7 @@ namespace GymFlow.WebUI.Controllers
             var result = new SubscriptionTypeIndexVM
             {
                 PagedSubscriptionTypeResult = getAllResult.Data,
-                Filter = filter
+                Filter = filter,
             };
             return View(result);
         }

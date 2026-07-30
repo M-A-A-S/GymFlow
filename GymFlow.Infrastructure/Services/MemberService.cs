@@ -7,6 +7,7 @@ using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
 using GymFlow.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -22,16 +23,19 @@ namespace GymFlow.Infrastructure.Services
         #region ========================= Fields & Properties =========================
         private readonly IAppDbContext _appDbContext;
         private readonly ILogger<MemberService> _logger;
+        private readonly IMemoryCache _cache;
 
         #endregion
 
         #region ========================= Constructors =========================
         public MemberService(
             IAppDbContext appDbContext,
-            ILogger<MemberService> logger)
+            ILogger<MemberService> logger,
+            IMemoryCache cache)
         {
             _appDbContext = appDbContext;
             _logger = logger;
+            _cache = cache;
         }
 
         #endregion
@@ -46,7 +50,7 @@ namespace GymFlow.Infrastructure.Services
             if (emailExists)
             {
                 return Result<int>.Failure(
-                    ResultCodes.EmailExists, 409);
+                    ResultCodes.EmailExists, HttpStatusCodes.Conflict);
             }
 
             bool phoneNumberExists = 
@@ -56,7 +60,7 @@ namespace GymFlow.Infrastructure.Services
             if (phoneNumberExists)
             {
                 return Result<int>.Failure(
-                    ResultCodes.PhoneExists, 409);
+                    ResultCodes.PhoneExists, HttpStatusCodes.Conflict);
             }
 
             var entity = dto.ToEntity();
@@ -65,6 +69,7 @@ namespace GymFlow.Infrastructure.Services
             {
                 _appDbContext.Members.Add(entity);
                 await _appDbContext.SaveChangesAsync();
+                _cache.Remove(CacheKeys.MembersSelect);
                 return Result<int>.Success(entity.Id, ResultCodes.CreatedSuccessfully);
 
             }
@@ -78,7 +83,7 @@ namespace GymFlow.Infrastructure.Services
 
                 return Result<int>.Failure(
                     ResultCodes.UnexpectedError,
-                    500,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
 
             }
@@ -107,7 +112,7 @@ namespace GymFlow.Infrastructure.Services
 
                 return Result<IEnumerable<MemberDTO>>.Failure(
                     ResultCodes.UnexpectedError,
-                    500,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
             }
         }
@@ -203,7 +208,7 @@ namespace GymFlow.Infrastructure.Services
 
                 if (member == null)
                 {
-                    return Result<MemberDTO>.Failure(ResultCodes.NotFound, 404);
+                    return Result<MemberDTO>.Failure(ResultCodes.NotFound, HttpStatusCodes.NotFound);
                 }
                 return Result<MemberDTO>.Success(member.ToDTO());
             }
@@ -217,7 +222,7 @@ namespace GymFlow.Infrastructure.Services
 
                 return Result<MemberDTO>.Failure(
                     ResultCodes.UnexpectedError,
-                    500,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
             }
         }
@@ -246,6 +251,57 @@ namespace GymFlow.Infrastructure.Services
             return Result<IEnumerable<MemberSearchDTO>>.Success(members);
         }
 
+        public async Task<Result<IEnumerable<MemberSearchDTO>>> GetForSelectAsync()
+        {
+            try
+            {
+                if (_cache.TryGetValue(
+                    CacheKeys.MembersSelect,
+                    out IEnumerable<MemberSearchDTO>? members))
+                {
+                    return Result<IEnumerable<MemberSearchDTO>>
+                        .Success(members);
+                }
+
+
+                members = await _appDbContext.Members
+                    .AsNoTracking()
+                    .OrderBy(x => x.FullName)
+                    .Select(x => new MemberSearchDTO
+                    {
+                        Id = x.Id,
+                        FullName = x.FullName
+                    })
+                    .ToListAsync();
+
+
+                _cache.Set(
+                    CacheKeys.MembersSelect,
+                    members,
+                    new MemoryCacheEntryOptions
+                    {
+                        SlidingExpiration = TimeSpan.FromMinutes(30),
+                        AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(2)
+                    });
+
+
+                return Result<IEnumerable<MemberSearchDTO>>
+                    .Success(members);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                    ex,
+                    "Error loading members for select");
+
+                return Result<IEnumerable<MemberSearchDTO>>
+                    .Failure(
+                        ResultCodes.UnexpectedError,
+                        HttpStatusCodes.InternalServerError,
+                        "An unexpected error occurred.");
+            }
+        }
+
         #endregion
 
         #region ========================= Update =========================
@@ -258,7 +314,7 @@ namespace GymFlow.Infrastructure.Services
 
                 if (member == null)
                 {
-                    return Result<bool>.Failure(ResultCodes.NotFound, 404);
+                    return Result<bool>.Failure(ResultCodes.NotFound, HttpStatusCodes.NotFound);
                 }
 
                 bool emailExists = await _appDbContext.Members
@@ -268,7 +324,7 @@ namespace GymFlow.Infrastructure.Services
                 {
                     return Result<bool>.Failure(
                         ResultCodes.EmailExists,
-                        409);
+                        HttpStatusCodes.Conflict);
                 }
 
                 bool phoneExists = await _appDbContext.Members
@@ -278,7 +334,7 @@ namespace GymFlow.Infrastructure.Services
                 {
                     return Result<bool>.Failure(
                         ResultCodes.PhoneExists,
-                        409);
+                        HttpStatusCodes.Conflict);
                 }
 
                 member.FullName = dto.FullName;
@@ -291,6 +347,7 @@ namespace GymFlow.Infrastructure.Services
                 member.UpdatedAt = DateTime.UtcNow;
 
                 await _appDbContext.SaveChangesAsync();
+                _cache.Remove(CacheKeys.MembersSelect);
                 return Result<bool>.Success(true, ResultCodes.UpdatedSuccessfully);
             }
             catch (Exception ex)
@@ -302,8 +359,8 @@ namespace GymFlow.Infrastructure.Services
                     nameof(UpdateAsync));
 
                 return Result<bool>.Failure(
-                    ResultCodes.UnexpectedError, 
-                    500, "An unexpected error occurred.");
+                    ResultCodes.UnexpectedError,
+                    HttpStatusCodes.InternalServerError, "An unexpected error occurred.");
             }
         }
         #endregion
@@ -319,7 +376,7 @@ namespace GymFlow.Infrastructure.Services
                 {
                     return Result<bool>.Failure(
                         ResultCodes.NotFound,
-                        404);
+                        HttpStatusCodes.NotFound);
                 }
 
                 member.IsDeleted = true;
@@ -327,6 +384,7 @@ namespace GymFlow.Infrastructure.Services
                 member.DeletedAt = DateTime.UtcNow;
 
                 await _appDbContext.SaveChangesAsync();
+                _cache.Remove(CacheKeys.MembersSelect);
                 return Result<bool>.Success(true, ResultCodes.DeletedSuccessfully);
             }
             catch (Exception ex)
@@ -339,7 +397,7 @@ namespace GymFlow.Infrastructure.Services
 
                 return Result<bool>.Failure(
                     ResultCodes.UnexpectedError,
-                    500,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
             }
 
