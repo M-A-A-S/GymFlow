@@ -1,0 +1,36 @@
+﻿@using GymFlow.WebUI.ViewModels
+@model ActionButtonsVM
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@if (Model.ShowEdit)
+{
+    <a asp-action="Edit"
+       asp-route-id="@Model.Id"
+       class="btn btn-icon btn-outline-primary tooltip-btn"
+       data-tooltip="@Localizer["Edit"]">
+        <i class="fa fa-pen"></i>
+    </a>
+}
+
+@if (Model.ShowDetails)
+{
+    <a asp-action="Details"
+       asp-route-id="@Model.Id"
+       class="btn btn-icon btn-outline-info tooltip-btn"
+       data-tooltip="@Localizer["Details"]">
+        <i class="fa fa-info"></i>
+    </a>
+}
+
+@if (Model.ShowDetails)
+{
+    <a asp-action="Delete"
+       asp-route-id="@Model.Id"
+       class="btn btn-icon btn-outline-danger tooltip-btn"
+       data-tooltip="@Localizer["Delete"]">
+        <i class="fa fa-trash"></i>
+    </a>
+}

@@ -1,0 +1,126 @@
+﻿@using GymFlow.WebUI.ViewModels.Pagination
+@model PaginationVM
+
+@using GymFlow.Domain.Resources.Shared
+@using Microsoft.Extensions.Localization
+
+@inject IStringLocalizer<SharedResource> Localizer
+
+@if (Model.TotalPages > 1)
+{
+
+    <nav aria-label="Page navigation">
+
+        <ul class="pagination justify-content-center">
+
+
+            <!-- Previous button -->
+            @{
+                var previousRoutes = new Dictionary<string,string>(Model.RouteValues);
+
+                previousRoutes["PageNumber"] =
+                    (Model.PageNumber - 1).ToString();
+            }
+
+
+            <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-all-route-data="previousRoutes">
+
+                    @Localizer["Previous"]
+
+                </a>
+
+            </li>
+
+
+
+            <!-- Page numbers -->
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+
+                var pageRoutes =
+                    new Dictionary<string,string>(Model.RouteValues);
+
+
+                pageRoutes["PageNumber"] = i.ToString();
+
+
+                <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+
+
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-all-route-data="pageRoutes">
+
+                        @i
+
+                    </a>
+
+
+                </li>
+
+            }
+
+
+
+            <!-- Next button -->
+            @{
+                var nextRoutes =
+                    new Dictionary<string,string>(Model.RouteValues);
+
+
+                nextRoutes["PageNumber"] =
+                    (Model.PageNumber + 1).ToString();
+            }
+
+
+            <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+
+
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-all-route-data="nextRoutes">
+
+                    @Localizer["Next"]
+
+                </a>
+
+
+            </li>
+
+
+        </ul>
+
+
+    </nav>
+
+
+    <!-- Information text -->
+    @* @{ *@
+        var start =
+            ((Model.PageNumber - 1) * Model.PageSize) + 1;
+
+
+        var end =
+            Math.Min(
+                Model.PageNumber * Model.PageSize,
+                Model.TotalCount);
+    // }
+
+
+    <div class="text-center text-muted small">
+
+        @* Showing @start - @end of @Model.TotalCount records *@
+        @Localizer[
+        "ShowingRecords",
+        start,
+        end,
+        Model.TotalCount
+        ]
+
+    </div>
+
+}

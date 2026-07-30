@@ -1,0 +1,125 @@
+﻿@using GymFlow.Domain.Extensions
+@using GymFlow.WebUI.Extensions
+@using GymFlow.WebUI.ViewModels
+@using GymFlow.WebUI.ViewModels.Member
+@model MemberIndexVM
+
+@using GymFlow.Domain.Resources.Shared
+@using GymFlow.WebUI.ViewModels.Pagination
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+
+    var routes = Model.Filter.ToRouteDictionary();
+
+}
+
+@if (!Model.Members.Items.Any())
+{
+    <div class="alert alert-info">
+
+        @Localizer["NoMembersFound"]
+
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "FullName",
+                                     Title = Localizer["FullName"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+                </th>
+                <th>@Localizer["Gender"]</th>
+                <th>
+                    <partial name="_SortableHeader"
+                             model='new SortHeaderVM
+                             {
+                                 Column = "BirthDate",
+                                 Title = Localizer["BirthDate"],
+                                 Filter = Model.Filter,
+                                 Routes = routes
+                             }' />
+                </th>
+                <th>
+                    <partial name="_SortableHeader"
+                             model='new SortHeaderVM
+                             {
+                                 Column = "PhoneNumber",
+                                 Title = Localizer["PhoneNumber"],
+                                 Filter = Model.Filter,
+                                 Routes = routes
+                             }' />
+                </th>
+                <th>@Localizer["Email"]</th>
+                <th>@Localizer["Address"]</th>
+                <th>
+                    <partial name="_SortableHeader"
+                             model='new SortHeaderVM
+                             {
+                                 Column = "RegisterDate",
+                                 Title = Localizer["RegisterDate"],
+                                 Filter = Model.Filter,
+                                 Routes = routes
+                             }' />
+                </th>
+                <th>
+                    <partial name="_SortableHeader"
+                             model='new SortHeaderVM
+                             {
+                                 Column = "Status",
+                                 Title = Localizer["Status"],
+                                 Filter = Model.Filter,
+                                 Routes = routes
+                             }' />
+                </th>
+                <th>@Localizer["Actions"]</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.Members.Items)
+                {
+
+                    <tr>
+                        <td>@item.FullName</td>
+                        <td>
+                            <span class="badge @item.Gender.ToBadgeClass()">
+                                @item.Gender.ToLocalizedString()
+                            </span>
+                        </td>
+                        <td>@item.BirthDate</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.Email</td>
+                        <td>@item.Address</td>
+                        <td>@item.RegisterDate</td>
+                        <td>
+                            <span class="badge @item.Status?.ToBadgeClass()">
+                                @item.Status?.ToLocalizedString()
+                            </span>
+                        </td>
+                        <td class="d-flex align-items-center gap-1">
+
+                            <partial name="_Actions"
+                                     model='new ActionButtonsVM
+                                     {
+Controller = "Members",
+Id = item.Id
+                                     }' />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -990,4 +990,24 @@ background-color: transparent;
 {
     color: var(--text-color)
 }
+.page-link{
+    color: var(--primary-color);
+    background-color: var(--card-background);
+    border-color: var(--border-color);
+}
+.page-link:hover
+{
+    background-color: var(--elevated-background);
+    color: var(--primary-color);
+    border-color: var(--border-color);
+}
+.page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+.page-item.disabled .page-link {
+    background-color: var(--card-background);
+    border-color: var(--border-color);
+}
 /*Starte Filting & Pangination*/
