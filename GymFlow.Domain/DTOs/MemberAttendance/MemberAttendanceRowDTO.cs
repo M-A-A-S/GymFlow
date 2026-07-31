@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GymFlow.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace GymFlow.Domain.DTOs.MemberAttendance
         //public DateOnly AttendanceDate { get; set; }
         public TimeOnly? CheckIn { get; set; }
         public TimeOnly? CheckOut { get; set; }
+
+        public AttendanceStatus Status { get; set; }
 
         public bool IsCheckedIn => CheckIn.HasValue;
         public bool IsCheckedOut => CheckOut.HasValue;

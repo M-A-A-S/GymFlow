@@ -13,5 +13,6 @@ namespace GymFlow.Application.Services
         Task<Result<IEnumerable<MemberAttendanceRowDTO>>> GetDailyAttendanceAsync(DateOnly date);
         Task<Result<bool>> CheckInAsync(int memberId, DateOnly date);
         Task<Result<bool>> CheckOutAsync(int attendanceId);
+        Task<Result<PagedResult<MemberAttendanceRowDTO>>> GetDailyAttendanceAsync(MemberAttendanceFilterDTO filter);
     }
 }

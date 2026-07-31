@@ -2,6 +2,7 @@
 using GymFlow.Domain.DTOs.MemberAttendance;
 using GymFlow.Domain.Resources.Shared;
 using GymFlow.Domain.Utilities;
+using GymFlow.WebUI.ViewModels.MemberAttendance;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
@@ -25,13 +26,11 @@ namespace GymFlow.WebUI.Controllers
         #endregion
 
         #region ========================= Get =========================
-        public async Task<IActionResult> Index(DateOnly? date)
+        public async Task<IActionResult> Index(MemberAttendanceFilterDTO filter)
         {
-            var selectedDate = date
-                ?? DateOnly.FromDateTime(DateTime.Today);
 
             var result = await _memberAttendanceService
-                .GetDailyAttendanceAsync(selectedDate);
+                .GetDailyAttendanceAsync(filter);
 
             if (!result.IsSuccess)
             {
@@ -39,14 +38,35 @@ namespace GymFlow.WebUI.Controllers
                 return View(new List<MemberAttendanceRowDTO>());
             }
 
-            return View(result.Data);
+            return View(new MemberAttendanceIndexVM
+            {
+                PagedResult = result.Data,
+                Filter = filter
+            });
         }
+        
+        //public async Task<IActionResult> Index(DateOnly? date)
+        //{
+        //    var selectedDate = date
+        //        ?? DateOnly.FromDateTime(DateTime.Today);
 
-        public async Task<IActionResult> AttendanceTable(DateOnly date)
+        //    var result = await _memberAttendanceService
+        //        .GetDailyAttendanceAsync(selectedDate);
+
+        //    if (!result.IsSuccess)
+        //    {
+        //        Error(result.Code);
+        //        return View(new List<MemberAttendanceRowDTO>());
+        //    }
+
+        //    return View(result.Data);
+        //}
+
+        public async Task<IActionResult> AttendanceTable(MemberAttendanceFilterDTO filter)
         {
 
             var result = await _memberAttendanceService
-                .GetDailyAttendanceAsync(date);
+                .GetDailyAttendanceAsync(filter);
 
             if (!result.IsSuccess)
             {
@@ -54,8 +74,29 @@ namespace GymFlow.WebUI.Controllers
                 return View(new List<MemberAttendanceRowDTO>());
             }
 
-            return PartialView("Partials/_AttendanceTable", result.Data);
+
+
+            return PartialView("Partials/_AttendanceTable", new MemberAttendanceIndexVM
+            {
+                PagedResult = result.Data,
+                Filter = filter
+            });
         }
+
+        //public async Task<IActionResult> AttendanceTable(DateOnly date)
+        //{
+
+        //    var result = await _memberAttendanceService
+        //        .GetDailyAttendanceAsync(date);
+
+        //    if (!result.IsSuccess)
+        //    {
+        //        Error(result.Code);
+        //        return View(new List<MemberAttendanceRowDTO>());
+        //    }
+
+        //    return PartialView("Partials/_AttendanceTable", result.Data);
+        //}
 
         #endregion
 

@@ -1,11 +1,28 @@
-﻿@using GymFlow.Domain.DTOs.MemberAttendance
-@model IEnumerable<MemberAttendanceRowDTO>
+﻿@using GymFlow.WebUI.ViewModels.MemberAttendance
+@using GymFlow.WebUI.ViewModels.Pagination
+@model MemberAttendanceIndexVM
+@using GymFlow.Domain.Extensions;
 
 @using GymFlow.Domain.Resources.Shared
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResource> Localizer
 
 @using System.Globalization
+
+@{
+
+    var routes = Model.Filter.ToRouteDictionary();
+
+    var pagination = new PaginationVM
+    {
+        PageNumber = Model.PagedResult.PageNumber,
+        PageSize = Model.PagedResult.PageSize,
+        TotalPages = Model.PagedResult.TotalPages,
+        TotalCount = Model.PagedResult.TotalCount,
+        RouteValues = routes
+
+    };
+}
 
 <div class="page-header d-flex align-items-center justify-content-between my-4">
     <h2>@Localizer["MemberAttendances"]</h2>
@@ -15,17 +32,30 @@
         @Localizer["CreateNew"]
     </a> *@
 
-    <input type="date"
+    @* <input type="date"
            id="attendanceDate"
            class="form-control"
            style="width:200px"
-           value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+           value="@DateTime.Today.ToString("yyyy-MM-dd")" /> *@
 
 </div>
+
+
+<partial name="_Pagination"
+         model="pagination" />
+
+
+<partial name="Partials/_MemberAttendanceFilter" />
+
+
 
 <div id="attendanceContainer">
-    @await Html.PartialAsync("Partials/_AttendanceTable", Model)
+    @await Html.PartialAsync("Partials/_AttendanceTable")
 </div>
+
+
+<partial name="_Pagination"
+         model="pagination" />
 
 
 @section Scripts

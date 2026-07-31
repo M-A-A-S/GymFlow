@@ -1,99 +1,158 @@
-﻿@using GymFlow.Domain.DTOs.MemberAttendance
-@model IEnumerable<MemberAttendanceRowDTO> 
+﻿@using GymFlow.WebUI.ViewModels.MemberAttendance
+@using GymFlow.WebUI.ViewModels.Pagination
+@model MemberAttendanceIndexVM
+
+@using GymFlow.Domain.Extensions;
 
 @using GymFlow.Domain.Resources.Shared
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResource> Localizer
 
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>@Localizer["Member"]</th>
-                <th>@Localizer["CheckIn"]</th>
-                <th>@Localizer["CheckOut"]</th>
-                <th>@Localizer["Status"]</th>
-                <th>@Localizer["Actions"]</th>
-                <th></th>
-            </tr>
-        </thead>
+@{
+    var routes = Model.Filter.ToRouteDictionary();
+}
 
-        <tbody>
-            @foreach (var item in Model)
-            {
-
+@if (!Model.PagedResult.Items.Any())
+{
+    <div class="alert alert-info">
+        @Localizer["NoRecordsFound"]
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@item.MemberName</td>
-                    <td>
-                        @if (item.CheckIn.HasValue)
-                        {
-                            @item.CheckIn.Value.ToString("hh\\:mm")
-                        }
-                        else
-                        {
-                            <span class="text-muted">
-                                -
-                            </span>
-                        }
-                    </td>
-                    <td>
-                        @if (item.CheckOut.HasValue)
-                        {
-                            @item.CheckOut.Value.ToString("hh\\:mm")
-                        }
-                        else
-                        {
-                            <span class="text-muted">
-                                -
-                            </span>
-                        }
-                    </td>
-                    <td>
-                        @if (!item.IsCheckedIn)
-                        {
-                            <span class="badge bg-secondary">
-                                <i class="fa fa-user-clock"></i>
-                                @Localizer["NotArrived"]
-                            </span>
-                        }
-                        else if (!item.IsCheckedOut)
-                        {
-                            <span class="badge bg-success">
-                                <i class="fa fa-user-check"></i>
-                                @Localizer["Inside"]
-                            </span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-primary">
-                                <i class="fa fa-check-circle"></i>
-                                @Localizer["Completed"]
-                            </span>
-                        }
-                    </td>
+                    <th>
+                        @* @Localizer["Member"] *@
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "MemberName",
+                                     Title = Localizer["Member"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+                        </th>
+                    <th>
+                        @* @Localizer["CheckIn"] *@
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "CheckIn",
+                                     Title = Localizer["CheckIn"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+                        </th>
+                    <th>
+                        @* @Localizer["CheckOut"] *@
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "CheckOut",
+                                     Title = Localizer["CheckOut"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+                    <th>
+                        @* @Localizer["Status"] *@
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "Status",
+                                     Title = Localizer["Status"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+                    <th>@Localizer["Actions"]</th>
+                    <th></th>
+                </tr>
+            </thead>
 
-                    <td>
-                        @if (!item.IsCheckedIn)
-                        {
-                            <button type="button"
-                                    class="btn btn-icon btn-outline-success tooltip-btn"
-                                    data-tooltip="@Localizer["CheckIn"]"
-                                    onclick="checkIn(@item.MemberId)">
-                                <i class="fa fa-sign-in-alt"></i>
-                            </button>
-                        }
-                        else if (!item.IsCheckedOut)
-                        {
-                            <button type="button"
-                                    class="btn btn-icon btn-outline-danger tooltip-btn"
-                                    data-tooltip="@Localizer["CheckOut"]"
-                                    onclick="checkOut(@item.AttendanceId)">
-                                <i class="fa fa-sign-out-alt"></i>
-                            </button>
-                        }
-                    </td>
+            <tbody>
+                @foreach (var item in Model.PagedResult.Items)
+                {
 
-                    @* <td>
+                    <tr>
+                        <td>@item.MemberName</td>
+                        <td>
+                            @if (item.CheckIn.HasValue)
+                            {
+                                @item.CheckIn.Value.ToString("hh\\:mm")
+                            }
+                            else
+                            {
+                                <span class="text-muted">
+                                    -
+                                </span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.CheckOut.HasValue)
+                            {
+                                @item.CheckOut.Value.ToString("hh\\:mm")
+                            }
+                            else
+                            {
+                                <span class="text-muted">
+                                    -
+                                </span>
+                            }
+                        </td>
+                        <td>
+                            @* @if (!item.IsCheckedIn)
+                            {
+                                <span class="badge bg-secondary">
+                                    <i class="fa fa-user-clock"></i>
+                                    @Localizer["NotArrived"]
+                                </span>
+                            }
+                            else if (!item.IsCheckedOut)
+                            {
+                                <span class="badge bg-success">
+                                    <i class="fa fa-user-check"></i>
+                                    @Localizer["Inside"]
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-primary">
+                                    <i class="fa fa-check-circle"></i>
+                                    @Localizer["Completed"]
+                                </span>
+                            } *@
+                            <span class="badge @item.Status.ToBadgeClass()">
+                                <i class="fa @item.Status.GetIconClass()"></i>
+                                @item.Status.ToLocalizedString()
+                            </span>
+                        </td>
+
+                        <td>
+                            @if (!item.IsCheckedIn)
+                            {
+                                <button type="button"
+                                        class="btn btn-icon btn-outline-success tooltip-btn"
+                                        data-tooltip="@Localizer["CheckIn"]"
+                                        onclick="checkIn(@item.MemberId)">
+                                    <i class="fa fa-sign-in-alt"></i>
+                                </button>
+                            }
+                            else if (!item.IsCheckedOut)
+                            {
+                                <button type="button"
+                                        class="btn btn-icon btn-outline-danger tooltip-btn"
+                                        data-tooltip="@Localizer["CheckOut"]"
+                                        onclick="checkOut(@item.AttendanceId)">
+                                    <i class="fa fa-sign-out-alt"></i>
+                                </button>
+                            }
+                        </td>
+
+                        @* <td>
                         <a asp-action="Edit"
                            asp-route-id="@item.Id"
                            class="btn btn-icon btn-outline-primary tooltip-btn"
@@ -113,8 +172,10 @@
                             <i class="fa fa-trash"></i>
                         </a>
                     </td> *@
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+

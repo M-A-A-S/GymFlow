@@ -2,8 +2,10 @@
 using GymFlow.Domain.Constants;
 using GymFlow.Domain.DTOs.MemberAttendance;
 using GymFlow.Domain.Entities;
+using GymFlow.Domain.Enums;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
+using GymFlow.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -81,6 +83,96 @@ namespace GymFlow.Infrastructure.Services
             }
 
             
+        }
+
+        public async Task<Result<PagedResult<MemberAttendanceRowDTO>>> GetDailyAttendanceAsync(MemberAttendanceFilterDTO filter)
+        {
+            try
+            {
+                var date = filter.Date;
+
+                var query = _appDbContext.Members
+                .Where(x => x.MemberSubscriptions.Any(x =>
+                    x.StartDate <= date &&
+                    (x.EndDate == null || x.EndDate >= date)))
+
+                .Select(x => new MemberAttendanceRowDTO
+                {
+                    MemberId = x.Id,
+                    MemberName = x.FullName,
+
+                    AttendanceId = x.MemberAttendances
+                    .Where(x => x.AttendanceDate == date)
+                    .Select(x => (int?)x.Id)
+                    .FirstOrDefault(),
+
+                    CheckIn = x.MemberAttendances
+                    .Where(x => x.AttendanceDate == date)
+                    .Select(x => (TimeOnly?)x.CheckIn)
+                    .FirstOrDefault(),
+
+                    CheckOut = x.MemberAttendances
+                    .Where(x => x.AttendanceDate == date)
+                    .Select(x => (TimeOnly?)x.CheckOut)
+                    .FirstOrDefault(),
+
+                    Status =
+                        x.MemberAttendances
+                            .Any(a =>
+                                a.AttendanceDate == date &&
+                                a.CheckIn != null &&
+                                a.CheckOut != null)
+                            ? AttendanceStatus.Completed
+
+                        : x.MemberAttendances
+                            .Any(a =>
+                                a.AttendanceDate == date &&
+                                a.CheckIn != null)
+                            ? AttendanceStatus.Inside
+
+                        : AttendanceStatus.NotArrived,
+
+                });
+
+                if (!string.IsNullOrWhiteSpace(filter.Search))
+                {
+                    query = query.Where(x => x.MemberName.Contains(filter.Search));
+                }
+
+                if (filter.HasAttendance.HasValue)
+                {
+                    query = filter.HasAttendance.Value
+                        ? query.Where(x => x.AttendanceId != null)
+                        : query.Where(x => x.AttendanceId == null);
+                }
+
+
+                query = string.IsNullOrWhiteSpace(filter.SortBy)
+                    ? query.OrderBy(x => x.MemberName)
+                    : query.OrderByProperty(filter.SortBy, filter.Descending);
+
+                var pagedResult = await query.ToPagedListAsync(filter.PageNumber, filter.PageSize);
+
+
+                //.OrderBy(x => x.MemberName)
+                //.ToListAsync();
+
+                return Result<PagedResult<MemberAttendanceRowDTO>>.Success(pagedResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                    ex,
+                    "Error in Type : {Type}, Method: {Method},",
+                    nameof(MemberService),
+                    nameof(GetDailyAttendanceAsync));
+
+                return Result<PagedResult<MemberAttendanceRowDTO>>.Failure(
+                    ResultCodes.UnexpectedError,
+                    500, "An unexpected error occurred.");
+            }
+
+
         }
 
         #endregion
