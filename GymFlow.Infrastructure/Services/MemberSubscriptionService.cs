@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -182,9 +183,10 @@ namespace GymFlow.Infrastructure.Services
                     _appDbContext.MemberSubscriptions
                     .AsNoTracking();
 
-                query = ApplyFilters(query, filter, today);
+                //query = ApplyFilters(query, filter, today);
+                //query = ApplySorting(query, filter, today);
 
-                query = query.OrderByProperty(filter.SortBy, filter.Descending);
+                //query = query.OrderByProperty(filter.SortBy, filter.Descending);
 
 
 
@@ -192,7 +194,7 @@ namespace GymFlow.Infrastructure.Services
 
 
                 //var pagedResult = await query.ToPagedListAsync(filter.PageNumber, filter.PageSize);
-                var pagedResult = await ProjectToDTO(query, today).ToPagedListAsync(filter.PageNumber, filter.PageSize);
+                //var pagedResult = await ProjectToDTO(query, today).ToPagedListAsync(filter.PageNumber, filter.PageSize);
 
                 //var result = new PagedResult<MemberSubscriptionDTO>
                 //{
@@ -202,6 +204,16 @@ namespace GymFlow.Infrastructure.Services
                 //    TotalCount = pagedResult.TotalCount,
                 //    TotalPages = pagedResult.TotalPages,
                 //};
+
+                query = ApplyFilters(query, filter, today);
+
+                var dtoQuery = ProjectToDTO(query, today);
+
+                dtoQuery = ApplyDtoSorting(dtoQuery, filter);
+
+                var pagedResult = await dtoQuery.ToPagedListAsync(
+                    filter.PageNumber,
+                    filter.PageSize);
 
 
                 return Result<PagedResult<MemberSubscriptionDTO>>.Success(pagedResult);
@@ -750,9 +762,32 @@ namespace GymFlow.Infrastructure.Services
                 EndDate = x.EndDate,
                 Price = x.Price,
                 Status = x.Status,
-                ActualDurationDays = x.EndDate.DayNumber - x.StartDate.DayNumber + 1,
+                //ActualDurationDays = x.EndDate.DayNumber - x.StartDate.DayNumber + 1,
 
-                RemainingDays = x.EndDate >= today ? x.EndDate.DayNumber - today.DayNumber + 1 : 0,
+                //RemainingDays = x.EndDate >= today ? x.EndDate.DayNumber - today.DayNumber + 1 : 0,
+
+                // Include both start and end dates in duration calculation
+                // The +1 is because you count both the start day and the end day.
+                //Example:
+                //StartDate = 2026 - 07 - 01
+                //EndDate = 2026 - 07 - 01
+                //Without + 1:
+                //EndDate - StartDate = 0
+                //But the subscription lasted 1 day,
+                //so:
+                //0 + 1 = 1 day
+                            ActualDurationDays =
+                EF.Functions.DateDiffDay(
+                    x.StartDate,
+                    x.EndDate) + 1,
+
+
+                            RemainingDays =
+                x.EndDate >= today
+                    ? EF.Functions.DateDiffDay(
+                        today,
+                        x.EndDate) + 1
+                    : 0,
 
                 AttendanceDays = 
                     x.Member.MemberAttendances
@@ -794,6 +829,153 @@ namespace GymFlow.Infrastructure.Services
 
                 },
             });
+        }
+
+        private IQueryable<MemberSubscription> ApplySorting(
+            IQueryable<MemberSubscription> query,
+            MemberSubscriptionFilterDTO filter,
+            DateOnly today)
+        {
+            if (string.IsNullOrWhiteSpace(filter.SortBy))
+            {
+                return query.OrderByDescending(x => x.Id);
+            }
+
+            bool desc = filter.Descending;
+            bool isArabic = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+
+            switch (filter.SortBy)
+            {
+                // ========================= Member ========================= 
+                case "Member":
+                    return desc
+                        ? query.OrderByDescending(x => x.Member.FullName)
+                        : query.OrderBy(x => x.Member.FullName);
+
+                // ========================= Member ========================= 
+                case "SubscriptionType":
+                    if (isArabic)
+                    {
+                        return desc
+                            ? query.OrderByDescending(x => x.SubscriptionType.NameAr)
+                            : query.OrderBy(x => x.SubscriptionType.NameAr);
+                    }
+                    else
+                    {
+                        return desc
+                            ? query.OrderByDescending(x => x.SubscriptionType.NameEn)
+                            : query.OrderBy(x => x.SubscriptionType.NameEn);
+                    }
+
+                // ========================= Member ========================= 
+                case "ActualDurationDays":
+                    return desc
+                        ? query.OrderByDescending(x =>
+                            x.EndDate.DayNumber - x.StartDate.DayNumber + 1)
+                        : query.OrderBy(x =>
+                            x.EndDate.DayNumber - x.StartDate.DayNumber + 1);
+
+                // ========================= Member ========================= 
+                case "RemainingDays":
+                    return desc
+                        ? query.OrderByDescending(x =>
+                            x.EndDate < today
+                                ? 0
+                                : x.EndDate.DayNumber - today.DayNumber + 1)
+                        : query.OrderBy(x =>
+                            x.EndDate < today
+                                ? 0
+                                : x.EndDate.DayNumber - today.DayNumber + 1);
+
+                // ========================= Member ========================= 
+                case "AttendanceDays":
+                    return desc
+                        ? query.OrderByDescending(x =>
+                            x.Member.MemberAttendances.Count(a =>
+                                a.AttendanceDate >= x.StartDate &&
+                                a.AttendanceDate <= x.EndDate))
+                        : query.OrderBy(x =>
+                            x.Member.MemberAttendances.Count(a =>
+                                a.AttendanceDate >= x.StartDate &&
+                                a.AttendanceDate <= x.EndDate));
+
+                // ========================= Member ========================= 
+                case "LastAttendanceDate":
+                    return desc
+                        ? query.OrderByDescending(x =>
+                            x.Member.MemberAttendances
+                                .Where(a =>
+                                    a.AttendanceDate >= x.StartDate &&
+                                    a.AttendanceDate <= x.EndDate)
+                                .Max(a => (DateOnly?)a.AttendanceDate))
+                        : query.OrderBy(x =>
+                            x.Member.MemberAttendances
+                                .Where(a =>
+                                    a.AttendanceDate >= x.StartDate &&
+                                    a.AttendanceDate <= x.EndDate)
+                                .Max(a => (DateOnly?)a.AttendanceDate));
+
+                // ========================= Time Status ========================= 
+                case "TimeStatus":
+                    return filter.Descending
+                        ? query.OrderByDescending(x =>
+                            (int)(
+                                x.EndDate < today
+                                    ? SubscriptionTimeStatus.Expired
+                                    : x.StartDate > today
+                                        ? SubscriptionTimeStatus.Upcoming
+                                        : SubscriptionTimeStatus.Current))
+                        : query.OrderBy(x =>
+                            (int)(
+                                x.EndDate < today
+                                    ? SubscriptionTimeStatus.Expired
+                                    : x.StartDate > today
+                                        ? SubscriptionTimeStatus.Upcoming
+                                        : SubscriptionTimeStatus.Current));
+
+                // ========================= Entity Properties ========================= 
+                default:
+                    return query.OrderByProperty(filter.SortBy, desc);
+            }
+
+        }
+
+        private IQueryable<MemberSubscriptionDTO> ApplyDtoSorting(
+            IQueryable<MemberSubscriptionDTO> query, 
+            MemberSubscriptionFilterDTO filter)
+        {
+            return filter.SortBy switch
+            {
+                "ActualDurationDays" => filter.Descending
+                    ? query.OrderByDescending(x => x.ActualDurationDays)
+                    : query.OrderBy(x => x.ActualDurationDays),
+
+                "RemainingDays" => filter.Descending
+                    ? query.OrderByDescending(x => x.RemainingDays)
+                    : query.OrderBy(x => x.RemainingDays),
+
+                "AttendanceDays" => filter.Descending
+                    ? query.OrderByDescending(x => x.AttendanceDays)
+                    : query.OrderBy(x => x.AttendanceDays),
+
+                "LastAttendanceDate" => filter.Descending
+                    ? query.OrderByDescending(x => x.LastAttendanceDate)
+                    : query.OrderBy(x => x.LastAttendanceDate),
+
+                "TimeStatus" => filter.Descending
+                    ? query.OrderByDescending(x => x.TimeStatus)
+                    : query.OrderBy(x => x.TimeStatus),
+
+                "Member" => filter.Descending
+                    ? query.OrderByDescending(x => x.Member!.FullName)
+                    : query.OrderBy(x => x.Member!.FullName),
+
+                "SubscriptionType" => filter.Descending
+                    ? query.OrderByDescending(x => x.SubscriptionType!.NameEn)
+                    : query.OrderBy(x => x.SubscriptionType!.NameEn),
+
+                _ => query.OrderByProperty(filter.SortBy, filter.Descending)
+            };
         }
 
         #endregion
