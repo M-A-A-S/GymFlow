@@ -1,0 +1,101 @@
+﻿@using GymFlow.Domain.Extensions
+@using GymFlow.WebUI.Extensions
+@using GymFlow.WebUI.ViewModels
+@using GymFlow.WebUI.ViewModels.Trainer
+@model TrainerIndexVM
+
+@using GymFlow.Domain.Resources.Shared
+@using GymFlow.WebUI.ViewModels.Pagination
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    var routes = Model.Filter.ToRouteDictionary();
+}
+
+@if (!Model.PagedResult.Items.Any())
+{
+    <div class="alert alert-info">
+        @Localizer["NoRecordsFound"]
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "FullName",
+                                     Title = Localizer["FullName"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "PhoneNumber",
+                                     Title = Localizer["PhoneNumber"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "Salary",
+                                     Title = Localizer["Salary"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "HireDate",
+                                     Title = Localizer["HireDate"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+
+                    <th>@Localizer["Actions"]</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.PagedResult.Items)
+                {
+                    <tr>
+                        <td>@item.FullName</td>
+
+                        <td>@item.PhoneNumber</td>
+
+                        <td>@item.Salary.ToString("N2")</td>
+
+                        <td>@item.HireDate</td>
+
+                        <td class="d-flex align-items-center gap-1">
+                            <partial name="_Actions"
+                                     model='new ActionButtonsVM
+                                     {
+                                         Controller = "Trainers",
+                                         Id = item.Id
+                                     }' />
+</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

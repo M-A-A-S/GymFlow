@@ -2,10 +2,12 @@
 using GymFlow.Domain.Constants;
 using GymFlow.Domain.DTOs.SubscriptionType;
 using GymFlow.Domain.DTOs.Trainer;
+using GymFlow.Domain.Entities;
 using GymFlow.Domain.Enums;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
+using GymFlow.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -67,7 +69,7 @@ namespace GymFlow.Infrastructure.Services
 
                 return Result<int>.Failure(
                     ResultCodes.UnexpectedError,
-                    500,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
 
             }
@@ -96,7 +98,48 @@ namespace GymFlow.Infrastructure.Services
 
                 return Result<IEnumerable<TrainerDTO>>.Failure(
                     ResultCodes.UnexpectedError,
-                    500,
+                    HttpStatusCodes.InternalServerError,
+                    "An unexpected error occurred.");
+            }
+        }
+
+        public async Task<Result<PagedResult<TrainerDTO>>> GetAllAsync(TrainerFilterDTO filter)
+        {
+            try
+            {
+
+                var query = _appDbContext.Trainers.AsNoTracking();
+
+                query = ApplayApplyFilters(query, filter);
+
+                query = query.OrderByProperty(filter.SortBy, filter.Descending);
+
+                var pagedResult = await query.ToPagedListAsync(
+                    filter.PageNumber,
+                    filter.PageSize);
+
+                var result = new PagedResult<TrainerDTO>
+                {
+                    Items = pagedResult.Items.Select(m => m.ToDTO()),
+                    PageNumber = pagedResult.PageNumber,
+                    PageSize = pagedResult.PageSize,
+                    TotalPages = pagedResult.TotalPages,
+                    TotalCount = pagedResult.TotalCount
+                };
+
+                return Result<PagedResult<TrainerDTO>>.Success(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                   ex,
+                   "Error in Type : {Type}, Method: {Method},",
+                   nameof(TrainerService),
+                   nameof(GetAllAsync));
+
+                return Result<PagedResult<TrainerDTO>>.Failure(
+                    ResultCodes.UnexpectedError,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
             }
         }
@@ -111,7 +154,7 @@ namespace GymFlow.Infrastructure.Services
 
                 if (trainer == null)
                 {
-                    return Result<TrainerDTO>.Failure(ResultCodes.NotFound, 404);
+                    return Result<TrainerDTO>.Failure(ResultCodes.NotFound, HttpStatusCodes.NotFound);
                 }
                 return Result<TrainerDTO>.Success(trainer.ToDTO());
             }
@@ -125,7 +168,7 @@ namespace GymFlow.Infrastructure.Services
 
                 return Result<TrainerDTO>.Failure(
                     ResultCodes.UnexpectedError,
-                    500,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
             }
         }
@@ -177,7 +220,7 @@ namespace GymFlow.Infrastructure.Services
 
                 if (trainer == null)
                 {
-                    return Result<bool>.Failure(ResultCodes.NotFound, 404);
+                    return Result<bool>.Failure(ResultCodes.NotFound, HttpStatusCodes.NotFound);
                 }
 
                 trainer.FullName = dto.FullName;
@@ -199,7 +242,7 @@ namespace GymFlow.Infrastructure.Services
 
                 return Result<bool>.Failure(
                     ResultCodes.UnexpectedError,
-                    500, "An unexpected error occurred.");
+                    HttpStatusCodes.InternalServerError, "An unexpected error occurred.");
             }
         }
         #endregion
@@ -215,7 +258,7 @@ namespace GymFlow.Infrastructure.Services
                 {
                     return Result<bool>.Failure(
                         ResultCodes.NotFound,
-                        404);
+                        HttpStatusCodes.NotFound);
                 }
 
                 trainer.IsDeleted = true;
@@ -235,7 +278,7 @@ namespace GymFlow.Infrastructure.Services
 
                 return Result<bool>.Failure(
                     ResultCodes.UnexpectedError,
-                    500,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
             }
 
@@ -249,14 +292,14 @@ namespace GymFlow.Infrastructure.Services
             {
                 return Result<bool>.Failure(
                     ResultCodes.InvalidData,
-                    400);
+                    HttpStatusCodes.BadRequest);
             }
 
             if (DTO.Salary < 0)
             {
                 return Result<bool>.Failure(
                     ResultCodes.ValueCannotBeNegative,
-                    400);
+                    HttpStatusCodes.BadRequest);
             }
 
             bool phoneNumberExists =
@@ -266,11 +309,46 @@ namespace GymFlow.Infrastructure.Services
             if (phoneNumberExists)
             {
                 return Result<bool>.Failure(
-                    ResultCodes.PhoneExists, 409);
+                    ResultCodes.PhoneExists, 
+                    HttpStatusCodes.Conflict);
             }
 
             return Result<bool>.Success(true);
 
+        }
+         
+        private IQueryable<Trainer> ApplayApplyFilters(
+            IQueryable<Trainer> query, 
+            TrainerFilterDTO filter)
+        {
+            // ========================== Search ==========================
+            if (!string.IsNullOrWhiteSpace(filter.Search))
+            {
+                query = query.Where(x =>
+                    x.FullName.Contains(filter.Search) ||
+                    x.PhoneNumber.Contains(filter.Search));
+            }
+
+            // ========================== Salary ==========================
+            if (filter.MinSalary.HasValue)
+            {
+                query = query.Where(x => x.Salary >= filter.MinSalary.Value);
+            }
+            if (filter.MaxSalary.HasValue)
+            {
+                query = query.Where(x => x.Salary <= filter.MaxSalary.Value);
+            }
+
+            // ========================== Hire Date ==========================
+            if (filter.HireDateFrom.HasValue)
+            {
+                query = query.Where(x => x.HireDate >= filter.HireDateFrom.Value);
+            }
+            if (filter.HireDateTo.HasValue)
+            {
+                query = query.Where(x => x.HireDate <= filter.HireDateTo.Value);
+            }
+            return query;
         }
 
         #endregion

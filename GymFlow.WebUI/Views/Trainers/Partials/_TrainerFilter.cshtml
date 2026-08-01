@@ -1,0 +1,56 @@
+﻿@using GymFlow.WebUI.ViewModels.Trainer
+@model TrainerIndexVM
+
+<form method="get" class="card shadow-sm mb-4">
+    <div class="card-body">
+        <div class="row g-3 align-items-end">
+            @* ========================== Search ========================== *@
+            <div class="col-12 col-md-6 col-xl-3">
+                <label asp-for="Filter.Search" class="form-label">@Localizer["Search"]</label>
+                <input asp-for="Filter.Search"
+                       class="form-control"
+                       placeholder="@Localizer["Search"]" />
+            </div>
+
+            @* ========================== Hire Date ========================== *@
+            <div class="col-12 col-md-6 col-xl-2">
+                <label asp-for="Filter.HireDateFrom" class="form-label">@Localizer["HireDateFrom"]</label>
+                <input asp-for="Filter.HireDateFrom" type="date" class="form-control" />
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-2">
+                <label asp-for="Filter.HireDateTo" class="form-label">@Localizer["HireDateTo"]</label>
+                <input asp-for="Filter.HireDateTo" type="date" class="form-control" />
+            </div>
+
+            @* ========================== Salary ========================== *@
+            <div class="col-12 col-md-6 col-xl-2">
+                <label asp-for="Filter.MinSalary" class="form-label">@Localizer["MinSalary"]</label>
+                <input asp-for="Filter.MinSalary" type="number" class="form-control" />
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-2">
+                <label asp-for="Filter.MaxSalary" class="form-label">@Localizer["MaxSalary"]</label>
+                <input asp-for="Filter.MaxSalary" type="number" class="form-control" />
+            </div>
+
+            @* ========================== Actions ========================== *@
+            <div class="col-12 col-xl-1">
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-search me-1"></i>@Localizer["Search"]
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-12 col-xl-1">
+                <div class="d-grid">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fa fa-times me-1"></i>@Localizer["Clear"]
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

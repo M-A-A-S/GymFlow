@@ -1,6 +1,7 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.DTOs.Trainer;
 using GymFlow.Domain.Resources.Shared;
+using GymFlow.WebUI.ViewModels.Trainer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
@@ -23,10 +24,15 @@ namespace GymFlow.WebUI.Controllers
         #endregion
 
         #region ========================= Get =========================
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(TrainerFilterDTO filter)
         {
-            var getAllResult = await _service.GetAllAsync();
-            return View(getAllResult.Data);
+            var getAllResult = await _service.GetAllAsync(filter);
+            var result = new TrainerIndexVM
+            {
+                PagedResult = getAllResult.Data,
+                Filter = filter,
+            };
+            return View(result);
         }
 
         public async Task<IActionResult> Details(int id)

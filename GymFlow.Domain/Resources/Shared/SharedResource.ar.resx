@@ -447,6 +447,12 @@
   <data name="HireDate" xml:space="preserve">
     <value>تاريخ التعيين</value>
   </data>
+  <data name="HireDateFrom" xml:space="preserve">
+    <value>تاريخ التعيين من</value>
+  </data>
+  <data name="HireDateTo" xml:space="preserve">
+    <value>تاريخ التعيين إلى</value>
+  </data>
   <data name="Hours" xml:space="preserve">
     <value>ساعات</value>
   </data>
@@ -624,6 +630,9 @@
   <data name="MaxRemainingDays" xml:space="preserve">
     <value>أعلى عدد أيام متبقية</value>
   </data>
+  <data name="MaxSalary" xml:space="preserve">
+    <value>الحد الأقصى للراتب</value>
+  </data>
   <data name="Member" xml:space="preserve">
     <value>العضو</value>
   </data>
@@ -686,6 +695,9 @@
   </data>
   <data name="MinRemainingDays" xml:space="preserve">
     <value>أقل عدد أيام متبقية</value>
+  </data>
+  <data name="MinSalary" xml:space="preserve">
+    <value>الحد الأدنى للراتب</value>
   </data>
   <data name="Monday" xml:space="preserve">
     <value>الإثنين</value>

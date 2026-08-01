@@ -10,8 +10,12 @@ namespace GymFlow.WebUI.Controllers
 {
     public class MembersController : BaseController
     {
+        #region ========================= Fields & Properties =========================
         private readonly IMemberService _service;
 
+        #endregion
+
+        #region ========================= Constructors =========================
         public MembersController(
             IMemberService memberService,
             IStringLocalizer<SharedResource> localizer
@@ -19,6 +23,7 @@ namespace GymFlow.WebUI.Controllers
         {
             _service = memberService;
         }
+        #endregion
 
         #region ========================= Get =========================
         public async Task<IActionResult> Index(MemberFilterDTO filter)

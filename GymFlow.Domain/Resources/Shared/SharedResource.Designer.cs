@@ -1051,6 +1051,24 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hire Date From.
+        /// </summary>
+        public static string HireDateFrom {
+            get {
+                return ResourceManager.GetString("HireDateFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hire Date To.
+        /// </summary>
+        public static string HireDateTo {
+            get {
+                return ResourceManager.GetString("HireDateTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to hours.
         /// </summary>
         public static string Hour_Few {
@@ -1582,6 +1600,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum Salary.
+        /// </summary>
+        public static string MaxSalary {
+            get {
+                return ResourceManager.GetString("MaxSalary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Member.
         /// </summary>
         public static string Member {
@@ -1767,6 +1794,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string MinRemainingDays {
             get {
                 return ResourceManager.GetString("MinRemainingDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Salary.
+        /// </summary>
+        public static string MinSalary {
+            get {
+                return ResourceManager.GetString("MinSalary", resourceCulture);
             }
         }
         
