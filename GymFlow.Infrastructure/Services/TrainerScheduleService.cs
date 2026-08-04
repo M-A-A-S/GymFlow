@@ -5,10 +5,13 @@ using GymFlow.Domain.DTOs.MemberSubscription;
 using GymFlow.Domain.DTOs.SubscriptionType;
 using GymFlow.Domain.DTOs.Trainer;
 using GymFlow.Domain.DTOs.TrainerSchedule;
+using GymFlow.Domain.Entities;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
+using GymFlow.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -53,6 +56,9 @@ namespace GymFlow.Infrastructure.Services
                 }
 
                 var entity = dto.ToEntity();
+                entity.DurationHours = TimeHelper.CalculateDurationHours(
+                    entity.StartTime, 
+                    entity.EndTime);
 
                 _appDbContext.TrainerSchedules.Add(entity);
                 await _appDbContext.SaveChangesAsync();
@@ -89,6 +95,7 @@ namespace GymFlow.Infrastructure.Services
                     Day = x.Day,
                     StartTime = x.StartTime,
                     EndTime = x.EndTime,
+                    DurationHours = x.DurationHours,
 
                     Trainer = new TrainerDTO
                     {
@@ -113,6 +120,40 @@ namespace GymFlow.Infrastructure.Services
                    nameof(GetAllAsync));
 
                 return Result<IEnumerable<TrainerScheduleDTO>>.Failure(
+                    ResultCodes.UnexpectedError,
+                    500,
+                    "An unexpected error occurred.");
+            }
+        }
+
+        public async Task<Result<PagedResult<TrainerScheduleDTO>>> GetAllAsync(TrainerScheduleFilterDTO filter)
+        {
+            try
+            {
+                var query = _appDbContext.TrainerSchedules
+                .AsNoTracking();
+
+                query = ApplyFilters(query, filter);
+
+                query = ApplySorting(query, filter);
+
+                var dtoQuery = ProjectToDTO(query);
+
+                var pagedResult = await dtoQuery.ToPagedListAsync(
+                    filter.PageNumber,
+                    filter.PageSize);
+
+                return Result<PagedResult<TrainerScheduleDTO>>.Success(pagedResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                   ex,
+                   "Error in Type : {Type}, Method: {Method},",
+                   nameof(TrainerScheduleService),
+                   nameof(GetAllAsync));
+
+                return Result<PagedResult<TrainerScheduleDTO>>.Failure(
                     ResultCodes.UnexpectedError,
                     500,
                     "An unexpected error occurred.");
@@ -185,7 +226,7 @@ namespace GymFlow.Infrastructure.Services
 
             return Result<TrainerScheduleAddUpdateDTO>.Success(DTO);
 
-        }
+        }   
 
         #endregion
 
@@ -213,11 +254,17 @@ namespace GymFlow.Infrastructure.Services
                     return Result<bool>.Failure(ResultCodes.NotFound, 404);
                 }
 
+                
+
                 trainerSchedule.TrainerId = dto.TrainerId;
                 trainerSchedule.Day = dto.Day.Value;
                 trainerSchedule.StartTime = dto.StartTime.Value;
                 trainerSchedule.EndTime = dto.EndTime.Value;
                 trainerSchedule.UpdatedAt = DateTime.UtcNow;
+
+                trainerSchedule.DurationHours = TimeHelper.CalculateDurationHours(
+                    trainerSchedule.StartTime,
+                    trainerSchedule.EndTime);
 
                 await _appDbContext.SaveChangesAsync();
                 return Result<bool>.Success(true, ResultCodes.UpdatedSuccessfully);
@@ -324,6 +371,153 @@ namespace GymFlow.Infrastructure.Services
 
             return Result<bool>.Success(true);
 
+        }
+
+        private IQueryable<TrainerSchedule> ApplyFilters(
+            IQueryable<TrainerSchedule> query,
+            TrainerScheduleFilterDTO filter)
+        {
+            // ========================== Search ==========================
+            if (!string.IsNullOrWhiteSpace(filter.Search))
+            {
+                query = query.Where(x =>
+                    x.Trainer.FullName.Contains(filter.Search));
+            }
+
+            // ========================== Trainer ==========================
+            if (filter.TrainerId.HasValue)
+            {
+                query = query.Where(x =>
+                    x.TrainerId == filter.TrainerId.Value);
+            }
+
+            // ========================== Day ==========================
+            if (filter.Day.HasValue)
+            {
+                query = query.Where(x =>
+                    x.Day == filter.Day.Value);
+            }
+
+            // ========================== Start Time ==========================
+            if (filter.StartTimeFrom.HasValue)
+            {
+                query = query.Where(x =>
+                    x.StartTime >= filter.StartTimeFrom.Value);
+            }
+
+            if (filter.StartTimeTo.HasValue)
+            {
+                query = query.Where(x =>
+                    x.StartTime <= filter.StartTimeTo.Value);
+            }
+
+            // ========================== Duration Hours ==========================
+            if (filter.MinDurationHours.HasValue)
+            {
+                query = query.Where(x => 
+                    x.DurationHours >= filter.MinDurationHours.Value);
+            }
+
+            if (filter.MaxDurationHours.HasValue)
+            {
+                query = query.Where(x =>
+                    x.DurationHours <= filter.MaxDurationHours.Value);
+            }
+
+
+            //if (filter.MinDurationHours.HasValue)
+            //{
+            //    query = query.Where(x => (x.EndTime - x.StartTime) < TimeSpan.Zero ? ((x.EndTime - x.StartTime) = (x.EndTime - x.StartTime) + TimeSpan.FromDays(1)) : )
+            //}
+            //if (filter.MinDurationHours.HasValue)
+            //{
+            //    query = query.Where(x =>
+            //    {
+            //        var duration = x.EndTime - x.StartTime;
+
+            //        if (duration < TimeSpan.Zero)
+            //        {
+            //            duration += TimeSpan.FromDays(1);
+            //        }
+
+            //        return duration.
+            //    }
+
+            //}
+
+            //if (filter.MaxDurationHours.HasValue)
+            //{
+            //    query = query.Where(x =>
+            //        (x.EndTime - x.StartTime).TotalHours <= filter.MaxDurationHours.Value);
+            //}
+
+            return query;
+
+        }
+
+        private IQueryable<TrainerSchedule> ApplySorting(
+            IQueryable<TrainerSchedule> query,
+            TrainerScheduleFilterDTO filter)
+        {
+            bool desc = filter.Descending;
+
+            switch (filter.SortBy)
+            {
+                // ========================= Member ========================= 
+                case "Trainer":
+                    return desc
+                        ? query.OrderByDescending(x => x.Trainer.FullName)
+                        : query.OrderBy(x => x.Trainer.FullName);
+                // From Saturday to Firday
+                case "Day":
+                    return desc
+                        ? query.OrderByDescending(x =>
+                            x.Day == DayOfWeek.Saturday ? 0 :
+                            x.Day == DayOfWeek.Sunday ? 1 :
+                            x.Day == DayOfWeek.Monday ? 2 :
+                            x.Day == DayOfWeek.Tuesday ? 3 :
+                            x.Day == DayOfWeek.Wednesday ? 4 :
+                            x.Day == DayOfWeek.Thursday ? 5 :
+                            6)
+                        : query.OrderBy(x =>
+                            x.Day == DayOfWeek.Saturday ? 0 :
+                            x.Day == DayOfWeek.Sunday ? 1 :
+                            x.Day == DayOfWeek.Monday ? 2 :
+                            x.Day == DayOfWeek.Tuesday ? 3 :
+                            x.Day == DayOfWeek.Wednesday ? 4 :
+                            x.Day == DayOfWeek.Thursday ? 5 :
+                            6);
+
+                // ========================= Entity Properties =========================
+                default:
+                    return query.OrderByProperty(filter.SortBy, desc);
+            }
+
+        }
+
+        private IQueryable<TrainerScheduleDTO> ProjectToDTO(
+            IQueryable<TrainerSchedule> query
+            )
+        {
+            return query.Select(x => new TrainerScheduleDTO
+            {
+                Id = x.Id,
+                TrainerId = x.TrainerId,
+                Day = x.Day,
+                StartTime = x.StartTime,
+                EndTime = x.EndTime,
+                DurationHours = x.DurationHours,
+
+
+                Trainer = new TrainerDTO
+                {
+                    Id = x.Trainer.Id,
+                    FullName = x.Trainer.FullName,
+                    PhoneNumber = x.Trainer.PhoneNumber,
+                    Salary = x.Trainer.Salary,
+                    HireDate = x.Trainer.HireDate,
+                }
+            });
         }
 
         #endregion

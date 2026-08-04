@@ -1582,6 +1582,15 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum Duration Hours.
+        /// </summary>
+        public static string MaxDurationHours {
+            get {
+                return ResourceManager.GetString("MaxDurationHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum Price.
         /// </summary>
         public static string MaxPrice {
@@ -1776,6 +1785,15 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string MinDurationDays {
             get {
                 return ResourceManager.GetString("MinDurationDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Duration Hours.
+        /// </summary>
+        public static string MinDurationHours {
+            get {
+                return ResourceManager.GetString("MinDurationHours", resourceCulture);
             }
         }
         
@@ -2856,6 +2874,24 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string StartTime {
             get {
                 return ResourceManager.GetString("StartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Time From.
+        /// </summary>
+        public static string StartTimeFrom {
+            get {
+                return ResourceManager.GetString("StartTimeFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Time To.
+        /// </summary>
+        public static string StartTimeTo {
+            get {
+                return ResourceManager.GetString("StartTimeTo", resourceCulture);
             }
         }
         

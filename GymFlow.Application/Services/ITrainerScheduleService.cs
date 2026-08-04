@@ -16,6 +16,7 @@ namespace GymFlow.Application.Services
         Task<Result<TrainerScheduleDTO>> GetByIdAsync(int id);
         Task<Result<IEnumerable<TrainerScheduleDTO>>> GetAllAsync();
         Task<Result<TrainerScheduleAddUpdateDTO>> GetTrainerScheduleAddUpdateDTO(int? id = null);
+        Task<Result<PagedResult<TrainerScheduleDTO>>> GetAllAsync(TrainerScheduleFilterDTO filter);
 
     }
 }

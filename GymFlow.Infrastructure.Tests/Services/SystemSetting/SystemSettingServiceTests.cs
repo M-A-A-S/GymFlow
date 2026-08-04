@@ -6,6 +6,7 @@ using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Services;
 using GymFlow.Infrastructure.Tests.Helpers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Moq;
 using System;
@@ -49,12 +50,16 @@ namespace GymFlow.Infrastructure.Tests.Services.SystemSetting
             _fileServiceMock =
                 new Mock<IFileService>();
 
+            var cache = new MemoryCache(
+new MemoryCacheOptions());
+
 
             _service =
                 new SystemSettingService(
                     _context,
                     logger.Object,
-                    _fileServiceMock.Object);
+                    _fileServiceMock.Object,
+                    cache);
         }
 
         #endregion

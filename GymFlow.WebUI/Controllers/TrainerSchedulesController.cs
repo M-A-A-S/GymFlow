@@ -1,8 +1,12 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.DTOs.TrainerSchedule;
 using GymFlow.Domain.Resources.Shared;
+using GymFlow.Infrastructure.Services;
+using GymFlow.WebUI.ViewModels.MemberSubscription;
+using GymFlow.WebUI.ViewModels.TrainerSchedule;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using static System.Net.WebRequestMethods;
 
 namespace GymFlow.WebUI.Controllers
 {
@@ -10,25 +14,43 @@ namespace GymFlow.WebUI.Controllers
     {
         #region ========================= Fields & Properties =========================
         private readonly ITrainerScheduleService _service;
+        private readonly ITrainerService _trainerService;
 
         #endregion
 
         #region ========================= Constructors =========================
         public TrainerSchedulesController(
             ITrainerScheduleService trainerScheduleService,
-            IStringLocalizer<SharedResource> localizer
+            IStringLocalizer<SharedResource> localizer,
+            ITrainerService trainerService
             ) : base(localizer)
         {
             _service = trainerScheduleService;
+            _trainerService = trainerService;
         }
 
         #endregion
 
         #region ========================= Get =========================
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(TrainerScheduleFilterDTO filter)
         {
-            var getAllResult = await _service.GetAllAsync();
-            return View(getAllResult.Data);
+            var getAllResult = await _service.GetAllAsync(filter);
+            if (!getAllResult.IsSuccess)
+            {
+                Error(getAllResult.Code);
+            }
+
+            //var subscriptionTypes = await _service.GetForSelectAsync();
+            //var trainers = await _trainerService.SearchAsync("");
+            var trainers = await _trainerService.GetForSelectAsync();
+
+            var result = new TrainerScheduleIndexVM
+            {
+                PagedResult = getAllResult.Data,
+                Filter = filter,
+                Trainers = trainers.Data,
+            };
+            return View(result);
         }
 
         public async Task<IActionResult> Details(int id)

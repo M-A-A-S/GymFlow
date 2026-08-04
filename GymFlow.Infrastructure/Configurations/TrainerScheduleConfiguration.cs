@@ -4,8 +4,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace GymFlow.Infrastructure.Configurations
 {
@@ -27,6 +29,18 @@ namespace GymFlow.Infrastructure.Configurations
 
             builder.Property(x => x.EndTime)
                    .IsRequired();
+
+    //        UPDATE TrainerSchedules
+    //SET DurationHours =
+    //    CASE
+    //        WHEN EndTime >= StartTime
+    //            THEN DATEDIFF(MINUTE, StartTime, EndTime) / 60.0
+    //        ELSE
+    //            DATEDIFF(MINUTE, StartTime, DATEADD(DAY, 1, CAST(EndTime AS datetime2))) / 60.0
+    //    END
+
+            builder.HasIndex(x => x.DurationHours)
+                .HasFilter("[DurationHours] IS NOT NULL AND [IsDeleted] = 0");
 
             // Prevent duplicate schedules for a trainer
             builder.HasIndex(x => new

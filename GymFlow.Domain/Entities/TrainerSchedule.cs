@@ -13,6 +13,8 @@ namespace GymFlow.Domain.Entities
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
 
+        public decimal? DurationHours { get; set; }
+
         public Trainer Trainer { get; set; }
     }
 }

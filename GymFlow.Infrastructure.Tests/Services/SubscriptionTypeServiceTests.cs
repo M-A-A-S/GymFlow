@@ -4,6 +4,7 @@ using GymFlow.Domain.Entities;
 using GymFlow.Infrastructure.Services;
 using GymFlow.Infrastructure.Tests.Helpers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Moq;
 using System;
@@ -29,9 +30,13 @@ namespace GymFlow.Infrastructure.Tests.Services
 
             var logger = new Mock<ILogger<SubscriptionTypeService>>();
 
+            var cache = new MemoryCache(
+            new MemoryCacheOptions());
+
             _service = new SubscriptionTypeService(
                 _context,
-                logger.Object);
+                logger.Object,
+                cache);
         }
 
 

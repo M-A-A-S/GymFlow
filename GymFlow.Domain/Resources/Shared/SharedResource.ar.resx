@@ -1050,6 +1050,12 @@
   <data name="StartTime" xml:space="preserve">
     <value>وقت البداية</value>
   </data>
+  <data name="StartTimeFrom" xml:space="preserve">
+    <value>وقت البداية من</value>
+  </data>
+  <data name="StartTimeTo" xml:space="preserve">
+    <value>وقت النهاية إلى</value>
+  </data>
   <data name="Status" xml:space="preserve">
     <value>الحالة</value>
   </data>
@@ -1215,4 +1221,11 @@
   <data name="Yes" xml:space="preserve">
     <value>نعم</value>
   </data>
+	<data name="MinDurationHours" xml:space="preserve">
+  <value>الحد الأدنى لساعات المدة</value>
+</data>
+
+	<data name="MaxDurationHours" xml:space="preserve">
+  <value>الحد الأقصى لساعات المدة</value>
+</data>
 </root>
