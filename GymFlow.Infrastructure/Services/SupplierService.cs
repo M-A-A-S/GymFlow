@@ -1,10 +1,12 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.Constants;
 using GymFlow.Domain.DTOs.Supplier;
+using GymFlow.Domain.DTOs.Trainer;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -19,16 +21,19 @@ namespace GymFlow.Infrastructure.Services
         #region ========================= Fields & Properties =========================
         private readonly IAppDbContext _appDbContext;
         private readonly ILogger<SupplierService> _logger;
+        private readonly IMemoryCache _cache;
 
         #endregion
 
         #region ========================= Constructors =========================
         public SupplierService(
             IAppDbContext appDbContext,
-            ILogger<SupplierService> logger)
+            ILogger<SupplierService> logger,
+            IMemoryCache cache)
         {
             _appDbContext = appDbContext;
             _logger = logger;
+            _cache = cache;
         }
 
         #endregion
@@ -151,6 +156,58 @@ namespace GymFlow.Infrastructure.Services
                 .ToListAsync();
 
             return Result<IEnumerable<SupplierSearchDTO>>.Success(suppliers);
+        }
+
+        public async Task<Result<IEnumerable<SupplierSearchDTO>>> GetForSelectAsync()
+        {
+            try
+            {
+                if (_cache.TryGetValue(
+                    CacheKeys.SuppliersSelect,
+                    out IEnumerable<SupplierSearchDTO>? suppliers))
+                {
+                    return Result<IEnumerable<SupplierSearchDTO>>
+                        .Success(suppliers);
+                }
+
+
+                suppliers = await _appDbContext.Suppliers
+                    .AsNoTracking()
+                    .OrderBy(x => x.FullName)
+                    .Select(x => new SupplierSearchDTO
+                    {
+                        Id = x.Id,
+                        FullName = x.FullName,
+                        PhoneNumber = x.PhoneNumber,
+                    })
+                    .ToListAsync();
+
+
+                _cache.Set(
+                    CacheKeys.SuppliersSelect,
+                    suppliers,
+                    new MemoryCacheEntryOptions
+                    {
+                        SlidingExpiration = TimeSpan.FromMinutes(30),
+                        AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(2)
+                    });
+
+
+                return Result<IEnumerable<SupplierSearchDTO>>
+                    .Success(suppliers);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                    ex,
+                    "Error loading suppliers for select");
+
+                return Result<IEnumerable<SupplierSearchDTO>>
+                    .Failure(
+                        ResultCodes.UnexpectedError,
+                        HttpStatusCodes.InternalServerError,
+                        "An unexpected error occurred.");
+            }
         }
 
         #endregion

@@ -18,6 +18,7 @@ namespace GymFlow.Application.Services
         Task<Result<IEnumerable<ProductDTO>>> GetAllAsync();
         Task<Result<IEnumerable<ProductSearchDTO>>> SearchAsync(string search);
         Task<Result<ProductAddUpdateDTO>> GetProductAddUpdateDTO(int? id = null);
+        Task<Result<PagedResult<ProductDTO>>> GetAllAsync(ProductFilterDTO filter);
 
     }
 }

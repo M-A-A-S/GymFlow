@@ -1233,4 +1233,43 @@
   <data name="EndTimeTo" xml:space="preserve">
     <value>End Time To</value>
   </data>
+  <data name="MinPurchasePrice" xml:space="preserve">
+    <value>Minimum Purchase Price</value>
+  </data>
+  <data name="MaxPurchasePrice" xml:space="preserve">
+    <value>Maximum Purchase Price</value>
+  </data>
+  <data name="MinSalePrice" xml:space="preserve">
+    <value>Minimum Sale Price</value>
+  </data>
+  <data name="MaxSalePrice" xml:space="preserve">
+    <value>Maximum Sale Price</value>
+  </data>
+  <data name="MinQuantity" xml:space="preserve">
+    <value>Minimum Quantity</value>
+  </data>
+  <data name="MaxQuantity" xml:space="preserve">
+    <value>Maximum Quantity</value>
+  </data>
+  <data name="MinReorderLevel" xml:space="preserve">
+    <value>Minimum Reorder Level</value>
+  </data>
+  <data name="MaxReorderLevel" xml:space="preserve">
+    <value>Maximum Reorder Level</value>
+  </data>
+  <data name="LowStockOnly" xml:space="preserve">
+    <value>Low Stock Only</value>
+  </data>
+  <data name="OutOfStockOnly" xml:space="preserve">
+    <value>Out of Stock Only</value>
+  </data>
+  <data name="OutOfStock" xml:space="preserve">
+    <value>Out of Stock</value>
+  </data>
+  <data name="LowStock" xml:space="preserve">
+    <value>Low Stock</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
 </root>

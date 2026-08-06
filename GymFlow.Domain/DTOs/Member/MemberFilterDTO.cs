@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GymFlow.Domain.DTOs.Member
 {
-    public class MemberFilterDTO : QueryRequest
+    public class MemberFilterDTO : BaseFilterDTO
     {
         public Gender? Gender { get; set; }
         public MemberStatus? Status { get; set; }

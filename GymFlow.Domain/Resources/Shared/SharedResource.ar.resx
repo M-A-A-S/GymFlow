@@ -1233,4 +1233,43 @@
   <data name="EndTimeTo" xml:space="preserve">
     <value>وقت النهاية إلى</value>
   </data>
+  <data name="MinPurchasePrice" xml:space="preserve">
+    <value>أقل سعر شراء</value>
+  </data>
+  <data name="MaxPurchasePrice" xml:space="preserve">
+    <value>أعلى سعر شراء</value>
+  </data>
+  <data name="MinSalePrice" xml:space="preserve">
+    <value>أقل سعر بيع</value>
+  </data>
+  <data name="MaxSalePrice" xml:space="preserve">
+    <value>أعلى سعر بيع</value>
+  </data>
+  <data name="MinQuantity" xml:space="preserve">
+    <value>أقل كمية</value>
+  </data>
+  <data name="MaxQuantity" xml:space="preserve">
+    <value>أعلى كمية</value>
+  </data>
+  <data name="MinReorderLevel" xml:space="preserve">
+    <value>أقل حد لإعادة الطلب</value>
+  </data>
+  <data name="MaxReorderLevel" xml:space="preserve">
+    <value>أعلى حد لإعادة الطلب</value>
+  </data>
+  <data name="LowStockOnly" xml:space="preserve">
+    <value>المنتجات منخفضة المخزون فقط</value>
+  </data>
+  <data name="OutOfStockOnly" xml:space="preserve">
+    <value>المنتجات غير المتوفرة فقط</value>
+  </data>
+  <data name="OutOfStock" xml:space="preserve">
+    <value>نفد المخزون</value>
+  </data>
+  <data name="LowStock" xml:space="preserve">
+    <value>المخزون منخفض</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
 </root>

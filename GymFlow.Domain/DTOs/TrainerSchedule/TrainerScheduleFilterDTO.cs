@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GymFlow.Domain.DTOs.TrainerSchedule
 {
-    public class TrainerScheduleFilterDTO : QueryRequest
+    public class TrainerScheduleFilterDTO : BaseFilterDTO
     {
         public int? TrainerId { get; set; }
         public DayOfWeek? Day { get; set; }

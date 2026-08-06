@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GymFlow.Domain.DTOs.MemberSubscription
 {
-    public class MemberSubscriptionFilterDTO : QueryRequest
+    public class MemberSubscriptionFilterDTO : BaseFilterDTO
     {
 
         // Filter by subscription status

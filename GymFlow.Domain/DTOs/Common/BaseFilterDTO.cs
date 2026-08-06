@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace GymFlow.Domain.DTOs.Common
 {
-    public class QueryRequest
+    public class BaseFilterDTO
     {
         public int PageNumber { get; set; } = 1;
-        public int PageSize { get; set; } = 10;
+        public int PageSize { get; set; } = 3;
         public string? Search {  get; set; }
         //public string SortBy { get; set; } = "Id";
         public string SortBy { get; set; } = nameof(BaseEntity.Id);

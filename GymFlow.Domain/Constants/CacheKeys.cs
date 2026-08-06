@@ -11,5 +11,7 @@ namespace GymFlow.Domain.Constants
         public const string MembersSelect = "members_select";
         public const string SubscriptionTypesSelect = "subscription_types_select";
         public const string TrainersSelect = "trainers_select";
+        public const string CategoriesSelect = "categories_select";
+        public const string SuppliersSelect = "suppliers_select";
     }
 }

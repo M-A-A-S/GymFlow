@@ -1555,6 +1555,24 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Low Stock.
+        /// </summary>
+        public static string LowStock {
+            get {
+                return ResourceManager.GetString("LowStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Low Stock Only.
+        /// </summary>
+        public static string LowStockOnly {
+            get {
+                return ResourceManager.GetString("LowStockOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Male.
         /// </summary>
         public static string Male {
@@ -1618,6 +1636,24 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum Purchase Price.
+        /// </summary>
+        public static string MaxPurchasePrice {
+            get {
+                return ResourceManager.GetString("MaxPurchasePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Quantity.
+        /// </summary>
+        public static string MaxQuantity {
+            get {
+                return ResourceManager.GetString("MaxQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum Remaining Days.
         /// </summary>
         public static string MaxRemainingDays {
@@ -1627,11 +1663,29 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum Reorder Level.
+        /// </summary>
+        public static string MaxReorderLevel {
+            get {
+                return ResourceManager.GetString("MaxReorderLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum Salary.
         /// </summary>
         public static string MaxSalary {
             get {
                 return ResourceManager.GetString("MaxSalary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Sale Price.
+        /// </summary>
+        public static string MaxSalePrice {
+            get {
+                return ResourceManager.GetString("MaxSalePrice", resourceCulture);
             }
         }
         
@@ -1825,11 +1879,38 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minimum Purchase Price.
+        /// </summary>
+        public static string MinPurchasePrice {
+            get {
+                return ResourceManager.GetString("MinPurchasePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Quantity.
+        /// </summary>
+        public static string MinQuantity {
+            get {
+                return ResourceManager.GetString("MinQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Minimum Remaining Days.
         /// </summary>
         public static string MinRemainingDays {
             get {
                 return ResourceManager.GetString("MinRemainingDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Reorder Level.
+        /// </summary>
+        public static string MinReorderLevel {
+            get {
+                return ResourceManager.GetString("MinReorderLevel", resourceCulture);
             }
         }
         
@@ -1843,11 +1924,29 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minimum Sale Price.
+        /// </summary>
+        public static string MinSalePrice {
+            get {
+                return ResourceManager.GetString("MinSalePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Monday.
         /// </summary>
         public static string Monday {
             get {
                 return ResourceManager.GetString("Monday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
@@ -2037,6 +2136,24 @@ namespace GymFlow.Domain.Resources.Shared {
         public static string Other {
             get {
                 return ResourceManager.GetString("Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Out of Stock.
+        /// </summary>
+        public static string OutOfStock {
+            get {
+                return ResourceManager.GetString("OutOfStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Out of Stock Only.
+        /// </summary>
+        public static string OutOfStockOnly {
+            get {
+                return ResourceManager.GetString("OutOfStockOnly", resourceCulture);
             }
         }
         

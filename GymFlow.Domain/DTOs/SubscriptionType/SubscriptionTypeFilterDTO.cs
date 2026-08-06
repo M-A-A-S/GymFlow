@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GymFlow.Domain.DTOs.SubscriptionType
 {
-    public class SubscriptionTypeFilterDTO : QueryRequest
+    public class SubscriptionTypeFilterDTO : BaseFilterDTO
     {
         public bool? IsActive { get; set; }
         public byte? MinDaysPerWeek { get; set; }

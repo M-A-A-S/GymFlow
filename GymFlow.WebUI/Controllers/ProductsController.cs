@@ -1,11 +1,14 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.DTOs.Product;
 using GymFlow.Domain.Resources.Shared;
+using GymFlow.Infrastructure.Services;
 using GymFlow.WebUI.Extensions;
 using GymFlow.WebUI.ViewModels;
 using GymFlow.WebUI.ViewModels.Product;
+using GymFlow.WebUI.ViewModels.TrainerSchedule;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using static System.Net.WebRequestMethods;
 
 namespace GymFlow.WebUI.Controllers
 {
@@ -13,23 +16,38 @@ namespace GymFlow.WebUI.Controllers
     {
         #region ========================= Fields & Properties =========================
         private readonly IProductService _service;
+        private readonly ICategoryService _categoryService;
         #endregion
 
         #region ========================= Constructors =========================
         public ProductsController(
             IProductService productService,
-            IStringLocalizer<SharedResource> localizer
+            IStringLocalizer<SharedResource> localizer,
+            ICategoryService categoryService
             ) : base(localizer)
         {
             _service = productService;
+            _categoryService = categoryService;
         }
         #endregion
 
         #region ========================= Get =========================
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(ProductFilterDTO filter)
         {
-            var getAllResult = await _service.GetAllAsync();
-            return View(getAllResult.Data);
+            var getAllResult = await _service.GetAllAsync(filter);
+            if (!getAllResult.IsSuccess)
+            {
+                Error(getAllResult.Code);
+            }
+
+            var trainers = await _categoryService.GetForSelectAsync();
+            var result = new ProductIndexVM
+            {
+                PagedResult = getAllResult.Data,
+                Filter = filter,
+                Categories = trainers.Data,
+            };
+            return View(result);
         }
 
         public async Task<IActionResult> Details(int id)

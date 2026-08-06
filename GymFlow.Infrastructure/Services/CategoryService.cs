@@ -1,10 +1,12 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.Constants;
 using GymFlow.Domain.DTOs.Category;
+using GymFlow.Domain.DTOs.Trainer;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,7 @@ namespace GymFlow.Infrastructure.Services
         private readonly IAppDbContext _appDbContext;
         private readonly ILogger<CategoryService> _logger;
         private readonly IFileService _fileService;
+        private readonly IMemoryCache _cache;
 
         #endregion
 
@@ -27,11 +30,13 @@ namespace GymFlow.Infrastructure.Services
         public CategoryService(
             IAppDbContext appDbContext,
             ILogger<CategoryService> logger,
-            IFileService fileService)
+            IFileService fileService,
+            IMemoryCache cache)
         {
             _appDbContext = appDbContext;
             _logger = logger;
             _fileService = fileService;
+            _cache = cache;
         }
 
         #endregion
@@ -157,7 +162,7 @@ namespace GymFlow.Infrastructure.Services
                     x.NameAr.Contains(search));
             }
 
-            var categorys = await query
+            var categories = await query
                 //.Take(20)
                 .Select(x => new CategorySearchDTO
                 {
@@ -167,7 +172,59 @@ namespace GymFlow.Infrastructure.Services
                 })
                 .ToListAsync();
 
-            return Result<IEnumerable<CategorySearchDTO>>.Success(categorys);
+            return Result<IEnumerable<CategorySearchDTO>>.Success(categories);
+        }
+
+        public async Task<Result<IEnumerable<CategorySearchDTO>>> GetForSelectAsync()
+        {
+            try
+            {
+                if (_cache.TryGetValue(
+                    CacheKeys.CategoriesSelect,
+                    out IEnumerable<CategorySearchDTO>? categories))
+                {
+                    return Result<IEnumerable<CategorySearchDTO>>
+                        .Success(categories);
+                }
+
+
+                categories = await _appDbContext.Categories
+                    .AsNoTracking()
+                    .OrderBy(x => x.NameEn)
+                    .Select(x => new CategorySearchDTO
+                    {
+                        Id = x.Id,
+                        NameEn = x.NameEn,
+                        NameAr = x.NameAr,
+                    })
+                    .ToListAsync();
+
+
+                _cache.Set(
+                    CacheKeys.CategoriesSelect,
+                    categories,
+                    new MemoryCacheEntryOptions
+                    {
+                        SlidingExpiration = TimeSpan.FromMinutes(30),
+                        AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(2)
+                    });
+
+
+                return Result<IEnumerable<CategorySearchDTO>>
+                    .Success(categories);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                    ex,
+                    "Error loading categories for select");
+
+                return Result<IEnumerable<CategorySearchDTO>>
+                    .Failure(
+                        ResultCodes.UnexpectedError,
+                        HttpStatusCodes.InternalServerError,
+                        "An unexpected error occurred.");
+            }
         }
 
         #endregion

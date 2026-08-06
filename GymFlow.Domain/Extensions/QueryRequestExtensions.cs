@@ -7,7 +7,7 @@ namespace GymFlow.Domain.Extensions
 {
     public static class QueryRequestExtensions
     {
-        public static string GetSortIcon(this QueryRequest request, string column)
+        public static string GetSortIcon(this BaseFilterDTO request, string column)
         {
             if (request.SortBy != column)
             {
@@ -17,7 +17,7 @@ namespace GymFlow.Domain.Extensions
             return request.Descending ? "fa-sort-down" : "fa-sort-up";
         }
 
-        public static bool ToggleDescending(this QueryRequest request, string column)
+        public static bool ToggleDescending(this BaseFilterDTO request, string column)
         {
             return request.SortBy == column ? !request.Descending : false;
         }
@@ -47,7 +47,7 @@ namespace GymFlow.Domain.Extensions
 
         public static Dictionary<string, string> ToRouteDictionary<T>(
     this T request)
-    where T : QueryRequest
+    where T : BaseFilterDTO
         {
             return request
                 .GetType()

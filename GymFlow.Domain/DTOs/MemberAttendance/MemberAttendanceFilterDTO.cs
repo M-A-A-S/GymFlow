@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GymFlow.Domain.DTOs.MemberAttendance
 {
-    public class MemberAttendanceFilterDTO : QueryRequest
+    public class MemberAttendanceFilterDTO : BaseFilterDTO
     {
         // true = attended, false = absent, null = all
         public bool? HasAttendance { get; set; }

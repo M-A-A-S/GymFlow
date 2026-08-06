@@ -5,13 +5,18 @@ using GymFlow.Domain.DTOs.Member;
 using GymFlow.Domain.DTOs.MemberSubscription;
 using GymFlow.Domain.DTOs.Product;
 using GymFlow.Domain.DTOs.SubscriptionType;
+using GymFlow.Domain.DTOs.Trainer;
+using GymFlow.Domain.DTOs.TrainerSchedule;
+using GymFlow.Domain.Entities;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
+using GymFlow.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -115,6 +120,41 @@ namespace GymFlow.Infrastructure.Services
                    nameof(GetAllAsync));
 
                 return Result<IEnumerable<ProductDTO>>.Failure(
+                    ResultCodes.UnexpectedError,
+                    500,
+                    "An unexpected error occurred.");
+            }
+        }
+
+        public async Task<Result<PagedResult<ProductDTO>>> GetAllAsync(ProductFilterDTO filter)
+        {
+            try
+            {
+                var query = _appDbContext.Products
+                .Include(x => x.Category)
+                .AsNoTracking();
+
+                query = ApplyFilters(query, filter);
+
+                query = ApplySorting(query, filter);
+
+                var dtoQuery = ProjectToDTO(query);
+
+                var pagedResult = await dtoQuery.ToPagedListAsync(
+                    filter.PageNumber,
+                    filter.PageSize);
+
+                return Result<PagedResult<ProductDTO>>.Success(pagedResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                   ex,
+                   "Error in Type : {Type}, Method: {Method},",
+                   nameof(ProductService),
+                   nameof(GetAllAsync));
+
+                return Result<PagedResult<ProductDTO>>.Failure(
                     ResultCodes.UnexpectedError,
                     500,
                     "An unexpected error occurred.");
@@ -403,6 +443,174 @@ namespace GymFlow.Infrastructure.Services
             }
 
             return $"PRD-{DateTime.UtcNow:yyyyMMddHHmmss}";
+        }
+
+        private IQueryable<Product> ApplyFilters(
+            IQueryable<Product> query,
+            ProductFilterDTO filter)
+        {
+            // ========================== Search ==========================
+            if (!string.IsNullOrWhiteSpace(filter.Search))
+            {
+                query = query.Where(x =>
+                    x.Code.Contains(filter.Search) || 
+                    x.NameEn.Contains(filter.Search) || 
+                    x.NameAr.Contains(filter.Search)
+                    );
+            }
+
+            // ========================== Category ==========================
+            if (filter.CategoryId.HasValue)
+            {
+                query = query.Where(x =>
+                    x.CategoryId == filter.CategoryId.Value);
+            }
+
+
+            // ========================== Purchase Price ==========================
+            if (filter.MinPurchasePrice.HasValue)
+            {
+                query = query.Where(x =>
+                    x.PurchasePrice >= filter.MinPurchasePrice.Value);
+            }
+
+            if (filter.MaxPurchasePrice.HasValue)
+            {
+                query = query.Where(x =>
+                    x.PurchasePrice <= filter.MaxPurchasePrice.Value);
+            }
+
+            // ========================== Sale Price ==========================
+            if (filter.MinSalePrice.HasValue)
+            {
+                query = query.Where(x =>
+                    x.SalePrice >= filter.MinSalePrice.Value);
+            }
+
+            if (filter.MaxSalePrice.HasValue)
+            {
+                query = query.Where(x =>
+                    x.SalePrice <= filter.MaxSalePrice.Value);
+            }
+
+            // ========================== Quantity ==========================
+            if (filter.MinQuantity.HasValue)
+            {
+                query = query.Where(x =>
+                    x.Quantity >= filter.MinQuantity.Value);
+            }
+
+            if (filter.MaxQuantity.HasValue)
+            {
+                query = query.Where(x =>
+                    x.Quantity <= filter.MaxQuantity.Value);
+            }
+
+            // ========================== Reorder Level ==========================
+            if (filter.MinReorderLevel.HasValue)
+            {
+                query = query.Where(x =>
+                    x.ReorderLevel >= filter.MinReorderLevel.Value);
+            }
+
+            if (filter.MaxReorderLevel.HasValue)
+            {
+                query = query.Where(x =>
+                    x.ReorderLevel <= filter.MaxReorderLevel.Value);
+            }
+
+            if (filter.LowStockOnly == true)
+            {
+                query = query.Where(x => x.Quantity <= x.ReorderLevel);
+            }
+
+            if (filter.OutOfStockOnly == true)
+            {
+                query = query.Where(x => x.Quantity == 0);
+            }
+
+
+            return query;
+
+        }
+
+        private IQueryable<Product> ApplySorting(
+            IQueryable<Product> query,
+            ProductFilterDTO filter)
+        {
+            bool desc = filter.Descending;
+            bool isArabic = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+
+            switch (filter.SortBy)
+            {
+                // ========================= Category ========================= 
+                case "Category":
+                    if (isArabic)
+                    {
+                        return desc
+                            ? query.OrderByDescending(x => x.Category.NameAr)
+                            : query.OrderBy(x => x.Category.NameAr);
+                    }
+                    else
+                    {
+                        return desc
+                            ? query.OrderByDescending(x => x.Category.NameEn)
+                            : query.OrderBy(x => x.Category.NameEn);
+                    }
+
+                // ========================= Name ========================= 
+                case "Name":
+                    if (isArabic)
+                    {
+                        return desc
+                            ? query.OrderByDescending(x => x.NameAr)
+                            : query.OrderBy(x => x.NameAr);
+                    }
+                    else
+                    {
+                        return desc
+                            ? query.OrderByDescending(x => x.NameEn)
+                            : query.OrderBy(x => x.NameEn);
+                    }
+                    
+
+                // ========================= Entity Properties =========================
+                default:
+                    return query.OrderByProperty(filter.SortBy, desc);
+            }
+
+        }
+
+        private IQueryable<ProductDTO> ProjectToDTO(
+            IQueryable<Product> query
+            )
+        {
+            return query.Select(x => new ProductDTO
+            {
+                Id = x.Id,
+                Code = x.Code,
+                NameEn = x.NameEn,
+                NameAr = x.NameAr,
+                DescriptionEn = x.DescriptionEn,
+                DescriptionAr = x.DescriptionAr,
+                ImageUrl = x.ImageUrl,
+                CategoryId = x.CategoryId,
+                PurchasePrice = x.PurchasePrice,
+                SalePrice = x.SalePrice,
+                Quantity = x.Quantity,
+                ReorderLevel = x.ReorderLevel,
+
+
+                Category = x.Category == null ? null : new CategoryDTO
+                {
+                    Id = x.Category.Id,
+                    NameEn = x.Category.NameEn,
+                    NameAr = x.Category.NameAr,
+                    DescriptionEn = x.Category.DescriptionEn,
+                    DescriptionAr = x.Category.DescriptionAr,
+                    ImageUrl = x.Category.ImageUrl,
+                }
+            });
         }
 
         #endregion

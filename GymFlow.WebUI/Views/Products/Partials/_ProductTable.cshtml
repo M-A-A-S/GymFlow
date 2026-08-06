@@ -1,0 +1,165 @@
+﻿@using System.Globalization
+@using GymFlow.Domain.Extensions
+@using GymFlow.WebUI.ViewModels
+@using GymFlow.WebUI.ViewModels.Pagination
+@using GymFlow.WebUI.ViewModels.Product
+
+@model ProductIndexVM
+
+@{
+    var routes = Model.Filter.ToRouteDictionary();
+}
+
+@if (!Model.PagedResult.Items.Any())
+{
+    <div class="alert alert-info">
+        @Localizer["NoRecordsFound"]
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+
+        <table class="table">
+
+            <thead>
+                <tr>
+
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "Code",
+                                     Title = Localizer["Code"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "Name",
+                                     Title = Localizer["Name"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "Category",
+                                     Title = Localizer["Category"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "PurchasePrice",
+                                     Title = Localizer["PurchasePrice"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "SalePrice",
+                                     Title = Localizer["SalePrice"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "Quantity",
+                                     Title = Localizer["Quantity"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+
+                    <th>
+                        @Localizer["Actions"]
+                    </th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model.PagedResult.Items)
+                {
+                    <tr>
+
+                        <td>
+                            @item.Code
+                        </td>
+
+                        <td>
+                            @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                ? item.NameAr
+                                : item.NameEn)
+                        </td>
+
+                        <td>
+                            @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar"
+                                ? item.Category?.NameAr
+                                : item.Category?.NameEn)
+                        </td>
+
+                        <td>
+                            @item.PurchasePrice
+                        </td>
+
+                        <td>
+                            @item.SalePrice
+                        </td>
+
+                        <td>
+                            @item.Quantity
+
+                            @if (item.Quantity == 0)
+                            {
+                                <span class="badge bg-danger ms-1">
+                                    @Localizer["OutOfStock"]
+                                </span>
+                            }
+                            else if (item.Quantity <= item.ReorderLevel)
+                            {
+                                <span class="badge bg-warning text-dark ms-1">
+                                    @Localizer["LowStock"]
+                                </span>
+                            }
+                        </td>
+
+                        <td>
+                            <partial name="_Actions"
+                                     model='new ActionButtonsVM
+                                     {
+                                         Controller = "Products",
+                                         Id = item.Id
+                                     }' />
+</td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+}

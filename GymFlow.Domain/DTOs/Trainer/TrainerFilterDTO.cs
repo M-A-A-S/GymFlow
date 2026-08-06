@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GymFlow.Domain.DTOs.Trainer
 {
-    public class TrainerFilterDTO : QueryRequest
+    public class TrainerFilterDTO : BaseFilterDTO
     {
         public decimal? MinSalary { get; set; }
         public decimal? MaxSalary { get; set; }

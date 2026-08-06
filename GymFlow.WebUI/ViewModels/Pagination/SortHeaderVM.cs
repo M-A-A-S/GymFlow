@@ -6,7 +6,7 @@ namespace GymFlow.WebUI.ViewModels.Pagination
     {
         public string Column { get; set; } = "";
         public string Title { get; set; } = "";
-        public QueryRequest Filter { get; set; } = default!;
+        public BaseFilterDTO Filter { get; set; } = default!;
         public Dictionary<string, string> Routes { get; set; } = new();
     }
 }
