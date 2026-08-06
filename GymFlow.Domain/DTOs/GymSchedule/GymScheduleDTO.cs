@@ -52,5 +52,7 @@ namespace GymFlow.Domain.DTOs.GymSchedule
         )]
         public TimeSpan? EndTime { get; set; }
 
+        public decimal? DurationHours { get; set; }
+
     }
 }

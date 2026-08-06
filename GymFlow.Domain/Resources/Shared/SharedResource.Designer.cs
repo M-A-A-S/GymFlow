@@ -799,6 +799,24 @@ namespace GymFlow.Domain.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End Time From.
+        /// </summary>
+        public static string EndTimeFrom {
+            get {
+                return ResourceManager.GetString("EndTimeFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Time To.
+        /// </summary>
+        public static string EndTimeTo {
+            get {
+                return ResourceManager.GetString("EndTimeTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error while saving invoice.
         /// </summary>
         public static string Error {

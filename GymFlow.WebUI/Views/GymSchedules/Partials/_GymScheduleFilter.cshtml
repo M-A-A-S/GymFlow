@@ -1,0 +1,139 @@
+﻿@using GymFlow.Domain.Enums
+@using GymFlow.Domain.Extensions
+@using GymFlow.WebUI.ViewModels.GymSchedule
+@model GymScheduleIndexVM
+
+
+<form method="get" class="card shadow-sm mb-4">
+    <div class="card-body">
+        <div class="row g-3 align-items-end">
+
+            <!-- ==================== Gender  ==================== -->
+            <div class="col-12 col-sm-6 col-lg-2">
+                <label asp-for="Filter.Gender" class="form-label">
+                    @Localizer["Gender"]
+                </label>
+
+                <select asp-for="Filter.Gender"
+                        class="form-select">
+                    <option value="">
+                        @Localizer["All"]
+                    </option>
+
+                    @foreach (var gender in Enum.GetValues<Gender>())
+                    {
+                        <option value="@gender">
+                            @gender.ToLocalizedString()
+                        </option>
+                    }
+                </select>
+
+
+            </div>
+
+            <!-- ==================== Day  ==================== -->
+            <div class="col-12 col-sm-6 col-lg-2">
+                <label asp-for="Filter.Day" class="form-label">
+                    @Localizer["Day"]
+                </label>
+
+                <select asp-for="Filter.Day"
+                        class="form-select">
+                    <option value="">
+                        @Localizer["All"]
+                    </option>
+
+                    @foreach (var day in Enum.GetValues<DayOfWeek>())
+                    {
+                        <option value="@day">
+                            @day.ToLocalizedString()
+                        </option>
+                    }
+                </select>
+
+
+            </div>
+
+            <!-- ==================== Start Time  ==================== -->
+            <div class="col-12 col-sm-6 col-lg-2">
+                <label asp-for="Filter.StartTimeFrom" class="form-label">
+                    @Localizer["StartTimeFrom"]
+                </label>
+
+                <input asp-for="Filter.StartTimeFrom"
+                       type="time"
+                       class="form-control" />
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-2">
+                <label asp-for="Filter.StartTimeTo" class="form-label">
+                    @Localizer["StartTimeTo"]
+                </label>
+
+                <input asp-for="Filter.StartTimeTo"
+                       type="time"
+                       class="form-control" />
+            </div>
+
+            <!-- ==================== End Time  ==================== -->
+            <div class="col-12 col-sm-6 col-lg-2">
+                <label asp-for="Filter.EndTimeFrom" class="form-label">
+                    @Localizer["EndTimeFrom"]
+                </label>
+
+                <input asp-for="Filter.EndTimeFrom"
+                       type="time"
+                       class="form-control" />
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-2">
+                <label asp-for="Filter.EndTimeTo" class="form-label">
+                    @Localizer["EndTimeTo"]
+                </label>
+
+                <input asp-for="Filter.EndTimeTo"
+                       type="time"
+                       class="form-control" />
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-2">
+                <label asp-for="Filter.MinDurationHours" class="form-label">
+                    @Localizer["MinDuration"]
+                </label>
+
+                <input asp-for="Filter.MinDurationHours" Filter.
+                       type="number"
+                       step="0.5"
+                       class="form-control" />
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-2">
+                <label asp-for="Filter.MaxDurationHours" class="form-label">
+                    @Localizer["MaxDuration"]
+                </label>
+
+                <input asp-for="Filter.MaxDurationHours"
+                       type="number"
+                       step="0.5"
+                       class="form-control" />
+            </div>
+
+            <div class="col-auto">
+                <button type="submit"
+                        class="btn btn-primary">
+                    <i class="fa fa-search me-1"></i>
+                    @Localizer["Search"]
+                </button>
+            </div>
+
+            <div class="col-auto">
+                <a asp-action="Index"
+                   class="btn btn-outline-secondary">
+                    <i class="fa fa-times me-1"></i>
+                    @Localizer["Clear"]
+                </a>
+            </div>
+
+        </div>
+    </div>
+</form>

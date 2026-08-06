@@ -1,5 +1,6 @@
-﻿@using GymFlow.Domain.DTOs.GymSchedule
-@model IEnumerable<GymScheduleDTO>
+﻿@using GymFlow.WebUI.ViewModels.GymSchedule
+@using GymFlow.WebUI.ViewModels.Pagination
+@model GymScheduleIndexVM
 
 @using GymFlow.Domain.Enums
 @using GymFlow.Domain.Extensions
@@ -7,7 +8,21 @@
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResource> Localizer
 
-@using System.Globalization
+
+@{
+
+    var routes = Model.Filter.ToRouteDictionary();
+
+    var pagination = new PaginationVM
+    {
+        PageNumber = Model.PagedResult.PageNumber,
+        PageSize = Model.PagedResult.PageSize,
+        TotalPages = Model.PagedResult.TotalPages,
+        TotalCount = Model.PagedResult.TotalCount,
+        RouteValues = routes
+
+    };
+}
 
 <div class="d-flex align-items-center justify-content-between my-4">
     <h2>@Localizer["GymSchedules"]</h2>
@@ -18,54 +33,12 @@
     </a>
 </div>
 
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>@Localizer["Day"]</th>
-                <th>@Localizer["Gender"]</th>
-                <th>@Localizer["StartTime"]</th>
-                <th>@Localizer["EndTime"]</th>
-                <th>@Localizer["Actions"]</th>
-                <th></th>
-            </tr>
-        </thead>
+<partial name="Partials/_GymScheduleFilter" />
 
-        <tbody>
-            @foreach (var item in Model)
-            {
+<partial name="_Pagination"
+         model="pagination" />
 
-                <tr>
-                    <td>@item.Day.Value.ToLocalizedString()</td>
-                    <td>
-                        <span class="badge @item.Gender.Value.ToBadgeClass()">
-                            @item.Gender.Value.ToLocalizedString()
-                        </span>
-                    </td>
-                    <td>@item.StartTime</td>
-                    <td>@item.EndTime</td>
-                    <td>
-                        <a asp-action="Edit"
-                           asp-route-id="@item.Id"
-                           class="btn btn-icon btn-outline-primary tooltip-btn"
-                           data-tooltip="@Localizer["Edit"]">
-                            <i class="fa fa-pen"></i>
-                        </a>
-                        <a asp-action="Details"
-                           asp-route-id="@item.Id"
-                           class="btn btn-icon btn-outline-info tooltip-btn"
-                           data-tooltip="@Localizer["Details"]">
-                            <i class="fa fa-info"></i>
-                        </a>
-                        <a asp-action="Delete"
-                           asp-route-id="@item.Id"
-                           class="btn btn-icon btn-outline-danger tooltip-btn"
-                           data-tooltip="@Localizer["Delete"]">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+<partial name="Partials/_GymScheduleTable" />
+
+<partial name="_Pagination"
+         model="pagination" />

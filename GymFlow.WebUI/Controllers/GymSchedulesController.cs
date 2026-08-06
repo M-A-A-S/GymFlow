@@ -1,8 +1,10 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.DTOs.GymSchedule;
 using GymFlow.Domain.Resources.Shared;
+using GymFlow.WebUI.ViewModels.GymSchedule;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using static System.Net.WebRequestMethods;
 
 namespace GymFlow.WebUI.Controllers
 {
@@ -25,10 +27,15 @@ namespace GymFlow.WebUI.Controllers
         #endregion
 
         #region ========================= Get =========================
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(GymScheduleFilterDTO filter)
         {
-            var getAllResult = await _service.GetAllAsync();
-            return View(getAllResult.Data);
+            var getAllResult = await _service.GetAllAsync(filter);
+            var result = new GymScheduleIndexVM
+            {
+                PagedResult = getAllResult.Data,
+                Filter = filter,
+            };
+            return View(result);
         }
 
         public async Task<IActionResult> Details(int id)

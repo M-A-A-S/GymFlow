@@ -34,6 +34,8 @@ namespace GymFlow.Infrastructure.Configurations
             builder.Property(x => x.EndTime)
                 .IsRequired();
 
+
+
             builder.HasIndex(x => new
             {
                 x.Day,
@@ -42,6 +44,9 @@ namespace GymFlow.Infrastructure.Configurations
             })
             .IsUnique()
             .HasFilter("[IsDeleted] = 0");
+
+            builder.HasIndex(x => x.DurationHours)
+                .HasFilter("[DurationHours] IS NOT NULL AND [IsDeleted] = 0");
 
             builder.HasData(LoadGymSchedules());
 

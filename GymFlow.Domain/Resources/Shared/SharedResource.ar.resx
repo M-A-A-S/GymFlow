@@ -1221,11 +1221,16 @@
   <data name="Yes" xml:space="preserve">
     <value>نعم</value>
   </data>
-	<data name="MinDurationHours" xml:space="preserve">
-  <value>الحد الأدنى لساعات المدة</value>
-</data>
-
-	<data name="MaxDurationHours" xml:space="preserve">
-  <value>الحد الأقصى لساعات المدة</value>
-</data>
+  <data name="MinDurationHours" xml:space="preserve">
+    <value>الحد الأدنى لساعات المدة</value>
+  </data>
+  <data name="MaxDurationHours" xml:space="preserve">
+    <value>الحد الأقصى لساعات المدة</value>
+  </data>
+  <data name="EndTimeFrom" xml:space="preserve">
+    <value>وقت النهاية من</value>
+  </data>
+  <data name="EndTimeTo" xml:space="preserve">
+    <value>وقت النهاية إلى</value>
+  </data>
 </root>

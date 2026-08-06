@@ -13,5 +13,7 @@ namespace GymFlow.Domain.Entities
         public Gender Gender { get; set; }   // Men or Women
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
+
+        public decimal? DurationHours { get; set; }
     }
 }

@@ -1,0 +1,125 @@
+﻿@using GymFlow.WebUI.ViewModels
+@using GymFlow.WebUI.ViewModels.GymSchedule
+@using GymFlow.WebUI.ViewModels.Pagination 
+@model GymScheduleIndexVM
+
+@using GymFlow.Domain.Extensions;
+
+
+@{
+    var routes = Model.Filter.ToRouteDictionary();
+}
+
+@if (!Model.PagedResult.Items.Any())
+{
+    <div class="alert alert-info">
+        @Localizer["NoRecordsFound"]
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "Gender",
+                                     Title = Localizer["Gender"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+                    </th>
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "Day",
+                                     Title = Localizer["Day"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+                    </th>
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "StartTime",
+                                     Title = Localizer["StartTime"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+                    </th>
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "EndTime",
+                                     Title = Localizer["EndTime"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+                    </th>
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "DurationHours",
+                                     Title = Localizer["DurationHours"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+                    </th>
+
+                    <th>@Localizer["Actions"]</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model.PagedResult.Items)
+                {
+                    <tr>
+
+
+                        <td>
+                            @item?.Gender?.ToLocalizedString()
+                        </td>
+
+                        <td>
+                            @item?.Day?.ToLocalizedString()
+                        </td>
+
+                        <td>
+                            @item.StartTime?.ToString(@"hh\:mm")
+                        </td>
+
+                        <td>
+                            @item.EndTime?.ToString(@"hh\:mm")
+                        </td>
+
+                        <td>
+                            @item.DurationHours
+                        </td>
+
+                        <td>
+                            <partial name="_Actions"
+                                     model='new ActionButtonsVM
+                                     {
+                                         Controller = "GymSchedules",
+                                         Id = item.Id
+                                     }' />
+</td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+}
+
