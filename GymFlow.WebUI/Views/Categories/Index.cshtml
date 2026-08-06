@@ -1,13 +1,26 @@
 ﻿@using GymFlow.Domain.Constants
 @using GymFlow.Domain.DTOs.Category
-@model IEnumerable<CategoryDTO>
+@using GymFlow.WebUI.ViewModels.Category
+@using GymFlow.WebUI.ViewModels.Pagination
+@model CategoryIndexVM
 
-@using GymFlow.Domain.Resources.Shared
-@using GymFlow.WebUI.Extensions
-@using Microsoft.Extensions.Localization
-@inject IStringLocalizer<SharedResource> Localizer
+@using GymFlow.Domain.Extensions;
 
-@using System.Globalization
+
+@{
+
+    var routes = Model.Filter.ToRouteDictionary();
+
+    var pagination = new PaginationVM
+    {
+        PageNumber = Model.PagedResult.PageNumber,
+        PageSize = Model.PagedResult.PageSize,
+        TotalPages = Model.PagedResult.TotalPages,
+        TotalCount = Model.PagedResult.TotalCount,
+        RouteValues = routes
+
+    };
+}
 
 <div class="d-flex align-items-center justify-content-between my-4">
     <h2>@Localizer["Categories"]</h2>
@@ -18,7 +31,17 @@
     </a>
 </div>
 
-<div class="table-responsive">
+<partial name="Partials/_CategoryFilter" />
+
+<partial name="_Pagination"
+         model="pagination" />
+
+<partial name="Partials/_CategoryTable" />
+
+<partial name="_Pagination"
+         model="pagination" />
+
+@* <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
@@ -42,7 +65,6 @@
                         <div class="table-image-wrapper">
                             @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
                             {
-                                @* <img src="@item.ImageUrl" *@
                                 <img src="@item.ImageUrl.GetImageUrl(Constants.CategoriesFolder)"
                                      class="table-image"
                                      alt="@item.NameEn"
@@ -87,4 +109,4 @@
             }
         </tbody>
     </table>
-</div>
+</div> *@

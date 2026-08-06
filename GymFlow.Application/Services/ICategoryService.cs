@@ -1,4 +1,5 @@
-﻿using GymFlow.Domain.DTOs.Category;
+﻿using GymFlow.Domain.Constants;
+using GymFlow.Domain.DTOs.Category;
 using GymFlow.Domain.Utilities;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace GymFlow.Application.Services
         Task<Result<IEnumerable<CategoryDTO>>> GetAllAsync();
         Task<Result<IEnumerable<CategorySearchDTO>>> SearchAsync(string search);
         Task<Result<IEnumerable<CategorySearchDTO>>> GetForSelectAsync();
+        Task<Result<PagedResult<CategoryDTO>>> GetAllAsync(CategoryFilterDTO filter);
 
     }
 }

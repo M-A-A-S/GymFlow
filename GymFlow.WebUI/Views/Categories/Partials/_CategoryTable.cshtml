@@ -1,0 +1,137 @@
+﻿@using GymFlow.Domain.Constants
+@using GymFlow.Domain.Extensions
+@using GymFlow.WebUI.Extensions
+@using GymFlow.WebUI.ViewModels
+@using GymFlow.WebUI.ViewModels.Category
+@model CategoryIndexVM
+
+@using GymFlow.Domain.Resources.Shared
+@using GymFlow.WebUI.ViewModels.Pagination
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    var routes = Model.Filter.ToRouteDictionary();
+}
+
+@if (!Model.PagedResult.Items.Any())
+{
+    <div class="alert alert-info">
+        @Localizer["NoRecordsFound"]
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Localizer["Image"]</th>
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "NameEn",
+                                     Title = Localizer["NameEn"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "NameAr",
+                                     Title = Localizer["NameAr"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "DescriptionEn",
+                                     Title = Localizer["DescriptionEn"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+                    <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "DescriptionAr",
+                                     Title = Localizer["DescriptionAr"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th>
+
+@*                     <th>
+                        <partial name="_SortableHeader"
+                                 model='new SortHeaderVM
+                                 {
+                                     Column = "Active",
+                                     Title = Localizer["Active"],
+                                     Filter = Model.Filter,
+                                     Routes = routes
+                                 }' />
+</th> *@
+
+                    <th>
+                        @Localizer["Active"]
+</th>
+
+                    <th>@Localizer["Actions"]</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.PagedResult.Items)
+                {
+                    <tr>
+                        <td>
+                            <div class="table-image-wrapper">
+                                @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
+                                {
+                                    <img src="@item.ImageUrl.GetImageUrl(Constants.CategoriesFolder)"
+                                         class="table-image"
+                                         alt="@item.NameEn"
+                                         onerror="this.src='/uploads/no-image.svg'" />
+                                }
+                                else
+                                {
+                                    <div class="table-no-image">
+                                        @Localizer["NoImage"]
+                                    </div>
+                                }
+                            </div>
+                        </td>
+
+                        <td>@item.NameEn</td>
+                        <td>@item.NameAr</td>
+                        <td>@item.DescriptionEn</td>
+                        <td>@item.DescriptionAr</td>
+                        <td>
+                            <span class="badge text-white @(item.IsActive ? "bg-success" : "bg-danger")">
+                                @(item.IsActive ? Localizer["Yes"] : Localizer["No"])
+                            </span>
+                        </td>
+
+                        <td class="d-flex align-items-center gap-1">
+                            <partial name="_Actions"
+                                     model='new ActionButtonsVM
+                                     {
+                                         Controller = "Categories",
+                                         Id = item.Id
+                                     }' />
+</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

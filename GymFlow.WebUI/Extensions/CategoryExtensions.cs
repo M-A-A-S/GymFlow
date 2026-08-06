@@ -1,6 +1,7 @@
 ﻿using GymFlow.Domain.Constants;
 using GymFlow.Domain.DTOs.Category;
 using GymFlow.WebUI.ViewModels;
+using GymFlow.WebUI.ViewModels.Category;
 
 namespace GymFlow.WebUI.Extensions
 {

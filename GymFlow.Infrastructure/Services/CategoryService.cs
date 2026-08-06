@@ -1,15 +1,19 @@
 ﻿using GymFlow.Application.Services;
 using GymFlow.Domain.Constants;
 using GymFlow.Domain.DTOs.Category;
+using GymFlow.Domain.DTOs.Product;
 using GymFlow.Domain.DTOs.Trainer;
+using GymFlow.Domain.Entities;
 using GymFlow.Domain.Extensions;
 using GymFlow.Domain.Utilities;
 using GymFlow.Infrastructure.Data;
+using GymFlow.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -117,6 +121,40 @@ namespace GymFlow.Infrastructure.Services
                 return Result<IEnumerable<CategoryDTO>>.Failure(
                     ResultCodes.UnexpectedError,
                     500,
+                    "An unexpected error occurred.");
+            }
+        }
+
+        public async Task<Result<PagedResult<CategoryDTO>>> GetAllAsync(CategoryFilterDTO filter)
+        {
+            try
+            {
+                var query = _appDbContext.Categories
+                .AsNoTracking();
+
+                query = ApplyFilters(query, filter);
+
+                query = ApplySorting(query, filter);
+
+                var dtoQuery = ProjectToDTO(query);
+
+                var pagedResult = await dtoQuery.ToPagedListAsync(
+                    filter.PageNumber,
+                    filter.PageSize);
+
+                return Result<PagedResult<CategoryDTO>>.Success(pagedResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                   ex,
+                   "Error in Type : {Type}, Method: {Method},",
+                   nameof(CategoryService),
+                   nameof(GetAllAsync));
+
+                return Result<PagedResult<CategoryDTO>>.Failure(
+                    ResultCodes.UnexpectedError,
+                    HttpStatusCodes.InternalServerError,
                     "An unexpected error occurred.");
             }
         }
@@ -354,6 +392,69 @@ namespace GymFlow.Infrastructure.Services
 
             return Result<bool>.Success(true);
 
+        }
+
+        private IQueryable<Category> ApplyFilters(
+            IQueryable<Category> query,
+            CategoryFilterDTO filter)
+        {
+            // ========================== Search ==========================
+            if (!string.IsNullOrWhiteSpace(filter.Search))
+            {
+                query = query.Where(x =>
+                    x.NameEn.Contains(filter.Search) ||
+                    x.NameAr.Contains(filter.Search)
+                    );
+            }
+
+            // ========================== IsActive ==========================
+            if (filter.IsActive.HasValue)
+            {
+                query = query.Where(x => x.IsActive == filter.IsActive.Value);
+            }
+
+            return query;
+
+        }
+
+        private IQueryable<Category> ApplySorting(
+            IQueryable<Category> query,
+            CategoryFilterDTO filter)
+        {
+            bool desc = filter.Descending;
+            bool isArabic = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+
+            switch (filter.SortBy)
+            {
+
+                // ========================= Name ========================= 
+                case "Name":
+                    if (isArabic)
+                    {
+                        return desc
+                            ? query.OrderByDescending(x => x.NameAr)
+                            : query.OrderBy(x => x.NameAr);
+                    }
+                    else
+                    {
+                        return desc
+                            ? query.OrderByDescending(x => x.NameEn)
+                            : query.OrderBy(x => x.NameEn);
+                    }
+
+
+                // ========================= Entity Properties =========================
+                default:
+                    return query.OrderByProperty(filter.SortBy, desc);
+            }
+
+        }
+
+        private IQueryable<CategoryDTO> ProjectToDTO(
+            IQueryable<Category> query
+            )
+        {
+            return query.Select(x => x.ToDTO());
         }
 
         #endregion

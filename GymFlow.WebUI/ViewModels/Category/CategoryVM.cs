@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using GymFlow.Domain.Resources.Shared;
 
-namespace GymFlow.WebUI.ViewModels
+namespace GymFlow.WebUI.ViewModels.Category
 {
     public class CategoryVM
     {

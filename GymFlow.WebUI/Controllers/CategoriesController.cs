@@ -3,10 +3,12 @@ using GymFlow.Domain.DTOs.Category;
 using GymFlow.Domain.DTOs.File;
 using GymFlow.Domain.Resources.Shared;
 using GymFlow.WebUI.Extensions;
-using GymFlow.WebUI.ViewModels;
+using GymFlow.WebUI.ViewModels.Category;
+using GymFlow.WebUI.ViewModels.Trainer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using System.Reflection.Metadata;
+using static System.Net.WebRequestMethods;
 
 namespace GymFlow.WebUI.Controllers
 {
@@ -28,10 +30,15 @@ namespace GymFlow.WebUI.Controllers
         #endregion
 
         #region ========================= Get =========================
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CategoryFilterDTO filter)
         {
-            var getAllResult = await _service.GetAllAsync();
-            return View(getAllResult.Data);
+            var getAllResult = await _service.GetAllAsync(filter);
+            var result = new CategoryIndexVM
+            {
+                PagedResult = getAllResult.Data,
+                Filter = filter,
+            };
+            return View(result);
         }
 
         public async Task<IActionResult> Details(int id)
